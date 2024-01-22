@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% preparation %%%%%%%%%%%%%%%%%%%%%%%%%
 clear;clc;path(path,[pwd,'/Classes']); format short;  AllEOS = {'PR','SRK','PTV','YR'};    %  warning('off'); 
-CubicEOS = AllEOS{4}; 
+CubicEOS = AllEOS{3}; 
 %%% define fluids to study
 Refrigerant = {'R1233zde','Emkarate RL32'};   MoleFrac1 = 0.900;  pres = 1.2e6;  temp = 273.15 + 150;  
 % Refrigerant = {'CO2','RENISO ACC HV'};   MoleFrac1 = 0.55;  pres = 1.2e6;  temp = 373.15;  

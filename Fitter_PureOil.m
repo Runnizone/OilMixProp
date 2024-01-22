@@ -13,7 +13,7 @@ xi0 = 1.97E-10; Gamma = 5.42E-02; qDinv = 5.98E-10; xi_mu = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define the fluid to be fitted
-OilNum = 3;            % oil to be study, see the fluid definition below
+OilNum = 1;            % oil to be study, see the fluid definition below
 Lplot = 0;             % plot and save the figure? 1 yes, 0 not
 Lsave2database = 1;    % save parameters to database (Classes/Fluid_Constants_Fitted.txt)? 1 yes, 0 not
 
@@ -27,11 +27,6 @@ if OilNum == 1
     FitIndex_V = [1,5,8,10];       % Index of viscosity data used for fit, at least four
     FitIndex_TC = [1,2,3,4,5,6];   % Index of thermal conductivity data used for fit, at least four
 elseif OilNum == 2
-    Material = 'RENISO ACC HV'; 
-    Zc = 0.279;         % give a good guess of the compressvility factor at the critical point
-    MM_gmol = 200;          % give a good guess of the molar mass
-    FitIndex_D = [1,10,19];            % Index of density data used for fit, at least two
-elseif OilNum == 3
     Material = 'Emkarate RL32'; 
     Zc = 0.270;         % give a good guess of the compressvility factor at the critical point
     MM_gmol = 200;          % give a good guess of the molar mass

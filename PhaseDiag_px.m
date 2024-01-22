@@ -17,11 +17,11 @@ AllEOS = {'PR','SRK','PTV','YR'};
 Refrigerant = {'propane','C12'};     temp = 419.15; %   temp = 457.65;  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% other parameters
+%%% define other parameters
 Lplot = 1;                 % save the figure? 1 yes, 0 not
 CubicEOS = AllEOS{3};      % choose the cubic eos  AllEOS = {'PR','SRK','PTV','YR'};  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Please insert your exp data here
+%%% Insert your exp data here, only if they exist. 
 %%%  x1    y1    P/MPa	
 
 xyp = [
@@ -56,6 +56,9 @@ xyp = [
 % ];
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Main program - Nothing needs to be changed
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -210,8 +213,8 @@ xlabel(['Mole Frac. of ',Refrigerant{1}, ' mixed with ',Refrigerant{2},' at ' ,n
 ylabel('Pressure \itp\rm / MPa','fontname','Arial','fontsize',fontsize); 
 
 if Lplot
-    Material_mix = [Refrigerant{1},'_',Refrigerant{2},'_',num2str(temp)];
+    Material_mix = [Refrigerant{1},'_',Refrigerant{2},'_',num2str(temp),' K'];
     set(gcf,'paperunits','centimeters');
     set(gcf,'paperposition',[0 0 18 8]);
-    print(gcf,'-dtiff','-r200',['figures/',thisfilename,'_',Material_mix,'.tiff']); 
+    print(gcf,'-dtiff','-r200',['Figures/',thisfilename,'_',Material_mix,'.tiff']); 
 end

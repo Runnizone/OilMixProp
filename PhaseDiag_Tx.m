@@ -1,24 +1,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% preparation %%%%%%%%%%%%%%%%%%%%%%%%%
-clear;clc;path(path,[pwd,'/Classes']); format short;  
-mycolor = [ 0  0  0;   255  0 0;   0 0 255;   72 113 57;  95 58 91 ; 27 71 116;222 110 38; 139 44 42;  100 100 100]/256; mycolor = [mycolor;mycolor];
-mymarker = {'x','+','^','s','o','d','v','<','>','p','h'};   linewidth = 1; fontsize = 10;  markersize = 4;   
+clear;clc;path(path,[pwd,'/Classes']); format short;  linewidth = 1; fontsize = 10;  markersize = 4;   
+SSS = dbstack();  thisfile = SSS(1).file;  LL = length(thisfile);   thisfilename = thisfile(1:LL-2);
 AllEOS = {'PR','SRK','PTV','YR'};    
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define fluids to study
 % Refrigerant = {'R134A','Emkarate RL32'};  pres = 3.5 * 1e6;  
 % Refrigerant = {'Emkarate RL32','R134A'};  pres = 3.5 * 1e6;  
-
 % Refrigerant = {'CO2','methane'};  pres =  7 * 1e6;  
 % Refrigerant = {'methane','CO2'};  pres =  7 * 1e6;  
-
 % Refrigerant = {'Nitrogen','Emkarate RL32'};  pres = 2 * 1e6;  
 % Refrigerant = {'Emkarate RL32','Nitrogen'};  pres = 3.2 * 1e6;  
 % Refrigerant = {'CO2','RENISO ACC HV'}; pres = 1 * 1e6;  
 % Refrigerant = {'CO2','RENISO ACC HV'}; pres = 1 * 1e6;  
 % Refrigerant = {'RENISO ACC HV','CO2'}; pres = 2 * 1e6;  
 % Refrigerant = {'propane','R134A'};    pres = 1 * 1e6; 
+Refrigerant = {'CO2','ethane'}; pres = 3 * 1e6;  
 
-Refrigerant = {'CO2','ethane'}; pres = 1 * 1e6;  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% define other parameters
+Lplot = 1;                 % save the figure? 1 yes, 0 not
+CubicEOS = AllEOS{3};      % choose the cubic eos  AllEOS = {'PR','SRK','PTV','YR'};  
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Main program - Nothing needs to be changed
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% prepare global parameters
@@ -153,3 +162,9 @@ end
 xlabel(['Mole Frac. of ',Refrigerant{1}, ' mixed with ',Refrigerant{2},' at ' ,num2str(pres/1e6) ,' MPa'],'fontname','Arial','fontsize',fontsize)
 ylabel('Temperature \itT\rm / K','fontname','Arial','fontsize',fontsize); 
 
+if Lplot
+    Material_mix = [Refrigerant{1},'_',Refrigerant{2},'_',num2str(pres/1e6),' MPa'];
+    set(gcf,'paperunits','centimeters');
+    set(gcf,'paperposition',[0 0 18 8]);
+    print(gcf,'-dtiff','-r200',['Figures/',thisfilename,'_',Material_mix,'.tiff']); 
+end
