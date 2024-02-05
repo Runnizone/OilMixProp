@@ -2,7 +2,7 @@
 %%  Preparation
 clear; clc; format short; path(path,[pwd,'/Classes']); 
 SSS = dbstack();  thisfile = SSS(1).file;  LL = length(thisfile);   thisfilename = thisfile(1:LL-2);
-AllEOS = {'PR','SRK','PTV','YR'};     
+AllEOS = {'PR','SRK','PTV','YR'};    CubicEOS = AllEOS{4}; 
 linewidth = 1; fontsize = 10;  markersize = 4;
 options = optimset('Display',  'off');   R = 8.31446261815324;     kB = 1.380649e-23;  % J / K  % m2 kg s-2 K-1
 PowerConst = 2/7;   epsilon_kB_K = 300; sigma_nm = 0.51;
@@ -17,12 +17,10 @@ OilNum = 1;            % oil to be study, see the fluid definition below
 Lplot = 1;             % plot and save the figure? 1 yes, 0 not
 Lsave2database = 1;    % save parameters to database (Classes/Fluid_Constants_Fitted.txt)? 1 yes, 0 not
 
-
-CubicEOS = AllEOS{3}; 
 % define the fitting parameters of the fluid
 if OilNum == 1
     Material = 'PAG68'; 
-    Zc = 0.2620;       % give a good guess of the compressvility factor at the critical point
+    Zc = 0.2720;       % give a good guess of the compressvility factor at the critical point
     MM_gmol = 200;         % give a good guess of the molar mass
     FitIndex_D = [1,6];            % Index of density data used for fit, at least two
     FitIndex_cp = [1,26];          % Index of isobaric heat capacity data used for fit, at least two
@@ -179,7 +177,7 @@ if Lplot
     if LdenExist == 1
         plot(T_D_K_all,ReDev_D_all*100,'o','color','r','markersize',markersize,'linewidth',linewidth-0.4); 
         plot(T_D_K,ReDev_D*100,'o','markerfacecolor','r','markeredgecolor','r','markersize',markersize,'linewidth',linewidth-0.4); 
-        plot([min(T_D_K_all)-10,max(T_D_K_all)+10],[0,0],'k-');   
+        plot(get(gca,'xlim'),[0,0],'k-');   
         % axis([min(T_D_K_all),max(T_D_K_all)+10,-2.0,2.0])
         ylabel(['100\cdot(\it\rho\rm_e_x_p\it',char(hex2dec('2212')),'\it\rho\rm_f_i_t)/\it\rho\rm_f_i_t'],'rotation',90,'fontsize',fontsize,'FontName','Arial','linewidth',linewidth); 
     end
@@ -188,7 +186,7 @@ if Lplot
         subplot(222); hold on; box on;
         plot(T_cp_K_all,ReDev_cp_all*100,'o','color','r','markersize',markersize,'linewidth',linewidth-0.4);  
         plot(T_cp_K,ReDev_cp*100,'o','markerfacecolor','r','markeredgecolor','r','markersize',markersize,'linewidth',linewidth-0.4);    
-        plot([min(T_cp_K_all)-10,max(T_cp_K_all)+10],[0,0],'k-');  
+        plot(get(gca,'xlim'),[0,0],'k-');  
         % axis([min(T_cp_K)-10,max(T_cp_K)+10,-0.6,0.6])
         ylabel(['100\cdot(\itc_p\rm_,_e_x_p\it',char(hex2dec('2212')),'\itc_p\rm_,_f_i_t)/\itc_p\rm_,_f_i_t'],'rotation',90,'fontsize',fontsize,'FontName','Arial','linewidth',linewidth); 
     end
@@ -197,7 +195,7 @@ if Lplot
         subplot(223); hold on; box on;
         plot(T_V_K_all,ReDev_v_all*100,'o','color','r','markersize',markersize,'linewidth',linewidth-0.4);  
         plot(T_V_K,ReDev_v*100,'o','markerfacecolor','r','markeredgecolor','r','markersize',markersize,'linewidth',linewidth-0.4);    
-        plot([min(T_V_K_all)-10,max(T_V_K_all)+10],[0,0],'k-'); 
+        plot(get(gca,'xlim'),[0,0],'k-'); 
         % axis([min(T_v_C(DataRange_v_all))+273.15-10,max(T_v_C(DataRange_v_all))+273.15+10,-5,5])
         ylabel(['100\cdot(\it\eta\rm_e_x_p\it',char(hex2dec('2212')),'\it\eta\rm_f_i_t)/\it\eta\rm_f_i_t'],'rotation',90,'fontsize',fontsize,'FontName','Arial','linewidth',linewidth); 
         xlabel('\itT\rm / K','FontSize',fontsize,FontName='Arial')
@@ -207,7 +205,7 @@ if Lplot
         subplot(224); hold on; box on;
         plot(T_L_K_all,ReDev_tc_all*100,'o','color','r','markersize',markersize,'linewidth',linewidth-0.4);  
         plot(T_L_K,ReDev_L*100,'o','markerfacecolor','r','markeredgecolor','r','markersize',markersize,'linewidth',linewidth-0.4);    
-        plot([min(T_L_K_all)-10,max(T_L_K_all)+10],[0,0],'k-'); 
+        plot(get(gca,'xlim'),[0,0],'k-'); 
         % axis([min(T_L)-10,max(T_L)+10,-1,1])
         ylabel(['100\cdot(\it\lambda\rm_e_x_p\it',char(hex2dec('2212')),'\it\lambda\rm_f_i_t)/\it\lambda\rm_f_i_t'],'rotation',90,'fontsize',fontsize,'FontName','Arial','linewidth',linewidth); 
         xlabel('\itT\rm / K','FontSize',fontsize,FontName='Arial')

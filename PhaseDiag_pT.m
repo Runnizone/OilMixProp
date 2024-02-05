@@ -5,14 +5,14 @@ AllEOS = {'PR','SRK','PTV','YR'};
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define fluids to study
-% Refrigerant = {'R134A','Emkarate RL32'};  MF1 = 0.9;
+Refrigerant = {'R134A','Emkarate RL32'};  MF1 = 0.9;
 % Refrigerant = {'CO2','methane'};  MF1 = 0.9; 
 % Refrigerant = {'methane','CO2'};  MF1 = 0.5;
 % Refrigerant = {'CO2','ethane'};   MF1 = 0.1;
 % Refrigerant = {'Nitrogen','Emkarate RL32'};  MF1 = 0.3;
 % Refrigerant = {'CO2','RENISO ACC HV'}; MF1 = 0.9;
 % Refrigerant = {'RENISO ACC HV','CO2'};  MF1 = 0.1; 
-Refrigerant = {'CO2','R134A'};   MF1 = 0.5; 
+% Refrigerant = {'CO2','R134A'};   MF1 = 0.5; 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define other parameters

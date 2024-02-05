@@ -8,13 +8,13 @@ AllEOS = {'PR','SRK','PTV','YR'};
 % Refrigerant = {'R134A','Emkarate RL32'};  temp = 273.15 + 10;  
 % Refrigerant = {'CO2','methane'};  temp = 273.15 - 50;  
 % Refrigerant = {'methane','CO2'};  temp = 273.15 - 50;  
-% Refrigerant = {'CO2','ethane'};  temp = 273.15 - 10;  
+Refrigerant = {'CO2','ethane'};  temp = 273.15 - 20;  
 % Refrigerant = {'Nitrogen','Emkarate RL32'};  temp = 273.15 + 200;  
 % Refrigerant = {'CO2','RENISO ACC HV'};  temp = 400.15;  
 % Refrigerant = {'CO2','RENISO ACC HV'};  temp = 400.15;  
 % Refrigerant = {'RENISO ACC HV','CO2'};  temp = 400.15;  
 % Refrigerant = {'propane','R134A'};     temp = 283.15;  
-Refrigerant = {'propane','C12'};     temp = 300; %   temp = 457.65;  
+% Refrigerant = {'propane','C12'};     temp = 419.15; %   temp = 457.65;  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define other parameters
@@ -23,7 +23,7 @@ CubicEOS = AllEOS{3};      % choose the cubic eos  AllEOS = {'PR','SRK','PTV','Y
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Insert your exp data here, only if they exist. 
 %%%  x1    y1    P/MPa	
-
+% 
 % xyp = [
 % 0.0755	0.94865	0.453
 % 0.1048	0.95308	0.622
@@ -146,7 +146,7 @@ if algorithm == 1   % mainly for azeotropic mixture
     px1(deleteindex) = [];
     x1(deleteindex) = [];
     y1(deleteindex) = [];
-    plot(x1,px1,'-+',y1,py1,'-x')
+    plot(x1,px1/1e6,'-+',y1,py1/1e6,'-x')
 elseif algorithm == 2
     dx = 0.01;  ddx0 = 0.003;     
     firstPF = 0;
@@ -203,8 +203,8 @@ elseif algorithm == 2
 end
 
 if exist('xyp','var')
-    plot(xyp(:,1),xyp(:,3),'+',"Color",'b')
-    plot(xyp(:,2),xyp(:,3),'x',"Color",'r')
+    plot(xyp(:,1),xyp(:,3)/1e6,'+',"Color",'b')
+    plot(xyp(:,2),xyp(:,3)/1e6,'x',"Color",'r')
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

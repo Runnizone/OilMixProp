@@ -25,7 +25,7 @@ function ff = OilPropm(parameter_1,value_1,parameter_2,value_2,Zi,GL,T_K_guess,p
 % D   Density [mol/m3]
 % Q   Quality (vapor fraction) (mol/mol)
 % H   Enthalpy [J/mol]
-% S   Enthalpy [J/mol/K]
+% S   Entropy [J/mol/K]
 % T   Temperature [K]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
