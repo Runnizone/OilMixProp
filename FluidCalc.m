@@ -22,7 +22,12 @@ p_Pa_0 = 0;  % if p to be solved and a good guess is known, otherwise set 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%% call the function %%%%%%%%%%%%%%%%%%%%%%%%%
-ff = OilPropm('T',temp,'P',pres,Zi,GL,0,0);
+ff = OilPropm('T',temp,'P',pres,Zi,GL,T_K_0,p_Pa_0);
+
+
+
+
+
 if ff.Phase == 2
     ff = OilPropm('T',temp,'Q',ff.FracV,Zi,GL,0,0);
     ff = OilPropm('P',pres,'Q',ff.FracV,Zi,GL,temp,0);                    % sometimes rely on a good guess.

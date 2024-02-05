@@ -2,7 +2,7 @@
 %%  Preparation
 clear; clc; format short; path(path,[pwd,'/Classes']); 
 SSS = dbstack();  thisfile = SSS(1).file;  LL = length(thisfile);   thisfilename = thisfile(1:LL-2);
-AllEOS = {'PR','SRK','YR','WRK','PTV','PRSV'};    CubicEOS = AllEOS{5}; 
+AllEOS = {'PR','SRK','PTV','YR'};     
 linewidth = 1; fontsize = 10;  markersize = 4;
 options = optimset('Display',  'off');   R = 8.31446261815324;     kB = 1.380649e-23;  % J / K  % m2 kg s-2 K-1
 PowerConst = 2/7;   epsilon_kB_K = 300; sigma_nm = 0.51;
@@ -14,9 +14,11 @@ xi0 = 1.97E-10; Gamma = 5.42E-02; qDinv = 5.98E-10; xi_mu = 1;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define the fluid to be fitted
 OilNum = 1;            % oil to be study, see the fluid definition below
-Lplot = 0;             % plot and save the figure? 1 yes, 0 not
+Lplot = 1;             % plot and save the figure? 1 yes, 0 not
 Lsave2database = 1;    % save parameters to database (Classes/Fluid_Constants_Fitted.txt)? 1 yes, 0 not
 
+
+CubicEOS = AllEOS{3}; 
 % define the fitting parameters of the fluid
 if OilNum == 1
     Material = 'PAG68'; 
