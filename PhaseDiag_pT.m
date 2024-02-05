@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% preparation %%%%%%%%%%%%%%%%%%%%%%%%%
 clear;clc;path(path,[pwd,'/Classes']); format short;  linewidth = 1; fontsize = 10;  markersize = 4;   
 SSS = dbstack();  thisfile = SSS(1).file;  LL = length(thisfile);   thisfilename = thisfile(1:LL-2);
-AllEOS = {'PR','SRK','PTV','YR'};   
+AllEOS = {'PR','SRK','PTV','YR'};    figure(1);clf;hold on;box on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define fluids to study
@@ -17,7 +17,7 @@ Refrigerant = {'R134A','Emkarate RL32'};  MF1 = 0.9;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define other parameters
 Lplot = 1;                 % save the figure? 1 yes, 0 not
-CubicEOS = AllEOS{3};      % choose the cubic eos  AllEOS = {'PR','SRK','PTV','YR'};  
+CubicEOS = AllEOS{4};      % choose the cubic eos  AllEOS = {'PR','SRK','PTV','YR'};  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Main program - Nothing needs to be changed
@@ -39,6 +39,47 @@ Tratio = max(GL2.tempc/GL1.tempc,GL1.tempc/GL2.tempc);
 pline = [linspace(p_s,p_e,15),linspace(p_e,Tratio*p_e,15)];
 np = length(pline);
 deleteindex = [];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% if refpropm is avaiable and can be calculated
+Tx_ref = zeros(1,np);       Ty_ref = zeros(1,np);    pline_ref = pline;  deleteindex_ref = [];
+[MM_mix_gmol,MassFrac] = EOSmodel.MoleF_2_MassF(GL.MM_gmol,Zi); 
+for ip = 1:np
+    try
+        Ty_ref(ip) = refpropm('T','P',pline(ip)/1000,'Q',1,Refrigerant{1},Refrigerant{2},MassFrac);
+        Tx_ref(ip) = refpropm('T','P',pline(ip)/1000,'Q',0,Refrigerant{1},Refrigerant{2},MassFrac);
+        if Tx_ref(ip) > Ty_ref(ip) || Tx_ref(ip) < 0  ||  Ty_ref(ip) < 0  ||  (Ty_ref(ip) - Tx_ref(ip)) < 0.3 
+            error(' '); 
+        end 
+        if ip >= 2
+            if Tx_ref(ip) < Tx_ref(ip-1)
+                error(' ');
+            end 
+        end
+    catch
+        if ip ~= 1
+            Ty_ref(ip) = Ty_ref(ip-1); 
+            Tx_ref(ip) = Tx_ref(ip-1);
+            if Tx_ref(ip) < Tx_ref(ip-1) && ip/np > 0.8
+                deleteindex_ref = [deleteindex_ref,ip:np];
+                break
+            else
+                deleteindex_ref = [deleteindex_ref,ip];
+            end
+        else
+            deleteindex_ref = [deleteindex_ref,ip];
+        end
+    end
+end
+pline_ref(deleteindex_ref) = [];
+Tx_ref(deleteindex_ref) = [];
+Ty_ref(deleteindex_ref) = [];
+if length(Tx_ref) > 2
+    plot(Tx_ref,pline_ref/1e6,'r--',Ty_ref,pline_ref/1e6,'b--')
+else
+    fprintf('\n  =-- Refprop Calculation fail --=  \n');
+end
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% start the main loop
@@ -86,9 +127,7 @@ end
 pline(deleteindex) = [];
 Tx(deleteindex) = [];
 Ty(deleteindex) = [];
-
-figure(1);clf;
-plot(Tx,pline/1e6,'-+',Ty,pline/1e6,'-x')
+plot(Tx,pline/1e6,'r-',Ty,pline/1e6,'b-')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% plot the results

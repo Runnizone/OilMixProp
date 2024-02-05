@@ -1,27 +1,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% preparation %%%%%%%%%%%%%%%%%%%%%%%%%
 clear;clc;path(path,[pwd,'/Classes']); format short;  linewidth = 1; fontsize = 10;  markersize = 4;   
 SSS = dbstack();  thisfile = SSS(1).file;  LL = length(thisfile);   thisfilename = thisfile(1:LL-2);
-AllEOS = {'PR','SRK','PTV','YR'};    
+AllEOS = {'PR','SRK','PTV','YR'};     figure(1);clf;hold on;box on;
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define fluids to study
 % Refrigerant = {'R134A','Emkarate RL32'};  pres = 3.5 * 1e6;  
 % Refrigerant = {'Emkarate RL32','R134A'};  pres = 3.5 * 1e6;  
 % Refrigerant = {'CO2','methane'};  pres =  7 * 1e6;  
-% Refrigerant = {'methane','CO2'};  pres =  7 * 1e6;  
-% Refrigerant = {'Nitrogen','Emkarate RL32'};  pres = 2 * 1e6;  
+% Refrigerant = {'methane','CO2'};  pres =  5 * 1e6;  
+Refrigerant = {'Nitrogen','Emkarate RL32'};  pres = 2 * 1e6;  
 % Refrigerant = {'Emkarate RL32','Nitrogen'};  pres = 3.2 * 1e6;  
 % Refrigerant = {'CO2','RENISO ACC HV'}; pres = 1 * 1e6;  
 % Refrigerant = {'CO2','RENISO ACC HV'}; pres = 1 * 1e6;  
 % Refrigerant = {'RENISO ACC HV','CO2'}; pres = 2 * 1e6;  
 % Refrigerant = {'propane','R134A'};    pres = 1 * 1e6; 
-Refrigerant = {'CO2','ethane'}; pres = 3 * 1e6;  
+% Refrigerant = {'CO2','ethane'}; pres = 3 * 1e6;  
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define other parameters
 Lplot = 1;                 % save the figure? 1 yes, 0 not
-CubicEOS = AllEOS{3};      % choose the cubic eos  AllEOS = {'PR','SRK','PTV','YR'};  
+CubicEOS = AllEOS{4};      % choose the cubic eos  AllEOS = {'PR','SRK','PTV','YR'};  
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -73,9 +73,40 @@ else
     error('Input pressure two high.')
 end
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% if refpropm is avaiable and can be calculated
+nx = 40; deleteindex_ref = [];
+x1_ref = linspace(0,1,nx);       y1_ref = linspace(0,1,nx); 
+Tx1_ref = zeros(1,nx);           Ty1_ref = zeros(1,nx);   
+for ix = 1:nx
+    MF1 = x1_ref(ix);
+    Zi = [MF1,1 - MF1]';
+    [MM_mix_gmol,MassFrac] = EOSmodel.MoleF_2_MassF(GL.MM_gmol,Zi);  
+    try
+        Ty1_ref(ix) = refpropm('T','P',pres/1000,'Q',1,Refrigerant{1},Refrigerant{2},MassFrac);
+        Tx1_ref(ix) = refpropm('T','P',pres/1000,'Q',0,Refrigerant{1},Refrigerant{2},MassFrac);
+        if Ty1_ref(ix) < Tx1_ref(ix) || Ty1_ref(ix) < 0  ||  Tx1_ref(ix) < 0
+            error(' '); 
+        end 
+    catch
+        deleteindex_ref = [deleteindex_ref,ix];
+    end
+end
+Ty1_ref(deleteindex_ref) = [];
+Tx1_ref(deleteindex_ref) = [];
+x1_ref(deleteindex_ref) = [];
+y1_ref(deleteindex_ref) = [];
+if length(x1_ref) > 2
+    plot(x1_ref,Tx1_ref,'b--',y1_ref,Ty1_ref,'r--')
+else
+    fprintf('\n  =-- Refprop Calculation fail --=  \n');
+end
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% start the main loop
-figure(1);clf;
 if algorithm == 1   % mainly for azeotropic mixture
     nx = 40;
     x1 = linspace(0,1,nx);       y1 = linspace(0,1,nx); 
@@ -106,7 +137,7 @@ if algorithm == 1   % mainly for azeotropic mixture
     Tx1(deleteindex) = [];
     x1(deleteindex) = [];
     y1(deleteindex) = [];
-    plot(x1,Tx1,'-+',y1,Ty1,'-x')
+    plot(x1,Tx1,'b-',y1,Ty1,'r-')
 elseif algorithm == 2
     dx = 0.01;  ddx0 = 0.003;     
     firstP = 0;
@@ -152,7 +183,7 @@ elseif algorithm == 2
     Tline(deleteindex) = [];
     x1(deleteindex) = [];
     y1(deleteindex) = [];
-    plot(x1,Tline,'-+',y1,Tline,'-x')
+    plot(x1,Tline,'b-',y1,Tline,'r-')
 end
 
 
