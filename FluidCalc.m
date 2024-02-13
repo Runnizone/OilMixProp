@@ -38,6 +38,13 @@ ff = OilPropm('P',pres,'D',ff.rho_kgm3_all,MassFrac,GL,300,1e6);
 ff = OilPropm('P',pres,'S',ff.ss_JkgK_all,MassFrac,GL,300,1e6);
 ff = OilPropm('P',pres,'H',ff.hh_Jkg_all,MassFrac,GL,300,1e6);  
 
+dT = 0.001;
+ff0 = OilPropm('T',temp,'P',pres,MassFrac,GL,0,0);
+ff1 = OilPropm('T',temp+dT,'D',ff0.rho_kgm3_all,MassFrac,GL,0,pres);  
+dp_dT = (ff1.p_Pa - ff0.p_Pa)/dT / 1000;  % in unit of kPa/K
+
+
+
 % ff = OilPropm('T',temp,'Q',1,MassFrac,GL,T_K_guess,p_Pa_guess);   % V
 % ff = OilPropm('T',temp,'Q',0,MassFrac,GL,T_K_guess,p_Pa_guess);   % L
 % ff = OilPropm('P',pres,'Q',1,MassFrac,GL,T_K_guess,p_Pa_guess);   % V                  % sometimes rely on a good guess.  
