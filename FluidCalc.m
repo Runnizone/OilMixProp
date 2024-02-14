@@ -8,7 +8,6 @@ Refrigerant = {'CO2','RENISO ACC HV'};   MassFrac1 = 0.22;  pres = 1.2e6;  temp 
 % Refrigerant = {'CO2'};   MassFrac1 = 1;  pres = 9.2e6;  temp = 273.15 + 90;  
 % Refrigerant = {'1-Methylnaphthalene','Emkarate RL32'};   MassFrac1 = 0.8648;  pres = 1.2e6;  temp = 273.15 + 150;  
 
-
 %%% parameter preperation
 GL = GetGlobals(CubicEOS,Refrigerant);  % obtain fluid constants
 ncomp = length(Refrigerant);            % get over all mole fraction Zi
@@ -23,6 +22,8 @@ T_K_guess = 0;   % if T to be solved and a good guess is known, otherwise set 0
 p_Pa_guess = 0;  % if p to be solved and a good guess is known, otherwise set 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% mole fraction to mass fraction converstion
+%         [MM_mix_gmol,MassFrac] = EOSmodel.MoleF_2_MassF(GL.MM_gmol,MoleFrac);  
 
 %%%%%%%%%%%%%%%%%%%%%%%%% call the function %%%%%%%%%%%%%%%%%%%%%%%%%
 ff = OilPropm('T',temp,'P',pres,MassFrac,GL,T_K_guess,p_Pa_guess);
@@ -132,7 +133,6 @@ try
         drhodT = refpropm('W','T',temp,'P',pres/1000,Refrigerant{:});
         dpdT = refpropm('#','T',temp,'P',pres/1000,Refrigerant{:});
     elseif ncomp == 2 
-%         [MM_mix_gmol,MassFrac] = EOSmodel.MoleF_2_MassF(GL.MM_gmol,Zi);  
         D_ref = refpropm('D','T',temp,'P',pres/1000,Refrigerant{1},Refrigerant{2},MassFrac);
         Cp_ref = refpropm('C','T',temp,'P',pres/1000,Refrigerant{1},Refrigerant{2},MassFrac);
         sos_ref = refpropm('A','T',temp,'P',pres/1000,Refrigerant{1},Refrigerant{2},MassFrac);
