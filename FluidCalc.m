@@ -2,8 +2,8 @@
 clear;clc;path(path,[pwd,'/Classes']); format short;  AllEOS = {'PR','SRK','PTV','YR'};    %  warning('off'); 
 CubicEOS = AllEOS{4}; 
 %%% define fluids to study
-% Refrigerant = {'R1233zde','Emkarate RL32'};   MassFrac1 = 0.900;  pres = 1.2e6;  temp = 273.15 + 150;  
-Refrigerant = {'CO2','RENISO ACC HV'};   MassFrac1 = 0.22;  pres = 1.2e6;  temp = 273.15;  
+Refrigerant = {'R1233zde','Emkarate RL32'};   MassFrac1 = 0.900;  pres = 1.2e6;  temp = 273.15 + 150;  
+% Refrigerant = {'CO2','RENISO ACC HV'};   MassFrac1 = 0.22;  pres = 1.2e6;  temp = 273.15;  
 % Refrigerant = {'propane','R32'};   MassFrac1 = 0.4588;  pres = 0.84e6;  temp = 283.15;  
 % Refrigerant = {'CO2'};   MassFrac1 = 1;  pres = 9.2e6;  temp = 273.15 + 90;  
 % Refrigerant = {'1-Methylnaphthalene','Emkarate RL32'};   MassFrac1 = 0.8648;  pres = 1.2e6;  temp = 273.15 + 150;  
