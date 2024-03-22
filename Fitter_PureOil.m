@@ -13,7 +13,7 @@ xi0 = 1.97E-10; Gamma = 5.42E-02; qDinv = 5.98E-10; xi_mu = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define the fluid to be fitted
-iOilNum = 2;            % oil to be study, see the fluid definition below, if 0, run all oils.
+iOilNum = 0;            % oil to be study, see the fluid definition below, if 0, run all oils.
 CubicEOS = AllEOS{4}; 
 
 N_Oil = 11;            % the number of avaiable oil 
@@ -34,7 +34,7 @@ for OilNum = PrjRun
         FitIndex_TC = [1,2,3,4,5,6];   % Index of thermal conductivity data used for fit, at least four
     elseif OilNum == 2
         Material = 'Emkarate RL32'; 
-        FitIndex_D = [1,4];            % Index of density data used for fit, at least two
+        FitIndex_D = [1,3,4];            % Index of density data used for fit, at least two
         FitIndex_V = [1,2,3,4];       % Index of viscosity data used for fit, at least four
     elseif OilNum == 3
         Material = 'DIDP'; 
