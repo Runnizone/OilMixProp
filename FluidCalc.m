@@ -13,7 +13,7 @@ CubicEOS = AllEOS{4};
 % Refrigerant = {'water','nitrogen'};   MassFrac1 = 0.900;  pres_kPa = 1.0e2;  temp_K = 273.15 + 90;  
 % Refrigerant = {'EGLYCOL'};   MassFrac1 = 1;  pres_kPa = 5e5;  temp_K = 273.15 + 1000;  
 % Refrigerant = {'PAG68','propane'};   MassFrac1 = 0.8068;  pres_kPa = 80;  temp_K = 232.11; 
-Refrigerant = {'ISO VG32','R1234zee'};   MassFrac1 = 0.9070;  pres_kPa = 200000;  temp_K = 900; 
+Refrigerant = {'ISO VG32','R1234zee'};   MassFrac1 = 0.9070;  pres_kPa = 300;  temp_K = 300; 
 % Refrigerant = {'PAG68'};   MassFrac1 = 1;  pres_kPa = 500;  temp_K = 273; 
 
 %%% parameter preperation
@@ -34,7 +34,7 @@ p_kPa_guess = 0;  % if p to be solved and a good guess is known, otherwise set 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%% call the function %%%%%%%%%%%%%%%%%%%%%%%%%
 % tic
-% ff = OilPropm('ALL','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);   
+% ff = OilPropm('T','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);   
 % ff = OilPropm('All','T',temp_K,'D',ff.rho_kgm3_all,MassFrac,GL,0,0); 
 % ff = OilPropm('All','T',temp_K,'S',ff.ss_JkgK_all,MassFrac,GL,0,0);   
 % ff = OilPropm('All','T',temp_K,'H',ff.hh_Jkg_all,MassFrac,GL,0,0); 
@@ -47,7 +47,7 @@ p_kPa_guess = 0;  % if p to be solved and a good guess is known, otherwise set 0
 % end
 
 % 
- ff = OilPropm('All','P',pres_kPa,'Q',1,MassFrac,GL,0,0);  
+%  ff = OilPropm('All','P',pres_kPa,'Q',1,MassFrac,GL,0,0);  
 %  ff = OilPropm('All','P',pres_kPa,'Q',0,MassFrac,GL,0,0);  
 %  ff = OilPropm('All','T',temp_K,'Q',1,MassFrac,GL,0,0);      
 %  ff = OilPropm('All','T',temp_K,'Q',0,MassFrac,GL,0,0); 
@@ -57,7 +57,7 @@ p_kPa_guess = 0;  % if p to be solved and a good guess is known, otherwise set 0
 % toc
 % ffi = OilPropm('A','T',temp_K,'Q',1,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['SoS: ',num2str(ffi),' m/s']);
 % ffi = OilPropm('C','T',temp_K,'Q',1,MassFrac,GL,T_K_guess,p_kPa_guess); disp(ffi)
-% ffi = OilPropm('D','T',temp_K,'Q',1,MassFrac,GL,T_K_guess,p_kPa_guess); disp(ffi)
+ffi = OilPropm('D','T',temp_K,'Q',0,MassFrac,GL,T_K_guess,p_kPa_guess); disp(ffi)
 % ffi = OilPropm('H','T',temp_K,'Q',1,MassFrac,GL,T_K_guess,p_kPa_guess); disp(ffi)
 % ffi = OilPropm('K','T',temp_K,'Q',1,MassFrac,GL,T_K_guess,p_kPa_guess); disp(ffi)
 % ffi = OilPropm('L','T',temp_K,'Q',1,MassFrac,GL,T_K_guess,p_kPa_guess); disp(ffi)
