@@ -1,0 +1,2 @@
+     Materials;    MM_gmol;  Power_fix;      Zc;      Tc_K;   Dc_kgm3;    pc_MPa;   acentric;  k0_JmolK;  k1_JmolK;    n1_mu;     n2_mu;     n3_mu;    n4_mu;        n1_tc;       n2_tc;       n3_tc;       n4_tc
+ RENISO ACC HV;   200.000;    0.2857;    0.2600;   735.628;   308.681;    2.4544;    0.8595;   300.000;   400.000;  0.220249; -0.070232;  0.011963;  0.000000;    0.001000;    0.895835;    2.305079;   -0.322008

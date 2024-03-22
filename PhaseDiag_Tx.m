@@ -5,17 +5,17 @@ AllEOS = {'PR','SRK','PTV','YR'};     figure(1);clf;hold on;box on;
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define fluids to study
-% Refrigerant = {'R134A','Emkarate RL32'};  pres = 3.5 * 1e6;  
-% Refrigerant = {'Emkarate RL32','R134A'};  pres = 3.5 * 1e6;  
-% Refrigerant = {'CO2','methane'};  pres =  7 * 1e6;  
-% Refrigerant = {'methane','CO2'};  pres =  5 * 1e6;  
-Refrigerant = {'Nitrogen','Emkarate RL32'};  pres = 2 * 1e6;  
-% Refrigerant = {'Emkarate RL32','Nitrogen'};  pres = 3.2 * 1e6;  
-% Refrigerant = {'CO2','RENISO ACC HV'}; pres = 1 * 1e6;  
-% Refrigerant = {'CO2','RENISO ACC HV'}; pres = 1 * 1e6;  
-% Refrigerant = {'RENISO ACC HV','CO2'}; pres = 2 * 1e6;  
-% Refrigerant = {'propane','R134A'};    pres = 1 * 1e6; 
-% Refrigerant = {'CO2','ethane'}; pres = 3 * 1e6;  
+% Refrigerant = {'R134A','Emkarate RL32'};  pres_kPa = 3.5 * 1e3;  
+% Refrigerant = {'Emkarate RL32','R134A'};  pres_kPa = 3.5 * 1e3;  
+% Refrigerant = {'CO2','methane'};  pres_kPa =  3 * 1e3;  
+Refrigerant = {'methane','CO2'};  pres_kPa =  5 * 1e3;  
+% Refrigerant = {'Nitrogen','Emkarate RL32'};  pres_kPa = 2 * 1e3;  
+% Refrigerant = {'Emkarate RL32','Nitrogen'};  pres_kPa = 3.2 * 1e3;  
+% Refrigerant = {'CO2','RENISO ACC HV'}; pres_kPa = 1 * 1e3;  
+% Refrigerant = {'CO2','RENISO ACC HV'}; pres_kPa = 1 * 1e3;  
+% Refrigerant = {'RENISO ACC HV','CO2'}; pres_kPa = 2 * 1e3;  
+% Refrigerant = {'propane','R134A'};    pres_kPa = 1 * 1e3; 
+% Refrigerant = {'CO2','ethane'}; pres_kPa = 3 * 1e3;  
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -39,12 +39,12 @@ GL = GetGlobals(CubicEOS,Refrigerant);  % obtain fluid constants
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define the pressure range 
 try
-    ff = OilPropm('P',pres,'Q',1,1,GL1,0,0);  Tsat1 = ff.T_K;  lve1 = 1;
+    ff = OilPropm('all','P',pres_kPa,'Q',1,1,GL1,0,0);  Tsat1 = ff.T_K;  lve1 = 1;
 catch
     Tsat1 = GL1.tempc;    lve1 = 0;
 end
 try
-    ff = OilPropm('P',pres,'Q',1,1,GL2,0,0);  Tsat2 = ff.T_K;   lve2 = 1;
+    ff = OilPropm('all','P',pres_kPa,'Q',1,1,GL2,0,0);  Tsat2 = ff.T_K;   lve2 = 1;
 catch
     Tsat2 = GL2.tempc;    lve2 = 0;
 end
@@ -84,8 +84,8 @@ for ix = 1:nx
     Zi = [MF1,1 - MF1]';
     [MM_mix_gmol,MassFrac] = EOSmodel.MoleF_2_MassF(GL.MM_gmol,Zi);  
     try
-        Ty1_ref(ix) = refpropm('T','P',pres/1000,'Q',1,Refrigerant{1},Refrigerant{2},MassFrac);
-        Tx1_ref(ix) = refpropm('T','P',pres/1000,'Q',0,Refrigerant{1},Refrigerant{2},MassFrac);
+        Ty1_ref(ix) = refpropm('T','P',pres_kPa,'Q',1,Refrigerant{1},Refrigerant{2},MassFrac);
+        Tx1_ref(ix) = refpropm('T','P',pres_kPa,'Q',0,Refrigerant{1},Refrigerant{2},MassFrac);
         if Ty1_ref(ix) < Tx1_ref(ix) || Ty1_ref(ix) < 0  ||  Tx1_ref(ix) < 0
             error(' '); 
         end 
@@ -122,9 +122,9 @@ if algorithm == 1   % mainly for azeotropic mixture
             T_y = ffy.T_K;    T_x = ffx.T_K;
         end
         try
-            ffy = OilPropm('P',pres,'Q',1,Zi,GL,T_y,0);
+            ffy = OilPropm('all','P',pres_kPa,'Q',1,Zi,GL,T_y,0);
             Ty1(ix) = ffy.T_K;
-            ffx = OilPropm('P',pres,'Q',0,Zi,GL,T_x,0);
+            ffx = OilPropm('all','P',pres_kPa,'Q',0,Zi,GL,T_x,0);
             Tx1(ix) = ffx.T_K;
             if Ty1(ix) < Tx1(ix) || Ty1(ix) < 0  ||  Tx1(ix) < 0
                 error(' '); 
@@ -162,7 +162,7 @@ elseif algorithm == 2
                 ddx = ddx0 * 25; 
             end
             Zi = [MF1,1 - MF1]';
-            ff = OilPropm('T',Tline(iT),'P',pres,Zi,GL,0,0);
+            ff = OilPropm('all','T',Tline(iT),'P',pres_kPa,Zi,GL,0,0);
             if strcmpi(ff.Phase,'V')
                 MF1 = MF1 + 2 * ((Tsat1 > Tsat2) -0.5) * ddx;
             elseif strcmpi(ff.Phase,'L')
@@ -190,11 +190,11 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% plot the results
-xlabel(['Mole Frac. of ',Refrigerant{1}, ' mixed with ',Refrigerant{2},' at ' ,num2str(pres/1e6) ,' MPa'],'fontname','Arial','fontsize',fontsize)
+xlabel(['Mole Frac. of ',Refrigerant{1}, ' mixed with ',Refrigerant{2},' at ' ,num2str(pres_kPa/1e3) ,' MPa'],'fontname','Arial','fontsize',fontsize)
 ylabel('Temperature \itT\rm / K','fontname','Arial','fontsize',fontsize); 
 
 if Lplot
-    Material_mix = [Refrigerant{1},'_',Refrigerant{2},'_',num2str(pres/1e6),' MPa'];
+    Material_mix = [Refrigerant{1},'_',Refrigerant{2},'_',num2str(pres_kPa/1e3),' MPa'];
     set(gcf,'paperunits','centimeters');
     set(gcf,'paperposition',[0 0 18 8]);
     print(gcf,'-dtiff','-r200',['Figures/',thisfilename,'_',Material_mix,'.tiff']); 

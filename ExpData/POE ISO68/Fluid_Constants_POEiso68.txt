@@ -1,0 +1,2 @@
+     Materials;    MM_gmol;  Power_fix;      Zc;      Tc_K;   Dc_kgm3;    pc_MPa;   acentric;  k0_JmolK;  k1_JmolK;    n1_mu;     n2_mu;     n3_mu;    n4_mu;        n1_tc;       n2_tc;       n3_tc;       n4_tc
+      POEiso68;   500.000;    0.2857;    0.2720;   943.043;   300.021;    1.2797;    0.5424;   859.533;  1049.415;  0.220249; -0.070232;  0.011963;  0.000000;    0.539850;  -20.677781;   11.766317;    0.000000

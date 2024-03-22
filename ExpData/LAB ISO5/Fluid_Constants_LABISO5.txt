@@ -1,0 +1,2 @@
+     Materials;    MM_gmol;  Power_fix;      Zc;      Tc_K;   Dc_kgm3;    pc_MPa;   acentric;  k0_JmolK;  k1_JmolK;    n1_mu;     n2_mu;     n3_mu;    n4_mu;        n1_tc;       n2_tc;       n3_tc;       n4_tc
+       LABISO5;   240.000;    0.2857;    0.2720;   717.334;   283.178;    1.9141;    0.3614;   300.000;   400.000;  0.906041; -0.552175;  0.140474;  0.000000;    0.001000;    4.835594;   -0.365323;    0.000000

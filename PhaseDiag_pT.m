@@ -86,9 +86,9 @@ end
 Tx = zeros(1,np);       Ty = zeros(1,np); 
 for ip = 1:np
     if ip == 1
-        ff = OilPropm('P',pline(ip),'Q',1,1,GL1,0,0);
+        ff = OilPropm('all','P',pline(ip)/1000,'Q',1,1,GL1,0,0);
         Tsat1 = ff.T_K;
-        ff = OilPropm('P',pline(ip),'Q',1,1,GL2,0,0);
+        ff = OilPropm('all','P',pline(ip)/1000,'Q',1,1,GL2,0,0);
         Tsat2 = ff.T_K;
         T_y = max([Tsat1,Tsat2]) + 20; 
         T_x = min([Tsat1,Tsat2]) - 20; 
@@ -97,9 +97,9 @@ for ip = 1:np
         T_x = Tx(ip-1); % ffx.T_K;
     end
     try
-        ffy = OilPropm('P',pline(ip),'Q',1,Zi,GL,T_y,0);
+        ffy = OilPropm('all','P',pline(ip)/1000,'Q',1,Zi,GL,T_y,0);
         Ty(ip) = ffy.T_K;
-        ffx = OilPropm('P',pline(ip),'Q',0,Zi,GL,T_x,0);
+        ffx = OilPropm('all','P',pline(ip)/1000,'Q',0,Zi,GL,T_x,0);
         Tx(ip) = ffx.T_K;
         if Tx(ip) > Ty(ip) || Tx(ip) < 0  ||  Ty(ip) < 0  ||  (Ty(ip) - Tx(ip)) < 0.3 
             error(' '); 

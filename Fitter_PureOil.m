@@ -5,10 +5,7 @@ SSS = dbstack();  thisfile = SSS(1).file;  LL = length(thisfile);   thisfilename
 AllEOS = {'PR','SRK','PTV','YR'};    
 linewidth = 1; fontsize = 10;  markersize = 4;
 options = optimset('Display',  'off');   R = 8.31446261815324;     kB = 1.380649e-23;  % J / K  % m2 kg s-2 K-1
-PowerConst = 2/7; 
-
-% epsilon_kB_K = 300; sigma_nm = 0.51; 
-xi0 = 1.97E-10; Gamma = 5.42E-02; qDinv = 5.98E-10; xi_mu = 1;
+PowerConst = 2/7;  xi0 = 1.97E-10; Gamma = 5.42E-02; qDinv = 5.98E-10; xi_mu = 1;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -20,11 +17,10 @@ N_Oil = 11;            % the number of avaiable oil
 Lplot = 1;             % plot and save the figure? 1 yes, 0 not
 Lsave2database = 1;    % save parameters to database (Classes/Fluid_Constants_Fitted.txt)? 1 yes, 0 not
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% start the fitting
-if iOilNum == 0, PrjRun = 1:N_Oil; else, PrjRun = iOilNum;  end
-for OilNum = PrjRun
+if iOilNum == 0, OilRun = 1:N_Oil; else, OilRun = iOilNum;  end
+for OilNum = OilRun
     % define the fitting parameters of the fluid
     if OilNum == 1
         Material = 'PAG68'; 

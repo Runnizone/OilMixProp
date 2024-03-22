@@ -12,9 +12,9 @@ CubicEOS = AllEOS{4};
 % Refrigerant = {'1-Methylnaphthalene','R32'};   MassFrac1 = 0.9;  pres_kPa = 1.2e3;  temp_K = 273.15 + 150;  
 % Refrigerant = {'water','nitrogen'};   MassFrac1 = 0.900;  pres_kPa = 1.0e2;  temp_K = 273.15 + 90;  
 % Refrigerant = {'EGLYCOL'};   MassFrac1 = 1;  pres_kPa = 5e5;  temp_K = 273.15 + 1000;  
-% Refrigerant = {'PAG68','propane'};   MassFrac1 = 0.8068;  pres_kPa = 80;  temp_K = 232.11; 
+Refrigerant = {'PAG68','propane'};   MassFrac1 = 0.8068;  pres_kPa = 200;  temp_K = 332.11; 
 % Refrigerant = {'ISO VG32','R1234zee'};   MassFrac1 = 0.9070;  pres_kPa = 3.4e1;  temp_K = 248.1500; 
-Refrigerant = {'PAG68'};   MassFrac1 = 1;  pres_kPa = 100;  temp_K = 273; 
+% Refrigerant = {'PAG68'};   MassFrac1 = 1;  pres_kPa = 100;  temp_K = 273; 
 
 %%% parameter preperation
 GL = GetGlobals(CubicEOS,Refrigerant);  % obtain fluid constants
@@ -32,11 +32,11 @@ p_kPa_guess = 0;  % if p to be solved and a good guess is known, otherwise set 0
 % mole fraction to mass fraction converstion
 %         [MM_mix_gmol,MassFrac] = EOSmodel.MoleF_2_MassF(GL.MM_gmol,MoleFrac);  
 
-ffi = OilPropm('L','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);   
+% ffi = OilPropm('L','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);   
 
 %%%%%%%%%%%%%%%%%%%%%%%%% call the function %%%%%%%%%%%%%%%%%%%%%%%%%
 % tic
-% ff = OilPropm('L','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);   
+ff = OilPropm('All','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);   
 % ff = OilPropm('All','T',temp_K,'D',ff.rho_kgm3_all,MassFrac,GL,0,0); 
 % ff = OilPropm('All','T',temp_K,'S',ff.ss_JkgK_all,MassFrac,GL,0,0);   
 % ff = OilPropm('All','T',temp_K,'H',ff.hh_Jkg_all,MassFrac,GL,0,0); 

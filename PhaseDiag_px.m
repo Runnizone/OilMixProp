@@ -56,12 +56,12 @@ GL = GetGlobals(CubicEOS,Refrigerant);  % obtain fluid constants
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define the pressure range 
 try
-    ff = OilPropm('T',temp,'Q',1,1,GL1,0,0);  psat1 = ff.p_Pa;  lve1 = 1;
+    ff = OilPropm('all','T',temp,'Q',1,1,GL1,0,0);  psat1 = ff.p_Pa;  lve1 = 1;
 catch
     psat1 = GL1.presc;    lve1 = 0;
 end
 try
-    ff = OilPropm('T',temp,'Q',1,1,GL2,0,0);  psat2 = ff.p_Pa;   lve2 = 1;
+    ff = OilPropm('all','T',temp,'Q',1,1,GL2,0,0);  psat2 = ff.p_Pa;   lve2 = 1;
 catch
     psat2 = GL2.presc;    lve2 = 0;
 end
@@ -146,9 +146,9 @@ if algorithm == 1   % mainly for azeotropic mixture
             p_y = ffy.p_Pa;    p_x = ffx.p_Pa;
         end
         try
-            ffy = OilPropm('T',temp,'Q',1,Zi,GL,0,p_y);
+            ffy = OilPropm('all','T',temp,'Q',1,Zi,GL,0,p_y/1000);
             py1(ix) = ffy.p_Pa;
-            ffx = OilPropm('T',temp,'Q',0,Zi,GL,0,p_x);
+            ffx = OilPropm('all','T',temp,'Q',0,Zi,GL,0,p_x/1000);
             px1(ix) = ffx.p_Pa;
             if py1(ix) > px1(ix) || py1(ix) < 0  ||  px1(ix) < 0  
                 error(' '); 
@@ -188,7 +188,7 @@ elseif algorithm == 2
                 ddx = ddx0 * 25; 
             end
             Zi = [MF1,1 - MF1]';
-            ff = OilPropm('T',temp,'P',pline(ip),Zi,GL,0,0);
+            ff = OilPropm('all','T',temp,'P',pline(ip)/1000,Zi,GL,0,0);
             if strcmpi(ff.Phase,'V')
                 MF1 = MF1 - 2 * ((psat1 > psat2) -0.5) * ddx;
             elseif strcmpi(ff.Phase,'L')

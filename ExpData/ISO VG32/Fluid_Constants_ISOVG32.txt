@@ -1,0 +1,2 @@
+     Materials;    MM_gmol;  Power_fix;      Zc;      Tc_K;   Dc_kgm3;    pc_MPa;   acentric;  k0_JmolK;  k1_JmolK;    n1_mu;     n2_mu;     n3_mu;    n4_mu;        n1_tc;       n2_tc;       n3_tc;       n4_tc
+       ISOVG32;   560.260;    0.2857;    0.2720;   717.192;   321.786;    0.9316;    0.3783;   300.000;   400.000;  1.619707; -1.010262;  0.255159;  0.000000;    0.001000;    4.835594;   -0.365323;    0.000000

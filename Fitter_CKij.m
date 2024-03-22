@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% preparation %%%%%%%%%%%%%%%%%%%%%%%%%
-clear;clc;path(path,[pwd,'/Classes']);  options = optimset('Display',  'off');  %  warning('off');  
+clear;clc;path(path,[pwd,'/Classes']);  options = optimset('Display',  'off');   warning('off');  
 SSS = dbstack();  thisfile = SSS(1).file;  LL = length(thisfile);   thisfilename = thisfile(1:LL-2);
 linewidth = 1; fontsize = 10;  markersize = 4;
-AllEOS = {'PR','SRK','PTV','YR'};     CubicEOS = AllEOS{3}; 
+AllEOS = {'PR','SRK','PTV','YR'};     CubicEOS = AllEOS{4}; 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -14,7 +14,7 @@ Lsave2database = 1;    % save parameters to database (Classes/Bin_kij_fit.txt)? 
 % Oil mixture details
 if OilNum == 1
     Material = {'R1233zde','Emkarate RL32'};     % make sure oil is the second component
-    FitIndex_VP = [1,9];                        % Index of data used for fit, only one point needed
+    FitIndex_VP = [1,6,9];                        % Index of data used for fit, only one point needed
 elseif OilNum == 2
 
 elseif OilNum == 3
