@@ -5,15 +5,14 @@ AllEOS = {'PR','SRK','PTV','YR'};      figure(1);clf; hold on; box on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define fluids to study
-% Refrigerant = {'R134A','Emkarate RL32'};  temp = 273.15 + 10;  
+Refrigerant = {'R134A','Emkarate RL32'};  temp = 273.15 + 10;  
 % Refrigerant = {'CO2','methane'};  temp = 273.15 - 50;  
 % Refrigerant = {'methane','CO2'};  temp = 273.15 - 50;  
 % Refrigerant = {'Nitrogen','Emkarate RL32'};  temp = 273.15 + 200;  
 % Refrigerant = {'CO2','RENISO ACC HV'};  temp = 400.15;  
-% Refrigerant = {'CO2','RENISO ACC HV'};  temp = 400.15;  
 % Refrigerant = {'RENISO ACC HV','CO2'};  temp = 400.15;  
 % Refrigerant = {'propane','R134A'};     temp = 283.15;  
-Refrigerant = {'propane','C12'};     temp = 419.15; %   temp = 457.65;  
+% Refrigerant = {'propane','C12'};     temp = 419.15; %   temp = 457.65;  
 % Refrigerant = {'CO2','ethane'};  temp = 273.15 - 20;  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

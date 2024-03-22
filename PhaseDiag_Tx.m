@@ -8,13 +8,12 @@ AllEOS = {'PR','SRK','PTV','YR'};     figure(1);clf;hold on;box on;
 % Refrigerant = {'R134A','Emkarate RL32'};  pres_kPa = 3.5 * 1e3;  
 % Refrigerant = {'Emkarate RL32','R134A'};  pres_kPa = 3.5 * 1e3;  
 % Refrigerant = {'CO2','methane'};  pres_kPa =  3 * 1e3;  
-Refrigerant = {'methane','CO2'};  pres_kPa =  5 * 1e3;  
+% Refrigerant = {'methane','CO2'};  pres_kPa =  5 * 1e3;  
 % Refrigerant = {'Nitrogen','Emkarate RL32'};  pres_kPa = 2 * 1e3;  
 % Refrigerant = {'Emkarate RL32','Nitrogen'};  pres_kPa = 3.2 * 1e3;  
 % Refrigerant = {'CO2','RENISO ACC HV'}; pres_kPa = 1 * 1e3;  
-% Refrigerant = {'CO2','RENISO ACC HV'}; pres_kPa = 1 * 1e3;  
 % Refrigerant = {'RENISO ACC HV','CO2'}; pres_kPa = 2 * 1e3;  
-% Refrigerant = {'propane','R134A'};    pres_kPa = 1 * 1e3; 
+Refrigerant = {'propane','R134A'};    pres_kPa = 1 * 1e3; 
 % Refrigerant = {'CO2','ethane'}; pres_kPa = 3 * 1e3;  
 
 
@@ -116,15 +115,16 @@ if algorithm == 1   % mainly for azeotropic mixture
     for ix = 2:nx-1
         MF1 = x1(ix);
         Zi = [MF1,1 - MF1]';
+        [MM_mix_gmol,MassFrac] = EOSmodel.MoleF_2_MassF(GL.MM_gmol,Zi); 
         if ix == 2
             T_y = Ty1(ix-1);   T_x = Tx1(ix-1);
         else
             T_y = ffy.T_K;    T_x = ffx.T_K;
         end
         try
-            ffy = OilPropm('all','P',pres_kPa,'Q',1,Zi,GL,T_y,0);
+            ffy = OilPropm('all','P',pres_kPa,'Q',1,MassFrac,GL,T_y,0);
             Ty1(ix) = ffy.T_K;
-            ffx = OilPropm('all','P',pres_kPa,'Q',0,Zi,GL,T_x,0);
+            ffx = OilPropm('all','P',pres_kPa,'Q',0,MassFrac,GL,T_x,0);
             Tx1(ix) = ffx.T_K;
             if Ty1(ix) < Tx1(ix) || Ty1(ix) < 0  ||  Tx1(ix) < 0
                 error(' '); 
@@ -142,15 +142,16 @@ elseif algorithm == 2
     dx = 0.01;  ddx0 = 0.003;     
     firstP = 0;
     for iT = 2:nT-1
-        if iT == 2 || firstP == 0
-            if Tsat2 > Tsat1  
-                MF1 = 1 - dx;
-            else
-                MF1 = dx;
-            end 
-        else
-            MF1 = (ffo.MoleF_Li(1) + ffo.MoleF_Vi(1))/2  + 2 * ((Tsat1 > Tsat2) -0.5) * dx;
-        end
+%         if iT == 2 || firstP == 0
+%             if Tsat2 > Tsat1  
+%                 MF1 = 1 - dx;
+%             else
+%                 MF1 = dx;
+%             end 
+%         else
+%             MF1 = (ffo.MoleF_Li(1) + ffo.MoleF_Vi(1))/2  + 2 * ((Tsat1 > Tsat2) -0.5) * dx;
+            MF1 = (Tline(iT) - Tsat2) / (Tsat1 - Tsat2);
+%         end
         loopcount = 0;
         while 1 
             loopcount = loopcount + 1;
@@ -162,7 +163,8 @@ elseif algorithm == 2
                 ddx = ddx0 * 25; 
             end
             Zi = [MF1,1 - MF1]';
-            ff = OilPropm('all','T',Tline(iT),'P',pres_kPa,Zi,GL,0,0);
+            [MM_mix_gmol,MassFrac] = EOSmodel.MoleF_2_MassF(GL.MM_gmol,Zi); 
+            ff = OilPropm('all','T',Tline(iT),'P',pres_kPa,MassFrac,GL,0,0);
             if strcmpi(ff.Phase,'V')
                 MF1 = MF1 + 2 * ((Tsat1 > Tsat2) -0.5) * ddx;
             elseif strcmpi(ff.Phase,'L')
