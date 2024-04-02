@@ -2,7 +2,7 @@
 clear;clc;path(path,[pwd,'/Classes']);  options = optimset('Display',  'off');   warning('off');  
 SSS = dbstack();  thisfile = SSS(1).file;  LL = length(thisfile);   thisfilename = thisfile(1:LL-2);
 linewidth = 1; fontsize = 10;  markersize = 4;
-AllEOS = {'PR','SRK','PTV','YR'};     CubicEOS = AllEOS{4}; 
+AllEOS = {'PR','SRK','PTV','YR'};     CubicEOS = AllEOS{3}; 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -63,7 +63,7 @@ end
 %% plot
 if Lplot && LvpExist == 1
     figure(1);clf; hold on; box on;
-    plot(T_K_all,ReDev_all*100,'o','color','r','markersize',markersize,'linewidth',linewidth-0.4); 
+    plot(T_K_all,ReDev_all*100,'o','color','k','markersize',markersize,'linewidth',linewidth-0.4); 
     plot(T_K,ReDev*100,'o','markerfacecolor','r','markeredgecolor','r','markersize',markersize,'linewidth',linewidth-0.4); 
     plot([min(T_K_all)-10,max(T_K_all)+10],[0,0],'k-');   
     text(min(T_K_all)-5,3,['\itk\rm_i_j = ',num2str(kij_fit)])

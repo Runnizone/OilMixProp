@@ -4,11 +4,11 @@
     3;         ISO VG32;              R134a;        -0.5
     4;         ISO VG32;               R125;        -0.5
     5;         ISO VG32;                R32;        -0.5
-    6;             DIDP;                CO2;       -0.35
+    6;             DIDP;                CO2;       -0.15
     7;             PEC5;                CO2;        0.00
     8;             PEC7;                CO2;        0.00
     9;             PEC9;                CO2;        0.00
-   10;         LAB ISO5;          isobutane;        -0.15
+   10;         LAB ISO5;          isobutane;       -0.15
    11;           DECANE;                C12;       -0.01
    12;           DECANE;           MLINOLEA;        0.04
    13;             PEB8;               PEC7;         0.1

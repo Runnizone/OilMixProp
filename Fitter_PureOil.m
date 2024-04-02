@@ -10,7 +10,7 @@ PowerConst = 2/7;  xi0 = 1.97E-10; Gamma = 5.42E-02; qDinv = 5.98E-10; xi_mu = 1
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define the fluid to be fitted
-iOilNum = 2;            % oil to be study, see the fluid definition below, if 0, run all oils.
+iOilNum = 0;            % oil to be study, see the fluid definition below, if 0, run all oils.
 CubicEOS = AllEOS{4}; 
 
 N_Oil = 11;            % the number of avaiable oil 
