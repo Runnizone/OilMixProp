@@ -22,6 +22,7 @@ function ff = OilPropm(OutPut,InPut_1,Value_1,InPut_2,Value_2,MassFrac,GL,T_K_gu
 % T   Temperature [K]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Avaiable OutPut sets
+%     All all the following properties               [a class]
 %     A   Speed of sound [m/s]                       [liquid phase, gas phase]
 %     C   Cp [J/(kg K)]                              [liquid phase, gas phase, all phase]
 %     D   Density [kg/m^3]                           [liquid phase, gas phase, all phase]

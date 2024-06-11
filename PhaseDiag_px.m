@@ -5,14 +5,14 @@ AllEOS = {'PR','SRK','PTV','YR'};      figure(1);clf; hold on; box on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define fluids to study
-Refrigerant = {'R134A','Emkarate RL32'};  temp = 273.15 + 10;  
+% Refrigerant = {'R134A','Emkarate RL32'};  temp = 273.15 + 10;  
 % Refrigerant = {'CO2','methane'};  temp = 273.15 - 50;  
 % Refrigerant = {'methane','CO2'};  temp = 273.15 - 50;  
 % Refrigerant = {'Nitrogen','Emkarate RL32'};  temp = 273.15 + 200;  
 % Refrigerant = {'CO2','RENISO ACC HV'};  temp = 400.15;  
 % Refrigerant = {'RENISO ACC HV','CO2'};  temp = 400.15;  
 % Refrigerant = {'propane','R134A'};     temp = 283.15;  
-% Refrigerant = {'propane','C12'};     temp = 419.15; %   temp = 457.65;  
+Refrigerant = {'propane','C12'};     temp = 419.15; %   temp = 457.65;  
 % Refrigerant = {'CO2','ethane'};  temp = 273.15 - 20;  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,7 +67,7 @@ end
 p_s = min([psat1,psat2]); p_e = max([psat1,psat2]); 
 if p_e / p_s > 20
     dp = (p_e-p_s)/1000; 
-    pline = [p_s: 2*dp :p_s+9*dp,  p_s+10*dp: 20*dp :p_s+90*dp,  p_s+100*dp:200*dp:p_e];
+    pline = [p_s * exp(linspace(0,log((p_s+dp)/p_s),10)),  p_s+2*dp: 2*dp :p_s+9*dp,  p_s+10*dp: 20*dp :p_s+90*dp,  p_s+100*dp:200*dp:p_e];
 else
     pline = linspace(p_s,p_e,20);
 end

@@ -8,13 +8,16 @@ CubicEOS = AllEOS{4};
 % Refrigerant = {'CO2','RENISO ACC HV'};   MassFrac1 = 0.6;  pres_kPa = 1e3;  temp_K = 273.15 + 10;  
 % Refrigerant = {'propane','R32'};   MassFrac1 = 0.4588;  pres_kPa = 0.84e3;  temp_K = 283.15;  
 % Refrigerant = {'CO2'};   MassFrac1 = 1;  pres_kPa = 1e3;  temp_K = 273.15  + 10;  
+% Refrigerant = {'hydrogen'};   MassFrac1 = 1;  pres_kPa = 5e3;  temp_K = 19;  
 % Refrigerant = {'CO2','POEiso68'};   MassFrac1 = 0.6;  pres_kPa = 1e4;  temp_K = 273.15 + 10;  
 % Refrigerant = {'1-Methylnaphthalene','R32'};   MassFrac1 = 0.9;  pres_kPa = 1.2e3;  temp_K = 273.15 + 150;  
-% Refrigerant = {'water','nitrogen'};   MassFrac1 = 0.900;  pres_kPa = 1.0e2;  temp_K = 273.15 + 90;  
+% Refrigerant = {'water','nitrogen'};   MassFrac1 = 0.5;  pres_kPa = 1.0e3;  temp_K = 273.15 + 30;  
 % Refrigerant = {'EGLYCOL'};   MassFrac1 = 1;  pres_kPa = 5e5;  temp_K = 273.15 + 1000;  
 % Refrigerant = {'PAG68','propane'};   MassFrac1 = 0.8068;  pres_kPa = 80;  temp_K = 232.11; 
 % Refrigerant = {'PAG68'};   MassFrac1 = 1;  pres_kPa = 100;  temp_K = 273; 
-Refrigerant = {'propane','R32'};   MoleFrac1 = 0.1499;  pres_kPa = 3.4e3;  temp_K = 290; 
+% Refrigerant = {'propane','R32'};   MoleFrac1 = 0.1499;  pres_kPa = 3.4e3;  temp_K = 290; 
+Refrigerant = {'water','nitrogen','argon'};   MassFrac1 = 0.5; MassFrac2 = 0.2;  pres_kPa = 1.0e3;  temp_K = 273.15 + 30;  
+% Refrigerant = {'benzene','ethanol'};   MassFrac1 = 0.5;  pres_kPa = 1.0e3;  temp_K = 273.15 + 30;  
 
 %%% parameter preperation
 GL = GetGlobals(CubicEOS,Refrigerant);  % obtain fluid constants
@@ -71,26 +74,26 @@ ff = OilPropm('All','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);
 %  ff = OilPropm('All','T',temp_K,'Q',0,MassFrac,GL,0,0); 
 % 
 
-
-toc
-ffi = OilPropm('A+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['SoS: ',num2str(ffi),' m/s']);
-ffi = OilPropm('C+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Cp: ',num2str(ffi),' xxx']);
-ffi = OilPropm('D+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Den: ',num2str(ffi),' xxx']);
-ffi = OilPropm('H+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['HH: ',num2str(ffi),' xxx']);
-ffi = OilPropm('K+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Kappa: ',num2str(ffi),' xxx']);
-ffi = OilPropm('L+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Vis: ',num2str(ffi),' xxx']);
-ffi = OilPropm('O+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Cv: ',num2str(ffi),' xxx']);
-ffi = OilPropm('P+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Pres: ',num2str(ffi),' xxx']);
-ffi = OilPropm('Q+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['FracV: ',num2str(ffi),' xxx']);
-ffi = OilPropm('S+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['SS: ',num2str(ffi),' xxx']);
-ffi = OilPropm('T+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Temp: ',num2str(ffi),' xxx']);
-ffi = OilPropm('U+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['UU: ',num2str(ffi),' xxx']);
-ffi = OilPropm('V+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Vol: ',num2str(ffi),' xxx']);
-ffi = OilPropm('X+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); % disp(['XX: ',num2str(ffi),' xxx']);
-ffi = OilPropm('Z+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Z: ',num2str(ffi),' xxx']);
-ffi = OilPropm('#+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['xxxx: ',num2str(ffi),' xxx']);
-ffi = OilPropm('R+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['xxxx: ',num2str(ffi),' xxx']);
-ffi = OilPropm('W+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['xxxx: ',num2str(ffi),' xxx']);
+% 
+% 
+% ffi = OilPropm('A+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['SoS: ',num2str(ffi),' m/s']);
+% ffi = OilPropm('C+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Cp: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('D+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Den: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('H+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['HH: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('K+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Kappa: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('L+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Vis: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('O+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Cv: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('P+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Pres: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('Q+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['FracV: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('S+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['SS: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('T+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Temp: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('U+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['UU: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('V+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Vol: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('X+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); % disp(['XX: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('Z+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Z: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('#+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['xxxx: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('R+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['xxxx: ',num2str(ffi),' xxx']);
+% ffi = OilPropm('W+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['xxxx: ',num2str(ffi),' xxx']);
 % % 
 
 % dT = 0.001;
@@ -182,7 +185,7 @@ end
 % try ff = OilPropm('All','T',temp_K,'Q',0,MassFrac,GL,0,0);  fprintf('\n L: %4s, Den: %10.3f   kg/m3 \n',ff.Phase,ff.rho_kgm3_all); catch,end
 % 
 
-try
+% try
     if ncomp == 1 
         D_ref = refpropm('D','T',temp_K,'P',pres_kPa,Refrigerant{:});
         Cp_ref = refpropm('C','T',temp_K,'P',pres_kPa,Refrigerant{:});
@@ -193,7 +196,6 @@ try
         drhodP = refpropm('R','T',temp_K,'P',pres_kPa,Refrigerant{:});
         drhodT = refpropm('W','T',temp_K,'P',pres_kPa,Refrigerant{:});
         dpdT = refpropm('#','T',temp_K,'P',pres_kPa,Refrigerant{:});
-
     elseif ncomp == 2 
         D_ref = refpropm('D','T',temp_K,'P',pres_kPa,Refrigerant{1},Refrigerant{2},MassFrac);
         Cp_ref = refpropm('C','T',temp_K,'P',pres_kPa,Refrigerant{1},Refrigerant{2},MassFrac);
@@ -217,6 +219,6 @@ try
         fprintf('d(rho)/dT:     %10.6f   kg/m3/K \n ',drhodT);
         fprintf('dp/dT:         %10.6f   kPa/K \n ',dpdT);
         fprintf('------------------------------- \n ');
-catch
-    fprintf('\n\n--- Refprop Calculation fail --=  \n ');
-end
+% catch
+%     fprintf('\n\n--- Refprop Calculation fail --=  \n ');
+% end

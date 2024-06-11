@@ -2,7 +2,7 @@
 %%  Preparation
 clear; clc; format short; path(path,'C:\Xiaoxian\Github\CubicEOS\Classes'); 
 SSS = dbstack();  thisfile = SSS(1).file;  LL = length(thisfile);   thisfilename = thisfile(1:LL-2);
-AllEOS = {'PR','SRK','PTV','YR'};    
+AllEOS = {'PR','SRK','PTV','YFR'};    
 linewidth = 1; fontsize = 10;  markersize = 4;
 options = optimset('Display',  'off');   R = 8.31446261815324;     kB = 1.380649e-23;  % J / K  % m2 kg s-2 K-1
 PowerConst = 2/7;  xi0 = 1.97E-10; Gamma = 5.42E-02; qDinv = 5.98E-10; xi_mu = 1;
@@ -10,7 +10,7 @@ PowerConst = 2/7;  xi0 = 1.97E-10; Gamma = 5.42E-02; qDinv = 5.98E-10; xi_mu = 1
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define the fluid to be fitted
-iOilNum = 0;            % oil to be study, see the fluid definition below, if 0, run all oils.
+iOilNum = 2;            % oil to be study, see the fluid definition below, if 0, run all oils.
 CubicEOS = AllEOS{4}; 
 
 N_Oil = 11;            % the number of avaiable oil 
@@ -30,8 +30,9 @@ for OilNum = OilRun
         FitIndex_TC = [1,2,3,4,5,6];   % Index of thermal conductivity data used for fit, at least four
     elseif OilNum == 2
         Material = 'Emkarate RL32'; 
-        FitIndex_D = [1,3,4];            % Index of density data used for fit, at least two
-        FitIndex_V = [1,2,3,4];       % Index of viscosity data used for fit, at least four
+        FitIndex_D = [1,5,9];            % Index of density data used for fit, at least two
+        FitIndex_V = [1,3,5,7];       % Index of viscosity data used for fit, at least four
+        MM_gmol = 180;  
     elseif OilNum == 3
         Material = 'DIDP'; 
         MM_gmol = 446.672;          % give a good guess of the molar mass
@@ -67,7 +68,7 @@ for OilNum = OilRun
         FitIndex_D = [10,55,100,145];         % Index of density data used for fit, at least two
         FitIndex_V = [1,31,44,60,92];       % Index of viscosity data used for fit, at least four
     elseif OilNum == 9
-        Material = 'POE ISO68'; 
+        Material = 'HATCOL 4467'; 
         MM_gmol = 500;          % give a good guess of the molar mass
         FitIndex_D = [1,9,17];         % Index of density data used for fit, at least two
         FitIndex_cp = [1,9,17];          % Index of isobaric heat capacity data used for fit, at least two
@@ -87,7 +88,7 @@ for OilNum = OilRun
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if ~exist('Zc','var')
-        if strcmpi(CubicEOS,'PTV'), Zc = 0.2563; elseif strcmpi(CubicEOS,'YR'), Zc = 0.2640; else, end
+        if strcmpi(CubicEOS,'PTV'), Zc = 0.2563; elseif strcmpi(CubicEOS,'YFR'), Zc = 0.2640; else, end
     end
     if ~exist('MM_gmol','var')
         MM_gmol = 200;  
