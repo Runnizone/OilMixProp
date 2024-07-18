@@ -1,5 +1,5 @@
           Material_1;          Material_2; Cubic_kij
                  xxx;              Emxxx2;    0.0511
-            R1233zde;       Emkarate RL32;    0.0400
+       Emkarate RL32;            R1233zde;    0.0000
              propane;                 C12;    0.0100
              propane;               PAG68;    0.0381

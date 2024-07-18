@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% preparation %%%%%%%%%%%%%%%%%%%%%%%%%
 clear;clc;path(path,[pwd,'/Classes']); format short;  linewidth = 1; fontsize = 10;  markersize = 4;   
 SSS = dbstack();  thisfile = SSS(1).file;  LL = length(thisfile);   thisfilename = thisfile(1:LL-2);
-AllEOS = {'PR','SRK','PTV','YR'};      figure(1);clf; hold on; box on;
+AllEOS = {'PR','SRK','PTV','YFR'};      figure(1);clf; hold on; box on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define fluids to study
@@ -226,6 +226,7 @@ end
 %%% plot the results
 xlabel(['Mole Frac. of ',Refrigerant{1}, ' mixed with ',Refrigerant{2},' at ' ,num2str(temp) ,' K'],'fontname','Arial','fontsize',fontsize)
 ylabel('Pressure \itp\rm / MPa','fontname','Arial','fontsize',fontsize); 
+title('Solid: OilMixProp; Dashed: REFPROP')
 
 if Lplot
     Material_mix = [Refrigerant{1},'_',Refrigerant{2},'_',num2str(temp),' K'];

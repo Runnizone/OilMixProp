@@ -1,9 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% preparation %%%%%%%%%%%%%%%%%%%%%%%%%
-clear;clc;path(path,[pwd,'/Classes']); format short;  AllEOS = {'PR','SRK','PTV','YR'};      warning('off'); 
+clear;clc;path(path,[pwd,'/Classes']); format short;  AllEOS = {'PR','SRK','PTV','YFR'};      warning('off'); 
 % rmpath('C:\Xiaoxian\Github\OilMixProp\Classes')
 
+%%%  Define cubic EoS, PTV and YFR are recommended %%%
 CubicEOS = AllEOS{4}; 
-%%% define fluids to study
+
+%%% define fluids to study %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Please see Classes/Fluid_Constants(_xxx).txt files for all available fluids
+% Both mole fraction and mass fraction are available
+% Following are a few examples. 
+
 % Refrigerant = {'R1233zde','Emkarate RL32'};   MassFrac1 = 0.5;  pres_kPa = 1.2e3;  temp_K = 273.15 + 150;  
 % Refrigerant = {'CO2','RENISO ACC HV'};   MassFrac1 = 0.6;  pres_kPa = 1e3;  temp_K = 273.15 + 10;  
 % Refrigerant = {'propane','R32'};   MassFrac1 = 0.4588;  pres_kPa = 0.84e3;  temp_K = 283.15;  
@@ -13,16 +19,16 @@ CubicEOS = AllEOS{4};
 % Refrigerant = {'1-Methylnaphthalene','R32'};   MassFrac1 = 0.9;  pres_kPa = 1.2e3;  temp_K = 273.15 + 150;  
 % Refrigerant = {'water','nitrogen'};   MassFrac1 = 0.5;  pres_kPa = 1.0e3;  temp_K = 273.15 + 30;  
 % Refrigerant = {'EGLYCOL'};   MassFrac1 = 1;  pres_kPa = 5e5;  temp_K = 273.15 + 1000;  
-% Refrigerant = {'PAG68','propane'};   MassFrac1 = 0.8068;  pres_kPa = 80;  temp_K = 232.11; 
+Refrigerant = {'PAG68','propane'};   MassFrac1 = 0.8068;  pres_kPa = 80;  temp_K = 232.11; 
 % Refrigerant = {'PAG68'};   MassFrac1 = 1;  pres_kPa = 100;  temp_K = 273; 
 % Refrigerant = {'propane','R32'};   MoleFrac1 = 0.1499;  pres_kPa = 3.4e3;  temp_K = 290; 
-Refrigerant = {'water','nitrogen','argon'};   MassFrac1 = 0.5; MassFrac2 = 0.2;  pres_kPa = 1.0e3;  temp_K = 273.15 + 30;  
+% Refrigerant = {'water','nitrogen','argon'};   MassFrac1 = 0.5; MassFrac2 = 0.2;  pres_kPa = 1.0e3;  temp_K = 273.15 + 30;  
 % Refrigerant = {'benzene','ethanol'};   MassFrac1 = 0.5;  pres_kPa = 1.0e3;  temp_K = 273.15 + 30;  
 
-%%% parameter preperation
+%%% parameter preperation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% You do not need to do anything here
 GL = GetGlobals(CubicEOS,Refrigerant);  % obtain fluid constants
 ncomp = length(Refrigerant);            % get over all mole fraction Zi
-
 if ~exist('MassFrac1','var') && exist('MoleFrac1','var')
     if ncomp == 3
         MoleFrac = [MoleFrac1,MoleFrac2,1 - MoleFrac1-MoleFrac2]'; 
@@ -45,17 +51,8 @@ T_K_guess = 0;   % if T to be solved and a good guess is known, otherwise set 0
 p_kPa_guess = 0;  % if p to be solved and a good guess is known, otherwise set 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%% A list of example inputs %%%%%%%%%%%%%%%%%%%%%%%%%
 ff = OilPropm('All','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);   
-% 
-% tic
-% ff = OilPropm('All','P',pres_kPa,'S',ff.ss_JkgK_all,MassFrac,GL,0,0);
-% toc
-% tic
-% ff = OilPropm('All+','P',pres_kPa,'S',ff.ss_JkgK_all,MassFrac,GL,0,0);
-% toc
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%% call the function %%%%%%%%%%%%%%%%%%%%%%%%%
 % ff = OilPropm('All','T',temp_K,'D',ff.rho_kgm3_all,MassFrac,GL,0,0); 
 % ff = OilPropm('All','T',temp_K,'S',ff.ss_JkgK_all,MassFrac,GL,0,0);   
 % ff = OilPropm('All','T',temp_K,'H',ff.hh_Jkg_all,MassFrac,GL,0,0); 
@@ -66,16 +63,11 @@ ff = OilPropm('All','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);
 %     ff = OilPropm('All','T',temp_K,'Q',ff.FracV_mass,MassFrac,GL,0,0);
 %     ff = OilPropm('All','P',pres_kPa,'Q',ff.FracV_mass,MassFrac,GL,0,0);                   
 % end
-
-% 
-%  ff = OilPropm('All','P',pres_kPa,'Q',1,MassFrac,GL,0,0);  
+%  ff = OilPropm('All','P',pres_kPa,'Q',1,MassFrac,GL,0,0);
 %  ff = OilPropm('All','P',pres_kPa,'Q',0,MassFrac,GL,0,0);  
 %  ff = OilPropm('All','T',temp_K,'Q',1,MassFrac,GL,0,0);      
 %  ff = OilPropm('All','T',temp_K,'Q',0,MassFrac,GL,0,0); 
-% 
 
-% 
-% 
 % ffi = OilPropm('A+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['SoS: ',num2str(ffi),' m/s']);
 % ffi = OilPropm('C+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Cp: ',num2str(ffi),' xxx']);
 % ffi = OilPropm('D+','T',temp_K,'P',pres_kPa,MassFrac,GL,T_K_guess,p_kPa_guess); disp(['Den: ',num2str(ffi),' xxx']);
@@ -100,8 +92,13 @@ ff = OilPropm('All','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);
 % ff0 = OilPropm('All','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);
 % ff1 = OilPropm('All','T',temp_K+dT,'D',ff0.rho_kgm3_all,MassFrac,GL,0,0);  
 % dp_dT = (ff1.p_Pa - ff0.p_Pa)/dT / 1000; 
-
-
+% 
+% tic
+% ff = OilPropm('All','P',pres_kPa,'S',ff.ss_JkgK_all,MassFrac,GL,0,0);
+% toc
+% tic
+% ff = OilPropm('All+','P',pres_kPa,'S',ff.ss_JkgK_all,MassFrac,GL,0,0);
+% toc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%% show the results  %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -178,14 +175,10 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% 
-% try ff = OilPropm('All','P',pres_kPa,'Q',1,MassFrac,GL,0,0);  fprintf('\n V: %4s, Den: %10.3f   kg/m3',ff.Phase,ff.rho_kgm3_all); catch,end
-% try ff = OilPropm('All','P',pres_kPa,'Q',0,MassFrac,GL,0,0);  fprintf('\n L: %4s, Den: %10.3f   kg/m3',ff.Phase,ff.rho_kgm3_all); catch,end  
-% try ff = OilPropm('All','T',temp_K,'Q',1,MassFrac,GL,0,0);         fprintf('\n V: %4s, Den: %10.3f   kg/m3',ff.Phase,ff.rho_kgm3_all); catch,end
-% try ff = OilPropm('All','T',temp_K,'Q',0,MassFrac,GL,0,0);  fprintf('\n L: %4s, Den: %10.3f   kg/m3 \n',ff.Phase,ff.rho_kgm3_all); catch,end
-% 
-
-% try
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% if refpropm are in your PC, you can do the following calculation
+% Contact Xiaoxian Yang if you need help on this
+try
     if ncomp == 1 
         D_ref = refpropm('D','T',temp_K,'P',pres_kPa,Refrigerant{:});
         Cp_ref = refpropm('C','T',temp_K,'P',pres_kPa,Refrigerant{:});
@@ -219,6 +212,6 @@ end
         fprintf('d(rho)/dT:     %10.6f   kg/m3/K \n ',drhodT);
         fprintf('dp/dT:         %10.6f   kPa/K \n ',dpdT);
         fprintf('------------------------------- \n ');
-% catch
-%     fprintf('\n\n--- Refprop Calculation fail --=  \n ');
-% end
+catch
+    fprintf('\n\n--- Refprop Calculation fail --=  \n ');
+end

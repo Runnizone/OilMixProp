@@ -11,9 +11,9 @@ PowerConst = 2/7;  xi0 = 1.97E-10; Gamma = 5.42E-02; qDinv = 5.98E-10; xi_mu = 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define the fluid to be fitted
 iOilNum = 2;            % oil to be study, see the fluid definition below, if 0, run all oils.
-CubicEOS = AllEOS{4}; 
+CubicEOS = AllEOS{3}; 
 
-N_Oil = 11;            % the number of avaiable oil 
+N_Oil = 11;            % the number of all avaiable oil 
 Lplot = 1;             % plot and save the figure? 1 yes, 0 not
 Lsave2database = 1;    % save parameters to database (Classes/Fluid_Constants_Fitted.txt)? 1 yes, 0 not
 

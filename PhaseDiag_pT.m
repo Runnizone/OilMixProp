@@ -1,15 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% preparation %%%%%%%%%%%%%%%%%%%%%%%%%
 clear;clc;path(path,[pwd,'/Classes']); format short;  linewidth = 1; fontsize = 10;  markersize = 4;   
 SSS = dbstack();  thisfile = SSS(1).file;  LL = length(thisfile);   thisfilename = thisfile(1:LL-2);
-AllEOS = {'PR','SRK','PTV','YR'};    figure(1);clf;hold on;box on;
+AllEOS = {'PR','SRK','PTV','YFR'};    figure(1);clf;hold on;box on;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define fluids to study
 % Refrigerant = {'R134A','Emkarate RL32'};  MF1 = 0.9;
-% Refrigerant = {'CO2','methane'};  MF1 = 0.9; 
+Refrigerant = {'CO2','methane'};  MF1 = 0.9; 
 % Refrigerant = {'methane','CO2'};  MF1 = 0.5;
 % Refrigerant = {'CO2','ethane'};   MF1 = 0.1;
-Refrigerant = {'Nitrogen','Emkarate RL32'};  MF1 = 0.3;
+% Refrigerant = {'Nitrogen','Emkarate RL32'};  MF1 = 0.3;
 % Refrigerant = {'CO2','RENISO ACC HV'}; MF1 = 0.9;
 % Refrigerant = {'RENISO ACC HV','CO2'};  MF1 = 0.1; 
 % Refrigerant = {'CO2','R134A'};   MF1 = 0.5; 
@@ -134,6 +134,7 @@ plot(Tx,pline/1e6,'r-',Ty,pline/1e6,'b-')
 % xlabel(['Mole Frac. of ',Refrigerant{1}, ' mixed with ',Refrigerant{2},' at ' ,num2str(temp) ,' K'],'fontname','Arial','fontsize',fontsize)
 ylabel('Pressure \itp\rm / MPa','fontname','Arial','fontsize',fontsize); 
 xlabel('Temperature \itT\rm / K','fontname','Arial','fontsize',fontsize); 
+title('Solid: OilMixProp; Dashed: REFPROP')
 
 if Lplot
     Material_mix = [Refrigerant{1},'_',Refrigerant{2},'_',num2str(MF1)];
