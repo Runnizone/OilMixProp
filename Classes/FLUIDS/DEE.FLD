@@ -1,0 +1,324 @@
+Diethyl ether        !Short name
+60-29-7              !CAS number
+Diethyl ether        !Full name
+C4H10O               !Chemical formula {C4H10O}
+Ethyl ether          !Synonym
+74.1216              !Molar mass [g/mol]
+156.92               !Triple point temperature [K]
+307.604              !Normal boiling point [K]
+466.7                !Critical temperature [K]
+3720.2               !Critical pressure [kPa]
+3.5617               !Critical density [mol/L]
+0.29                 !Acentric factor
+1.151                !Dipole moment [Debye]; DIPPR DIADEM 2012
+NBP                  !Default reference state
+10.0                 !Version number
+1155                 !UN Number                                                 :UN:
+ether                !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C4H10O/c1-3-5-4-2/h3-4H2,1-2H3         !Standard InChI String                :InChi:
+RTZKZFJDLAIYFH-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+46a701e0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by M. Thol, Thermodynamics, Ruhr-Universitaet Bochum, Germany
+! 08-14-12  MT, Original version.
+! 08-14-12  MT, Add ancillary equations.
+! 04-01-13  SH, Add ancillary equations.
+! 04-06-13 EWL, Add dipole moment.
+! 03-26-14 MLH, Add preliminary transport.
+! 04-17-14 EWL, Add surface tension coefficients of Mulero et al. (2014).
+! 04-22-14  MT, Add PH0 parameters for NBP.
+! 03-29-17 MLH, Refit vis, th cond.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for diethyl ether of Thol et al. (2014).
+:TRUECRITICALPOINT:  467.900    3.456402      !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1007/s10765-014-1633-1
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Thol, M., Piazza, L., and Span, R.,
+? "A New Functional Form for Equations of State for Some Polar and Weakly
+? Associating Fluids,"
+? Int. J. Thermophys., 35(5):783-811, 2014.
+?
+!```````````````````````````````````````````````````````````````````````````````
+270.0              !Lower temperature limit [K]
+500.0              !Upper temperature limit [K]
+40000.0            !Upper pressure limit [kPa]
+11.48              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+74.1216                                !Molar mass [g/mol]
+156.92                                 !Triple point temperature [K]
+0.0005555                              !Pressure at triple point [kPa]
+11.48                                  !Density at triple point [mol/L]
+307.604                                !Normal boiling point temperature [K]
+0.29                                   !Acentric factor
+466.7         3720.2       3.5617148   !Tc [K], pc [kPa], rhoc [mol/L]
+466.7                      3.5617148   !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  16  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 0.376700499    -0.75      1.  0.      !a(i),t(i),d(i),l(i)
+-0.116630334    -0.25      1.  0.
+-0.73801498      1.25      1.  0.
+-0.2725701       0.75      2.  0.
+-0.04979231     -1.0       3.  0.
+ 0.172267029    -0.375     3.  0.
+ 0.0044161891    1.25      5.  0.
+-1.53951612      2.375     1.  1.
+ 1.15606052      3.0       1.  1.
+-0.0184504019    2.625     2.  1.
+-0.101800599     1.875     5.  1.
+-0.403598704     4.5       1.  2.
+ 0.00213055571   5.75      3.  2.
+-0.154741976     5.375     4.  2.
+ 0.0120950552    2.75      5.  2.
+-0.0143106371   14.5       2.  3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for diethyl ether of Thol et al. (2014).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Thol, M., Piazza, L., and Span, R., 2014.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+4 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.36281           0.0
+ 0.03832793        1.0
+-0.00001504648     2.0
+ 1.960074e-9       3.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for diethyl ether of Thol et al. (2014).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Thol, M., Piazza, L., and Span, R., 2014.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 5  0  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.36281               1.0      !ai, ti for [ai*log(tau**ti)] terms
+  7.030415236514175     0.0      !aj, ti for [ai*tau**ti] terms
+  0.5095228896650534    1.0      !aj, ti for [ai*tau**ti] terms
+  0.03832793           -1.0
+ -0.00001504648        -2.0
+  1.960074e-9          -3.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for diethyl ether.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Thol, M., Piazza, L., and Span, R., 2014.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 5  0  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 3.36281           1.0                 !ai, ti for [ai*log(tau**ti)] terms
+ 6.371861          0.0                 !aj, ti for [ai*tau**ti] terms
+ 1.522773          1.0
+-8.943822         -1.0
+ 0.54621          -2.0
+-0.016604         -3.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Propane reference) for diethyl ether.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?VISCOSITY
+? Meng, X., Zheng, P., Wu, J., Liu, Z., "Density and Viscosity Measurements of Diethyl Ether from 243 to 373 K and up to 20 MPa," Fluid Phase Equilib., 271:1-5, 2008.  Estimated uncertainty: liquid phase 3% at pressures to 20 MPa, gas phase 10%.
+?
+?THERMAL CONDUCTIVITY
+? Li, X., Wu, J., Dang, Q., "Thermal Conductivity of Liquid Diethyl Ether, Diisopropyl Ether, and Di-n-butyl Ether from (233 to 373) K at Pressures up to 30 MPa," J. Chem. Eng. Data, 55:1241-1246, 2010, estimated uncertainty 10% gas phase, 3% liquid phase at pressures to 30 MPa and T<375 K.
+?
+?The Lennard-Jones parameters were estimated with the method of Chung.
+?
+!```````````````````````````````````````````````````````````````````````````````
+230.0              !Lower temperature limit [K]
+500.0              !Upper temperature limit [K]
+40000.0            !Upper pressure limit [kPa]
+11.48              !Maximum density [mol/L]
+FEQ PROPANE.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+BIG                !Large molecule identifier
+0.90 0. 0. 0.      !Large molecule parameters
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.530              !Lennard-Jones coefficient sigma [nm]
+370.6              !Lennard-Jones coefficient epsilon/kappa [K]
+1  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.00132       0. 0. 0.  !Coefficient, power of T, spare1, spare2
+3  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 1.15039       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.1535        0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+ 0.0330048     0. 2. 0.  !Coefficient, power of Tr, power of Dr, spare
+2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 1.16276       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.0357361     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for diethyl ether of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.196e-9           !Xi0 (amplitude) [m]
+0.066              !Gam0 (amplitude) [-]
+0.645e-9           !Qd_inverse (modified effective cutoff parameter) [m]; estimated-not fitted to data
+700.05             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for diethyl ether of Mulero et al. (2014).
+:DOI: 10.1063/1.4878755
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A. and Cachadiña, I.,
+? "Recommended Correlations for the Surface Tension of Several Fluids
+? Included in the REFPROP Program,"
+? J. Phys. Chem. Ref. Data, 43, 023104, 2014.
+? doi: 10.1063/1.4878755
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+2                  !Number of terms in surface tension model
+466.7              !Critical temperature used in fit (dummy)
+ 0.3995    1.466   !Sigma0 and n
+-0.3455    1.523
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for diethyl ether of Herrig (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., 2013.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+466.70  3644.0     !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+-7.3059    1.0
+ 1.1734    1.5
+ 0.7142    2.2
+-4.3219    3.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for diethyl ether of Herrig (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., 2013.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+466.70  3.5617     !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+ 0.3275    0.12
+ 3.1842    0.55
+-2.1407    1.0
+ 1.4376    1.4
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for diethyl ether of Herrig (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., 2013.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+466.70  3.5617     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-0.35858   0.06
+-16.843    0.87
+ 32.476    1.3
+-33.444    1.7
+-48.036    5.3
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

@@ -1,0 +1,542 @@
+Xenon                !Short name
+7440-63-3            !CAS number
+Xenon                !Full name
+Xe                   !Chemical formula {Xe}
+Xenon                !Synonym
+131.293              !Molar mass [g/mol]
+161.405              !Triple point temperature [K]
+165.05               !Normal boiling point [K]
+289.733              !Critical temperature [K]
+5842.0               !Critical pressure [kPa]
+8.4                  !Critical density [mol/L]
+0.00363              !Acentric factor
+0.0                  !Dipole moment [Debye]; (exactly zero for monatomic molecules)
+NBP                  !Default reference state
+10.0                 !Version number
+2036                 !UN Number                                                 :UN:
+cryogen              !Family                                                    :Family:
+0.0                  !Heating value (upper) [kJ/mol]                            :Heat:
+1S/Xe                                     !Standard InChI String                :InChi:
+FHNFHKCVQCLJFQ-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+434e2a40  (ethane)                        !Alternative fluid for mixing rules   :AltID:
+71fd7fa0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 03-30-98 EWL, Original version.
+! 07-11-00 EWL, Add equation of state of Lemmon and Span.
+! 01-27-02 EWL, Add sublimation line.
+! 03-10-03 EWL, Change critical parameters slightly (truncated final digits).
+! 04-08-04 EWL, Finalize equation of state.
+! 07-07-04 EWL, Increase max density in transport equations.
+! 08-05-04 EWL, Add Harvey and Lemmon dielectric correlation.
+! 12-02-06 MLH, Update LJ for ECS.
+! 01-30-07 EWL, Change triple point from 161.4 to 161.405 in accordance with Bedford et al., Metrologia, 33:133, 1996.
+! 08-17-10 IDC, Add ancillary equations.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 08-06-17 EWL, Change melting point at Ttrp to match triple point pressure of Lemmon and Span.
+! 11-22-17 MLH, Revise viscosity and thermal conductivity to replace old DDMIX correlations.
+! 12-11-17 MLH, Adjust dilute gas ecs viscosity to match ref. value at 25 C from Berg and Moldover, JPCRD 41(4) 043104 (2012).
+! 02-14-18 MLH, Redo thermal conductivity due to changes in viscosity made on 12.11.17
+! 02-19-18 MLH, Fixed typo in TK3 block.
+! 04-03-18 MLH, Revise k to reflect bug fix due to different R values for internal contribution of thermal conductivity, revise Fc.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for xenon of Lemmon and Span (2006).
+:TRUECRITICALPOINT:  289.733    8.4           !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1021/je050186n
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R.,
+? "Short Fundamental Equations of State for 20 Industrial Fluids,"
+? J. Chem. Eng. Data, 51(3):785-850, 2006. doi: 10.1021/je050186n
+?
+?The uncertainties in the equation of state are 0.2% in density up to 100
+? MPa, rising to 1% at higher pressures, 0.2% in vapor pressure, 1% in
+? the speed of sound, and 2% in heat capacities.
+?
+!```````````````````````````````````````````````````````````````````````````````
+161.405            !Lower temperature limit [K]
+750.0              !Upper temperature limit [K]
+700000.0           !Upper pressure limit [kPa]
+28.78              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+131.293                                !Molar mass [g/mol]
+161.405                                !Triple point temperature [K]
+81.77                                  !Pressure at triple point [kPa]
+22.59                                  !Density at triple point [mol/L]
+165.05                                 !Normal boiling point temperature [K]
+0.00363                                !Acentric factor
+289.733       5842.0       8.4         !Tc [K], pc [kPa], rhoc [mol/L]
+289.733                    8.4         !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  12  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 0.83115     0.25    1.  0.            !a(i),t(i),d(i),l(i)
+-2.3553      1.125   1.  0.
+ 0.53904     1.5     1.  0.
+ 0.014382    1.375   2.  0.
+ 0.066309    0.25    3.  0.
+ 0.00019649  0.875   7.  0.
+ 0.14996     0.625   2.  1.
+-0.035319    1.75    5.  1.
+-0.15929     3.625   1.  2.
+-0.027521    3.625   4.  2.
+-0.023305   14.5     3.  3.
+ 0.0086941  12.0     4.  3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for xenon of Lemmon and Span (2006).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+1 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 2.5        0.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for xenon of Lemmon and Span (2006).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  0  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  1.5                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -3.8227169849622977    0.0      !aj, ti for [ai*tau**ti] terms
+  3.8416390607135864    1.0      !aj, ti for [ai*tau**ti] terms
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for xenon.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  0  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 1.5               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+-3.8227178129      0.0                 !aj, ti for [ai*tau**ti] terms
+ 3.8416395351      1.0
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+BWR     !MBWR equation of state for xenon of McCarty.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Coefficients from NIST Thermophysical Properties of Pure Fluids Database, NIST12,
+          ? Version 3.0, National Institute of Standards and Technology, Boulder, CO, 1992.
+          ?
+          ?N.B.  all temperatures on IPTS-68
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          161.36             !Lower temperature limit [K]
+          1300.0             !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          24.62              !Maximum density [mol/L]
+          CPP                                    !Pointer to Cp0 model
+          131.3                                  !Molar mass [g/mol]
+          161.36                                 !Triple point temperature [K]
+          81.654                                 !Pressure at triple point [kPa]
+          22.597                                 !Density at triple point [mol/L]
+          165.071                                !Normal boiling point temperature [K]
+          -0.00111                               !Acentric factor
+          289.74        5821.0      11.0         !Tc [K], pc [kPa], rhoc [mol/L]
+          289.74                    11.0         !Reducing parameters [K, mol/L]
+          8.3776661                              !gamma
+          0.0831434                              !Gas constant [L-bar/mol-K]
+                32       1                       !Nterm, Ncoeff per term
+          -0.001122246365118     0.4265740662874      -12.19294183093
+           998.6032891995       -129247.1898135        0.0001460668285129
+          -0.1075162481632       123.5414695585       -122563.8806967
+           0.4700505087543e-5    0.01436700919927     -13.31592168658
+           0.9460000692027e-4    0.01930354270958      23.7055871939
+          -0.0005601751815957    0.9004325692403e-5   -0.04754291673359
+           0.0008647482958006    113851.9318642       -1263477.094904
+           1843.675807499        9271172.468374        4.973184925072
+           428.2591875459        0.07690405557218     -522.7868138738
+          -0.0001048773067133    0.009082979494829     0.6458784488434e-6
+          -0.166767382207e-4     0.001556036272902
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Nitrogen reference); fit to limited data for xenon.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?Estimated uncertainty for gas-phase viscosity is 1%, for liquid to 60 MPa and temperatures above 170 K is 5%.
+?Estimated uncertainty for gas-phase thermal conductivity is 5%, and 3% for the liquid at pressures to 50 MPa at temperatures 170 K to 235 K.
+?
+?The Lennard-Jones parameters were obtained by fitting data in Vogel, E., Ber. Bunsen-Ges. Phys. Chem., 88:997-1002, 1984.
+?
+!```````````````````````````````````````````````````````````````````````````````
+161.405            !Lower temperature limit [K]
+750.0              !Upper temperature limit [K]
+100000.0           !Upper pressure limit [kPa]
+28.78              !Maximum density [mol/L]
+FEQ NITROGEN.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+BIG                !Large molecule identifier
+1.0012   0. 0. 0.  !Large molecule parameters
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.3929             !Lennard-Jones coefficient sigma [nm]
+260.91             !Lennard-Jones coefficient epsilon/kappa [K]
+1  0  0                !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.00132      0. 0. 0. !Coefficient, power of T, spare1, spare2; dummy value only term is zero
+3  0  0                !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 0.806961     0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+ 0.130263     0. 1. 0. !Coefficient, power of Tr, power of Dr, spare
+ -2.22093e-2  0. 2. 0. !Coefficient, power of Tr, power of Dr, spare
+2  0  0                !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 0.906192     0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+ 6.383e-3     0. 1. 0. !Coefficient, power of Tr, power of Dr, spare
+TK3                    !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for xenon of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.182e-9           !Xi0 (amplitude) [m]
+0.058              !Gam0 (amplitude) [-]
+0.479e-9           !Qd_inverse (modified effective cutoff parameter) [m]; estimated-not fitted to data
+434.5995           !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+@ETA    !---Viscosity---
+VS2     !Pure fluid viscosity model from NIST12 for xenon.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Coefficients from NIST Thermophysical Properties of Pure Fluids Database, NIST12,
+          ? Version 3.0, National Institute of Standards and Technology, Boulder, CO, 1992.
+          ?
+          ?Estimated uncertainty less than 5%.
+          ?
+          ?All temperatures are on IPTS-68.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          161.36             !Lower temperature limit [K]
+          1300.0             !Upper temperature limit [K]
+          300000.0           !Upper pressure limit [kPa]
+          28.78              !Maximum density [mol/L]
+          CI2                !Pointer to collision integral model
+          0.3297             !Lennard-Jones coefficient sigma [nm]
+          300.0              !Lennard-Jones coefficient epsilon/kappa [K]
+           0.305864975918623 !Const in Eq 19 = 5/16*(k*MW/1000/pi/Na)**0.5*1.0d12
+           0.0               !Exponent in Eq 20 for T
+           0.768059558541217 !Coefficient for initial density dependence of viscosity (eq 21); Fv(1)
+          -0.585958377425158 !Fv(2)
+           2.984837805288    !Fv(3)
+           26.32847824613    !Fv(4)
+          -10.78336030151    !Coefficients for residual viscosity, eqs (22 - 25)
+           50.05660460723    !Ev(2)
+           11.1406641168716  !Ev(3)
+          -779.716643301403  !Ev(4)
+           0.0615104211699   !Ev(5)
+           10.7552268985402  !Ev(6)
+           70.1937254720167  !Ev(7)
+           5.3593311454524   !Ev(8)
+          NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+@AUX    !---Auxiliary function for the collision integral
+CI2     !Collision integral model for xenon of McCarty.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Coefficients from NIST Thermophysical Properties of Pure Fluids Database, NIST12,
+          ? Version 3.0, National Institute of Standards and Technology, Boulder, CO, 1992.
+          ?
+          ?Estimated uncertainty less than 5%.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          9                  !Number of terms
+           128.829355170398    0   !Eta0 (eq 20): coeffs of {(e/kT)**((4-n)/3)}
+          -824.923907889772    0
+           2218.37801659791    0
+          -3223.99202732053    0
+           2718.40030222947    0
+          -1324.88234523685    0
+           356.464839471621    0
+          -40.0927287567597    0
+           0                   0
+
+
+
+
+********************************************************************************
+
+@TCX    !---Thermal conductivity---
+TC3     !Pure fluid thermal conductivity model for xenon of McCarty.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Coefficients from NIST Thermophysical Properties of Pure Fluids Database, NIST12,
+          ? Version 3.0, National Institute of Standards and Technology, Boulder, CO, 1992.
+          ?
+          ?Estimated uncertainty less than 6%.
+          ?
+          ?All temperatures are on IPTS-68.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          161.36             !Lower temperature limit [K]
+          1300.0             !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          28.78              !Maximum density [mol/L]
+          0.3297             !Lennard-Jones coefficient sigma [nm]
+          300.0              !Lennard-Jones coefficient epsilon/kappa [K]
+           0.305864975918623 !Const in Eq 20 = 5/16*(k*MW/1000/pi/Na)**0.5*1.0d12
+           0.                !Exponent in Eq 20 for T
+           0.015244231368    !Eta0 (eq 20): coeffs of {(e/kT)**((4-n)/3)}
+          -0.0905313615496
+           0.220032138191832
+          -0.278004805199205
+           0.189554114709829
+          -0.0636328719931
+           0.00929951868906
+           0.
+           0.
+           2.64173335524e-4  !Coefficient for initial density dependence of viscosity (eq 21); Fv(1)
+           4.73502202366e-5  !Fv(2)
+          -0.6198732951154   !Fv(3)
+           1525.9253243      !Fv(4)
+          -18.50657092152    !Coefficients for residual viscosity, eqs (22 - 25)
+           222.4871694717    !Ev(2)
+           11.0124644286886  !Ev(3)
+          -3621.41559218313  !Ev(4)
+           0.00514892242754  !Ev(5)
+           16.2049998648212  !Ev(6)
+          -11.4853001847611  !Ev(7)
+           5.15587382303351  !Ev(8)
+           1.7124            !F
+           0.00000003669     !Rm
+          NUL                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for xenon of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+2                  !Number of terms in surface tension model
+289.733            !Critical temperature used in fit (dummy)
+-0.11538   1.0512  !Sigma0 and n
+ 0.16598   1.098
+
+
+#DE    !---Dielectric constant---
+DE3    !Dielectric constant model for xenon of Harvey and Lemmon (2005).
+:DOI: 10.1007/s10765-005-2351-5
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Harvey, A.H. and Lemmon, E.W.,
+? "Method for Estimating the Dielectric Constant of Natural Gas Mixtures,"
+? Int. J. Thermophys., 26(1):31-46, 2005. doi: 10.1007/s10765-005-2351-5
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+273.16 1000.0 1.0  !Reducing parameters for T and D
+0 1 3 0 0 0        !Number of terms in dielectric constant model
+ 10.122  0. 1.  0. !Coefficient, T exp, D exp
+ 31.97   0. 2.  0.
+ 46.97   1. 2.  0.
+-948.4   0. 2.7 0.
+
+
+#MLT   !---Melting line---
+ML1    !Melting line model for xenon of Michels and Prins (1962).
+:DOI: 10.1016/0031-8914(62)90096-4
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Michels, A. and Prins, C.,
+? "The Melting Lines of Argon, Krypton and Xenon up to 1500 Atm;
+? Representation of the Results by a Law of Corresponding States,"
+? Physica, 28:101-116, 1962.
+?
+!```````````````````````````````````````````````````````````````````````````````
+161.405            !Lower temperature limit [K]
+1300.0             !Upper temperature limit [K]
+0.                 !
+0.                 !
+1.       101.325   !Reducing temperature and pressure
+2 0 0 0 0 0        !Number of terms in melting line equation
+-2575.0728    0.0  !Coefficients and exponents
+ 0.7983277028 1.589165
+
+
+#SBL   !---Sublimation line---
+SB3    !Sublimation line model for xenon of Lemmon (2003).
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., 2003.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+161.405            !Upper temperature limit [K]
+0.                 !
+0.                 !
+161.405  81.75     !Reducing temperature and pressure
+0 2 0 0 0 0        !Number of terms in sublimation line equation
+-13.9        1.06  !Coefficients and exponents
+ 14.0        3.1
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for xenon of Cullimore (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Cullimore, I.D., 2010.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+289.733 5842.0     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-6.0231    1.0
+ 1.4989    1.5
+-0.74906   2.2
+-1.2194    4.8
+-0.44905   6.2
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for xenon of Cullimore (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Cullimore, I.D., 2010.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+289.733 8.4        !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 13.570    0.56
+-47.545    0.8
+ 63.876    1.0
+-39.983    1.3
+ 12.701    1.6
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for xenon of Cullimore (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Cullimore, I.D., 2010.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+289.733 8.4        !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-3.0026    0.435
+-6.0560    1.4
+-60.339    4.4
+ 488.38    6.2
+-819.74    7.0
+ 472.87    8.6
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

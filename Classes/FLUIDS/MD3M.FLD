@@ -1,0 +1,381 @@
+MD3M                 !Short name
+141-63-9             !CAS number
+Dodecamethylpentasiloxane !Full name
+C12H36Si5O4          !Chemical formula {C12H36Si5O4}
+MD3M                 !Synonym
+384.839              !Molar mass [g/mol]
+192.0                !Triple point temperature [K]
+503.032              !Normal boiling point [K]
+628.96               !Critical temperature [K]
+961.12               !Critical pressure [kPa]
+0.7                  !Critical density [mol/L]
+0.723                !Acentric factor
+1.223                !Dipole moment [Debye]; DIPPR DIADEM 2012
+NBP                  !Default reference state
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+siloxane             !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C12H36O4Si5/c1-17(2,3)13-19(7,8)15-21(11,12)16-20(9,10)14-18(4,5)6/h1-12H3   :InChi:  !Standard InChI String
+FBZANXDWQAVSTQ-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+7d394df0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by T.M. Blackham, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 04-19-10 TMB, Original version.
+! 08-23-10 IDC, Add ancillary equations.
+! 02-15-11 MLH, Add preliminary transport.
+! 04-06-13 EWL, Add dipole moment.
+! 04-17-14 EWL, Add surface tension coefficients of Mulero et al. (2014).
+! 01-27-16 MLH, Revise transport.
+! 02-06-17 MLH, Revise uncertainty limits and range of ECS model.
+! 02-16-17  KG, Add ancillary equations.
+! 08-05-17  MK, Add new EOS of König and Thol.
+! 12-21-17 MLH, Revise transport with new EOS.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for MD3M of Thol et al. (2018).
+:TRUECRITICALPOINT:  628.96     0.7           !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Thol, M., Javed, M.A., Baumhoegger, E., Span, R., and Vrabec, J.,
+? "Thermodynamic Properties of Dodecamethylpentasiloxane,
+? Tetradecamethylhexasiloxane, and Decamethylcyclopentasiloxane,"
+? to be submitted to Fluid Phase Equilib., 2018
+?
+?The uncertainty in the equation of state is 0.2 % in density in the liquid phase,
+? and is unkown in the vapor phase.  For speed of sound in the liquid phase,
+? the uncertainty is 0.4 % (with no data available in the vapor phase), and for
+? vapor pressure it is 0.15 % for temperatures between 390 and 520 K.
+?
+!```````````````````````````````````````````````````````````````````````````````
+192.0              !Lower temperature limit [K]
+630.0              !Upper temperature limit [K]
+125000.            !Upper pressure limit [kPa]
+2.53               !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+384.839                                !Molar mass [g/mol]
+192.0                                  !Triple point temperature [K]
+0.000000000203                         !Pressure at triple point [kPa]
+2.53                                   !Density at triple point [mol/L]
+503.032                                !Normal boiling point temperature [K]
+0.723                                  !Acentric factor
+628.96          961.12       0.7       !Tc [K], pc [kPa], rhoc [mol/L]
+628.96                       0.7       !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  10  4   5 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.04906305   1.0     4.  0.          !a(i),t(i),d(i),l(i)
+  1.693388     0.18    1.  0.
+ -2.651199     0.88    1.  0.
+ -1.24071      0.87    2.  0.
+  0.5979957    0.55    3.  0.
+ -4.489986     1.72    1.  2.
+ -1.838087     2.8     3.  2.
+  1.07023      1.08    2.  1.
+ -2.526278     1.49    2.  2.
+ -0.06520235   1.02    7.  1.
+  7.767276     1.0     1.  2. 2.   -0.8     -0.5     1.34    0.885    0. 0. 0.
+ -0.006926687  1.13    1.  2. 2.  -12.96   -1198.7   1.05    0.955    0. 0. 0.
+ -1.078341     1.45    3.  2. 2.   -1.07    -0.29    1.1     0.85     0. 0. 0.
+ -1.14881      1.46    2.  2. 2.   -0.7     -0.51    1.01    0.79     0. 0. 0.
+ -2.244494     1.2     2.  2. 2.   -1.185   -0.68    0.7     0.58     0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for MD3M of Thol et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Thol, M., Javed, M.A., Baumhoegger, E., Span, R., and Vrabec, J., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0          0.0
+ 81.2386    610.0
+ 61.1910   2500.0
+ 51.1798   7500.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for MD3M of Thol et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Thol, M., Javed, M.A., Baumhoegger, E., Span, R., and Vrabec, J., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+ 68.1699868894220344    0.0      !aj, ti for [ai*tau**ti] terms
+-29.8081594318726495    1.0      !aj, ti for [ai*tau**ti] terms
+  81.2386    610.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  61.191    2500.0
+  51.1798   7500.0
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for MD3M of Colonna et al. (2008).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Colonna, P., Nannan, N.R., and Guardone, A.,
+          ? "Multiparameter Equations of State for Siloxanes,"
+          ? Fluid Phase Equilibria, 263:115-130, 2008.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          193.0              !Lower temperature limit [K]
+          673.               !Upper temperature limit [K]
+          30000.             !Upper pressure limit [kPa]
+          2.54               !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          384.839                                !Molar mass [g/mol]
+          193.0                                  !Triple point temperature [K]
+          0.000000000271                         !Pressure at triple point [kPa]
+          2.54                                   !Density at triple point [mol/L]
+          503.02                                 !Normal boiling point temperature [K]
+          0.722                                  !Acentric factor
+          628.36         945.0      0.6857981627 !Tc [K], pc [kPa], rhoc [mol/L]
+          628.36                    0.6857981627 !Reducing parameters [K, mol/L]
+          8.314472                               !Gas constant [J/mol-K]
+            12  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           1.20540386      0.25      1.  0.      !a(i),t(i),d(i),l(i)
+          -2.42914797      1.125     1.  0.
+           0.69016432      1.5       1.  0.
+          -0.69268041      1.375     2.  0.
+           0.18506046      0.25      3.  0.
+           0.00031161436   0.875     7.  0.
+           0.99862519      0.625     2.  1.
+           0.074229034     1.75      5.  1.
+          -0.80259136      3.625     1.  2.
+          -0.20865337      3.625     4.  2.
+          -0.036461791    14.5       3.  3.
+           0.019174051    12.0       4.  3.
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for MD3M of Colonna et al. (2008).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Colonna, P., Nannan, N.R., and Guardone, A.,
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     1.0        !Reducing parameters for T, Cp0
+          1 0   1 1   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           463.2      0.0
+           609372332.2   -2.0    908.5     -1.0  -2.0
+           4290277999.0  -2.0    2117.1    -1.0  -2.0
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Nitrogen reference); fit to limited data for MD3M.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?VISCOSITY
+? Wilcock, D.F., "Vapor Pressure-Viscosity Relations in Methylpolysiloxanes," J. Amer. Chem. Soc., 68:691, 1946.
+? Hurd, C.B., "Studies on Siloxanes. I. The Specific Volume and Viscosity in Relation to Temperature and Constitution," J. Amer. Chem. Soc., 68:364, 1946.
+?
+?The estimated uncertainty of the liquid phase at atmospheric pressure is
+? estimated to be 3%, rising to 10% at pressures to 10 MPa.
+? Gas phase data unavailable; estimated uncertainty in the vapor phase is 10%.
+?
+?THERMAL CONDUCTIVITY
+? Bates, O.K., "Thermal Conductivity of Liquid Silicones," Ind. Eng. Chem., 41:1966, 1949. doi: 10.1021/ie50477a030
+?
+?The uncertainty of the thermal conductivity of the liquid phase is estimated
+? to be 5% for T<400 K at pressures to 10 MPa, 10% at higher temperatures and pressures.
+? Gas phase data unavailable; estimated uncertainty in the vapor phase is 25%.
+?
+?The Lennard-Jones parameters were estimated with the method of Chung.
+?
+!```````````````````````````````````````````````````````````````````````````````
+193.0              !Lower temperature limit [K]
+673.0              !Upper temperature limit [K]
+10000.0            !Upper pressure limit [kPa]
+2.54               !Maximum density [mol/L]
+FEQ NITROGEN.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.911              !Lennard-Jones coefficient sigma [nm]
+499.5              !Lennard-Jones coefficient epsilon/kappa [K]
+1  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.00132       0. 0. 0.  !Coefficient, power of T, spare1, spare2
+2  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 1.45796       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.15796       0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+1  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 1.72213       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare; 4.09027d0
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for MD3M of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.330e-9           !Xi0 (amplitude) [m]
+0.066              !Gam0 (amplitude) [-]
+1.127e-9           !Qd_inverse (modified effective cutoff parameter) [m]
+943.44             !Tref (reference temperature) [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for MD3M of Mulero et al. (2014).
+:DOI: 10.1063/1.4878755
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A. and Cachadiña, I.,
+? "Recommended Correlations for the Surface Tension of Several Fluids
+? Included in the REFPROP Program,"
+? J. Phys. Chem. Ref. Data, 43, 023104, 2014.
+? doi: 10.1063/1.4878755
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+628.36             !Critical temperature used in fit (dummy)
+0.03972   1.254    !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for MD3M of König and Thol (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Thol, M., Javed, M.A., Baumhoegger, E., Span, R., and Vrabec, J., 2018.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+628.96  961.12     !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-9.773     1.0
+ 7.28      1.5
+-24.761    1.95
+-34.348    2.803
+ 43.384    2.37
+-4.0954   10.48
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for MD3M of König and Thol (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Thol, M., Javed, M.A., Baumhoegger, E., Span, R., and Vrabec, J., 2018.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+628.96  0.7        !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 1.4321    0.2945
+ 3.4013    0.86
+-4.2146    1.4
+ 3.1199    2.0
+-0.36264   2.74
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for MD3M of König and Thol (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Thol, M., Javed, M.A., Baumhoegger, E., Span, R., and Vrabec, J., 2018.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+628.96  0.7        !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-2.21196   0.3423
+-8.11823   0.974
+-25.2915   2.83
+-74.468    5.484
+-180.51   11.75
+-388.60   23.9
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

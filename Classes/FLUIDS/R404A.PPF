@@ -1,0 +1,191 @@
+R404A                !Short name
+404A-404A            !CAS number
+44% R125/4% R134a/52% R143a   !Full name
+R404A                !Chemical formula
+R404A                !Synonym
+97.6038              !Molar mass [g/mol]
+200.0                !Triple point temperature [K]
+226.93               !Normal boiling point [K]
+345.270              !Critical temperature [K]
+3734.8               !Critical pressure [kPa]
+4.94                 !Critical density [mol/L]
+0.293                !Acentric factor
+-1.                  !Dipole moment [Debye]
+IIR                  !Default reference state
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+halocb               !Family                                                    :Family:
+????                 !Heating value (upper) at 25 C [kJ/mol] (ISO 6976:2016)    :Heat:
+????                                      !IUPAC Int. Chemical Identifier       :InChi:
+????                                      !InChi Key                            :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+404a404a                                  !Hash number from InChI Key           :Hash:
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 11-14-02 EWL, original version
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for R-404A of Lemmon (2003).
+:DOI: 10.1023/A:1025048800563
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W.,
+? "Pseudo Pure-Fluid Equations of State for the Refrigerant Blends R-410A,
+? R-404A, R-507A, and R-407C,"
+? Int. J. Thermophys., 24(4):991-1006, 2003. doi: 10.1023/A:1025048800563
+?
+?The estimated uncertainty of density values calculated with the
+? equation of state is 0.1%.  The estimated uncertainty of calculated
+? heat capacities and speed of sound values is 0.5%.  Uncertainties of
+? bubble and dew point pressures are 0.5%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+200.0              !Lower temperature limit [K]
+500.0              !Upper temperature limit [K]
+50000.0            !Upper pressure limit [kPa]
+14.21              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+97.6038                                !Molar mass [g/mol]
+200.0                                  !Triple point temperature [K]
+22.65                                  !Pressure at triple point [kPa]
+14.21                                  !Density at triple point [mol/L]
+226.93                                 !Normal boiling point temperature [K]
+0.293                                  !Acentric factor
+345.27        3734.8      4.94         !Tc [K], pc [kPa], rhoc [mol/L]
+345.27                    4.94         !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  22  4    0 0   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 6.10984         0.67    1.   0.       !a(i),t(i),d(i),l(i)
+-7.79453         0.91    1.   0.
+ 0.0183377       5.96    1.   0.
+ 0.26227         0.7     2.   0.
+-0.00351688      6.0     2.   0.
+ 0.0116181       0.3     4.   0.
+ 0.00105992      0.7     6.   0.
+ 0.850922        1.7     1.   1.
+-0.520084        3.3     1.   1.
+-0.0464225       7.0     1.   1.
+ 0.62119         2.05    2.   1.
+-0.195505        4.3     2.   1.
+ 0.336159        2.7     3.   1.
+-0.0376062       1.8     4.   1.
+-0.00636579      1.25    7.   1.
+-0.0758262      12.0     2.   2.
+-0.0221041       6.0     3.   2.
+ 0.0310441       8.7     4.   2.
+ 0.0132798      11.6     4.   2.
+ 0.0689437      13.0     2.   3.
+-0.0507525      17.0     3.   3.
+ 0.0161382      16.0     5.   3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for R404A of Lemmon (2003).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0   8.314472     !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 1.2744      0.3
+ 0.63078   413.0
+ 3.5979    804.0
+ 5.0335   1727.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for R404A.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 3  3 0 0  0 0 0  !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+ -1.0              1.0            !ai, ti for [ai*log(tau**ti)] terms
+  7.00407          0.0            !aj, ti for [ai*tau**ti] terms
+  7.98695          1.0
+-18.8664          -0.3
+  0.63078         -1.19617        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+  3.5979          -2.32861
+  5.0335          -5.00188
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for R404A of Lemmon (2003).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., preliminary equation, 2003.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+2                  !Number of terms in surface tension model
+345.27             !Critical temperature used in fit (dummy)
+0.06868   1.3142   !Sigma0 and n
+-0.04576  2.3084
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for R404A of Lemmon (2003)
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+345.270   3734.8   !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+-0.00026863   0.1
+-6.5757       0.972
+-4.1802       3.8
+-7.9102       9.0
+
+
+#PL    !---Liquid pressure---
+PL5    !Liquid pressure equation for R404A of Lemmon (2003)
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+345.270   3734.8   !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+ 0.061067   0.54
+-6.5646     0.965
+-3.6162     3.7
+-3.9771     9.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

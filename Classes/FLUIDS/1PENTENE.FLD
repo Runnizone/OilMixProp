@@ -1,0 +1,317 @@
+1-Pentene            !Short name
+109-67-1             !CAS number
+Pent-1-ene           !Full name
+C5H10                !Chemical formula
+Propylethylene       !Synonym
+70.1329              !Molar mass [g/mol]
+107.797              !Triple point temperature [K]
+303.101              !Normal boiling point [K]
+465.74               !Critical temperature [K]
+3598.0               !Critical pressure [kPa]
+3.45                 !Critical density [mol/L]
+0.233                !Acentric factor
+0.510                !Dipole moment [Debye]; Geiseler, G., Pilz, E., "Zur Kenntnis der Dipolmomente Homologer alpha-Olefine, " Chem. Ber., 95, 96-101 (1962)
+NBP                  !Default reference state
+10.0                 !Version number
+1108                 !UN Number                                                 :UN:
+n-alkene             !Family                                                    :Family:
+3375.42              !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C5H10/c1-3-5-4-2/h3H,1,4-5H2,2H3       !Standard InChI String                :InChi:
+YWAKXRMUMFPDSH-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+76bc0290  (pentane)                       !Alternative fluid for mixing rules   :AltID:
+1f061ca0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by K. Gao, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 10-31-17  KG, Original version
+! 10-31-17  KG, Add equation of state of Gao et al. (2017)
+! 11-03-17 MLH, Add dipole moment, preliminary transport.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for 1-pentene of Gao et al. (2017).
+:TRUECRITICALPOINT:  465.74     3.45          !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W.,
+? unpublished equation, 2017.
+?
+?In the vapor phase, there is no density data below the critical temperature, and
+? the uncertainty in density is 2.5 % at temperatures between the critical
+? temperature and 500 K with pressures below 30 MPa. In the liquid phase, the
+? uncertainties in density are 0.15 % at temperatures between 280 K and 440 K with
+? pressures below 30 MPa, and 0.6 % at temperatures between 280 K and 360 K with
+? pressures between 30 MPa and 100 MPa. In the critical region, the uncertainty in
+? density is estimated to be 1.5 %. The uncertainties in vapor pressure are 0.04 %
+? at temperatures between 270 K and 385 K, and 1 % at temperatures between 385 K
+? and the critical temperature.  The uncertainties in saturated liquid density are
+? 0.05 % at temperatures between 190 K and 450 K, 0.3 % at temperatures between
+? 150 K and 190 K, and 1.5 % at temperature between 450 K and the critical
+? temperature.  The uncertainties in isobaric heat capacity are 0.5 % in the vapor
+? phase at temperatures between 310 K and 475 K, and 1 % in the liquid phase at
+? temperatures between 180 K and 300 K with pressures below 0.2 MPa. The
+? uncertainty in saturation heat capacity is 1 % at temperatures between the
+? triple point temperature and 310 K.
+?
+!```````````````````````````````````````````````````````````````````````````````
+107.797            !Lower temperature limit [K]
+466.0              !Upper temperature limit [K]
+10000.0            !Upper pressure limit [kPa]
+11.76              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+70.1329                                !Molar mass [g/mol]
+107.797                                !Triple point temperature [K]
+0.0000000102                           !Pressure at triple point [kPa]
+11.75                                  !Density at triple point [mol/L]
+303.101                                !Normal boiling point temperature [K]
+0.233                                  !Acentric factor
+465.74         3598.0       3.45       !Tc [K], pc [kPa], rhoc [mol/L]
+465.74                      3.45       !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  10  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.772189126  0.125   1.  0.          !a(i),t(i),d(i),l(i)
+ -1.83042132   1.125   1.  0.
+ -0.192259446  1.25    2.  0.
+  0.115251009  0.25    3.  0.
+  0.00008839   0.75    8.  0.
+  0.432066965  0.625   2.  1.
+  0.190314262  2.0     3.  1.
+ -0.24306775   4.125   1.  2.
+ -0.030971971  4.125   4.  2.
+ -0.011097285 17.0     3.  3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for 1-pentene of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 8.0         0.0
+ 9.4073    934.0
+16.83     2082.0
+ 8.2294   5594.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for 1-pentene of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  7.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+  0.3010452941444726    0.0      !aj, ti for [ai*tau**ti] terms
+  0.4205708365769115    1.0      !aj, ti for [ai*tau**ti] terms
+  9.4073    934.0                !aj, ti for [ai*log(1-exp(-ti/T)] terms
+ 16.83     2082.0
+  8.2294   5594.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Propane reference)
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?VISCOSITY
+? Viscosity data unavailable. Predicitve model with estimated uncertainty in viscosity of 20%.
+?
+?THERMAL CONDUCTIVITY
+?The ECS parameters for thermal conductivity were based on:
+? Naziev, Y.M. and Abasov, A.A., "Determination of Thermal Conductivity of Olefinic Hydrocarbons in the Gas Phase," Chemtech., 20, 12, 756, 1968. This is a correlation for gas phase.
+? Watanabe, H. and Kato, H., "Thermal Conductivity and Thermal Diffusivity of Twenty-Nine Liquids: Alkenes, Cyclic (Alkanes, Alkenes, Alkadienes, Aromatics), and Deuterated Hydrocarbons," J. Chem. Eng. Data, 49:809-825, 2004.
+?
+?The estimated uncertainty of the thermal conductivity of the liquid phase from 257-302 K is 1% at saturation, rising to 10% at higher pressures and in the gas phase. Larger near critical.
+?
+?The Lennard-Jones parameters were estimated with the method of Chung, T.H., Ajlan, M., Lee, L.L., and Starling, K.E., "Generalized Multiparameter Correlation for Nonpolar and Polar Fluid Transport Properties," Ind. Eng. Chem. Res., 27:671-679, 1988.
+?
+!```````````````````````````````````````````````````````````````````````````````
+107.797            !Lower temperature limit [K]
+466.0              !Upper temperature limit [K]
+10000.0            !Upper pressure limit [kPa]
+11.76              !Maximum density [mol/L]
+FEQ PROPANE.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+BIG                !Large molecule identifier
+0.96 0. 0. 0.      !Large molecule parameters
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.5354             !Lennard-Jones coefficient sigma [nm] for ECS method
+369.8              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+3  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.00077636  0. 0. 0. !Coefficient, power of T, spare1, spare2
+ 1.5844e-6   1. 0. 0. !Coefficient, power of T, spare1, spare2
+-1.19304e-9  2. 0. 0. !Coefficient, power of T, spare1, spare2
+2  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 0.97     0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+ 0.0      0. 1. 0. !Coefficient, power of Tr, power of Dr, spare
+2  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 1.07723    0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-8.50457e-3 0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for 1-pentene of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.223e-9           !Xi0 (amplitude) [m]
+0.058              !Gam0 (amplitude) [-]
+0.652e-9           !Qd_inverse (modified effective cutoff parameter) [m]; arbitrary guess
+698.61             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for 1-pentene using model of Huber (2018).
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+? Fit to Jasper, J.J., "The Surface Tension of Pure Liquid Compounds," J. Phys. Chem. Ref. Data, 1, 4, 841-1009, 1972. doi: 10.1063/1.3253106
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+465.74             !Critical temperature used in Yaws (dummy)
+0.050798  1.16356  !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for 1-pentene of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+465.74   3598.0    !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-7.48233   1.0
+ 2.89916   1.5
+-2.82790   2.15
+-10.6523   5.9
+-8.26335   8.5
+ 15.6616   7.15
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for 1-pentene of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+465.74   3.45      !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+ 7.6105   0.546
+-18.340   0.876
+ 29.764   1.23
+-23.321   1.6
+ 7.1874   2.1
+ 0.54244 13.5
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for 1-pentene of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+465.74   3.45      !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-4.4293   0.495
+-8.8291   1.743
+-23.467   4.0
+-50.892   7.65
+-113.57  15.5
+-224.82  30.7
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

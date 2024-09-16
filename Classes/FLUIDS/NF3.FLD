@@ -1,0 +1,263 @@
+Nitrogen trifluoride !Short name
+7783-54-2            !CAS number
+Nitrogen trifluoride !Full name
+NF3                  !Chemical formula {F3N}
+Trifluoroamine       !Synonym
+71.019               !Molar mass [g/mol]
+66.36                !Triple point temperature [K]
+144.138              !Normal boiling point [K]
+234.0                !Critical temperature [K]
+4460.7               !Critical pressure [kPa]
+7.92                 !Critical density [mol/L]
+0.126                !Acentric factor
+0.235                !Dipole moment [Debye]; Nelson, R.D., Lide, D.R., Maryott, A., "Selected Values of electric dipole moments for molecules in the gas phase", NSRDS 10, National Bureau of Standards, Washington, D.C. (1967).
+NBP                  !Default reference state
+10.0                 !Version number
+2451                 !UN Number                                                 :UN:
+cryogen              !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1S/F3N/c1-4(2)3                           !Standard InChI String                :InChi:
+GVGCUCJTUSOZKP-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+434e2a40  (ethane)                        !Alternative fluid for mixing rules   :AltID:
+6db4e3b0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 12-04-97 EWL, Original version.
+! 01-24-00 EWL, Change Tlow to 85 K and Dmax to 25.3 mol/L to avoid EOS problems at low temperatures.
+! 10-06-03 AHH, Update dipole moment.
+! 08-17-10 IDC, Add ancillary equations.
+! 04-17-14 EWL, Add surface tension coefficients of Mulero et al. (2014).
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+BWR    !MBWR equation of state for nitrogen trifluoride of Younglove (1982).
+:TRUECRITICALPOINT:  234.0      7.92          !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+:WEB: https://srd.nist.gov/JPCRD/jpcrdS1Vol11.pdf
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Younglove, B.A.,
+? "Thermophysical Properties of Fluids.  I. Argon, Ethylene,
+? Parahydrogen, Nitrogen, Nitrogen Trifluoride, and Oxygen,"
+? J. Phys. Chem. Ref. Data, Vol. 11, Suppl. 1, pp. 1-11, 1982.
+?
+?The uncertainties in density are 0.25% in the liquid phase and 0.3% in the
+? vapor and supercritical regions.  The uncertainty in speed of sound and
+? heat capacity is 5%.
+?
+?All temperatures are on IPTS-68.
+?
+!```````````````````````````````````````````````````````````````````````````````
+85.0               !Lower temperature limit [K]
+500.0              !Upper temperature limit [K]
+50000.0            !Upper pressure limit [kPa]
+25.3               !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+71.019                                 !Molar mass [g/mol]
+66.36                                  !Triple point temperature [K]
+0.0001863                              !Pressure at triple point [kPa]
+26.32                                  !Density at triple point [mol/L]
+144.138                                !Normal boiling point temperature [K]
+0.126                                  !Acentric factor
+234.0         4460.7       7.92        !Tc [K], pc [kPa], rhoc [mol/L]
+234.0                      7.92        !Reducing parameters [K, mol/L]
+13.3630620956                          !gamma
+0.0831441                              !Gas constant [L-bar/mol-K]
+      32       1                       !Nterm, Ncoeff per term
+ 0.01774353868        -0.5409379418          3.976634466
+-520.9476694          -32863.22888          -0.0005990517411
+ 0.9217525601         -484.8977075          -4235892.691
+-0.9824248063e-5       0.05432235989        -14.623885
+-0.00336618044         0.2801374599          8.435288597
+-0.01324421452         0.0001875604377       0.2959643991
+-0.00700997687         4365820.912          -11113975.36
+ 24118.66612           3179136.276           61.6684909
+ 42.6085472            0.1090598789         -33.40951059
+ 0.8597429644e-4       0.001240544214        0.1286224248e-6
+-0.8941104276e-6       0.3353054595e-4
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for nitrogen trifluoride of Younglove (1982).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Refit of the Younglove (1982) equation by Tim Eisenbach, 2018.
+? Above 60 K, differences are generally less than 0.05%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.31441    !Reducing parameters for T, Cp0
+1 2   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.              0.0
+ 2.651         736.0
+ 3.315        1325.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for nitrogen trifluoride of Younglove (1982).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Refit of the Younglove (1982) equation by Tim Eisenbach, 2018.
+? Above 60 K, differences are generally less than 0.05%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  2  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                 1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -3.53770174889460    0.0      !aj, ti for [ai*tau**ti] terms
+  3.49711323704754    1.0      !aj, ti for [ai*tau**ti] terms
+  2.651       736.0            !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  3.315      1325.0
+
+
+#AUX   !---Auxiliary function for Cp0
+CP1    !Ideal gas heat capacity function for nitrogen trifluoride of Younglove (1982).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Younglove, B.A.,
+? "Thermophysical Properties of Fluids.  I. Argon, Ethylene,
+? Parahydrogen, Nitrogen, Nitrogen Trifluoride, and Oxygen,"
+? J. Phys. Chem. Ref. Data, Vol. 11, Suppl. 1, pp. 1-11, 1982.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.31441    !Reducing parameters for T, Cp0
+7 1   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+-7.140693612211    0.0
+ 742751.8245951   -3.0
+-43898.25372134   -2.0
+ 1012.629224351   -1.0
+ 0.05481339146452  1.0
+-7.677196006769e-5 2.0
+ 0.420363086434e-7 3.0
+-0.6328752997967   3000.0
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for nitrogen trifluoride of Mulero et al. (2014).
+:DOI: 10.1063/1.4878755
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A. and Cachadiña, I.,
+? "Recommended Correlations for the Surface Tension of Several Fluids
+? Included in the REFPROP Program,"
+? J. Phys. Chem. Ref. Data, 43, 023104, 2014.
+? doi: 10.1063/1.4878755
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+234.               !Critical temperature used in fit (dummy)
+0.063203  1.2565   !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for nitrogen trifluoride of Cullimore (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Cullimore, I.D., 2010.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+234.0   4460.7     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-6.6672    1.0
+ 3.3864    1.5
+-2.8222    1.7
+-5.0602    5.5
+ 3.2481    7.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for nitrogen trifluoride of Cullimore (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Cullimore, I.D., 2010.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+234.0   7.92       !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 2.2080    0.35
+ 35.709    2.4
+-92.868    2.7
+ 66.666    3.0
+-9.3589    4.0
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for nitrogen trifluoride of Cullimore (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Cullimore, I.D., 2010.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+234.0   7.92       !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-3.0610    0.421
+-8.0541    1.48
+-19.619    3.9
+-13.432    7.0
+-32.760    8.0
+-67.907    15.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890
+                    0.4154             !Lennard-Jones coefficient sigma [nm] for ECS method
+                    175.0              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method

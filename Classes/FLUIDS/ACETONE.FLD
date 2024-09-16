@@ -1,0 +1,333 @@
+Acetone              !Short name
+67-64-1              !CAS number
+Propanone            !Full name
+(CH3)2CO             !Chemical formula {C3H6O}
+Dimethyl ketone      !Synonym
+58.07914             !Molar mass [g/mol]
+178.5                !Triple point temperature [K]
+329.22               !Normal boiling point [K]
+508.1                !Critical temperature [K]
+4692.4               !Critical pressure [kPa]
+4.7                  !Critical density [mol/L]
+0.3071               !Acentric factor
+2.88                 !Dipole moment [Debye]; R.D. Nelson, D.R. Lide, and A.A. Maryott, "Selected Values of Electric Dipole Moments for Molecules in the Gas Phase," NSRDS-NBS 10, National Reference Data Series, US Government Printing Office, Washington, 1967
+NBP                  !Default reference state
+10.0                 !Version number
+1090                 !UN Number                                                 :UN:
+other                !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+0.5                  !GWP (IPCC 2007)                                           :GWP:
+1S/C3H6O/c1-3(2)4/h1-2H3                  !Standard InChI String                :InChi:
+CSCPPACGZOOCGX-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+342481e0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 02-12-04 EWL, Original version.
+! 04-21-04 AHH, Add dipole moment.
+! 06-10-10 CKL, Add ancillary equations.
+! 07-02-10 MLH, Add preliminary transport.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 07-14-15 EWL, Change critical pressure slightly to more accurate represent the calculated value at Tc and rhoc.
+! 05-03-16 MLH, Revise transport.
+! 02-15-17 MLH, Revise uncertainty estimates and range of applicability for ECS transport.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for acetone of Lemmon and Span (2006).
+:TRUECRITICALPOINT:  508.1      4.7           !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1021/je050186n
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R.,
+? "Short Fundamental Equations of State for 20 Industrial Fluids,"
+? J. Chem. Eng. Data, 51(3):785-850, 2006. doi: 10.1021/je050186n
+?
+?The uncertainties in the equation of state are 0.1% in the saturated
+? liquid density between 280 and 310 K, 0.5% in density in the liquid phase
+? below 380 K, and 1% in density elsewhere, including all states at
+? pressures above 100 MPa. The uncertainties in vapor pressure are 0.5%
+? above 270 K (0.25% between 290 and 390 K), and the uncertainties in heat
+? capacities and speeds of sound are 1%.  The uncertainties in caloric
+? properties and sound speeds may be higher at pressures above the
+? saturation pressure and at temperatures above 320 K in the liquid phase
+? and at supercritical conditions.
+?
+!```````````````````````````````````````````````````````````````````````````````
+178.5              !Lower temperature limit [K]
+550.0              !Upper temperature limit [K]
+700000.0           !Upper pressure limit [kPa]
+15.73              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+58.07914                               !Molar mass [g/mol]
+178.5                                  !Triple point temperature [K]
+0.002326                               !Pressure at triple point [kPa]
+15.72                                  !Density at triple point [mol/L]
+329.22                                 !Normal boiling point temperature [K]
+0.3071                                 !Acentric factor
+508.1         4692.4       4.7         !Tc [K], pc [kPa], rhoc [mol/L]
+508.1                      4.7         !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  12  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 0.90041      0.25   1.  0.            !a(i),t(i),d(i),l(i)
+-2.1267       1.25   1.  0.
+-0.083409     1.5    1.  0.
+ 0.065683     0.25   3.  0.
+ 0.00016527   0.875  7.  0.
+-0.039663     2.375  1.  1.
+ 0.72085      2.0    2.  1.
+ 0.0092318    2.125  5.  1.
+-0.17217      3.5    1.  2.
+-0.14961      6.5    1.  2.
+-0.076124     4.75   4.  2.
+-0.018166    12.5    2.  3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for acetone of Lemmon and Span (2006).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0        0.0
+ 3.7072     310.0
+ 7.0675     3480.0
+ 11.012     1576.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for acetone of Lemmon and Span (2006).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+  0.3015070258580721    0.0      !aj, ti for [ai*tau**ti] terms
+  2.7317365462703083    1.0      !aj, ti for [ai*tau**ti] terms
+  3.7072     310.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  7.0675     3480.0
+  11.012     1576.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for acetone.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  3  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 3.0               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+-9.4883659997      0.0                 !aj, ti for [ai*tau**ti] terms
+ 7.1422719708      1.0
+ 3.7072           -0.6101161189        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 7.0675           -6.8490454635
+ 11.012           -3.1017516237
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Propane reference) for acetone.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?VISCOSITY
+? Estimated uncertainty in the liquid phase along saturation is 5%, up to 15% at 100 MPa.
+? Estimated uncertainty in the gas phase is 5%.
+?
+?THERMAL CONDUCTIVITY
+? Estimated uncertainty in the liquid phase along saturation is 5%. No data at higher pressures is available, uncertainties at 100 MPa may reach 20%.
+? Estimated uncertainty in the gas phase is 5%.
+?
+?The Lennard-Jones parameters were taken from Hirschfelder, J.O., Curtiss, C.F., and Bird, R.B., "Molecular Theory of Gases and Liquids," John Wiley and Sons, Inc., New York, 1245 pp, 1954. doi: 10.1002/pol.1955.120178311
+?
+!```````````````````````````````````````````````````````````````````````````````
+178.5              !Lower temperature limit [K]
+550.0              !Upper temperature limit [K]
+100000.0           !Upper pressure limit [kPa]
+15.73              !Maximum density [mol/L]
+FEQ PROPANE.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.4669             !Lennard-Jones coefficient sigma [nm]
+519.0              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+2  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.000954299   0. 0. 0.  !Coefficient, power of T, spare1, spare2
+ 0.522303e-6   1. 0. 0.  !Coefficient, power of T, spare1, spare2
+3  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 1.25183       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.239533      0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+ 0.0485815     0. 2. 0.  !Coefficient, power of Tr, power of Dr, spare
+2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 1.08482       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.0313081     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for acetone of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.196e-9           !Xi0 (amplitude) [m]
+0.052              !Gam0 (amplitude) [-]
+0.586e-9           !Qd_inverse (modified effective cutoff parameter) [m]
+762.15             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for acetone of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+508.1              !Critical temperature used in fit (dummy)
+0.0633    1.16     !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for acetone of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, C.K. and Lemmon, E.W., 2010.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+508.1   4692.4     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-7.6214    1.0
+ 1.7441    1.5
+-2.0514    2.57
+-2.6644    4.43
+-0.69437   15.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for acetone of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, C.K. and Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+508.1   4.7        !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 11.118    0.456
+-29.507    0.626
+ 35.255    0.8
+-14.712    1.0
+ 0.95560   2.47
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for acetone of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, C.K. and Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+508.1   4.7        !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-2.52      0.36
+-6.6065    1.05
+-25.751    3.2
+ 7.8120    4.0
+-53.778    6.5
+-116.84    14.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

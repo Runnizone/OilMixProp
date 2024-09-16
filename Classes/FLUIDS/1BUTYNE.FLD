@@ -1,0 +1,302 @@
+1-Butyne             !Short name
+107-00-6             !CAS number
+But-1-yne            !Full name
+C4H6                 !Chemical formula
+Ethylacetylene       !Synonym
+54.09044             !Molar mass [g/mol]
+147.44               !Triple point temperature [K]
+281.230              !Normal boiling point [K]
+432.0                !Critical temperature [K]
+4141.6               !Critical pressure [kPa]
+4.65                 !Critical density [mol/L]
+0.280                !Acentric factor
+0.81                 !Dipole moment [Debye]; Krieger, F.J. and Wenzke, H.H., J. Am. Chem. Soc. 60, 2115-9 (1938).
+NBP                  !Default reference state
+10.0                 !Version number
+2452                 !UN Number                                                 :UN:
+alkyne               !Family                                                    :Family:
+2596.76              !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C4H6/c1-3-4-2/h1H,4H2,2H3              !Standard InChI String                :InChi:
+KDKYADYSIPSCCQ-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+7b3b4080  (butane)                        !Alternative fluid for mixing rules   :AltID:
+4bfbe360                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by K. Gao, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 10-31-17  KG, Original version
+! 10-31-17  KG, Add equation of state of Gao et al. (2017)
+! 11-01-17 MLH, Add dipole moment, preliminary transport.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for 1-butyne of Gao et al. (2017).
+:TRUECRITICALPOINT:  432.0      4.65          !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W.,
+? unpublished equation, 2017.
+?
+?The uncertainty in density is estimated to be 1 % due to the sparse data
+? situation.  The uncertainty in vapor pressure is 0.2 % at temperatures between
+? 200 K and 285 K. The uncertainty in saturated liquid density is 0.1 % at
+? temperatures between 240 K and 285 K. The uncertainties in heat capacities and
+? speed sound are estimated to be 5 % because there are no published experimental
+? data.
+?
+!```````````````````````````````````````````````````````````````````````````````
+147.44             !Lower temperature limit [K]
+432.0              !Upper temperature limit [K]
+10000.0            !Upper pressure limit [kPa]
+14.96              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+54.09044                               !Molar mass [g/mol]
+147.44                                 !Triple point temperature [K]
+0.0011830                              !Pressure at triple point [kPa]
+14.96                                  !Density at triple point [mol/L]
+281.230                                !Normal boiling point temperature [K]
+0.280                                  !Acentric factor
+432.0          4141.6       4.65       !Tc [K], pc [kPa], rhoc [mol/L]
+432.0                       4.65       !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  10  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.806625     0.125   1.  0.          !a(i),t(i),d(i),l(i)
+ -1.75423      1.125   1.  0.
+ -0.219937     1.25    2.  0.
+  0.109675     0.25    3.  0.
+  0.000089653  0.75    8.  0.
+  0.277043     0.625   2.  1.
+  0.159607     2.0     3.  1.
+ -0.348927     4.125   1.  2.
+ -0.0570926    4.125   4.  2.
+ -0.00765105  17.0     3.  3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for 1-butyne of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0         0.0
+ 2.5772    325.0
+ 9.5417    991.0
+11.125    3349.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for 1-butyne of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -0.6354993583088628    0.0      !aj, ti for [ai*tau**ti] terms
+  2.8136254296508953    1.0      !aj, ti for [ai*tau**ti] terms
+  2.5772    325.0                !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  9.5417    991.0
+ 11.125    3349.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Propane reference)
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?VISCOSITY
+? No data available. ECS parameters based on family similarities.
+? The estimated uncertainty of the viscosity of the liquid phase and gas phases is 20%.
+?
+?THERMAL CONDUCTIVITY
+? No data available. ECS parameters based on family similarities.
+? The estimated uncertainty of the thermal conductivity of the liquid phase and gas phases is 20%, larger near critical.
+?
+?The Lennard-Jones parameters were estimated with the method of Chung, T.H., Ajlan, M., Lee, L.L., and Starling, K.E., "Generalized Multiparameter Correlation for Nonpolar and Polar Fluid Transport Properties," Ind. Eng. Chem. Res., 27:671-679, 1988.
+?
+!```````````````````````````````````````````````````````````````````````````````
+147.44             !Lower temperature limit [K]
+432.0              !Upper temperature limit [K]
+10000.0            !Upper pressure limit [kPa]
+14.96              !Maximum density [mol/L]
+FEQ PROPANE.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.4847             !Lennard-Jones coefficient sigma [nm] for ECS method
+343.0              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+1  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.0012        0. 0. 0.  !Coefficient, power of T, spare1, spare2
+2  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+  0.98         0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+  0.0          0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+  0.95         0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+  0.0          0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for 1-butyne of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.199e-9           !Xi0 (amplitude) [m]
+0.054              !Gam0 (amplitude) [-]
+0.588e-9           !Qd_inverse (modified effective cutoff parameter) [m]; arbitrary guess
+648.0              !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for 1-butyne using model of Huber (2018).
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?Fit at NIST to the data of:
+? Morehouse, F.R. and Maass, O., Can. J. Res., 5:306-312, 1931.
+? Estimated uncertainty over 240 - 282 K is 3%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+432.0              !Critical temperature (dummy)
+0.0564795  1.06959 !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for 1-butyne of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+432.0    4141.6    !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-7.7880   1.0
+ 4.6419   1.5
+-4.3658   1.84
+-3.1948   4.6
+-6.3609  20.5
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for 1-butyne of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+432.0    4.65      !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 1.9537   0.314
+ 1.3293   1.17
+-1.6707   2.0
+ 1.2883   2.75
+ 0.48718 12.0
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for 1-butyne of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+432.0    4.65      !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-3.08241   0.366
+-6.39764   1.243
+-15.8641   2.93
+-41.4891   5.9
+-61.7023  10.8
+-148.468  19.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

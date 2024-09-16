@@ -1,0 +1,78 @@
+0.46 propane + 0.54 R32 in mass frac. with PTV EoS 
+ T:             283.150000   K  
+ p:               0.840000   MPa 
+ MM:                48.059   g/mol 
+ Phase:                 LV 
+
+Phase behavior in mass fraction.  Vapor Frac: 0.267568
+             propane             R32  
+Liquid:          0.487381    0.512619  
+Vapor:           0.380562    0.619438  
+
+       ---- Properties in each phase  ----       
+                     Liquid       Vapor
+ Z:               0.024963    0.857371
+ MM:                47.832      48.692   g/mol 
+ rho:              683.690      20.264   kg/m3 
+ Entropy:           -0.216       0.948   kJ/K/kg
+ Enthalpy:        -344.888      -8.509   kJ/kg
+ cp:                 2.271       1.238   kJ/K/kg
+ cv:                 1.318       0.946   kJ/K/kg
+ SoS:              607.321     213.673   m/s
+ vis:             0.123507    0.010209   mPa s
+ TC:              0.116709    0.017095   W/m/K
+ Kappa            1.723085    1.308905   
+ d(rho)/dP:       0.004655    0.028668   kg/m3/kPa 
+ d(rho)/dT:      -2.699936   -0.110232   kg/m3/K 
+ dp/dT_rho:     582.811248    3.845152   kPa/K 
+ 
+   -- Properties with all phases combined --
+ rho_all:                 70.050         kg/m3 
+ Entropy_all:              0.096         kJ/K/kg 
+ Enthalpy_all:          -254.884         kJ/kg 
+ cp_all:                   1.995         kJ/K/kg 
+ cv_all:                   1.219         kJ/K/kg 
+ Kappa_all              1.637043     
+ 
+
+----- Refprop Calculations --- 
+ rho_kg:            19.862   kg/m3 
+ cp:              1.453440   kJ/K/kg
+ SoS:              216.698   m/s
+ vis:             0.012167   mPa s
+ TC:              0.016218   W/m/K
+ d(rho)/dP:       0.027896   kg/m3/kPa 
+ d(rho)/dT:      -0.115609   kg/m3/K 
+ dp/dT:           4.144339   kPa/K 
+ ------------------------------- 
+ >> 
+ 
+Fluid at single phase, probably L 
+ T:             273.150000   K  
+ p:               5.200000   MPa 
+ Z:               0.110313
+ MM:                44.010   g/mol 
+ rho_kg:           913.465   kg/m3 
+ d(rho)/dP:       0.012660   kg/m3/kPa 
+ d(rho)/dT:      -8.135644   kg/m3/K 
+ dp/dT_rho:     642.630099   kPa/K 
+ Entropy:        -0.333350   kJ/K/kg
+ Enthalpy:        -282.750   kJ/kg
+ cp:              2.622628   kJ/K/kg
+ cv:              0.911176   kJ/K/kg
+ SoS:              476.831   m/s
+ vis:             0.102805   mPa s
+ TC:              0.115336   W/m/K
+ Kappa            2.878288   
+ 
+
+----- Refprop Calculations --- 
+ rho_kg:           942.107   kg/m3 
+ cp:              2.403569   kJ/K/kg
+ SoS:              571.350   m/s
+ vis:             0.104703   mPa s
+ TC:              0.112230   W/m/K
+ d(rho)/dP:       0.007879   kg/m3/kPa 
+ d(rho)/dT:      -6.132727   kg/m3/K 
+ dp/dT:         778.368059   kPa/K 
+ ------------------------------- 

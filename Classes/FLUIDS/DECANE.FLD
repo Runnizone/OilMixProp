@@ -1,0 +1,544 @@
+Decane               !Short name
+124-18-5             !CAS number
+Decane               !Full name
+CH3-8(CH2)-CH3       !Chemical formula {C10H22}
+n-Decane             !Synonym
+142.28168            !Molar mass [g/mol]
+243.5                !Triple point temperature [K]
+447.27               !Normal boiling point [K]
+617.7                !Critical temperature [K]
+2103.0               !Critical pressure [kPa]
+1.64                 !Critical density [mol/L]
+0.4884               !Acentric factor
+0.07                 !Dipole moment [Debye]; (estimated value)
+NBP                  !Default reference state
+10.0                 !Version number
+2247                 !UN Number                                                 :UN:
+n-alkane             !Family                                                    :Family:
+6829.77              !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C10H22/c1-3-5-7-9-10-8-6-4-2/h3-10H2,1-2H3                                   :InChi:  !Standard InChI String
+DIOQZVSQGTUSAI-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+111888d0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 02-07-01 EWL, Original version.
+! 03-13-03 EWL, Replace cp0 equation.
+! 02-09-04 EWL, Revise EOS fit.
+! 02-28-04 MLH, Add viscosity VS1 fit.
+! 03-18-04 MLH, Add thermal conductivity TC1 fit.
+! 04-19-04 MLH, Add TC1, VS1 references.
+! 07-07-04 AHH, Update dipole moment.
+! 08-05-04 EWL, Add Harvey and Lemmon dielectric correlation.
+! 10-13-04 MLH, Add family.
+! 11-14-09 EWL, Duplicate FEQ as FEK and use PHK so as to work with GERG-2008.
+! 06-21-10 CKL, Add ancillary equations.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for decane of Lemmon and Span (2006).
+:TRUECRITICALPOINT:  617.7      1.64          !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1021/je050186n
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R.,
+? "Short Fundamental Equations of State for 20 Industrial Fluids,"
+? J. Chem. Eng. Data, 51(3):785-850, 2006. doi: 10.1021/je050186n
+?
+?The uncertainties in density are 0.05% in the saturated liquid density
+? between 290 and 320 K, 0.2% in the liquid phase at temperatures to 400 K
+? (with somewhat higher uncertainties above 100 MPa, up to 0.5%), 1% in the
+? liquid phase up to 500 K, and 2% at higher temperatures as well as in the
+? vapor phase.  Vapor pressures have an uncertainty of 0.2% and the
+? uncertainties in liquid heat capacities and liquid sound speeds are 1%.
+? The uncertainty in heat capacities may be higher at pressures above 10 MPa.
+?
+!```````````````````````````````````````````````````````````````````````````````
+243.5              !Lower temperature limit [K]
+675.0              !Upper temperature limit [K]
+800000.0           !Upper pressure limit [kPa]
+5.41               !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+142.28168                              !Molar mass [g/mol]
+243.5                                  !Triple point temperature [K]
+0.001404                               !Pressure at triple point [kPa]
+5.41                                   !Density at triple point [mol/L]
+447.27                                 !Normal boiling point temperature [K]
+0.4884                                 !Acentric factor
+617.7         2103.0       1.64        !Tc [K], pc [kPa], rhoc [mol/L]
+617.7                      1.64        !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  12  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 1.0461      0.25    1.  0.            !a(i),t(i),d(i),l(i)
+-2.4807      1.125   1.  0.
+ 0.74372     1.5     1.  0.
+-0.52579     1.375   2.  0.
+ 0.15315     0.25    3.  0.
+ 0.00032865  0.875   7.  0.
+ 0.84178     0.625   2.  1.
+ 0.055424    1.75    5.  1.
+-0.73555     3.625   1.  2.
+-0.18507     3.625   4.  2.
+-0.020775   14.5     3.  3.
+ 0.012335   12.0     4.  3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for decane of Lemmon and Span (2006).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+1 4   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 19.109     0.0
+ 25.685     1193.0
+ 28.233     2140.0
+ 12.417     4763.0
+ 10.035     10862.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for decane of Lemmon and Span (2006).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  4  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+ 18.109                 1.0      !ai, ti for [ai*log(tau**ti)] terms
+ 13.936202857079877     0.0      !aj, ti for [ai*tau**ti] terms
+-10.5265173263752523    1.0      !aj, ti for [ai*tau**ti] terms
+  25.685     1193.0              !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  28.233     2140.0
+  12.417     4763.0
+  10.035     10862.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for decane.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  4  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 18.109            1.0                 !ai, ti for [ai*log(tau**ti)] terms
+ 13.9361966549     0.0                 !aj, ti for [ai*tau**ti] terms
+-10.5265128286     1.0
+ 25.685           -1.9313582645        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 28.233           -3.4644649506
+ 12.417           -7.7108628784
+ 10.035           -17.5845879877
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FEK     !Helmholtz equation of state for decane of Lemmon and Span (2006).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Lemmon, E.W. and Span, R.,
+          ? "Short Fundamental Equations of State for 20 Industrial Fluids,"
+          ? J. Chem. Eng. Data, 51(3):785-850, 2006. doi: 10.1021/je050186n
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          243.5              !Lower temperature limit [K]
+          675.0              !Upper temperature limit [K]
+          800000.0           !Upper pressure limit [kPa]
+          5.41               !Maximum density [mol/L]
+          PHK                                    !Pointer to Cp0 model
+          142.28168                              !Molar mass [g/mol]
+          243.5                                  !Triple point temperature [K]
+          0.0014                                 !Pressure at triple point [kPa]
+          5.41                                   !Density at triple point [mol/L]
+          447.27                                 !Normal boiling point temperature [K]
+          0.4884                                 !Acentric factor
+          617.7         2103.0       1.64        !Tc [K], pc [kPa], rhoc [mol/L]
+          617.7                      1.64        !Reducing parameters [K, mol/L]
+          8.314472                               !Gas constant [J/mol-K]
+            12  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           1.0461      0.25    1.  0.            !a(i),t(i),d(i),l(i)
+          -2.4807      1.125   1.  0.
+           0.74372     1.5     1.  0.
+          -0.52579     1.375   2.  0.
+           0.15315     0.25    3.  0.
+           0.00032865  0.875   7.  0.
+           0.84178     0.625   2.  1.
+           0.055424    1.75    5.  1.
+          -0.73555     3.625   1.  2.
+          -0.18507     3.625   4.  2.
+          -0.020775   14.5     3.  3.
+           0.012335   12.0     4.  3.
+
+
+@AUX    !---Auxiliary function for PH0
+PHK     !Ideal gas Helmholtz form for decane of Kunz and Wagner (2004).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Kunz, O., Klimeck, R., Wagner, W., Jaeschke, M.
+          ? "The GERG-2004 Wide-Range Equation of State for Natural Gases
+          ? and Other Mixtures," GERG Technical Monograph 15,
+          ? Fortschritt-Berichte VDI, VDI-Verlag, Düsseldorf, 2007.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1 2  0 1 2  0 0 0  !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+           3.0               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+           15.870791919      0.0                 !aj, ti for [ai*tau**ti] terms
+          -108.858547525     1.0
+          -43.4931           1.353835195         !aj, ti for cosh and sinh terms
+           21.0069           0.267034159
+           58.3657           2.833479035
+
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#ETA   !---Viscosity---
+VS1    !Pure fluid viscosity model for decane of Huber et al. (2004).
+:DOI: 10.1016/j.fluid.2005.03.008
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., Laesecke, A., and Xiang, H.W.,
+? "Viscosity Correlations for Minor Constituent Fluids in Natural
+? Gas: n-Octane, n-Nonane and n-Decane,"
+? Fluid Phase Equilib., 224:263-270, 2004.
+?
+?The estimated uncertainty in viscosity is 1% along the saturated liquid line,
+? 2% in compressed liquid to 200 MPa, and 5% in vapor and supercritical regions.
+?
+?DATA SOURCES FOR VISCOSITY
+? The parameters for viscosity were based in part on the data of:
+? Knapstad, B., Skolsvik, P.A., and Oye, H.A., "Viscosity of Pure Hydrocarbons," J. Chem. Eng. Data, 34:37-43, 1989.
+? Knapstad, B., Skjolsvik, P.A., and Oye, H.A., "Viscosity of Three Binary Hydrocarbon Mixtures," J. Chem. Eng. Data, 36:84-88, 1991.
+? Dymond, J.H. and Young, K.J., "Transport Properties of Nonelectrolyte Liquid Mixtures- I. Viscosity Coefficients for n-Alkane Mixtures at Saturation Pressure from 283 to 378 K," Int. J. Thermophys., 1(4):331-344, 1980.
+? Caudwell, D.R., Trusler, J.P.M., Vesovic, V., and Wakeham, W.A., "The Viscosity and Density of n-Dodecane and n-Octadecane at Pressures up to 200 MPa and Temperatures up to 473 K," paper presented at 15th Symposium on Thermophysical Properties, Boulder CO 80303, June, 2003.
+? Lyusternik, V.E. and Zhdanov, A.G., Teplofiz. Svoistva Veshchestv Mater, No.7, Rabinovich, V.A. ed., Standards Publishing, Moscow, 1973.
+? Average absolute deviations of the fit from the experimental data are:
+? Knapstad, 1989: avg 0.33% (max 0.93); Knapstad, 1991: avg 0.65% (max. 1.72);
+? Caudwell: avg 1.05% (max 1.97); Lyusternik: 0.76% (max 1.60).
+?
+!```````````````````````````````````````````````````````````````````````````````
+243.5              !Lower temperature limit [K]
+1000.0             !Upper temperature limit [K]
+800000.0           !Upper pressure limit [kPa]
+8.0                !Maximum density [mol/L]
+1                  !Number of terms associated with dilute-gas function
+CI1                !Pointer to reduced effective collision cross-section model
+0.6860             !Lennard-Jones coefficient sigma [nm]
+490.51             !Lennard-Jones coefficient epsilon/kappa [K]
+1.0      1.0       !Reducing parameters for T, eta
+0.2547503   0.5    !=0.021357*SQRT(MW)  [Chapman-Enskog term]
+9                  !Number of terms for initial density dependence
+490.51    0.194412 !Reducing parameters for T (=eps/k), etaB2 (= 0.6022137*sigma**3)
+-19.572881    0.0  !Coefficient, power in T* = T/(eps/k)
+ 219.73999   -0.25
+-1015.3226   -0.5
+ 2471.0125   -0.75
+-3375.1717   -1.0
+ 2491.6597   -1.25
+-787.26086   -1.5
+ 14.085455   -2.5
+-0.34664158  -5.50
+3 5 1 2 0 0        !# resid terms:  close-packed density;  simple poly; numerator of rational poly; denominator of rat. poly; numerator of exponential; denominator of exponential
+617.7     1.64          1000.0         !Reducing parameters for T, rho, eta (Laesecke correlation in terms of mPa-s, convert to uPa-s)
+ 2.55105      0.0    0.  0.  0         !  c10
+ 1.71465      0.5    0.  0.  0         !  c8
+ 0.0          1.0    0.  0.  0         !  c22
+-0.0402094   -1.0    2.  0.  0         !  beta16; powers of tau, del, del0; power of del in exponential [0= no exp.]
+ 0.0         -1.0    3.  0.  0         !  beta17; powers of tau, del, del0; power of del in exponential [0= no exp.]
+ 0.0404435   -2.0    2.  0.  0         !  beta18; powers of tau, del, del0; power of del in exponential [0= no exp.]
+-0.0142063   -2.0    3.  0.  0         !  beta19; powers of tau, del, del0; power of del in exponential [0= no exp.]
+-0.453387     0.0    1. -1.  0         !  beta7 over del0 term
+ 0.453387     0.0    1.  0.  0         !  beta7 in non-simple poly term
+ 1.0          0.0    0.  1.  0         !  del0 term in denominator
+-1.0          0.0    1.  0.  0         !  -del term in denominator
+NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+#AUX   !---Auxiliary function for the collision integral
+CI1    !Reduced effective collision cross-section model (empirical form in log(T*)) for decane.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., Laesecke, A., and Xiang, H.W., 2004.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+2                  !Number of terms
+ 0.343267       0  !Coefficient, power of Tstar
+-0.460514       1
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC1    !Pure fluid thermal conductivity model for decane of Huber and Perkins (2005).
+:DOI: 10.1016/j.fluid.2004.10.031
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L. and Perkins, R.A., "Thermal Conductivity Correlations for
+? Minor Constituent Fluids in Natural Gas: n-Octane, n-Nonane and n-Decane,"
+? Fluid Phase Equilib., 227:47-55, 2005.
+?
+?Uncertainty in thermal conductivity is 3%, except in the supercritical region
+? and dilute gas which have an uncertainty of 5%.
+?
+?DATA SOURCES FOR THERMAL CONDUCTIVITY
+? Tanaka, Y., Itani, Y., Kubota, H., and Makita, T., "Thermal Conductivity of Five Normal Alkanes in the Temperature Range 283-373 K at Pressures up to 250 MPa," Int. J. Thermophys., 9(3):331-350, 1988.
+? Mustafaev, R.A., "Thermal Conductivity of Vapors of Normal Saturated Hydrocarbons at High Temperatures," Izv. Vyssh. Ucheb. Zaved., Neft Gaz, 16(11):71-74, 1973.
+? Watanabe, H., Seong, D.J., "The Thermal Conductivity and Thermal Diffusivity of Liquid n-Alkanes: CnH2n+2 (n=5 to 10) and Toluene," Int. J. Thermophys., 23:337-356, 2002.
+? Average absolute deviations of the fit from the experimental data are:
+? Tanaka et al.: 0.82% (max -2.31); Mustafaev: 0.82% (max -2.69);
+? Watanabe and Seong: 0.11% (max 0.20).
+?
+!```````````````````````````````````````````````````````````````````````````````
+243.               !Lower temperature limit [K]
+1000.              !Upper temperature limit [K]
+800000.0           !Upper pressure limit [kPa]
+8.0                !Maximum density [mol/L]
+4   0              !# terms for dilute gas function:  numerator, denominator
+617.7   1.0        !Reducing parameters for T, tcx
+ 0.0105543   0.    !Coefficient, power in T
+-0.051453    1.    !(2)
+ 0.118979    2.    !(3)
+-0.0372442   3.    !(16)
+10  0              !# terms for background gas function:  numerator, denominator
+ 617.7  1.64   1.  !Reducing parameters for T, rho, tcx
+-0.0294394   0.  1.  0.  !Coefficient, powers of T, rho, spare for future use
+ 0.0150509   1.  1.  0.
+ 0.0499245   0.  2.  0.
+ 0.0         1.  2.  0.
+-0.01427     0.  3.  0.
+-0.0138857   1.  3.  0.
+ 0.00150828  0.  4.  0.
+ 0.00433326  1.  4.  0.
+ 0.0         0.  5.  0.
+ 0.0         1.  5.  0.
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for decane of Olchowy and Sengers (1989).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Olchowy, G.A. and Sengers, J.V.,
+? "A Simplified Representation For the Thermal Conductivity of Fluids in the Critical Region,"
+? Int. J. Thermophys., 10:417-426, 1989. doi: 10.1007/BF01133538
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.03               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.194e-9           !Xi0 (amplitude) [m]
+0.0496             !Gam0 (amplitude) [-]
+7.086368e-10       !Qd_inverse (modified effective cutoff parameter) [m]; fitted to data
+926.55             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Nitrogen reference); predictive mode for decane.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Klein, S.A., McLinden, M.O., and Laesecke, A., "An Improved Extended Corresponding States Method for Estimation of Viscosity of Pure Refrigerants and Mixtures," Int. J. Refrigeration, 20(3):208-217, 1997. doi: 10.1016/S0140-7007(96)00073-4.
+          ?McLinden, M.O., Klein, S.A., and Perkins, R.A., "An Extended Corresponding States Model for the Thermal Conductivity of Refrigerants and Refrigerant Mixtures," Int. J. Refrigeration, 23(1):43-63, 2000. doi: 10.1016/S0140-7007(99)00024-9
+          ?
+          ?The Lennard-Jones parameters were estimated with the method of Chung.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          243.               !Lower temperature limit [K]
+          1000.0             !Upper temperature limit [K]
+          800000.0           !Upper pressure limit [kPa]
+          8.0                !Maximum density [mol/L]
+          FEQ NITROGEN.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.686              !Lennard-Jones coefficient sigma [nm] for ECS method
+          490.51             !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+          1  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00132  0. 0. 0. !Coefficient, power of T, spare1, spare2
+          1  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          1  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for decane of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+617.7              !Critical temperature used in fit (dummy)
+0.05473   1.29     !Sigma0 and n
+
+
+#DE    !---Dielectric constant---
+DE3    !Dielectric constant model for decane of Harvey and Lemmon (2005).
+:DOI: 10.1007/s10765-005-2351-5
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Harvey, A.H. and Lemmon, E.W.,
+? "Method for Estimating the Dielectric Constant of Natural Gas Mixtures,"
+? Int. J. Thermophys., 26(1):31-46, 2005. doi: 10.1007/s10765-005-2351-5
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+273.16 1000.0 1.0  !Reducing parameters for T and D
+1 2 4 0 0 0        !Number of terms in dielectric constant model
+ 0.10924 -1. 1. 0. !Coefficient, T exp, D exp
+ 49.32     0. 1. 0.
+ 0.050     1. 1. 0.
+ 220.15    0. 2. 0.
+-316.3     1. 2. 0.
+-88358.0   0. 3. 0.
+ 53511.0   1. 3. 0.
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for decane of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, C.K. and Lemmon, E.W., 2010.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+617.7   2103.0     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-8.7738    1.0
+ 4.0864    1.5
+-4.0775    1.93
+-6.4910    4.14
+ 1.5598    4.7
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for decane of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, C.K. and Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+617.7   1.64       !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 9.2435    0.535
+-16.288    0.74
+ 20.445    1.0
+-17.624    1.28
+ 7.3796    1.57
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for decane of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, C.K. and Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+617.7   1.64       !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-5.0378    0.4985
+-3.4694    1.33
+-15.906    2.43
+-82.894    5.44
+ 29.336    5.8
+-109.85    11.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

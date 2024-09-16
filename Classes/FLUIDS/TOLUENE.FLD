@@ -1,0 +1,646 @@
+Toluene              !Short name
+108-88-3             !CAS number
+Methylbenzene        !Full name
+CH3-C6H5             !Chemical formula {C7H8}
+Toluene              !Synonym
+92.13842             !Molar mass [g/mol]
+178.0                !Triple point temperature [K]
+383.75               !Normal boiling point [K]
+591.75               !Critical temperature [K]
+4126.3               !Critical pressure [kPa]
+3.169                !Critical density [mol/L]
+0.2657               !Acentric factor
+0.36                 !Dipole moment [Debye]; R.D. Nelson, D.R. Lide, and A.A. Maryott, "Selected Values of Electric Dipole Moments for Molecules in the Gas Phase," NSRDS-NBS 10, National Reference Data Series, US Government Printing Office, Washington, 1967.
+NBP                  !Default reference state
+10.0                 !Version number
+1294                 !UN Number                                                 :UN:
+aromatic             !Family                                                    :Family:
+3947.89              !Heating value (upper) [kJ/mol]                            :Heat:
+2.7                  !GWP (IPCC 2007)                                           :GWP:
+1S/C7H8/c1-7-5-3-2-4-6-7/h2-6H,1H3        !Standard InChI String                :InChi:
+YXFVVABEGXRONW-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+b398a3b0  (heptane)                       !Alternative fluid for mixing rules   :AltID:
+a49b8b50                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 11-13-98 EWL, Original version.
+! 04-24-00 EWL, Add very preliminary equation of state of Lemmon and Jacobsen.
+! 07-21-00 EWL, Add second preliminary equation of state of Lemmon and Jacobsen.
+! 04-06-04 EWL, Finalize short (12 term) equation of state.
+! 04-19-04 AHH, Change dipole moment.
+! 09-04-06 MLH, Add very preliminary predictive ECS transport.
+! 03-12-09 EWL, Add vapor pressure ancillary equation.
+! 07-01-10 EWL, Add ancillary equations.
+! 07-05-10 EWL, Add transport equations.
+! 09-02-10 MLH, Add ECS.
+! 12-13-11 MLH, Add new thermal condictivity equation of Assael et al. (2012).
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 04-08-15 MLH, Add new viscosity model of Avgeri et al. (2015).
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for toluene of Lemmon and Span (2006).
+:TRUECRITICALPOINT:  591.75     3.169         !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1021/je050186n
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R.,
+? "Short Fundamental Equations of State for 20 Industrial Fluids,"
+? J. Chem. Eng. Data, 51(3):785-850, 2006. doi: 10.1021/je050186n
+?
+?The uncertainties in density in the equation of state are 0.05% in the
+? liquid phase up to 540 K, 0.5% up to the critical temperature, 1% at
+? higher temperatures, 0.5% at pressures from 100 to 500 MPa, and 0.2% in
+? the vapor phase.  The uncertainty for the saturated liquid density (and
+? densities near atmospheric pressure) approaches 0.01% around 300 K. The
+? uncertainties in vapor pressure are 0.3% from 270 to 305 K, 0.05% from
+? 305 to 425 K, 0.1% up to 555 K, and 0.15% up to the critical temperature.
+? The uncertainty in heat capacities is 0.5% and rises to 3% in the
+? critical region.  The uncertainty in the speed of sound is 1% up to 500 K
+? and 100 MPa and rises to 2% at higher pressures and higher temperatures.
+?
+!```````````````````````````````````````````````````````````````````````````````
+178.0              !Lower temperature limit [K]
+700.0              !Upper temperature limit [K]
+500000.0           !Upper pressure limit [kPa]
+10.581             !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+92.13842                               !Molar mass [g/mol]
+178.0                                  !Triple point temperature [K]
+0.00003939                             !Pressure at triple point [kPa]
+10.58                                  !Density at triple point [mol/L]
+383.75                                 !Normal boiling point temperature [K]
+0.2657                                 !Acentric factor
+591.75        4126.3       3.169       !Tc [K], pc [kPa], rhoc [mol/L]
+591.75                     3.169       !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  12  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 0.96464     0.25    1.  0.            !a(i),t(i),d(i),l(i)
+-2.7855      1.125   1.  0.
+ 0.86712     1.5     1.  0.
+-0.18860     1.375   2.  0.
+ 0.11804     0.25    3.  0.
+ 0.00025181  0.875   7.  0.
+ 0.57196     0.625   2.  1.
+-0.029287    1.75    5.  1.
+-0.43351     3.625   1.  2.
+-0.12540     3.625   4.  2.
+-0.028207   14.5     3.  3.
+ 0.014076   12.0     4.  3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for toluene of Lemmon and Span (2006).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+1 5   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0        0.0
+ 1.6994     190.0
+ 8.0577     797.0
+ 17.059     1619.0
+ 8.4567     3072.0
+ 8.6423     7915.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for toluene of Lemmon and Span (2006).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  5  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+  3.5241204689061192    0.0      !aj, ti for [ai*tau**ti] terms
+  1.1360804066266901    1.0      !aj, ti for [ai*tau**ti] terms
+  1.6994     190.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  8.0577     797.0
+  17.059     1619.0
+  8.4567     3072.0
+  8.6423     7915.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for toluene.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  5  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 3.0               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+ 3.5241174832      0.0                 !aj, ti for [ai*tau**ti] terms
+ 1.1360823464      1.0
+ 1.6994           -0.3210815378        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 8.0577           -1.346852556
+ 17.059           -2.7359526827
+ 8.4567           -5.1913814956
+ 8.6423           -13.3755809041
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for toluene of Polt et al. (1992).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Polt, A., Platzer, B., and Maurer, G.,
+          ? "Parameter der thermischen Zustandsgleichung von Bender fuer 14
+          ? mehratomige reine Stoffe,"
+          ? Chem. Tech. (Leipzig), 44(6):216-224, 1992.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          298.0              !Lower temperature limit [K]
+          673.0              !Upper temperature limit [K]
+          25000.0            !Upper pressure limit [kPa]
+          9.7242             !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          92.142                                 !Molar mass [g/mol]
+          178.0                                  !Triple point temperature [K]
+          3.774                                  !Pressure at triple point [kPa]
+          9.3606                                 !Density at triple point [mol/L]
+          383.766                                !Normal boiling point temperature [K]
+          0.2654                                 !Acentric factor
+          591.72        4119.9       3.1473161   !Tc [K], pc [kPa], rhoc [mol/L]
+          591.72                     3.1473161   !Reducing parameters [K, mol/L]
+          8.3143                                 !Gas constant [J/mol-K]
+            22  5    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+          -0.343905499875     3.  0.  0.  0.     !a(i),t(i),d(i),l(i)
+           0.737562743137     4.  0.  0.  0.
+          -0.158601557810     5.  0.  0.  0.
+           1.13243121503      0.  1.  0.  0.
+          -2.53681929563      1.  1.  0.  0.
+           1.04584338973      2.  1.  0.  0.
+          -1.1573211938       3.  1.  0.  0.
+           0.176205273278     4.  1.  0.  0.
+          -0.242942016719     0.  2.  0.  0.
+           0.398925293195     1.  2.  0.  0.
+           0.193881828889     2.  2.  0.  0.
+           0.199426230143     0.  3.  0.  0.
+          -0.306598708746     1.  3.  0.  0.
+          -0.0114697533947    0.  4.  0.  0.
+           0.0230068676459    1.  4.  0.  0.
+           0.00658341220591   1.  5.  0.  0.
+           0.343905499875     3.  0.  2.  0.841
+          -0.737562743137     4.  0.  2.  0.841
+           0.158601557810     5.  0.  2.  0.841
+           0.407079283970     3.  2.  2.  0.841
+          -0.681406141650     4.  2.  2.  0.841
+           0.110425925004     5.  2.  2.  0.841
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for toluene.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Polt, A., Platzer, B., and Maurer, G.,
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     92.142     !Reducing parameters for T, Cp0
+          5 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+          -0.321892          0.0
+           0.00579338        1.0
+          -0.00000348446     2.0
+           0.143577e-8       3.0
+          -0.71935e-12       4.0
+
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#ETA   !---Viscosity---
+VS1    !Pure fluid viscosity model for toluene of Avgeri et al. (2015).
+:DOI: 10.1063/1.4926955
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Avgeri, S., Assael, M.J., Huber, M.L., and Perkins, R.A.,
+? "Reference Correlation of the Viscosity of Toluene from the Triple Point to 675 K and up to 500 MPa,"
+? J. Phys. Chem. Ref. Data, 44(3), 033101, 2015. doi: 10.1063/1.4926955
+?
+?The estimated uncertainty at a 95% confidence level varies depending on the region of temperature and pressure
+? from a low of 0.3% for the low-density gas at temperatures from 305 K to 640 K at pressures to 0.3 MPa
+? to 0.7% for the saturated liquid at temperatures from 263 K to 373 K, to 5% for the low-temperature liquid
+? from 187 K to 210 K at pressures to 15 MPa.
+?
+!```````````````````````````````````````````````````````````````````````````````
+178.0              !Lower temperature limit [K]
+700.0              !Upper temperature limit [K]
+500000.0           !Upper pressure limit [kPa]
+10.581             !Maximum density [mol/L]
+1                  !Number of terms associated with dilute-gas function
+CI1                !Pointer to reduced effective collision cross-section model
+0.524              !Lennard-Jones coefficient sigma [nm]
+472.0              !Lennard-Jones coefficient epsilon/kappa [K]
+1.0      1.0       !Reducing parameters for T, eta
+0.20500319  0.5    !=0.021357*SQRT(MW)  [Chapman-Enskog term]
+9                  !Number of terms for initial density dependence
+472. 0.0866452     !Reducing parameters for T (=eps/k), etaB2 (= 0.6022137*sigma**3)
+-19.572881    0.0  !Coefficient, power in T* = T/(eps/k)
+ 219.73999   -0.25
+-1015.3226   -0.5
+ 2471.0125   -0.75
+-3375.1717   -1.0
+ 2491.6597   -1.25
+-787.26086   -1.5
+ 14.085455   -2.5
+-0.34664158  -5.5
+0 0 8 3 0 0        !# resid terms:  close-packed density;  simple poly; numerator of rational poly; denominator of rat. poly; numerator of exponential; denominator of exponential
+591.75    3.169001703   1.0            !Reducing parameters for T, rho, eta (correlation in terms of uPa-s)
+-159.279468  -0.5  1.6666666666 0.  0  !Coefficient, power of tau, del n1
+ 19.9192161  -0.5  3.6666666667 0.  0  !Coefficient, power of tau, del n2
+ 21.236423   -0.5  4.6666666667 0.  0  !Coefficient, power of tau, del n3
+-2.6557905   -0.5  6.6666666667 0.  0  !Coefficient, power of tau, del n4
+-138.53326    0.5  1.6666666667 0.  0  !Coefficient, power of tau, del n5
+-146.018028   0.5  3.6666666667 0.  0  !Coefficient, power of tau, del n6
+ 29.252989    0.5  4.6666666667 0.  0  !Coefficient, power of tau, del n7
+ 111.401629   1.5  1.6666666667 0.  0  !Coefficient, power of tau, del n8
+-7.9962719    0.0    0.  0.  0         !Coefficient, power of tau, del d1
+ 1.0          0.0    2.  0.  0         !Coefficient, power of tau, del d2
+-11.0147955   1.0    0.  0.  0         !Coefficient, power of tau, del d3
+NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+#AUX   !---Auxiliary function for the collision integral
+CI1    !Reduced effective collision cross-section model (empirical form in log(T*)) for toluene.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Avgeri, S., Assael, M.J., Huber, M.L., and Perkins, R.A., 2015.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+4                  !Number of terms
+ 0.401080       0  !Coefficient, power of Tstar
+-0.476409       1
+ 0.0            2
+ 0.069442       3
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC1    !Pure fluid thermal conductivity model for toluene of Assael et al. (2012).
+:DOI: 10.1063/1.3700155
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Assael, M.J., Mylona, S.K., Huber, M.L., and Perkins, R.A.,
+? "Reference Correlation of the Thermal Conductivity of Toluene from the Triple Point
+? to 1000 K and up to 1000 MPa,"
+? J. Phys. Chem. Ref. Data, 41, 023101, 2012. doi: 10.1063/1.3700155
+?
+?The uncertainty is estimated, for pressures less than 700 MPa and temperatures less than 550 K,
+? to be less than 3% for the liquid, while for the region 550 K = T = 700 K the uncertainty
+? is estimated to be 4%. For the region T > 700 K and 500 MPa = p = 1000 MPa,
+? the equations can safely be used with an uncertainty of the order of 10%.
+? Finally, the uncertainty along the saturation line is estimated to be 2%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+170.0              !Lower temperature limit [K]
+2000.0             !Upper temperature limit [K]
+1000000.0          !Upper pressure limit [kPa]
+20.0               !Maximum density [mol/L]
+6   0              !# terms for dilute gas function:  numerator, denominator
+ 1.0         0.001 !Reducing parameters for T, tcx
+ 5.8808      0.    !Coefficient, power in T
+-0.061693    1.
+ 3.4151e-4   2.
+-3.042e-7    3.
+ 1.2868e-10  4.
+-2.1303e-14  5.
+ 12  0             !# terms for background gas function:  numerator, denominator
+ 591.75  3.169  1. !Reducing parameters for T, rho, tcx
+-0.051853    0.  1.  0.
+ 0.133846    0.  2.  0.
+-0.120446    0.  3.  0.
+ 0.0530211   0.  4.  0.
+-0.0100604   0.  5.  0.
+ 0.000633457 0.  6.  0.
+ 0.0517449   1.  1.  0.
+-0.121902    1.  2.  0.
+ 0.137748    1.  3.  0.
+-0.0732792   1.  4.  0.
+ 0.0172914   1.  5.  0.
+-0.00138585  1.  6.  0.
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for toluene of Assael et al. (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Assael, M.J., Mylona, S.K., Huber, M.L., and Perkins, R.A., 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.22e-9            !Xi0 (amplitude) [m]
+0.05               !Gam0 (amplitude) [-]
+0.62e-9            !Qd_inverse (modified effective cutoff parameter) [m]
+887.625            !Tref (reference temperature) [K]
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Propane reference); predictive mode for toluene.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+          ?Unpublished; uses method described in the following reference:
+          ?Huber, M.L., Laesecke, A., and Perkins, R.A.
+          ? "Model for the Viscosity and Thermal Conductivity of Refrigerants, Including
+          ? a New Correlation for the Viscosity of R134a,"
+          ? Ind. Eng. Chem. Res., 42(13):3163-3178, 2003. doi: 10.1021/ie0300880
+          ?
+          ?The Lennard-Jones parameters were estimated with the method of Chung.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          178.0              !Lower temperature limit [K]
+          700.0              !Upper temperature limit [K]
+          500000.0           !Upper pressure limit [kPa]
+          10.581             !Maximum density [mol/L]
+          FEQ PROPANE.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.5507             !Lennard-Jones coefficient sigma [nm]
+          469.90             !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+          1  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00132       0. 0. 0.  !Coefficient, power of T, spare1, spare2
+          3  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           1.64387       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+          -0.52457       0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+           0.103043      0. 2. 0.  !Coefficient, power of Tr, power of Dr, spare
+          2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.09724       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+          -0.0167852     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for toluene of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+591.75             !Critical temperature used in fit (dummy)
+0.06897   1.291    !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for toluene of Lemmon et al. (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., 2010.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+591.75  4126.3     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-7.45201   1.0
+ 2.03681   1.5
+-1.43777   2.13
+-3.51652   4.0
+-1.75818   12.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for toluene of Lemmon et al. (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+591.75  3.169      !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 14.0531   0.54
+-32.5072   0.72
+ 35.1091   0.93
+-16.0694   1.2
+ 2.38699   2.0
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for toluene of Lemmon et al. (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+591.75  3.169      !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-2.97587   0.425
+-5.34939   1.06
+-19.1781   3.0
+-24.0058   6.3
+-32.4034   7.0
+-140.645   15.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+
+                    @TCX               !Thermal conductivity model specification
+                    TC1  pure fluid thermal conductivity model of Lemmon (2010).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?Lemmon, E.W. and Laesecke, A., 2010.
+                    ? Unpublished preliminary equation for the thermal conductivity of toluene.
+                    ? This equation should not be used for calibration purposes.
+                    ?
+                    ?For a limited standard, see: Ramires, M.L.V., de Castro, C.A.N., Perkins, R.A., et al.
+                    ? Reference data for the thermal conductivity of saturated liquid toluene over a wide range of temperatures,
+                    ? J. Phys. Chem. Ref. Data, 29:133-139, 2000. doi: 10.1063/1.556057
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    1.0                !Lower temperature limit [K]
+                    2000.0             !Upper temperature limit [K]
+                    2200000.0          !Upper pressure limit [kPa]
+                    53.15              !Maximum density [mol/L]
+                    3   0              !# terms for dilute gas function:  numerator, denominator
+                     591.75       0.001      !Reducing parameters for T, tcx
+                     28.96745197  1.20532335 !Coefficient, power in T
+                    -167.24996945 1.58866032
+                     180.04690463 1.71267964
+                    6   0              !# terms for background gas function:  numerator, denominator
+                    591.75 3.169 0.001 !Reducing parameters for T, rho, tcx
+                    -3.18905053658  -0.53316   4.  0.      !Coefficient, powers of T, rho, exp(rho)
+                     25.8544682121  -0.27224   3.  0.
+                    -26.3059677817  -0.09974   5.  1.
+                    -0.691196173614 -5.53274   7.  2.
+                     0.054242865164 -6.84315   8.  2.
+                    -0.326501347819 -0.39659   3.  2.
+                    TK3                !Pointer to critical enhancement auxiliary function
+
+
+                    @AUX               !---Thermal conductivity critical enhancement model
+                    TK3  simplified thermal conductivity critical enhancement of Lemmon and Laesecke (2010).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?Lemmon, E.W. and Laesecke, A., 2010.
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    0.                 !
+                    10000.             !
+                    0.                 !
+                    0.                 !
+                    9 0 0 0            !# terms:  terms, spare, spare, spare
+                    1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+                    0.63               !Nu (universal exponent)
+                    1.2415             !gamma (universal exponent)
+                    1.01               !R0 (universal amplitude)
+                    0.065              !Z (universal exponent--not used for t.c., only viscosity)
+                    1.0                !c (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+                    0.33442441e-9      !xi0 (amplitude) [m]
+                    0.055              !gam0 (amplitude) [-]
+                    0.71763799e-9      !qd_inverse (modified effective cutoff parameter) [m]
+                    1183.50            !Tref (reference temperature) [K]
+
+
+                    @ETA               !Viscosity model specification
+                    VS1  pure fluid viscosity model of Lemmon (2010).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?Lemmon, E.W. and Laesecke, A., 2010.
+                    ? Unpublished preliminary equation for the viscosity of toluene.
+                    ? This equation should not be used for calibration purposes.
+                    ?
+                    ?For a limited standard, see: Santos, F.J.V., de Castro, C.A.N, Dymond, J.H., et al.,
+                    ? Standard reference data for the viscosity of toluene,
+                    ? J. Phys. Chem. Ref. Data, 35:1-8, 2006. doi: 10.1063/1.1928233
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    1.0                !Lower temperature limit [K]
+                    2000.0             !Upper temperature limit [K]
+                    2200000.0          !Upper pressure limit [kPa]
+                    50.0               !Maximum density [mol/L]
+                    1                  !Number of terms associated with dilute-gas function
+                    CI1                !Pointer to reduced effective collision cross-section model
+                    0.5507             !Lennard-Jones coefficient sigma [nm]
+                    469.90             !Lennard-Jones coefficient epsilon/kappa [K]
+                    1.0      1.0       !Reducing parameters for T, eta
+                    9.598876    0.5    !Chapman-Enskog term
+                    0                  !Number of terms for initial density dependence
+                    0 10 0 0 0 0       !# resid terms:  close-packed density;  simple poly; numerator of rational poly; denominator of rat. poly; numerator of exponential; denominator of exponential
+                    591.75    3.169         1.0            !Reducing parameters for T, rho, eta
+                     15.7560701809     -0.2843   1.  0.  0 !Simple polynomial terms
+                     65.8234203776     -2.4238   2.  0.  0
+                    -90.9162962259     -2.7667   2.  0.  1
+                    -80.6740654754     -3.0019   4.  0.  1
+                     3.95093273404     -3.2869   6.  0.  2
+                     0.0867277691823   -6.0789   9.  0.  1
+                    -0.00928414042924  -6.1564  11.  0.  1
+                     0.98226489285e-5  -6.8541  12.  0.  0
+                    -0.000785434913708 -5.5123  17.  0.  2
+                     0.169683455336e-7 -4.1175  19.  0.  0
+                    NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+                    @AUX               !---Collision integral specification
+                    CI1  collision integral model of Lemmon (2010).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    0.                 !
+                    10000.             !
+                    0.                 !
+                    0.                 !
+                    5                  !Number of terms
+                     4.16412004     0  !Coefficient, power of Tstar
+                    -0.51985826     1
+                     0.02635729     2
+                     0.30985922     3
+                     0.11296801     4

@@ -1,0 +1,21 @@
+Interface User GuideSteps to Use
+1. Click the " Load VP Data " Button
+Locate and click the "Load VP Data" button on the interface to enter the data management section.
+2. Select the "ExpData" Folder
+After clicking the " Load VP Data " button, a file selection window will pop up. Please select the "ExpData" folder in this window.
+3. Create a Fluid Folder  
+In the "ExpData" folder, users need to create a new folder for each measured fluid. Name the folder after the fluid. For example, if the measured fluid is water, name the folder "Water".
+4. Add Measurement Data
+In the named fluid folder, users need to place the measurement data in txt files. The measurement data includes the following categories:
+•	Density 
+•	Fluid_Constants_xxx (xxx is the fluid name)
+•	HeatCapacity
+•	ThermalConductivity
+•	VaporPressure (required)
+•	Viscosity
+Each data type should be placed in a separate txt file and named accordingly. For example, density data should be in a file named " VaporPressure.txt".
+5. Save the Data
+Save all the relevant txt files into the corresponding fluid folder.
+6. Select and View Data
+Once the data is saved, users only need to select the " Load VP Data " file under the "ExpData" folder to retrieve all the measurement data within that folder.
+

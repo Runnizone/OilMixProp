@@ -1,0 +1,408 @@
+R236fa               !Short name
+690-39-1             !CAS number
+1,1,1,3,3,3-Hexafluoropropane !Full name
+CF3CH2CF3            !Chemical formula {C3H2F6}
+HFC-236fa            !Synonym
+152.0384             !Molar mass [g/mol]
+179.6                !Triple point temperature [K]
+271.66               !Normal boiling point [K]
+398.07               !Critical temperature [K]
+3200.0               !Critical pressure [kPa]
+3.626                !Critical density [mol/L]
+0.377                !Acentric factor
+1.982                !Dipole moment [Debye]; Goodwin & Mehl (1997) IJT 18:795-806
+IIR                  !Default reference state
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+halocb               !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+9810.                !GWP (IPCC 2007)                                           :GWP:
+55000.               !RCL (ppm v/v, ASHRAE Standard 34, 2010)                   :RCL:
+A1                   !Safety Group (ASHRAE Standard 34, 2010)                   :Safety:
+1S/C3H2F6/c4-2(5,6)1-3(7,8)9/h1H2         !Standard InChI String                :InChi:
+NSGXIBWMJZWTPY-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+77fa2150                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by M. McLinden, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 05-29-97  MM, Original version.
+! 05-21-02 MLH, Add new transport coefficients.
+! 04-19-04 MLH, Update transport references.
+! 08-17-10 IDC, Add ancillary equations.
+! 01-30-12 EWL, Add equation of state of Pan et al.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 03-07-13 MLH, Refit ECS viscosity and tcon with new Pan EOS and new vis data of Meng 2011.
+! 02-16-17  KG, Add ancillary equations.
+! 11-18-17 MLH, Revised critical enhancment.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for R-236fa of Pan et al. (2012).
+:TRUECRITICALPOINT:  398.07     3.626         !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1016/j.fluid.2012.02.012
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Pan, J., Rui, X., Zhao, X., and Qiu, L.,
+? "An Equation of State for the Thermodynamic Properties of
+? 1,1,1,3,3,3-Hexafluoropropane (HFC-236fa),"
+? Fluid Phase Equilib., 321:10-16, 2012. doi: 10.1016/j.fluid.2012.02.012
+?
+?The uncertainties in density of the equation of state are estimated to be
+? 0.1% in the compressed liquid region, and 0.5% in the vapor region.  The
+? uncertainties in vapor pressure are 0.2% at temperature from 280 K to 380 K,
+? and 0.4% at temperature above 380 K. The uncertainty in speed of sound in
+? the gas region is 0.1%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+179.6              !Lower temperature limit [K]
+400.0              !Upper temperature limit [K]
+70000.0            !Upper pressure limit [kPa]
+11.235             !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+152.0384                               !Molar mass [g/mol]
+179.6                                  !Triple point temperature [K]
+0.1603                                 !Pressure at triple point [kPa]
+11.235                                 !Density at triple point [mol/L]
+271.66                                 !Normal boiling point temperature [K]
+0.377                                  !Acentric factor
+398.07        3200.0       3.626       !Tc [K], pc [kPa], rhoc [mol/L]
+398.07                     3.626       !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  10  4   5 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.04453255   1.07    4.  0.          !a(i),t(i),d(i),l(i)
+  1.777017     0.222   1.  0.
+ -2.230519     0.66    1.  0.
+ -0.6708606    1.33    2.  0.
+  0.1587907    0.227   3.  0.
+ -1.425119     2.33    1.  2.
+ -0.6461628    1.94    3.  2.
+  0.8469985    1.53    2.  1.
+ -0.5635356    2.65    2.  2.
+ -0.01535611   0.722   7.  1.
+  1.156362     1.11    1.  2. 2.    -1.02     -1.42    1.13    0.712    0. 0. 0.
+ -0.4070310    2.31    1.  2. 2.    -1.336    -2.31    0.67    0.91     0. 0. 0.
+ -0.2172753    3.68    3.  2. 2.    -1.055    -0.89    0.46    0.677    0. 0. 0.
+ -1.007176     4.23    3.  2. 2.    -5.84    -80.0     1.28    0.718    0. 0. 0.
+-0.00006902909 0.614   2.  2. 2.   -16.2    -108.0     1.2     1.64     0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for R-236fa of Pan et al. (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Pan, J., Rui, X., Zhao, X., and Qiu, L., 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 10.175     0.0
+ 9.8782     962.0
+ 18.236     2394.0
+ 49.934     5188.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for R-236fa of Pan et al. (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Pan, J., Rui, X., Zhao, X., and Qiu, L., 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  9.175                 1.0      !ai, ti for [ai*log(tau**ti)] terms
+-17.5984116945361393    0.0      !aj, ti for [ai*tau**ti] terms
+  8.8715179690698527    1.0      !aj, ti for [ai*tau**ti] terms
+  9.8782     962.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  18.236     2394.0
+  49.934     5188.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for R-236fa.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Pan, J., Rui, X., Zhao, X., and Qiu, L., 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  3  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 9.175             1.0                 !ai, ti for [ai*log(tau**ti)] terms
+-17.5983848631     0.0                 !aj, ti for [ai*tau**ti] terms
+ 8.8715044883      1.0
+ 9.8782           -2.4166603864        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 18.236           -6.0140176351
+ 49.934           -13.0328836637
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+BWR     !MBWR equation of state for R-236fa of Outcalt and McLinden (1995).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Outcalt, S.L. and McLinden, M.O.,
+          ? "An equation of state for the thermodynamic properties of R236fa,"
+          ? NIST report to sponsor (U.S. Navy, David Taylor Model Basin) under
+          ? contract N61533-94-F-0152, 1995.
+          ?
+          ?The uncertainties are 1% in density, 1% in vapor pressure, and 5% in
+          ? heat capacities.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          179.52             !Lower temperature limit [K]
+          500.0              !Upper temperature limit [K]
+          40000.0            !Upper pressure limit [kPa]
+          11.30              !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          152.0393                               !Molar mass [g/mol]
+          179.52                                 !Triple point temperature [K]
+          0.162                                  !Pressure at triple point [kPa]
+          11.29                                  !Density at triple point [mol/L]
+          271.71                                 !Normal boiling point temperature [K]
+          0.37721                                !Acentric factor
+          398.07        3200.0       3.626       !Tc [K], pc [kPa], rhoc [mol/L]
+          398.07                     3.626       !Reducing parameters [K, mol/L]
+          3.626                                  !gamma
+          0.08314471                             !Gas constant [L-bar/mol-K]
+                32       1                       !Nterm, Ncoeff per term
+          -0.0661121874831       8.61763902745        -233.732255968
+           43748.6232843        -5396777.61508        -0.00757588552002
+           10.7379563512        -10662.6588551        -103047.455432
+          -0.00194868091617      4.38365228107        -1112.0784388
+          -0.263710051508        47.7521163113         1978.04035098
+          -4.85710898935         0.144821196401       -22.1059322936
+           0.926270169913        5779206.66161        -985511065.626
+           197199.808018         0.319420123094e+10    7929.46107314
+          -693606.29561          84.9836259084         2097020.51124
+           1.10600369167         95.3714711849        -0.00881815206562
+           9.73194908842        -935.516922205
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for R-236fa of Outcalt & McLinden (1995).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Outcalt, S.L. and McLinden, M.O.,
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     1.0        !Reducing parameters for T, Cp0
+          3 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           53.4662555        0.0
+           0.228092134       1.0
+           0.0000352999168   2.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Propane reference); fitted to data for R-236fa.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?THERMAL CONDUCTIVITY
+? The ECS parameters for thermal conductivity were based in part on the data of:
+? Perkins, R., Cusco, L., Howley, J., Laesecke, A., Matthes, S., and Ramires, M.L.V., "Thermal Conductivities of Alternatives to CFC-11 for Foam Insulation," J. Chem. Eng. Data, 46(2):428-432, 2001.  doi: 10.1021/je990337k
+? Geller, V., Bivens, D.B., and Yokozeki, A., "Transport Properties and Surface Tension of Hydrofluorocarbons HFC236fa and HFC 245fa," Proc. 20th Int. Congress of Refrig, IIR/IIF, Sydney, 1999.
+? Perkins, R., NIST Div. 838.07, 325 Broadway, Boulder CO 80305, perkins@boulder.nist.gov, personal communication, 2002.
+? Average absolute deviations of the fit from the experimental data are:
+? Perkins, 2001: 1.15%; Geller: 13.89%; Perkins, 2002: 0.36%.
+? Overall: 1.41%.
+?
+?VISCOSITY
+? The ECS parameters for viscosity were based in part on the data of:
+? Meng, X., Zhang, J., and Wu, J., "Compressed Liquid Viscosity of 1,1,1,3,3-Pentafluoropropane (R245fa) and 1,1,1,3,3,3-Hexafluoropropane (R236fa)," J. Chem. Eng. Data, 56:4956-4964, 2011. doi: 10.1021/je200854k
+? Laesecke, A. and Defibaugh, D.R., "Viscosity of 1,1,1,2,3,3-Hexafluoropropane and 1,1,1,3,3,3-Hexafluoropropane at Saturated-Liquid Conditions from 262 K to 353 K," J. Chem. Eng. Data, 41(1):59-62, 1996. doi: 10.1021/je950206t
+? Average absolute deviations of the fit from the experimental data are:
+? Laesecke: 0.52%; Meng: 0.34%.
+?
+?The Lennard-Jones parameters were estimated.
+?
+!```````````````````````````````````````````````````````````````````````````````
+179.52             !Lower temperature limit [K]
+500.0              !Upper temperature limit [K]
+60000.0            !Upper pressure limit [kPa]
+11.30              !Maximum density [mol/L]
+FEQ PROPANE.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.5644             !Lennard-Jones coefficient sigma [nm] for ECS method !from scaling R134a
+307.24             !Lennard-Jones coefficient epsilon/kappa [K] for ECS method !from scaling R134a
+2  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.00100946    0. 0. 0.  !Coefficient, power of T, spare1, spare2
+ 1.21255e-6    1. 0. 0.  !Coefficient, power of T, spare1, spare2
+3  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 1.08017       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.026407      0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+ 0.00605762    0. 2. 0.  !Coefficient, power of Tr, power of Dr, spare
+2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 1.29118       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.0785568     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for R-236fa of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.209e-9           !Xi0 (amplitude) [m]
+0.060              !Gam0 (amplitude) [-]
+0.641e-9           !Qd_inverse (modified effective cutoff parameter) [m]; generic number, not fitted to data
+597.105            !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for R-236fa of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+398.07             !Critical temperature used in fit (dummy)
+0.05389   1.249    !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for R-236fa of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+398.07  3200.0     !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+-8.1978    1.0
+ 3.5942    1.5
+-3.7047    2.0
+-5.5891    4.8
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for R-236fa of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+398.07  3.626      !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+ 8.0698    0.5
+-27.224    0.8
+ 64.951    1.1
+-77.118    1.4
+ 49.269    1.8
+-15.134    2.2
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for R-236fa of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+398.07  3.626      !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-3.5310    0.425
+-7.9365    1.35
+-26.088    3.5
+-70.949    7.2
+-173.18    15.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

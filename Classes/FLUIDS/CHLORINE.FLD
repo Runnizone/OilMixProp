@@ -1,0 +1,393 @@
+Chlorine             !Short name
+7782-50-5            !CAS number
+Chlorine             !Full name
+Cl2                  !Chemical formula {Cl2}
+Chlorine             !Synonym
+70.906               !Molar mass [g/mol]
+172.17               !Triple point temperature [K]
+239.198              !Normal boiling point [K]
+416.8654             !Critical temperature [K]
+7642.4               !Critical pressure [kPa]
+8.06                 !Critical density [mol/L]
+0.070                !Acentric factor
+0.                   !Dipole moment [Debye]; Reid, Prausnitz, & Poling, McGraw-Hill (1987)
+NBP                  !Default reference state
+10.0                 !Version number
+1017                 !UN Number                                                 :UN:
+other                !Family                                                    :Family:
+0.0                  !Heating value (upper) [kJ/mol]                            :Heat:
+1S/Cl2/c1-2                               !Standard InChI String                :InChi:
+KZBUYRJDOAKODT-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+828f1c80                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 01-05-04 EWL, Original version.
+! 07-27-15  SH, Add Herrig et al. equation of state.
+! 11-15-15 MLH, Add preliminary surface tension, viscosity, thermal conductivity.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for chlorine of Herrig et al. (2018).
+:TRUECRITICALPOINT:  416.8654   7.949829      !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., Thol, M., and Span, R.,
+? to be submitted to J. Phys. Chem., 2018.
+?
+?In the liquid phase, homogeneous densities can be obtained from the EOS with an
+? uncertainty of 0.1 %, wtih slightly higher uncertainties close to the phase
+? boundary.  Homogeneous gas densities are represented within 0.25 %. The EOS
+? represents the most accurate experimental speed-of-sound data in the gas phase
+? with deviations within 0.05 %. Due to the limited experimental database, the
+? estimated uncertainty of calculated sound speeds in the liquid phase is 0.6 %.
+? The uncertainty of calculated vapor pressures is 0.4 % at temperatures up to
+? 275 K and 1 % at higher temperatures up 320 K. The uncertainties for all
+? properties increase at higher temperatures where there are no reliable
+? experimental data.
+?
+!```````````````````````````````````````````````````````````````````````````````
+172.17             !Lower temperature limit [K]
+440.               !Upper temperature limit [K]
+20000.             !Upper pressure limit [kPa]
+24.61              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+70.906                                 !Molar mass [g/mol]
+172.17                                 !Triple point temperature [K]
+1.3808                                 !Pressure at triple point [kPa]
+24.6                                   !Density at triple point [mol/L]
+239.198                                !Normal boiling point temperature [K]
+0.070                                  !Acentric factor
+416.8654      7642.4       8.06        !Tc [K], pc [kPa], rhoc [mol/L]
+416.8654                   8.06        !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  10  4   5 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.0245017    1.0     4.  0.          !a(i),t(i),d(i),l(i)
+  0.9132904    0.196   1.  0.
+ -1.72309      1.      1.  0.
+ -0.3359344    1.08    2.  0.
+  0.1200495    0.39    3.  0.
+ -1.214889     1.64    1.  2.
+ -0.10167      3.2     3.  2.
+  0.6196819    1.32    2.  1.
+ -0.6578512    2.163   2.  2.
+ -0.009159452  0.93    7.  1.
+  1.909418     0.872   1.  2. 2.    -0.969    -1.22    1.142   0.88     0. 0. 0.
+ -0.07163412   2.08    1.  2. 2.    -1.89     -6.8     1.22    0.73     0. 0. 0.
+ -0.1893345    1.6     3.  2. 2.    -1.32     -3.5     1.552   0.28     0. 0. 0.
+ -0.5698469    1.37    2.  2. 2.    -1.012    -1.276   1.135   0.863    0. 0. 0.
+ -0.8964496    1.05    2.  2. 2.    -0.98     -1.6     0.754   0.554    0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for chlorine of Herrig et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., Thol, M., and Span, R., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 3.5        0.0
+ 1.0256     800.0
+ 0.067756   3000.0
+ 0.14068    8200.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for chlorine of Herrig et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., Thol, M., and Span, R., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  2.5                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -3.9539013640553815    0.0      !aj, ti for [ai*tau**ti] terms
+  3.8399048397930695    1.0      !aj, ti for [ai*tau**ti] terms
+  1.0256     800.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  0.067756   3000.0
+  0.14068    8200.0
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for chlorine of Bonsen (2002).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Bonsen (2002)
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          172.12             !Lower temperature limit [K]
+          600.               !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          24.45              !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          70.906                                 !Molar mass [g/mol]
+          172.12                                 !Triple point temperature [K]
+          1.4                                    !Pressure at triple point [kPa]
+          24.4                                   !Density at triple point [mol/L]
+          239.1                                  !Normal boiling point temperature [K]
+          0.174                                  !Acentric factor
+          417.0         9700.0       8.1375342   !Tc [K], pc [kPa], rhoc [mol/L]
+          417.0                      8.1375342   !Reducing parameters [K, mol/L]
+          8.314                                  !Gas constant [J/mol-K]
+            12  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           0.9178215309        0.25      1.  0.  !a(i),t(i),d(i),l(i)
+          -2.301431792         1.125     1.  0.
+           0.4517970045        1.5       1.  0.
+          -0.04310372015       1.375     2.  0.
+           0.07777809415       0.25      3.  0.
+           0.0001900921704     0.875     7.  0.
+           0.006949800797      0.625     2.  1.
+          -0.02150536297       1.75      5.  1.
+          -0.2178807183        3.625     1.  2.
+           0.0168814077        3.625     4.  2.
+           0.01549021349      14.5       3.  3.
+           0.01722723733      12.0       4.  3.
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for chlorine.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Bonsen
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.314      !Reducing parameters for T, Cp0
+          4 1   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           2.9711935         0.
+           0.00498353462     1.
+          -0.000004177662906 2.
+           0.000000001318031484 3.
+          -0.812960306       2014.02967
+
+
+@AUX    !---Auxiliary function for Cp0
+CP2     !Ideal gas heat capacity function for chlorine.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Martin and Longpre, JCED, 29:466-473, 1984.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     4.184      !Reducing parameters for T, Cp0
+          4 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           10.265952         0.0
+          -0.00078085907     1.0
+          -709.60655        -1.0
+           40821.249        -2.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Propane reference) fit to limited data for chlorine.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?THERMAL CONDUCTIVITY
+? Chaikin, A.M. and Markevich, A.M., Zh. Fiz. Khim., 32:116-20, 1958.
+? Ho, C.Y., Powell, R.W., and Liley, P.E., "Thermal Conductivity of the Elements," J. Phys. Chem. Ref. Data, 1(2):279, 1972.
+?
+?Estimated uncertainty in the gas phase is <10% based on comparisons with the data
+? of Chaikin and Markevich.  Estimated uncertainty in the liquid phase is difficult
+? to assess due to lack of experimental data, estimated to be <10% along saturation
+? based on agreement with recommended values of Ho et al.
+?
+?VISCOSITY
+? Steacie, E.W.R. and Johnson, F.M.G., "The Viscosities of the Liquid Halogens," J. Am. Chem. Soc., 47:754-762, 1925.
+?
+?Estimated uncertainty in the gas phase is <10%, based on comparisons with the
+? data of Trautz, M. and Ruf, F., Ann. Phys., 20(5):127, 1934.  Estimated uncertainty
+? along the liquid saturation line is <10%, based on comparisons with the data of Steacie and Johnson.
+?
+?The Lennard-Jones parameters were taken from Hirschfelder, J.O., Curtiss, C.F., and Bird, R.B., "Molecular Theory of Gases and Liquids," John Wiley and Sons, Inc., New York, 1245 pp, 1954. doi: 10.1002/pol.1955.120178311
+?
+!```````````````````````````````````````````````````````````````````````````````
+172.17             !Lower temperature limit [K]
+440.0              !Upper temperature limit [K]
+20000.0            !Upper pressure limit [kPa]
+24.61              !Maximum density [mol/L]
+FEQ PROPANE.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.44               !Lennard-Jones coefficient sigma [nm]
+257.0              !Lennard-Jones coefficient epsilon/kappa [K]
+1  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.0029        0. 0. 0.  !Coefficient, power of T, spare1, spare2
+2  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 1.269         0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.08947       0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 1.24341       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.0812555     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for chlorine of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.179e-9           !Xi0 (amplitude) [m]
+0.056              !Gam0 (amplitude) [-]
+0.486e-9           !Qd_inverse (modified effective cutoff parameter) [m]; generic number, not fitted to data
+625.30             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for chlorine of Huber (2018).
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?Fit to experimental data of:
+? Johnson, F.M.G. and McIntosh, D., "Liquid Chlorine," J. Am. Chem. Soc., 31(10):1138-1144, 1909.
+?
+?Estimated uncertainty is 5%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+416.8654           !Critical temperature used in fit (dummy)
+0.0783601 1.28083  !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for chlorine of Herrig et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+416.8654  7642.4   !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-6.1289    1.0
+ 1.5112    1.5
+-1.4523    2.0
+-5.6038    5.94
+ 3.9923    7.0
+-1.2651    14.8
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for chlorine of Herrig et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+416.8654 8.06      !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+ 0.9662    0.234
+ 1.7744    0.68
+-0.23081   1.3
+ 0.47213   3.35
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for chlorine of Herrig et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+416.8654  8.06     !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-1.7673    0.3
+-5.173     0.994
+-12.539    2.7
+-37.552    6.155
+-64.404    12.4
+-151.49    24.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

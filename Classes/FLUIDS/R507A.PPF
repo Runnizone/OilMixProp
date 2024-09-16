@@ -1,0 +1,191 @@
+R507A                !Short name
+507A-507A            !CAS number
+50% R125/50% R143a   !Full name
+R507A                !Chemical formula
+R507A                !Synonym
+98.8592              !Molar mass [g/mol]
+200.0                !Triple point temperature [K]
+226.41               !Normal boiling point [K]
+343.765              !Critical temperature [K]
+3704.9               !Critical pressure [kPa]
+4.964                !Critical density [mol/L]
+0.286                !Acentric factor
+-1.                  !Dipole moment [Debye]
+IIR                  !Default reference state
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+halocb               !Family                                                    :Family:
+????                 !Heating value (upper) at 25 C [kJ/mol] (ISO 6976:2016)    :Heat:
+????                                      !IUPAC Int. Chemical Identifier       :InChi:
+????                                      !InChi Key                            :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+507a507a                                  !Hash number from InChI Key           :Hash:
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 11-14-02 EWL, original version
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for R-507A of Lemmon (2003).
+:DOI: 10.1023/A:1025048800563
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W.,
+? "Pseudo Pure-Fluid Equations of State for the Refrigerant Blends R-410A,
+? R-404A, R-507A, and R-407C,"
+? Int. J. Thermophys., 24(4):991-1006, 2003.
+?
+?The estimated uncertainty of density values calculated with the
+? equation of state is 0.1%.  The estimated uncertainty of calculated
+? heat capacities and speed of sound values is 0.5%.  Uncertainties of
+? bubble and dew point pressures are 0.5%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+200.0              !Lower temperature limit [K]
+500.0              !Upper temperature limit [K]
+50000.0            !Upper pressure limit [kPa]
+14.13              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+98.8592                                !Molar mass [g/mol]
+200.0                                  !Triple point temperature [K]
+23.23                                  !Pressure at triple point [kPa]
+14.13                                  !Density at triple point [mol/L]
+226.41                                 !Normal boiling point temperature [K]
+0.286                                  !Acentric factor
+343.765       3704.9      4.964        !Tc [K], pc [kPa], rhoc [mol/L]
+343.765                   4.964        !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  21  4    0 0   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 6.24982         0.692   1.   0.       !a(i),t(i),d(i),l(i)
+-8.07855         0.943   1.   0.
+ 0.0264843       5.8     1.   0.
+ 0.286215        0.77    2.   0.
+-0.00507076      5.84    2.   0.
+ 0.0109552       0.24    4.   0.
+ 0.00116124      0.69    6.   0.
+ 1.38469         2.0     1.   1.
+-0.922473        3.0     1.   1.
+-0.0503562       7.0     1.   1.
+ 0.822098        2.2     2.   1.
+-0.277727        4.3     2.   1.
+ 0.358172        2.7     3.   1.
+-0.0126426       1.2     4.   1.
+-0.0060701       1.23    7.   1.
+-0.0815653      12.0     2.   2.
+-0.0233323       6.0     3.   2.
+ 0.0352952       8.5     4.   2.
+ 0.0159566      11.5     4.   2.
+ 0.0755927      13.0     2.   3.
+-0.0542007      17.0     3.   3.
+ 0.0170451      16.2     5.   3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for R507A of Lemmon (2003).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0   8.314472     !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 1.568        0.25
+ 0.95006    364.0
+ 4.1887     815.0
+ 5.5184    1768.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for R507A.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 3  3 0 0  0 0 0  !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+ -1.0              1.0            !ai, ti for [ai*log(tau**ti)] terms
+  9.93541          0.0            !aj, ti for [ai*tau**ti] terms
+  7.9985           1.0
+-21.6054          -0.25
+  0.95006         -1.05886        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+  4.1887          -2.37081
+  5.5184          -5.14305
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for R507A of Lemmon (2003).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., preliminary equation, 2003.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+2                  !Number of terms in surface tension model
+343.765            !Critical temperature used in fit (dummy)
+0.06701   1.3066   !Sigma0 and n
+-0.04297  2.3145
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for R507A of Lemmon (2003)
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+343.765   3704.9   !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+-7.5459   1.0
+ 2.338    1.5
+-2.237    2.1
+-4.1535   4.7
+
+
+#PL    !---Liquid pressure---
+PL5    !Liquid pressure equation for R507A of Lemmon (2003)
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+343.765   3704.9   !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+-7.4853   1.0
+ 2.0115   1.5
+-2.0141   2.2
+-3.7763   4.6
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

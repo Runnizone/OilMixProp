@@ -1,0 +1,415 @@
+R236ea               !Short name
+431-63-0             !CAS number
+1,1,1,2,3,3-Hexafluoropropane !Full name
+CF3CHFCHF2           !Chemical formula {C3H2F6}
+HFC-236ea            !Synonym
+152.0384             !Molar mass [g/mol]
+170.0                !Triple point temperature [K] predicted value, est unc 5%
+279.322              !Normal boiling point [K]
+412.44               !Critical temperature [K]
+3420.0               !Critical pressure [kPa]
+3.71616644           !Critical density [mol/L]
+0.369                !Acentric factor
+1.129                !Dipole moment [Debye]; Goodwin & Mehl (1997) IJT 18:795-806
+IIR                  !Default reference state
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+halocb               !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1410.                !GWP (WMO 2010)                                            :GWP:
+1S/C3H2F6/c4-1(2(5)6)3(7,8)9/h1-2H        !Standard InChI String                :InChi:
+FYIRUPZTYPILDH-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+93fd5d40                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 06-10-96 EWL, Original version.
+! 05-21-02 MLH, Add transport fits.
+! 04-19-04 MLH, Update transport references.
+! 08-17-10 IDC, Add ancillary equations.
+! 10-21-10 MLH, Add predicted triple point temperature from DIPPR jan2010 sponsor version.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 12-17-12 EWL, Add equation of state of Rui et al.
+! 03-07-13 MLH, Refit ECS transport with new EOS of Rui.
+! 11-19-17 MLH, Revise critical enhancement.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for R-236ea of Rui et al. (2013).
+:TRUECRITICALPOINT:  412.409    3.747823      !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1016/j.fluid.2012.12.026
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Rui, X., Pan, J., and Wang, Y.,
+? "An Equation of State for Thermodynamic Properties of
+? 1,1,1,2,3,3-Hexafluoropropane (R236ea),"
+? Fluid Phase Equilib., 341:75-85, 2013. doi: 10.1016/j.fluid.2012.12.026
+?
+?The uncertainties in density of the equation of state are estimated to be 0.1%
+? in the compressed liquid region, and 0.5% in the vapor region.  The
+? uncertainties in vapor pressure are 0.2% at temperatures from 280 K to 370 K,
+? and 0.4% at temperatures outside of this range.  The uncertainty in speed of
+? sound is 0.1% in the vapor region and 2% in the liquid region.
+?
+!```````````````````````````````````````````````````````````````````````````````
+240.0              !Lower temperature limit [K]
+420.0              !Upper temperature limit [K]
+6000.0             !Upper pressure limit [kPa]
+11.71              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+152.0384                               !Molar mass [g/mol]
+170.0                                  !Triple point temperature [K] predicted value, est unc 5%
+0.02                                   !Pressure at triple point [kPa]
+11.7                                   !Density at triple point [mol/L]
+279.322                                !Normal boiling point temperature [K]
+0.369                                  !Acentric factor
+412.44        3420.0       3.71616644  !Tc [K], pc [kPa], rhoc [mol/L]
+412.44                     3.71616644  !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  10  4   5 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.051074     1.0     4.  0.          !a(i),t(i),d(i),l(i)
+  2.5584       0.264   1.  0.
+ -2.9180       0.5638  1.  0.
+ -0.71485      1.306   2.  0.
+  0.15534      0.2062  3.  0.
+ -1.5894       2.207   1.  2.
+ -0.784        2.283   3.  2.
+  0.85767      1.373   2.  1.
+ -0.67235      2.33    2.  2.
+ -0.017953     0.6376  7.  1.
+  1.3165       1.08    1.  2. 2.    -1.019    -1.30    1.13    0.7119   0. 0. 0.
+ -0.42023      1.67    1.  2. 2.    -1.341    -2.479   0.6691  0.9102   0. 0. 0.
+ -0.28053      3.502   3.  2. 2.    -1.034    -1.068   0.465   0.678    0. 0. 0.
+ -1.4134       4.357   3.  2. 2.    -5.264   -79.850   1.280   0.7091   0. 0. 0.
+ -0.0000062617 0.6945  2.  2. 2.   -24.44    -49.06    0.8781  1.727    0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for R-236ea of Rui et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Rui, X., Pan, J., and Wang, Y., 2013.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+1 4   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 3.762      0.0
+ 0.7762     144.0
+ 10.41      385.0
+ 12.18      1536.0
+ 3.332      7121.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for R-236ea of Rui et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Rui, X., Pan, J., and Wang, Y., 2013.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  4  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  2.762                 1.0      !ai, ti for [ai*log(tau**ti)] terms
+-14.1214509664740717    0.0      !aj, ti for [ai*tau**ti] terms
+ 10.2355719335625732    1.0      !aj, ti for [ai*tau**ti] terms
+  0.7762     144.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  10.41      385.0
+  12.18      1536.0
+  3.332      7121.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for R-236ea.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Rui, X., Pan, J., and Wang, Y., 2013.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  4  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 2.762             1.0                 !ai, ti for [ai*log(tau**ti)] terms
+-14.121424135      0.0                 !aj, ti for [ai*tau**ti] terms
+ 10.2355589225     1.0
+ 0.7762           -0.3491416933        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 10.41            -0.9334691107
+ 12.18            -3.7241780623
+ 3.332            -17.2655416545
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+ECS     !Extended Corresponding States model w/ T- and rho-dependent shape factors for R-236ea.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Huber, M.L. and Ely, J.F.,
+          ? "A predictive extended corresponding states model for pure and mixed
+          ? refrigerants including an equation of state for R134a,"
+          ? Int. J. Refrigeration, 17(1):18-31, 1994. doi: 10.1016/0140-7007(94)90083-3
+          ?
+          ?ECS parameters fitted by Eric W. Lemmon, NIST, 06-10-97
+          ?DATA SOURCES
+          ? Defibaugh, D.R., Gillis, K.A., Moldover, M.R., Schmidt, J.W., and Weber, L.A., Thermodynamic properties of CF3-CF-CHF2, 1,1,1,2,3,3-hexafluoropropane. Fluid Phase Equilibria, 122:131-155 (1996). doi: 10.1016/0378-3812(96)03003-8
+          ? Average absolute deviations of the fit from the experimental data are:
+          ? PVT:  0.07%; Psat:  0.05%;
+          ?
+          ?The uncertainty in density is 0.3% at temperatures up to 360 K, and 1% at
+          ? higher temperatures.  The uncertainty in vapor pressure is 1.5% from the
+          ? triple point temperature to 270 K, and 0.5% from 270 K to the critical point
+          ? temperature.  The vapor phase uncertainty for the speed of sound and isobaric
+          ? heat capacity is less than 0.5%.  The uncertainties of heat capacities and
+          ? speeds of sound in the liquid phase are unknown due to a lack of experimental
+          ? data.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          240.0              !Lower temperature limit [K]
+          500.0              !Upper temperature limit [K]
+          60000.0            !Upper pressure limit [kPa]
+          10.465             !Maximum density [mol/L]
+          CP1                !Pointer to Cp0 model
+          R134A.FLD
+          BWR                !Pointer to reference fluid model
+          0.32668            !Acentric factor for R134a used in shape factor correlation
+          0.259147           !Critical compressibility for R134a used in correlation
+          0.3794             !Acentric factor for fluid used in shape factor correlation
+          412.44             !Critical temperature [K]
+          3501.98            !Critical pressure [kPa]
+          3.70302            !Critical density [mol/L]
+          2                  !Number of temperature coefficients for 'f' shape factor
+          -0.677869920    0. !Alpha1 of Huber & Ely
+          -0.521826510    1. !Alpha2 (log(Tr) term)
+          1                  !Number of density coefficients for 'f' shape factor
+           0.0113833347   1. !Rho coefficient and power in temperature
+          3                  !Number of temperature coefficients for 'h' shape factor
+           1.42369159     0. !Beta1 of Huber & Ely
+           0.0870214752   1. !Beta2 (log(Tr) term)
+           0.0195298641   1.
+          0                  !Number of density coefficients for 'h' shape factor
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for R-236ea of Outcalt & McLinden (1995).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Defibaugh, D.R., Gillis, K.A., Moldover, M.R., Schmidt, J.W., and Weber, L.A.,
+          ? "Thermodynamic properties of CF3-CF-CHF2, 1,1,1,2,3,3-hexafluoropropane,"
+          ? Fluid Phase Equilibria, 122:131-155, 1996.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.314471   !Reducing parameters for T, Cp0
+          3 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           5.30694    0.0
+           0.03973    1.0
+          -0.00001859 2.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (R134a reference); fitted to data for R-236ea.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?THERMAL CONDUCTIVITY
+? The ECS parameters for thermal conductivity were based in part on the data of:
+? Perkins, R., Cusco, L., Howley, J., Laesecke, A., Matthes, S., and Ramires, M.L.V., "Thermal Conductivities of Alternatives to CFC-11 for Foam Insulation," J. Chem. Eng. Data, 46(2):428-432, 2001.  doi: 10.1021/je990337k
+? Perkins, R., NIST Div. 838.07, 325 Broadway, Boulder CO 80305, perkins@boulder.nist.gov, personal communication, 2002.
+? Average absolute deviations of the fit from the experimental data are:
+? Perkins, 2001: 1.52%; Perkins, 2002: 1.17%.
+?
+?VISCOSITY
+? The ECS parameters for viscosity were based in part on the data of:
+? Laesecke, A. and Defibaugh, D.R., "Viscosity of 1,1,1,2,3,3-Hexafluoropropane and 1,1,1,3,3,3-Hexafluoropropane at Saturated-Liquid Conditions from 262 K to 353 K," J. Chem. Eng. Data, 41(1):59-62, 1996. doi: 10.1021/je950206t
+? Average absolute deviations of the fit from the experimental data are:
+? Laesecke: 0.56%.
+?
+?The Lennard-Jones parameters were estimated.
+?
+!```````````````````````````````````````````````````````````````````````````````
+240.0              !Lower temperature limit [K] (based on Ttp/Tc of ref fluid)
+500.0              !Upper temperature limit [K]
+60000.0            !Upper pressure limit [kPa]
+20.0               !Maximum density [mol/L] (limit of ECS-thermo fit)
+FEQ R134A.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.5604             !Lennard-Jones coefficient sigma [nm] for ECS method
+318.33             !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+3  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.0054277     0. 0. 0.  !Coefficient, power of T, spare1, spare2
+-2.33425e-5    1. 0. 0.  !Coefficient, power of T, spare1, spare2
+ 3.46098e-8    2. 0. 0.  !Coefficient, power of T, spare1, spare2
+3  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 1.19985       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.0906827     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+ 0.0128243     0. 2. 0.  !Coefficient, power of Tr, power of Dr, spare
+2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 0.961712      0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+ 0.0337897     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for R-236ea of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.208e-9           !Xi0 (amplitude) [m]
+0.06               !Gam0 (amplitude) [-]
+0.636e-9           !Qd_inverse (modified effective cutoff parameter) [m]; generic number, not fitted to data
+618.66             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for R-236ea of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+2                  !Number of terms in surface tension model
+412.44             !Critical temperature used in fit (dummy)
+ 0.306974  1.12614 !Sigma0 and n
+-0.247277  1.09899
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for R-236ea of Lemmon (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., 2012.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+412.44  3420.0     !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+-7.9095    1.0
+ 2.3374    1.5
+-2.6453    2.15
+-5.7058    4.75
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for R-236ea of Lemmon (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., 2012.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+412.44  3.7162     !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+ 1.6074    0.31
+ 1.5021    0.75
+-1.1060    1.3
+ 0.91146   1.9
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for R-236ea of Lemmon (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., 2012.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+412.44  3.7162     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-2.7426    0.376
+-6.2268    1.1
+-15.109    2.7
+-49.524    5.5
+-114.11    11.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

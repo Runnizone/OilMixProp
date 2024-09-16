@@ -1,0 +1,447 @@
+p-Xylene             !Short name
+106-42-3             !CAS number
+1,4-Dimethylbenzene  !Full name
+C8H10                !Chemical formula {C8H10}
+p-Xylene             !Synonym
+106.165              !Molar mass [g/mol]
+286.4                !Triple point temperature [K]
+411.470              !Normal boiling point [K]
+616.168              !Critical temperature [K]
+3531.5               !Critical pressure [kPa]
+2.69392              !Critical density [mol/L]
+0.324                !Acentric factor
+0.0                  !Dipole moment [Debye]; (exactly zero due to symmetry)  van Arkel, A.E., P. Meerburg, and C.R. van der Handel, Rec. Trav. Chim., 61, 767-770 (1942).
+NBP                  !Default reference state
+10.0                 !Version number
+1307                 !UN Number                                                 :UN:
+aromatic             !Family                                                    :Family:
+4593.938             !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C8H10/c1-7-3-5-8(2)6-4-7/h3-6H,1-2H3   !Standard InChI String                :InChi:
+URLKBWYHVLBVBO-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+f174a9b0  (octane)                        !Alternative fluid for mixing rules   :AltID:
+01b0e650                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 03-12-09 EWL, Original version.
+! 04-01-13  SH, Add ancillary equations.
+! 04-06-13 EWL, Add dipole moment.
+! 04-17-14 EWL, Add surface tension coefficients of Mulero et al. (2014).
+! 06-17-14 MLH, Add preliminary transport.
+! 12-08-14 MLH, Add thermal conductivity model of Mylona et al. (2014).
+! 02-21-17 MLH, Add viscosity model of Balogun et al. (2015).
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for p-xylene of Zhou et al. (2012).
+:TRUECRITICALPOINT:  616.168    2.69392       !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1063/1.3703506
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Zhou, Y., Lemmon, E.W., and Wu, J.,
+? "Thermodynamic Properties of o-Xylene, m-Xylene, p-Xylene, and Ethylbenzene,"
+? J. Phys. Chem. Ref. Data, 41, 023103, 2012.
+?
+?The uncertainty in vapor pressure of the equation of state for p-xylene is
+? 0.2% above 300 K. The uncertainties in saturated liquid density are 0.02%
+? between 290 K and 350 K, and 0.2% elsewhere, due to a lack of reliable
+? experimental data.  The uncertainties in density are 0.2% in the liquid
+? region and 1.0% elsewhere, including the critical and vapor regions.  The
+? uncertainty in sound speed is 0.3% in the liquid region, and the
+? uncertainty in heat capacity is 1.0%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+286.4              !Lower temperature limit [K]
+700.0              !Upper temperature limit [K]
+200000.0           !Upper pressure limit [kPa]
+8.166              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+106.165                                !Molar mass [g/mol]
+286.4                                  !Triple point temperature [K]
+0.580                                  !Pressure at triple point [kPa]
+8.165                                  !Density at triple point [mol/L]
+411.470                                !Normal boiling point temperature [K]
+0.324                                  !Acentric factor
+616.168       3531.5       2.69392     !Tc [K], pc [kPa], rhoc [mol/L]
+616.168                    2.69392     !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  12  4   4 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.0010786811 1.0     5.  0.          !a(i),t(i),d(i),l(i)
+ -0.103161822  0.83    1.  0.
+  0.0421544125 0.83    4.  0.
+  1.47865376   0.281   1.  0.
+ -2.4266       0.932   1.  0.
+ -0.46575193   1.1     2.  0.
+  0.190290995  0.443   3.  0.
+ -1.06376565   2.62    1.  2.
+ -0.209934069  2.5     3.  2.
+  1.25159879   1.2     2.  1.
+ -0.951328356  3.0     2.  2.
+ -0.0269980032 0.778   7.  1.
+  1.37103180   1.13    1.  2. 2.    -1.179    -2.445   1.267   0.54944  0. 0. 0.
+ -0.494160616  4.5     1.  2. 2.    -1.065    -1.483   0.4242  0.7234   0. 0. 0.
+ -0.0724317468 2.2     3.  2. 2.    -1.764    -4.971   0.864   0.4926   0. 0. 0.
+ -3.69464746   2.0     3.  2. 2.   -13.675  -413.0     1.1465  0.8459   0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for p-xylene of Zhou et al. (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Zhou, Y., Lemmon, E.W., and Wu, J., 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+1 4   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 5.2430504  0.0
+ 5.2291378  414.0
+ 19.549862  1256.0
+ 16.656178  2649.0
+ 5.9390291  6681.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for p-xylene of Zhou et al. (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Zhou, Y., Lemmon, E.W., and Wu, J., 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  4  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  4.2430504             1.0      !ai, ti for [ai*log(tau**ti)] terms
+  5.9815277224498971    0.0      !aj, ti for [ai*tau**ti] terms
+ -0.5247807538556827    1.0      !aj, ti for [ai*tau**ti] terms
+  5.2291378  414.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  19.549862  1256.0
+  16.656178  2649.0
+  5.9390291  6681.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for p-xylene of Zhou et al. (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Zhou, Y., Lemmon, E.W., and Wu, J., 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  4  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 4.2430504         1.0                 !ai, ti for [ai*log(tau**ti)] terms
+ 5.9815241         0.0                 !aj, ti for [ai*tau**ti] terms
+-0.52477835        1.0
+ 5.2291378        -0.6718946781        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 19.549862        -2.0384051103
+ 16.656178        -4.2991521793
+ 5.9390291        -10.8428220875
+
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#ETA   !---Viscosity---
+VS6    !Pure fluid viscosity model for p-xylene of Balogun et al. (2015).
+:DOI: 10.1063/1.4908048
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Balogun, B., Riesco, N., and Vesovic, V.,
+? "Reference Correlation of the Viscosity of para-Xylene from the Triple Point to 673 K and up to 110 MPa,"
+? J. Phys. Chem. Ref. Data, 44, 013103, 2015.
+? doi: 10.1063/1.4908048
+?
+?The overall uncertainty of the proposed correlation varies from 0.5% for the viscosity of the
+? dilute gas and of liquid at ambient pressure to 5% for the viscosity at high pressures and
+? temperatures.
+?
+!```````````````````````````````````````````````````````````````````````````````
+286.4              !Lower temperature limit [K]
+700.0              !Upper temperature limit [K]
+110000.0           !Upper pressure limit [kPa]
+8.166              !Maximum density [mol/L]
+1                  !Number of terms associated with dilute-gas function
+CI3                !Pointer to reduced effective collision cross-section model
+1.0                !Lennard-Jones coefficient sigma [nm] not used here
+1.0                !Lennard-Jones coefficient epsilon/kappa [K] not used here
+1.0       1.0      !Reducing parameters for T, eta
+0.220055  1.0      !Chapman-Enskog term  0.021357*SQRT(MW)
+0                  !Number of terms for initial density dependence
+0 12 0 0 0 0       !# resid terms:  close-packed density;  simple poly; numerator of rational poly; denominator of rat. poly; numerator of exponential; denominator of exponential
+616.168   2.69392       1.0            !Reducing parameters for T, rho, eta
+ 35.779029    0.0    1.0       0.  0
+-47.491003   -1.0    1.0       0.  0
+ 11.80743    -2.0    1.0       0.  0
+ 15.337      -0.5    2.166667  0.  0
+ 122.919      0.0    2.166667  0.  0
+-282.329      0.0    2.666667  0.  0
+ 279.348      0.0    3.666667  0.  0
+-146.776      0.0    4.666667  0.  0
+ 28.361       0.0    5.666667  0.  0
+-0.004585     0.0   11.666667  0.  0
+-0.0004382   -0.5   11.666667  0.  0
+ 0.00002307  -0.5   15.666667  0.  0
+NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+#AUX   !---Auxiliary function for the collision integral
+CI3    !Collision integral model for p-xylene of Balogun et al. (2014).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Balogun, B., Riesco, N., and Vesovic, V., 2015.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+3                  !Number of terms
+-1.4933         0  !Coefficient, power of Tstar
+ 473.2         -1
+-57033.        -2
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC1    !Pure fluid thermal conductivity model for p-xylene of Mylona et al. (2014).
+:DOI: 10.1063/1.4901166
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mylona, S.K., Antoniadis, K.D., Assael, M.J. Huber, M.L., and Perkins, R.A.,
+? "Reference Correlation of the Thermal Conductivity of o-Xylene, m-Xylene,
+? p-Xylene, and Ethylbenzene from the Triple Point to 700 K and Moderate Pressures,"
+? J. Phys. Chem. Ref. Data, 48, 043104, 2014.
+?
+?The estimated uncertainty for thermal conductivity of liquid and supercritical
+? densities at temperatures from the triple point to 700 K is 3.6%, and 2.5% for the dilute gas.
+? Uncertainty in the critical region is much larger.
+?
+!```````````````````````````````````````````````````````````````````````````````
+286.4              !Lower temperature limit [K]
+700.0              !Upper temperature limit [K]
+200000.0           !Upper pressure limit [kPa]
+10.                !Maximum density [mol/L]
+7   3              !# terms for dilute gas function:  numerator, denominator
+ 616.168     0.001 !Reducing parameters for T, tcx
+-3.88568     0.
+ 29.4648     1.
+-81.5299     2.
+ 77.1534     3.
+ 7.55487     4.
+-3.8897      5.
+ 0.406892    6.
+ 0.00404188  0.
+-0.424893    1.
+ 1.0         2.
+ 10  0             !# terms for background gas function:  numerator, denominator
+616.168 2.69392 1. !Reducing parameters for T, rho, tcx
+-0.101022    0.  1.  0.
+ 0.224828    0.  2.  0.
+-0.1591      0.  3.  0.
+ 0.049949    0.  4.  0.
+-0.00562422  0.  5.  0.
+ 0.107531    1.  1.  0.
+-0.205499    1.  2.  0.
+ 0.150348    1.  3.  0.
+-0.0502584   1.  4.  0.
+ 0.00644051  1.  5.  0.
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for p-xylene of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.235e-9           !Xi0 (amplitude) [m]
+0.056              !Gam0 (amplitude) [-]
+0.71e-9            !Qd_inverse (modified effective cutoff parameter) [m]
+924.3              !Tref (reference temperature) [K]
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Propane reference); predictive mode for p-xylene.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+          ?Unpublished; uses method described in the following reference:
+          ?Huber, M.L., Laesecke, A., and Perkins, R.A.
+          ? "Model for the Viscosity and Thermal Conductivity of Refrigerants, Including
+          ? a New Correlation for the Viscosity of R134a,"
+          ? Ind. Eng. Chem. Res., 42(13):3163-3178, 2003. doi: 10.1021/ie0300880
+          ?
+          ?Estimated uncertainty for liquid viscosity at pressures to 110 MPa is 5% for 298<T<348 K.
+          ? Based on comparisons with the data of Kashiwagi, H., Makita, T. "Viscosity of Twelve Hydrocarbon Liquids in the Temperature Range 298-348 K at Pressures Up To 110 MPa," Int. J. Thermophys., 1982, 3, 289-305
+          ?
+          ?The Lennard-Jones parameters were estimated with the method of Chung.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          286.4              !Lower temperature limit [K]
+          700.0              !Upper temperature limit [K]
+          200000.0           !Upper pressure limit [kPa]
+          10.0               !Maximum density [mol/L]
+          FEQ PROPANE.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.5813             !Lennard-Jones coefficient sigma [nm] for ECS method (estimated)
+          489.3              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method (estimated)
+          1  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00132       0. 0. 0.  !Coefficient, power of T, spare1, spare2
+          3  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           0.312445906   0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+           0.403396269   0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+          -0.0603026419  0. 2. 0.  !Coefficient, power of Tr, power of Dr, spare
+          1  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.0           0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for p-xylene of Mulero et al. (2014).
+:DOI: 10.1063/1.4878755
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A. and Cachadiña, I.,
+? "Recommended Correlations for the Surface Tension of Several Fluids
+? Included in the REFPROP Program,"
+? J. Phys. Chem. Ref. Data, 43, 023104, 2014.
+? doi: 10.1063/1.4878755
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+616.168            !Critical temperature used in fit (dummy)
+0.0619    1.21     !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for p-xylene of Herrig (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., 2013.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+616.168 3531.5     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-7.7221    1.0
+ 1.5789    1.5
+-13.035    3.8
+ 18.453    4.6
+-11.345    5.5
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for p-xylene of Herrig (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., 2013.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+616.168 2.69392    !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+ 0.1783    0.15
+ 3.4488    0.5
+-2.3906    0.9
+ 1.5933    1.3
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for p-xylene of Herrig (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., 2013.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+616.168 2.69392    !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-6.17784   0.653
+-0.38825   0.17
+-19.0575   2.6
+-541.124   7.8
+ 1251.55   8.9
+-920.226   10.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

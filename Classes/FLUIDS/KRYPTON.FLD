@@ -1,0 +1,459 @@
+Krypton              !Short name
+7439-90-9            !CAS number
+Krypton              !Full name
+Kr                   !Chemical formula {Kr}
+R-784                !Synonym
+83.798               !Molar mass [g/mol]
+115.775              !Triple point temperature [K]
+119.73               !Normal boiling point [K]
+209.48               !Critical temperature [K]
+5525.0               !Critical pressure [kPa]
+10.85                !Critical density [mol/L]
+-0.000894            !Acentric factor
+0.0                  !Dipole moment [Debye]; (exactly zero for monatomic molecules)
+NBP                  !Default reference state
+10.0                 !Version number
+1056, 1970           !UN Number                                                 :UN:
+cryogen              !Family                                                    :Family:
+0.0                  !Heating value (upper) [kJ/mol]                            :Heat:
+1S/Kr                                     !Standard InChI String                :InChi:
+DNNSSWSSYDEUBZ-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+434e2a40  (ethane)                        !Alternative fluid for mixing rules   :AltID:
+d7c8c510                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 04-06-98 EWL, Original version.
+! 11-18-98 EWL, Add equation of state of Polt et al. (1992).
+! 07-11-00 EWL, Remove Juza equation and replace with Lemmon and Span equation.
+! 04-12-00 EWL, Update Lemmon and Span short EOS.
+! 05-20-01 EWL, Add sublimation line.
+! 03-29-04 EWL, Update Lemmon and Span short EOS.
+! 07-07-04 EWL, Update Tmax for transport equations.
+! 08-05-04 EWL, Add Harvey and Lemmon dielectric correlation.
+! 08-08-05 EWL, Change first coef. in melting line equation slightly to match EOS at Ttrp.
+! 01-30-07 EWL, Change triple point from 115.77 to 115.775 in accordance with Bedford et al., Metrologia, 33:133, 1996.
+! 07-01-10 CKL, Add ancillary equations.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 04-03-17 MLH, Revise thermal conductivity, viscosity.
+! 08-06-17 EWL, Change melting point at Ttrp to match triple point pressure of Lemmon and Span.
+! 12-11-17 MLH, Adjust dilute gas viscosity to match ref. value at 25 C from Berg and Moldover, JPCRD 41(4) 043104 (2012).
+! 02-15-18 MLH, Revise thermal conductivity to account for changes in viscosity made 12.11.17
+! 03-01-18 MLH, Revise cutoff in critical enhancement.
+! 04-02-18 MLH, Revise k to reflect bug fix due to different R values for internal contribution of thermal conductivity.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for krypton of Lemmon and Span (2006).
+:TRUECRITICALPOINT:  209.48    10.85          !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1021/je050186n
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R.,
+? "Short Fundamental Equations of State for 20 Industrial Fluids,"
+? J. Chem. Eng. Data, 51(3):785-850, 2006. doi: 10.1021/je050186n
+?
+?The equation of state is valid from the triple point to 750 K with
+? pressures to 200 MPa, although the uncertainties increase substantially
+? above 100 MPa. The uncertainties in density are typically 0.2% below 100
+? MPa, increasing to 1% at pressures up to 200 MPa. The uncertainty in vapor
+? pressure is 0.2% and the uncertainties in speed of sound are 0.01% in the
+? vapor phase (including supercritical conditions) at low pressures, 1% below
+? 20 MPa in the liquid phase, and 3% below 100 MPa at other state points.
+? The limited amount of heat capacity data show that the uncertainty is 1%
+? near the triple point, and uncertainties in heat capacities at other states
+? are probably within 2%, at least at pressures up to 20 MPa.
+?
+!```````````````````````````````````````````````````````````````````````````````
+115.775            !Lower temperature limit [K]
+750.0              !Upper temperature limit [K]
+200000.0           !Upper pressure limit [kPa]
+33.42              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+83.798                                 !Molar mass [g/mol]
+115.775                                !Triple point temperature [K]
+73.53                                  !Pressure at triple point [kPa]
+29.2                                   !Density at triple point [mol/L]
+119.73                                 !Normal boiling point temperature [K]
+-0.000894                              !Acentric factor
+209.48        5525.0      10.85        !Tc [K], pc [kPa], rhoc [mol/L]
+209.48                    10.85        !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  12  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 0.83561     0.25    1.  0.            !a(i),t(i),d(i),l(i)
+-2.3725      1.125   1.  0.
+ 0.54567     1.5     1.  0.
+ 0.014361    1.375   2.  0.
+ 0.066502    0.25    3.  0.
+ 0.0001931   0.875   7.  0.
+ 0.16818     0.625   2.  1.
+-0.033133    1.75    5.  1.
+-0.15008     3.625   1.  2.
+-0.022897    3.625   4.  2.
+-0.021454   14.5     3.  3.
+ 0.0069397  12.0     4.  3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for krypton of Lemmon and Span (2006).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+1 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 2.5        0.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for krypton of Lemmon and Span (2006).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  0  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  1.5                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -3.7506404605274408    0.0      !aj, ti for [ai*tau**ti] terms
+  3.7798013718120207    1.0      !aj, ti for [ai*tau**ti] terms
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for krypton.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  0  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 1.5               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+-3.7506412806      0.0                 !aj, ti for [ai*tau**ti] terms
+ 3.7798018435      1.0
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for krypton of Polt et al. (1992).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Polt, A., Platzer, B., and Maurer, G.,
+          ? "Parameter der thermischen Zustandsgleichung von Bender fuer 14
+          ? mehratomige reine Stoffe,"
+          ? Chem. Tech. (Leipzig), 44(6):216-224, 1992.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          115.775            !Lower temperature limit [K]
+          780.0              !Upper temperature limit [K]
+          375000.0           !Upper pressure limit [kPa]
+          33.55              !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          83.7                                   !Molar mass [g/mol]
+          115.775                                !Triple point temperature [K]
+          73.476                                 !Pressure at triple point [kPa]
+          29.249                                 !Density at triple point [mol/L]
+          119.73                                 !Normal boiling point temperature [K]
+          -0.0015                                !Acentric factor
+          209.4         5502.2      10.860215    !Tc [K], pc [kPa], rhoc [mol/L]
+          209.4                     10.860215    !Reducing parameters [K, mol/L]
+          8.3143                                 !Gas constant [J/mol-K]
+            22  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+          -0.402218741560      3.0       0.  0.  !a(i),t(i),d(i),l(i)
+           0.679250544381      4.0       0.  0.
+          -0.187886980286      5.0       0.  0.
+           0.603399982935      0.0       1.  0.
+          -1.77297564389       1.0       1.  0.
+           0.581208430222      2.0       1.  0.
+          -0.733585469788      3.0       1.  0.
+           0.164651929067      4.0       1.  0.
+          -0.0319923148922     0.0       2.  0.
+           0.333278228743      1.0       2.  0.
+           0.0219652478083     2.0       2.  0.
+           0.0751994891628     0.0       3.  0.
+          -0.212109737251      1.0       3.  0.
+          -0.00645185506524    0.0       4.  0.
+           0.04091756102       1.0       4.  0.
+           0.00169416098754    1.0       5.  0.
+           0.402218741560      3.0       0.  2.
+          -0.679250544381      4.0       0.  2.
+           0.187886980286      5.0       0.  2.
+           0.108265263587      3.0       2.  2.
+          -0.137102675805      4.0       2.  2.
+          -0.110549803007      5.0       2.  2.
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for krypton.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Polt, A., Platzer, B., and Maurer, G.,
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     83.7       !Reducing parameters for T, Cp0
+          1 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           0.2483363  0.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Nitrogen reference); predictive mode for krypton.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?Uncertainty of viscosity in the liquid phase is 30%, data unavailable.
+? Uncertainty of viscosity in the gas phase at atmospheric pressure is 3%.
+?
+?Uncertainty of thermal conductivity is 4% at pressures to 50 MPa.
+?
+?The Lennard-Jones parameters were taken from Reid, R.C., Prausnitz, J.M., and Poling, B.E., "The Properties of Gases and Liquids," 4th edition, New York, McGraw-Hill Book Company, 1987.
+?
+!```````````````````````````````````````````````````````````````````````````````
+115.775            !Lower temperature limit [K]
+750.0              !Upper temperature limit [K]
+100000.0           !Upper pressure limit [kPa]
+33.42              !Maximum density [mol/L]
+FEQ NITROGEN.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+BIG                !Large molecule identifier
+1.008291 0. 0. 0.  !Large molecule parameters
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.3655             !Lennard-Jones coefficient sigma [nm] for ECS method
+178.9              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+1  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.00132       0. 0. 0.  !Coefficient, power of T, spare1, spare2; dummy value - term is zero
+1  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 1.0           0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 0.962573      0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.0118156     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for krypton of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.168e-9           !Xi0 (amplitude) [m]
+0.058              !Gam0 (amplitude) [-]
+0.437e-9           !Qd_inverse (modified effective cutoff parameter) [m]
+314.22             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for krypton of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+209.48             !Critical temperature used in fit (dummy)
+0.0447    1.245    !Sigma0 and n
+
+
+#DE    !---Dielectric constant---
+DE3    !Dielectric constant model for krypton of Harvey and Lemmon (2005).
+:DOI: 10.1007/s10765-005-2351-5
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Harvey, A.H. and Lemmon, E.W.,
+? "Method for Estimating the Dielectric Constant of Natural Gas Mixtures,"
+? Int. J. Thermophys., 26(1):31-46, 2005. doi: 10.1007/s10765-005-2351-5
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+273.16 1000.0 1.0  !Reducing parameters for T and D
+0 1 4 0 0 0        !Number of terms in dielectric constant model
+ 6.273   0. 1.  0. !Coefficient, T exp, D exp
+ 6.485   0. 2.  0.
+ 13.48   1. 2.  0.
+-82.51   0. 2.7 0.
+-170.4   1. 2.7 0.
+
+
+#MLT   !---Melting line---
+ML1    !Melting line model for krypton of Michels and Prins (1962).
+:DOI: 10.1016/0031-8914(62)90096-4
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Michels, A. and Prins, C.,
+? "The Melting Lines of Argon, Krypton and Xenon up to 1500 Atm;
+? Representation of the Results by a Law of Corresponding States,"
+? Physica, 28:101-116, 1962.
+?
+!```````````````````````````````````````````````````````````````````````````````
+115.775            !Lower temperature limit [K]
+800.0              !Upper temperature limit [K]
+0.                 !
+0.                 !
+1.       101.325   !Reducing temperature and pressure
+2 0 0 0 0 0        !Number of terms in melting line equation
+-2345.921     0.0  !Coefficients and exponents
+ 1.080476685  1.6169841
+
+
+#SBL   !---Sublimation line---
+SB3    !Sublimation line model for krypton of Lemmon (2002).
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., 2002.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+115.775            !Upper temperature limit [K]
+0.                 !
+0.                 !
+115.775  73.197    !Reducing temperature and pressure
+0 1 0 0 0 0        !Number of terms in sublimation line equation
+-11.5616     1.    !Coefficients and exponents
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for krypton of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, C.K. and Lemmon, E.W., 2010.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+209.48   5525.0    !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-5.9697    1.0
+ 1.2673    1.5
+-0.95609   2.95
+-35.630    9.3
+ 56.884    10.4
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for krypton of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, C.K. and Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+209.48   10.85     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 20.593    0.62
+-65.490    0.84
+ 94.407    1.07
+-69.678    1.34
+ 22.810    1.6
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for krypton of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, C.K. and Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+209.48   10.85     !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-6.4163    0.525
+ 8.9956    0.77
+-10.216    1.04
+-13.477    3.2
+-211.52    8.3
+ 213.75    9.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

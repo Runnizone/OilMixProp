@@ -1,0 +1,387 @@
+Propylcyclohexane    !Short name
+1678-92-8            !CAS number
+n-Propylcyclohexane  !Full name
+(C6H11)CH2CH2CH3     !Chemical formula {C9H18}
+Propylcyclohexane    !Synonym
+126.23922            !Molar mass [g/mol]
+178.2                !Triple point temperature [K]
+429.856              !Normal boiling point [K]
+630.8                !Critical temperature [K]
+2860.0               !Critical pressure [kPa]
+2.06                 !Critical density [mol/L]
+0.326                !Acentric factor
+0.0                  !Dipole moment [Debye]; ab-initio calculations from HF 6-31G*
+NBP                  !Default reference state
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+naphthene            !Family                                                    :Family:
+5920.769             !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C9H18/c1-2-6-9-7-4-3-5-8-9/h9H,2-8H2,1H3                                     :InChi:  !Standard InChI String
+DEDZSLCZHWTGOR-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+f174a9b0  (octane)                        !Alternative fluid for mixing rules   :AltID:
+206f01b0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 09-10-07 EWL, Original version.
+! 10-08-09 MLH, Add transport equation. make viscosity preliminary pending high pressure data.
+! 11-03-09 MLH, Add Planck Einstein Cp0.
+! 09-01-10 EWL, Add ancillary equations.
+! 04-06-13 EWL, Add dipole moment.
+! 04-17-14 EWL, Add surface tension coefficients of Mulero et al. (2014).
+! 11-21-17 MLH, Revised viscosity.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for propylcyclohexane of Lemmon (2007).
+:TRUECRITICALPOINT:  630.8      2.06          !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., unpublished equation, 2007.
+?
+!```````````````````````````````````````````````````````````````````````````````
+178.2              !Lower temperature limit [K]
+650.0              !Upper temperature limit [K]
+50000.0            !Upper pressure limit [kPa]
+7.03               !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+126.23922                              !Molar mass [g/mol]
+178.2                                  !Triple point temperature [K]
+0.0000007179                           !Pressure at triple point [kPa]
+7.03                                   !Density at triple point [mol/L]
+429.856                                !Normal boiling point temperature [K]
+0.326                                  !Acentric factor
+630.8         2860.0       2.06        !Tc [K], pc [kPa], rhoc [mol/L]
+630.8                      2.06        !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  11  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 1.01911     0.2     1.  0.            !a(i),t(i),d(i),l(i)
+-2.59762     1.2     1.  0.
+ 0.675152    1.8     1.  0.
+-0.230891    1.5     2.  0.
+ 0.120966    0.3     3.  0.
+ 3.09038e-4  0.9     7.  0.
+ 0.526461    1.4     2.  1.
+-0.0188462   2.2     5.  1.
+-0.549272    3.7     1.  2.
+-0.139233    4.2     4.  2.
+ 0.121242    2.4     1.  1.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for propylcyclohexane of Lemmon (2007).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?ThermoData Engine (TRC, NIST).
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     1.0        !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 9.29427    0.385871
+ 1.37051    173295.
+ 106.426    561.14
+ 313.713    1919.52
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for propylcyclohexane of Lemmon (2007).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?ThermoData Engine (TRC, NIST).
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 3  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+ -1.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+ 36.0099894104630494    0.0      !aj, ti for [ai*tau**ti] terms
+ -4.1649997963208678    1.0      !aj, ti for [ai*tau**ti] terms
+  1.1178441201916689 -0.385871
+  0.164834521179596  173295.0
+ 12.8001099963223108   561.14
+ 37.731014106292271   1919.52
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC1    !Pure fluid thermal conductivity model for propylcyclohexane of Perkins et al. (2008).
+:DOI: 10.1021/je800255r
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Hammerschmidt, U., and Huber, M.L.,
+? "Measurement and Correlation of the Thermal Conductivity of Methylcyclohexane
+? and Propylcyclohexane from 300 K to 600 K at Pressures to 60 MPa,"
+? J. Chem. Eng. Data, 53(9):2120-2127, 2008. doi: 10.1021/je800255r
+?
+?Liquid and vapor phases from 300 K to 604 K at pressures up to
+? 60 MPa are represented to within 4% at a 95% confidence level.
+?
+!```````````````````````````````````````````````````````````````````````````````
+178.2              !Lower temperature limit [K]
+700.               !Upper temperature limit [K]
+100000.            !Upper pressure limit [kPa]
+10.0               !Maximum density [mol/L]
+4   0              !# terms for dilute gas function:  numerator, denominator
+ 630.8       1.    !Reducing parameters for T, tcx; poly fit to Chung estimation
+ 0.0107402   0.    !Coefficient, power in T
+-0.0609829   1.
+ 0.138204    2.
+-0.0381213   3.
+ 10  0             !# terms for background gas function:  numerator, denominator
+ 630.8   2.06  1.  !Reducing parameters for T, rho, tcx
+ 0.116524    0.  1.  0.
+-0.102821    1.  1.  0.
+-0.113871    0.  2.  0.
+ 0.126431    1.  2.  0.
+ 0.0445827   0.  3.  0.
+-0.05946     1.  3.  0.
+-0.00545736  0.  4.  0.
+ 0.0098936   1.  4.  0.
+ 0.0         0.  5.  0.
+ 0.0         1.  5.  0.
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Propane reference); fitted to limited data.
+:DOI: 10.6028/NIST.IR.8209
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Huber, M.L., (2018) "Models for the Viscosity, Thermal Conductivity, and
+          ? Surface Tension of Selected Pure Fluids as Implemented in REFPROP v10.0",
+          ? NISTIR 8209; doi: 10.6028/NIST.IR.8209
+          ?
+          ?VISCOSITY
+          ? The ECS parameters for viscosity were based on limited data from:
+          ? Geist, J.M. and Cannon,M.R. Ind. Eng. Chem. Anal. Ed., 1946, 18, 611;
+          ? Koelbel, H., Siemes, W., Luther, H.,Brennst.-Chem., 1949, 30, 362-371
+          ? Knothe, G., Steidley, K. R., Fuel, 2005, 84, 1059-1065
+          ? High pressure data unavailable
+          ? Estimated uncertainty 10%
+          ?
+          ?THERMAL CONDUCTIVITY
+          ? The ECS parameters for thermal conductivty are predictive only.
+          ? Estimated uncertainty 10%
+          ?
+          ?The Lennard-Jones parameters were estimated with the method of Chung.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          178.2              !Lower temperature limit [K]
+          700.0              !Upper temperature limit [K]
+          50000.0            !Upper pressure limit [kPa]
+          10.0               !Maximum density [mol/L]
+          FEQ PROPANE.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.6358             !Lennard-Jones coefficient sigma [nm] for ECS method
+          500.91             !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+          1  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00132  0. 0. 0. !Coefficient, power of T, spare1, spare2
+          3  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           1.85997  0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          -0.587812 0. 1. 0. !Coefficient, power of Tr, power of Dr, spare
+           0.103092 0. 2. 0. !Coefficient, power of Tr, power of Dr, spare
+          1  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for propylcyclohexane of Olchowy and Sengers (1989).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Olchowy, G.A. and Sengers, J.V.,
+? "A Simplified Representation for the Thermal Conductivity of Fluids in the Critical Region,"
+? Int. J. Thermophys., 10:417-426, 1989. doi: 10.1007/BF01133538
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.2415             !Gamma (universal exponent)
+1.01               !R0 (universal amplitude)
+0.065              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.15e-9            !Xi0 (amplitude) [m]
+0.052              !Gam0 (amplitude) [-]
+6.24e-10           !Qd_inverse (modified effective cutoff parameter) [m]; number for mcc6 from fit
+958.725            !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+********************************************************************************
+
+@ETA    !---Viscosity---
+VS4     !Pure fluid generalized friction theory viscosity model for propylcyclohexane of Quinones-Cisneros and Deiters (2006).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?(10-13-07 regression) uses functional form described in
+          ? Quinones-Cisneros, S.E. and Deiters, U.K.,
+          ? "Generalization of the Friction Theory for Viscosity Modeling,"
+          ? J. Phys. Chem. B 2006, 110,12820-12834.
+          ?
+          ?Estimated uncertainty 3 % for liquid at 273-373 K at atmospheric pressure,
+          ? approximately 15-20 % otherwise. Based on extremely limited data.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          178.2              !Lower temperature limit [K]
+          700.0              !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          10.0               !Maximum density [mol/L]
+          5 0 0 0 0 0        !Number of terms associated with dilute-gas function
+          NUL                !Pointer to reduced effective collision cross-section model; not used
+          0.6321             !Lennard-Jones coefficient sigma [nm] for ECS method
+          507.54             !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+           630.8     1.0     !Reducing parameters for T, eta
+          0.0         0.5    !Chapman-Enskog term; not used here
+           52.8175   0.0
+          -170.572   0.25
+           171.218   0.50
+          -40.2745   0.75
+          0                  !Number of terms for initial density dependence
+          -0.000132691   0.0           0.469322e-6    0. 0.  !  a(0),a(1),a(2)
+          -0.000121616   0.157511e-4   0.487973e-6    0. 0.  !  b(0),b(1),b(2)
+           0.00160622   -0.000500143   0.0            0. 0.  !  c(0),c(1),c(2)
+          -0.158302e-7   0.2238e-9     0.0            0. 0.  !  A(0),A(1),A(2)
+           0.252822e-7   0.0           0.0            0. 0.  !  B(0),B(1),B(2)
+           0.0           0.0           0.0            0. 0.  !  C(0),C(1),C(2)
+           0.0           0.0           0.0            0. 0.  !  D(0),D(1),D(2)
+           0.0           0.0           0.0            0. 0.  !  E(0),E(1),E(2)
+          NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for propylcyclohexane of Mulero et al. (2014).
+:DOI: 10.1063/1.4878755
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A. and Cachadiña, I.,
+? "Recommended Correlations for the Surface Tension of Several Fluids
+? Included in the REFPROP Program,"
+? J. Phys. Chem. Ref. Data, 43, 023104, 2014.
+? doi: 10.1063/1.4878755
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+630.8              !Critical temperature used in fit (dummy)
+0.055     1.17     !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for propylcyclohexane of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., 2010.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+630.8   2860.0     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-7.6296    1.0
+ 1.6538    1.5
+-2.8518    2.7
+-2.8205    4.7
+-2.8144    15.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for propylcyclohexane of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+630.8   2.06       !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 0.039271  0.1
+ 38.257    0.75
+-65.743    0.87
+ 30.332    1.0
+ 0.17224   5.0
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for propylcyclohexane of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+630.8   2.06       !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-6.4572    0.6
+ 9.1228    1.8
+-25.806    2.2
+-59.044    6.0
+-147.09    14.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

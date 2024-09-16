@@ -1,0 +1,295 @@
+Propadiene           !Short name
+463-49-0             !CAS number
+1,2-Propadiene       !Full name
+C3H4                 !Chemical formula
+Allene               !Synonym
+40.06386             !Molar mass [g/mol]
+136.65               !Triple point temperature [K]
+240.874              !Normal boiling point [K]
+398.0                !Critical temperature [K]
+5215.6               !Critical pressure [kPa]
+5.9                  !Critical density [mol/L]
+0.115                !Acentric factor
+0.2                  !Dipole moment [Debye]; Watson, H.E. and Ramaswamy, K.L., Proc. Roy. Soc. (London) A156, 130-7 (1936).
+NBP                  !Default reference state
+10.0                 !Version number
+2200                 !UN Number                                                 :UN:
+n-alkene             !Family  (diene)                                           :Family:
+1943.11              !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C3H4/c1-3-2/h1-2H2                     !Standard InChI String                :InChi:
+IYABWNGZIDDRAK-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+70c6aac0  (propane)                       !Alternative fluid for mixing rules   :AltID:
+46c6b6e0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by K. Gao, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 10-31-17  KG, Original version
+! 10-31-17  KG, Add equation of state of Gao et al. (2017)
+! 11-02-17 MLH, Add dipole moment, preliminary transport.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for propadiene of Gao et al. (2017).
+:TRUECRITICALPOINT:  398.0      5.9           !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W.,
+? unpublished equation, 2017.
+?
+?The experimental data for propadiene are very sparse.  The uncertainty in vapor
+? pressure is 1.5 % at temperatures between the triple point and 190 K. The
+? uncertainty in saturated liquid density and at pressures up to 0.2 MPa is 0.1 %
+? at temperatures between 200 K and 240 K. The uncertainty in the second virial
+? coefficient is 12 cm^3/mol at temperatures between 220 K and 355 K.
+?
+!```````````````````````````````````````````````````````````````````````````````
+136.65             !Lower temperature limit [K]
+400.0              !Upper temperature limit [K]
+10000.0            !Upper pressure limit [kPa]
+19.67              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+40.06386                               !Molar mass [g/mol]
+136.65                                 !Triple point temperature [K]
+0.018343                               !Pressure at triple point [kPa]
+19.67                                  !Density at triple point [mol/L]
+240.874                                !Normal boiling point temperature [K]
+0.115                                  !Acentric factor
+398.0          5215.6       5.9        !Tc [K], pc [kPa], rhoc [mol/L]
+398.0                       5.9        !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  10  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.7231448    0.125   1.  0.          !a(i),t(i),d(i),l(i)
+ -1.790058     1.125   1.  0.
+ -0.06836828   1.25    2.  0.
+  0.07947672   0.25    3.  0.
+  0.000040778  0.75    8.  0.
+  0.1760558    0.625   2.  1.
+  0.1443484    2.0     3.  1.
+ -0.1494723    4.125   1.  2.
+  0.008248376  4.125   4.  2.
+ -0.009386559 17.0     3.  3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for propadiene of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0         0.0
+ 2.1260    512.0
+ 7.4934   1442.0
+ 5.2240   3896.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for propadiene of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -2.7836228624391168    0.0      !aj, ti for [ai*tau**ti] terms
+  3.2416044956386374    1.0      !aj, ti for [ai*tau**ti] terms
+  2.126     512.0                !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  7.4934   1442.0
+  5.224    3896.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Propane reference)
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?Experimental data not found. Totally predictive model.
+?Estimated uncertainty for viscosity: 20%
+?Estimated uncertainty for thermal conductivity: 20%
+?
+?The Lennard-Jones parameters were estimated with the method of Chung, T.H., Ajlan, M., Lee, L.L., and Starling, K.E., "Generalized Multiparameter Correlation for Nonpolar and Polar Fluid Transport Properties," Ind. Eng. Chem. Res., 27:671-679, 1988.
+?
+!```````````````````````````````````````````````````````````````````````````````
+136.65             !Lower temperature limit [K]
+400.0              !Upper temperature limit [K]
+10000.0            !Upper pressure limit [kPa]
+19.67              !Maximum density [mol/L]
+FEQ PROPANE.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.4477             !Lennard-Jones coefficient sigma [nm] for ECS method
+316.0              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+1  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.0012  0. 0. 0.  !Coefficient, power of T, spare1, spare2
+1  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 0.99    0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+2  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 0.95    0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+ 0.0     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for propadiene of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.195e-9           !Xi0 (amplitude) [m]
+0.055              !Gam0 (amplitude) [-]
+0.541e-9           !Qd_inverse (modified effective cutoff parameter) [m]; arbitrary guess
+597.0              !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension predictive model for propadiene of Huber (2018).
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?Experimental data not found. Predictive model based on family behavior.
+? Estimated uncertainty is 10%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+398.0              !Critical temperature (dummy)
+0.056   1.205      !
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for propadiene of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+398.0    5215.6    !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-6.7710   1.0
+ 3.0853   1.5
+-3.3137   2.0
+ 1.2095   2.8
+-2.7511   4.3
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for propadiene of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+398.0    5.90      !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 2.5282   0.384
+-1.5802   0.9
+ 5.4328   1.5
+-5.5434   2.1
+ 2.3510   3.0
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for propadiene of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+398.0    5.90      !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-3.333    0.415
+-7.2503   1.5
+-47.109   7.5
+-18.886   3.68
+-108.51  16.1
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

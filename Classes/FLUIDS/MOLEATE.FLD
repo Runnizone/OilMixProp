@@ -1,0 +1,385 @@
+Methyl oleate        !Short name
+112-62-9             !CAS number
+Methyl cis-9-octadecenoate !Full name
+C19H36O2             !Chemical formula {C19H36O2}
+Methyl ester oleic acid !Synonym
+296.48794            !Molar mass [g/mol]
+253.47               !Triple point temperature [K]
+627.18               !Normal boiling point [K]
+782.0                !Critical temperature [K]
+1246.0               !Critical pressure [kPa]
+0.81285              !Critical density [mol/L]
+0.906                !Acentric factor
+1.63                 !Dipole moment [Debye]
+NBP                  !Default reference state
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+FAME                 !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C19H36O2/c1-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19(20)21-2/h10-11H,3-9,12-18H2,1-2H3/b11-10-                                                  :InChi:  !Standard InChI String
+QYDYPVFESGNLHU-KHPPLWFESA-N               !Standard InChI Key                   :InChiKey:
+111888d0  (decane)                        !Alternative fluid for mixing rules   :AltID:
+f300b9e0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by M.L. Huber, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 03-25-08 MLH, Original version.
+! 08-27-08 EWL, Add equation of state.
+! 11-20-08 MLH, Add preliminary predictive transport.
+! 08-20-10 IDC, Add ancillary equations.
+! 10-25-10 MLH, Add correlation for therm. cond. based on R. Perkins data.
+! 11-6-10  MLH, Revise ECS viscosity based on fortin 2010 data.
+! 04-17-14 EWL, Add surface tension coefficients of Mulero et al. (2014).
+! 02-16-17  KG, Add ancillary equations.
+! 11-17-17 MLH, Revise viscosity.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for methyl oleate of Huber et al. (2009).
+:TRUECRITICALPOINT:  782.0      0.81285       !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1021/ef900159g
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., Lemmon, E.W., Kazakov, A., Ott, L.S., and Bruno, T.J.,
+? "Model for the Thermodynamic Properties of a Biodiesel Fuel,"
+? Energy & Fuels, 23:3790-3797, 2009.
+?
+?The uncertainties in the liquid phase between 270 K and 350 K are 0.6% for
+? density, 0.4% for speed of sound, and 5% for heat capacity.  The uncertainty
+? in vapor pressure between 350 K and 500 K is 5%, and increases at lower
+? temperatures due to the limited data and very low pressures.  Uncertainties in
+? the critical region and the vapor phase are unknown due to the lack of data.
+?
+!```````````````````````````````````````````````````````````````````````````````
+253.47             !Lower temperature limit [K]
+1000.0             !Upper temperature limit [K]
+50000.0            !Upper pressure limit [kPa]
+3.05               !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+296.48794                              !Molar mass [g/mol]
+253.47                                 !Triple point temperature [K]
+0.0000000003781                        !Pressure at triple point [kPa]
+3.05                                   !Density at triple point [mol/L]
+627.18                                 !Normal boiling point temperature [K]
+0.906                                  !Acentric factor
+782.0         1246.0       0.81285     !Tc [K], pc [kPa], rhoc [mol/L]
+782.0                      0.81285     !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  10  4   3 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.04596121   1.0     4.  0.          !a(i),t(i),d(i),l(i)
+  2.2954       0.34    1.  0.
+ -3.554366     1.14    1.  0.
+ -0.2291674    1.4     2.  0.
+  0.06854534   0.6     3.  0.
+ -1.535778     3.3     1.  2.
+ -0.7334697    4.1     3.  2.
+  1.7127       1.9     2.  1.
+ -1.471394     3.8     2.  2.
+ -0.01724678   1.3     7.  1.
+  2.11547      3.4     1.  2. 2.    -1.1      -0.9     1.14    0.79     0. 0. 0.
+ -0.7555374    3.8     1.  2. 2.    -1.6      -0.65    0.65    0.90     0. 0. 0.
+ -0.4134269    4.0     3.  2. 2.    -1.1      -0.75    0.77    0.76     0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for methyl oleate of Huber et al. (2009).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?TDE 3.0 internal version, March 2008, Planck-Einstein form
+? based on estimation from Joback method, uncertainty 10%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     1.0        !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 90.2385    0.146118
+ 234.797    613.529
+ 335.768    1405.31
+ 431.66     2867.76
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for methyl oleate of Huber et al. (2009).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?TDE 3.0 internal version, March 2008, Planck-Einstein form
+? based on estimation from Joback method, uncertainty 10%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 3  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+ -1.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+230.1791429440617662    0.0      !aj, ti for [ai*tau**ti] terms
+-34.1983488947336269    1.0      !aj, ti for [ai*tau**ti] terms
+ 10.853200589171168   -0.146118
+ 28.2395977186635747   613.529
+ 40.3836217958501607  1405.31
+ 51.9167823747250523  2867.76
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC1    !Pure fluid thermal conductivity model for methyl oleate of Perkins and Huber (2011).
+:DOI: 10.1021/ef200417x
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A. and Huber, M.L.,
+? "Measurement and Correlation of the Thermal Conductivities of Biodiesel Constituent Fluids:
+? Methyl Oleate and Methyl Linoleate,"
+? Energy & Fuels, 25:2383-2388, 2011.
+?
+?The estimated uncertainty of the correlation for the liquid phase is 2.5%. The dilute gas is
+? based on predicted values and uncertainties are larger, on the order of 10-30%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+253.47             !Lower temperature limit [K]
+1000.0             !Upper temperature limit [K]
+50000.0            !Upper pressure limit [kPa]
+3.05               !Maximum density [mol/L]
+4   0              !# terms for dilute gas function:  numerator, denominator
+782.0      1.0     !Reducing parameters for T, tcx
+-0.00027125  0.
+ 0.00259365  1.
+ 0.0350241   2.
+-0.00902273  3.
+ 10  0             !# terms for background gas function:  numerator, denominator
+ 782.0  0.81285 1. !Reducing parameters for T, rho, tcx
+-0.0410106   0.  1.  0.
+ 0.0328443   0.  2.  0.
+-0.00418506  0.  3.  0.
+ 0.0         0.  4.  0.
+ 0.0         0.  5.  0.
+ 0.0606657   1.  1.  0.
+-0.0498407   1.  2.  0.
+ 0.0121752   1.  3.  0.
+ 0.0         1.  4.  0.
+ 0.0         1.  5.  0.
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Propane reference) for methyl oleate.
+:DOI: 10.6028/NIST.IR.8209
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Huber, M.L., (2018) "Models for the Viscosity, Thermal Conductivity, and
+          ? Surface Tension of Selected Pure Fluids as Implemented in REFPROP v10.0",
+          ? NISTIR 8209; doi: 10.6028/NIST.IR.8209
+          ?
+          ?VISCOSITY
+          ? Estimated uncertainty approximately 2 % for atm pressure liquid
+          ? Estimated uncertainty otherwise approximately 10-50%
+          ? Values based on estimation method of extended corresponding states;
+          ?
+          ?THERMAL CONDUCTIVITY
+          ? Values based on estimation method of
+          ? extended corresponding states; Estimated uncertainty approximately 10-50%
+          ?
+          ?The Lennard-Jones parameters were estimated with the method of Chung.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          253.47             !Lower temperature limit [K]
+          1000.0             !Upper temperature limit [K]
+          10000.0            !Upper pressure limit [kPa] limited pressure range
+          3.05               !Maximum density [mol/L]
+          FEQ PROPANE.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.8668             !Lennard-Jones coefficient sigma [nm] from method Chung=0.809vc*(1/3)A
+          620.98             !Lennard-Jones coefficient epsilon/kappa [K] from Chung=Tc/1.2593
+          1  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00132  0. 0. 0. !Coefficient, power of T, spare1, spare2
+          3  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           1.92477  0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          -0.515884 0. 1. 0. !Coefficient, power of Tr, power of Dr, spare
+          7.03972e-2 0. 2. 0. !Coefficient, power of Tr, power of Dr, spare
+          1  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.190    0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for methyl oleate of Olchowy and Sengers (1989).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Olchowy, G.A. and Sengers, J.V.,
+? "A Simplified Representation for the Thermal Conductivity of Fluids in the Critical Region,"
+? Int. J. Thermophys., 10:417-426, 1989. doi: 10.1007/BF01133538
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.03               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.194e-9           !Xi0 (amplitude) [m]
+0.0496             !Gam0 (amplitude) [-]
+0.875e-9           !Qd_inverse (modified effective cutoff parameter) [m]; based on butane
+1173.0             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+********************************************************************************
+
+@TCX    !---Thermal conductivity---
+TC5     !Pure fluid thermal conductivity model for methyl oleate of Chung et al. (1988).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Chung, T-H., Ajlan, M., Lee, L.L. and Starling, K.E.
+          ? "Generalized Multiparameter Correlation for Nonpolar and Polar Fluid Transport Properties"
+          ? Ind. Eng. Chem. Res. 1998, 27, 671-679.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          225.68             !Lower temperature limit [K]
+          1000.              !Upper temperature limit [K]
+          50000.             !Upper pressure limit [kPa]
+          10.                !Maximum density [mol/L]
+          0.87               !Lennard-Jones coefficient sigma [nm] =0.809vc*(1/3)A
+          621.0              !Lennard-Jones coefficient epsilon/kappa [K] =Tc/1.2593
+          0.91    0.  0.     !w, mur, kappa for Chung
+          0                  !Additional parameters for Chung
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for methyl oleate of Mulero et al. (2014).
+:DOI: 10.1063/1.4878755
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A. and Cachadiña, I.,
+? "Recommended Correlations for the Surface Tension of Several Fluids
+? Included in the REFPROP Program,"
+? J. Phys. Chem. Ref. Data, 43, 023104, 2014.
+? doi: 10.1063/1.4878755
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+782.               !Critical temperature used in fit (dummy)
+0.0565    1.31     !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for methyl oleate of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+782.0   1246.0     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-13.663    1.0
+ 13.240    1.5
+-14.122    2.1
+-7.8690    4.9
+-14.347    12.5
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for methyl oleate of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+782.0   0.81285    !Reducing parameters
+7 0 0 0 0 0        !Number of terms in equation
+ 8.8882    0.6
+-82.732    1.4
+ 279.40    1.9
+-505.98    2.5
+ 642.01    3.2
+-454.98    3.8
+ 117.86    4.5
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for methyl oleate of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+782.0   0.81285    !Reducing parameters
+7 0 0 0 0 0        !Number of terms in equation
+-13.220    0.664
+ 170.88    1.7
+-531.07    2.1
+ 700.70    2.6
+-410.61    3.1
+-207.26    9.8
+-660.64    21.5
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

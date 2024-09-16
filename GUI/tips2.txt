@@ -1,0 +1,2 @@
+*Provide values only if P is to be solved and also good estimations are known. This speeds up the calculations. 
+*Otherwise set zeros

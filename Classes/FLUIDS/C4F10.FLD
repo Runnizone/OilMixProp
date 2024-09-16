@@ -1,0 +1,375 @@
+Perfluorobutane      !Short name
+355-25-9             !CAS number
+Decafluorobutane     !Full name
+C4F10                !Chemical formula {C4F10}
+Perfluorobutane      !Synonym
+238.027              !Molar mass [g/mol]
+144.0                !Triple point temperature [K]; Reid, Prausnitz, & Poling, McGraw-Hill (1987)
+271.123              !Normal boiling point [K]
+386.326              !Critical temperature [K]
+2322.4               !Critical pressure [kPa]
+2.637                !Critical density [mol/L]
+0.372                !Acentric factor
+0.0                  !Dipole moment [Debye]; ab-initio calculations from HF 6-31G*
+NBP                  !Default reference state
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+halocb               !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C4F10/c5-1(6,3(9,10)11)2(7,8)4(12,13)14!Standard InChI String                :InChi:
+KAVGMUDTWQVPDF-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+7b3b4080  (butane)                        !Alternative fluid for mixing rules   :AltID:
+a8f85e00                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+!  5-07-98 EWL, Original version.
+! 07-03-10 MLH, Add predictive transport. No data yet.
+! 08-19-10 IDC, Add ancillary equations.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 04-06-13 EWL, Add dipole moment.
+! 04-29-16 MLH, Revise transport.
+! 03-13-17  KG, Add new equation of state of Gao et al. (2017).
+! 03-14-17 MLH, Revise transport for new EOS.
+! 12-23-17 MLH, Tweaked critical enhancement parameters to match EOS critical point.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for perfluorobutane of Gao et al. (2017).
+:TRUECRITICALPOINT:  386.326    2.637         !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W.,
+? unpublished equation, 2017.
+?
+?The uncertainty of the equation of state in density is 1 % in the vapor
+? phase region at temperatures between 338 K and 455 K. The uncertainty in
+? vapor pressure is 0.2 % at temperatures between 260 K and 380 K. The
+? uncertainty in saturated-liquid density is 0.2 % between 230 K and 360 K.
+? The uncertainty in saturated-vapor density is generally less than 2 %
+? between 230 K and 360 K. The uncertainty in sound speed is 0.4 % at
+? temperatures between 255 K and 305 K.
+?
+!```````````````````````````````````````````````````````````````````````````````
+144.0              !Lower temperature limit [K]
+450.0              !Upper temperature limit [K]
+10000.             !Upper pressure limit [kPa]
+8.61               !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+238.027                                !Molar mass [g/mol]
+144.0                                  !Triple point temperature [K]
+0.001077                               !Pressure at triple point [kPa]
+8.604                                  !Density at triple point [mol/L]
+271.123                                !Normal boiling point temperature [K]
+0.372                                  !Acentric factor
+386.326       2322.4       2.637       !Tc [K], pc [kPa], rhoc [mol/L]
+386.326                    2.637       !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+   9  4   5 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.025377604  1.0     4.  0.          !a(i),t(i),d(i),l(i)
+  0.97089776   0.135   1.  0.
+ -0.76128126   1.      1.  0.
+ -1.2517125    1.      2.  0.
+  0.28005904   0.42    3.  0.
+ -1.7144149    1.62    1.  2.
+ -0.64918553   2.35    3.  2.
+  1.1662335    1.01    2.  1.
+ -0.35934725   2.65    2.  2.
+  1.4986537    0.75    1.  2. 2.    -1.431    -1.544   1.265   0.781    0. 0. 0.
+ -0.60326234   1.28    1.  2. 2.    -1.803    -1.366   1.156   0.723    0. 0. 0.
+ -0.11389713   1.5     3.  2. 2.    -1.608    -0.876   0.916   0.842    0. 0. 0.
+ -0.2553212    1.      2.  2. 2.    -1.837    -1.117   0.927   0.652    0. 0. 0.
+ -0.1017598    1.9     2.  2. 2.    -1.846    -1.29    0.926   1.139    0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for perfluorobutane of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 2   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 14.0       0.0
+ 2.164      368.0
+ 15.64      810.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for perfluorobutane of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  2  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+ 13.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+  7.0061914961295244    0.0      !aj, ti for [ai*tau**ti] terms
+ -4.9395325777031092    1.0      !aj, ti for [ai*tau**ti] terms
+  2.164      368.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  15.64      810.0
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+ECS     !Extended Corresponding States model w/ T- and rho-dependent shape factors for perfluorobutane.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Huber, M.L. and Ely, J.F.,
+          ? "A predictive extended corresponding states model for pure and mixed
+          ? refrigerants including an equation of state for R134a,"
+          ? Int. J. Refrigeration, 17(1):18-31, 1994. doi: 10.1016/0140-7007(94)90083-3
+          ?
+          ?ECS parameters fitted by E.W. Lemmon, NIST, 05-07-98
+          ? Average absolute deviations of the fit from the experimental data are:
+          ? PVT(vapor): 0.64%;  Pv: 0.48%;  Dsat(liq.): 0.43%
+          ?
+          ?DATA SOURCES
+          ? Brown, J.A. and Mears, W.H. Physical Properties of n-Perfluorobutane. J. Phys. Chem., 62(8):960-62 (1958). doi: 10.1021/j150566a015
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          189.0              !Lower temperature limit [K]
+          500.0              !Upper temperature limit [K]
+          30000.0            !Upper pressure limit [kPa]
+          7.64               !Maximum density [mol/L]
+          CP1                !Pointer to Cp0 model
+          R113.FLD
+          FEQ                !Pointer to reference fluid model
+          0.25253            !Acentric factor for R113 used in shape factor correlation
+          0.280191           !Critical compressibility for R113 used in correlation
+          0.371              !Acentric factor for fluid used in shape factor correlation
+          386.326            !Critical temperature [K]
+          2323.4             !Critical pressure [kPa]
+          2.52               !Critical density [mol/L]
+          2                  !Number of temperature coefficients for 'f' shape factor
+           0.00776042865  0. !Alpha1 of Huber & Ely
+          -0.641975631    1. !Alpha2 (log(Tr) term)
+          0                  !Number of density coefficients for 'f' shape factor
+          2                  !Number of temperature coefficients for 'h' shape factor
+           0.00278313281  0. !Beta1 of Huber & Ely
+          -0.593657910    1. !Beta2 (log(Tr) term)
+          1                  !Number of density coefficients for 'h' shape factor
+          -0.00236093735  1. !Rho coefficient and power in temperature
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for perfluorobutane.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Estimated from group contribution methods and equations for R14, R116, and
+          ? R218.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.31451    !Reducing parameters for T, Cp0
+          4 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           2.0150709         0.0
+           0.096863193       1.0
+          -0.000099797537    2.0
+           0.3734806e-7      3.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (R134a reference); predictive mode for perfluorobutane.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?VISCOSITY
+? Predictive model. Experimental data unavailable. Values based on estimation method of
+? extended corresponding states; estimated uncertainty is approximately 20-50%.
+?
+?THERMAL CONDUCTIVITY
+? Predictive model. Experimental data unavailable. Values based on estimation method of
+? extended corresponding states; estimated uncertainty is approximately 20-50%.
+? The parameters for C5F12 were used as estimated values.
+?
+?The Lennard-Jones parameters were estimated by scaling the values for C5F12 from McCoubrey and Singh, 1960.
+?
+!```````````````````````````````````````````````````````````````````````````````
+189.0              !Lower temperature limit [K]
+500.0              !Upper temperature limit [K]
+30000.0            !Upper pressure limit [kPa]
+7.64               !Maximum density [mol/L]
+FEQ R134A.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.694              !Lennard-Jones coefficient sigma [nm]
+179.0              !Lennard-Jones coefficient epsilon/kappa [K]
+1  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.00125  0. 0. 0. !Coefficient, power of T, spare1, spare2
+1  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 1.045    0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+2  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 1.99     0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+-0.33     0. 1. 0. !Coefficient, power of Tr, power of Dr, spare; -0.31
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for perfluorobutane of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.233e-9           !Xi0 (amplitude) [m]
+0.061              !Gam0 (amplitude) [-]
+0.715e-9           !Qd_inverse (modified effective cutoff parameter) [m]
+579.49             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for perfluorobutane of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+386.326            !Critical temperature used in fit (dummy)
+0.04429   1.242    !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for perfluorobutane of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+386.326 2322.4     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-8.2957    1.0
+ 4.5997    1.5
+-4.4355    1.9
+-5.0941    4.3
+-4.1863    15.1
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for perfluorobutane of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+386.326 2.637      !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 7.2166    0.507
+-18.074    0.824
+ 32.084    1.15
+-30.238    1.5
+ 12.446    1.9
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for perfluorobutane of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+386.326 2.637      !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-6.2029    0.496
+ 7.0601    0.82
+-11.424    1.17
+-24.160    3.3
+-67.136    6.8
+-182.16    15.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

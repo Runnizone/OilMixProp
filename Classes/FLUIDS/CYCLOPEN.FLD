@@ -1,0 +1,505 @@
+Cyclopentane         !Short name
+287-92-3             !CAS number
+Cyclopentane         !Full name
+C5H10                !Chemical formula {C5H10}
+C5H10                !Synonym
+70.1329              !Molar mass [g/mol]
+179.7                !Triple point temperature [K]
+322.40               !Normal boiling point [K]
+511.72               !Critical temperature [K]
+4582.8               !Critical pressure [kPa]
+3.92                 !Critical density [mol/L]
+0.202                !Acentric factor
+0.0                  !Dipole moment [Debye]; van Arkel, A.E., P. Meerburg, and C.R. van der Handel, Rec. Trav. Chim., 61, 767-770 (1942).
+NBP                  !Default reference state
+10.0                 !Version number
+1146                 !UN Number                                                 :UN:
+naphthene            !Family                                                    :Family:
+3319.59              !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C5H10/c1-2-4-5-3-1/h1-5H2              !Standard InChI String                :InChi:
+RGSFGYAAUTVSQA-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+76bc0290  (pentane)                       !Alternative fluid for mixing rules   :AltID:
+43ab1810                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 09-02-08 EWL, Original version.
+! 07-01-10 MLH, Add preliminary transport.
+! 08-23-10 IDC, Add ancillary equations.
+! 02-22-10 EWL, Add new equation of state.
+! 04-17-14 EWL, Add surface tension coefficients of Mulero et al. (2014).
+! 04-30-14 EWL, Add final equation of state.
+! 06-30-14 MLH, Update critical parameters in TK3 block.
+! 04-15-15 MLH, Add new Vassiliou et al. (2015) thermal conductivity formulation.
+! 11-21-17 MLH, Revise ECS transport.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for cyclopentane of Gedanitz et al. (2015).
+:TRUECRITICALPOINT:  511.72     3.92          !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1021/je5010164
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gedanitz, H., Dávila, M.J., and Lemmon, E.W.,
+? "Speed of Sound Measurements and a Fundamental Equation of State for Cyclopentane,"
+? J. Chem. Eng. Data, 60(5):1311-1337, 2015.
+?
+?The uncertainty in density of the equation of state ranges from 0.2% at low
+? temperatures in the liquid to 0.5% at the highest temperatures and in the vapor.
+? Between 280 and 315 K, the uncertainty in saturated liquid density decreases to
+? 0.05%.  The uncertainty in the speed of sound is 0.1% and in heat capacities is
+? 1%.  The uncertainty in vapor pressure is 0.1% at temperatures between 280 and
+? 325 K. This uncertainty increases to possibly 0.5% at other temperatures due to
+? a lack of reliable experimental data.  In the critical region, the uncertainties
+? are higher for all properties.
+?
+!```````````````````````````````````````````````````````````````````````````````
+179.7              !Lower temperature limit [K]
+550.               !Upper temperature limit [K]
+250000.            !Upper pressure limit [kPa]
+12.11              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+70.1329                                !Molar mass [g/mol]
+179.7                                  !Triple point temperature [K]
+0.0089                                 !Pressure at triple point [kPa]
+12.1                                   !Density at triple point [mol/L]
+322.40                                 !Normal boiling point temperature [K]
+0.202                                  !Acentric factor
+511.72        4582.8       3.92        !Tc [K], pc [kPa], rhoc [mol/L]
+511.72                     3.92        !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  10  4   5 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.0630928    1.0     4.  0.          !a(i),t(i),d(i),l(i)
+  1.50365      0.29    1.  0.
+ -2.37099      0.85    1.  0.
+ -0.484886     1.185   2.  0.
+  0.191843     0.45    3.  0.
+ -0.835582     2.28    1.  2.
+ -0.435929     1.8     3.  2.
+  0.545607     1.5     2.  1.
+ -0.209741     2.9     2.  2.
+ -0.0387635    0.93    7.  1.
+  0.677674     1.05    1.  2. 2.    -0.86     -0.63    1.22    0.684    0. 0. 0.
+ -0.137043     4.0     1.  2. 2.    -0.85     -2.8     0.32    0.7      0. 0. 0.
+ -0.0852862    2.33    3.  2. 2.    -0.86     -0.5     0.22    0.77     0. 0. 0.
+ -0.128085     1.5     3.  2. 2.    -1.53     -0.95    1.94    0.625    0. 0. 0.
+ -0.00389381   1.0     2.  2. 2.    -5.13     -0.23    1.21    0.42     0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for cyclopentane of Gedanitz et al. (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gedanitz, H., Dávila, M.J., and Lemmon, E.W., 2015.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 4   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0        0.0
+ 1.34       230.0
+ 13.4       1180.0
+ 17.4       2200.0
+ 6.65       5200.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for cyclopentane of Gedanitz et al. (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gedanitz, H., Dávila, M.J., and Lemmon, E.W., 2015.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  4  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -0.3946228999462562    0.0      !aj, ti for [ai*tau**ti] terms
+  2.4918907456695547    1.0      !aj, ti for [ai*tau**ti] terms
+  1.34       230.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  13.4       1180.0
+  17.4       2200.0
+  6.65       5200.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for cyclopentane of Gedanitz et al. (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gedanitz, H., Dávila, M.J., and Lemmon, E.W., 2015.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  4  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 3.0               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+-0.3946233253      0.0                 !aj, ti for [ai*tau**ti] terms
+ 2.4918910143      1.0
+ 1.34             -0.4494645509        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 13.4             -2.3059485656
+ 17.4             -4.2992261393
+ 6.65             -10.1618072383
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for cyclopentane of Gedanitz et al. (2010).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Gedanitz, H., Davila, M.J., Lemmon, E.W.
+          ? "Speed of Sound Measurements and a Fundamental Equation of State for Cyclopentane,"
+          ? unpublished equation, 2010.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          179.7              !Lower temperature limit [K]
+          550.               !Upper temperature limit [K]
+          250000.            !Upper pressure limit [kPa]
+          12.11              !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          70.1329                                !Molar mass [g/mol]
+          179.7                                  !Triple point temperature [K]
+          0.008854                               !Pressure at triple point [kPa]
+          12.1                                   !Density at triple point [mol/L]
+          322.405                                !Normal boiling point temperature [K]
+          0.201                                  !Acentric factor
+          511.72        4571.2       3.82        !Tc [K], pc [kPa], rhoc [mol/L]
+          511.72                     3.82        !Reducing parameters [K, mol/L]
+          8.314472                               !Gas constant [J/mol-K]
+            10  4    4 12    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+            0.0536938    1.0     4.  0.          !a(i),t(i),d(i),l(i)
+            1.60394      0.29    1.  0.
+           -2.41244      0.8     1.  0.
+           -0.474009     1.14    2.  0.
+            0.203482     0.5     3.  0.
+           -0.965616     2.0     1.  2.
+           -0.344543     1.5     3.  2.
+            0.353975     1.0     2.  1.
+           -0.231373     3.36    2.  2.
+           -0.0379099    0.95    7.  1.
+            0.867586     1.0     1.  2. 2.    -0.82     -1.15    1.08    0.68     0. 0. 0.
+           -0.381827     2.5     1.  2. 2.    -1.19     -1.61    0.36    0.97     0. 0. 0.
+           -0.108741     2.5     3.  2. 2.    -0.79     -0.66    0.09    0.84     0. 0. 0.
+           -0.0976984    1.5     3.  2. 2.    -1.52     -2.72    1.48    0.66     0. 0. 0.
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for cyclopentane of Gedanitz et al. (2010).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Gedanitz, H., Davila, M.J., Lemmon, E.W.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.314472   !Reducing parameters for T, Cp0
+          1 4   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+          1.96       0.0
+          3.34       120.0
+          18.6       1300.0
+          13.9       2700.0
+          4.86       5300.0
+
+
+@EOS    !---Equation of state---
+FE2     !Helmholtz equation of state for cyclopentane.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Lemmon, E.W., unpublished equation, 2008.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          179.7              !Lower temperature limit [K]
+          600.               !Upper temperature limit [K]
+          200000.            !Upper pressure limit [kPa]
+          12.2               !Maximum density [mol/L]
+          CP2                                    !Pointer to Cp0 model
+          70.1329                                !Molar mass [g/mol]
+          179.722                                !Triple point temperature [K]
+          0.0089                                 !Pressure at triple point [kPa]
+          12.1                                   !Density at triple point [mol/L]
+          322.40                                 !Normal boiling point temperature [K]
+          0.195                                  !Acentric factor
+          511.69        4515.0       3.82        !Tc [K], pc [kPa], rhoc [mol/L]
+          511.69                     3.82        !Reducing parameters [K, mol/L]
+          8.314472                               !Gas constant [J/mol-K]
+            10  4    4 12    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           0.04909331   1.0     4.  0.           !a(i),t(i),d(i),l(i)
+           1.244679     0.23    1.  0.
+          -1.990222     0.94    1.  0.
+          -0.5245596    1.08    2.  0.
+           0.1764215    0.53    3.  0.
+          -1.066798     1.67    1.  2.
+          -0.5028152    1.80    3.  2.
+           0.8484762    1.30    2.  1.
+          -0.4547443    2.50    2.  2.
+          -0.02767817   1.0     7.  1.
+           0.9455318    0.87    1.  2. 2.    -1.023    -1.70    1.10    0.713    0. 0. 0.
+          -0.3014822    1.40    1.  2. 2.    -1.383    -1.55    0.64    0.917    0. 0. 0.
+          -0.1675668    2.40    3.  2. 2.    -0.996    -1.07    0.50    0.688    0. 0. 0.
+          -0.6377070    1.30    3.  2. 2.    -7.038   -87.17    1.26    0.748    0. 0. 0.
+
+
+@AUX    !---Auxiliary function for Cp0
+CP2     !Ideal gas heat capacity function for cyclopentane.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Lemmon, E.W., unpublished equation, 2008.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.314472   !Reducing parameters for T, Cp0
+          1 4   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+          3.263      0.0
+          2.151      179.0
+          19.55      1336.0
+          14.45      2911.0
+          3.594      6420.0
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC1    !Pure fluid thermal conductivity model for cyclopentane of Vassiliou 2015.
+:DOI: 10.1063/1.4927095
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Vassiliou, C.-M., Assael, M.J., Huber, M.L., and Perkins, R.A.,
+? "Reference Correlatons of the Thermal Conductivity
+? of Cyclopentane, iso-Pentane, and n-Pentane,"
+? J. Phys. Chem. Ref. Data, 44(3), 033102, 2015.
+?
+?Estimated uncertainty in thermal conductivity is 4% for the liquid over
+? 218 K<T<240 K at pressures up to 250 MPa, 3% for the gas, and estimated to be
+? 10% in the supercritical region, except near critical where the uncertainties
+? are larger.
+?
+!```````````````````````````````````````````````````````````````````````````````
+179.7              !Lower temperature limit [K]
+550.               !Upper temperature limit [K]
+250000.            !Upper pressure limit [kPa]
+12.11              !Maximum density [mol/L]
+4   4              !# terms for dilute gas function:  numerator, denominator
+ 511.72      0.001 !Reducing parameters for T, tcx
+-8.2523346   0.    !Coefficient, power in T
+ 76.336543   1.
+-217.6154    2.
+ 312.29877   3.
+ 1.0         0.
+ 0.28341479  1.
+ 2.7890541   2.
+ 0.32645005  3.
+10  0              !# terms for background gas function:  numerator, denominator
+ 511.72  3.92  1.  !Reducing parameters for T, rho, tcx
+ 0.0920536   0.  1.  0.
+-0.172699    0.  2.  0.
+ 0.126557    0.  3.  0.
+-0.0362296   0.  4.  0.
+ 0.00388718  0.  5.  0.
+-0.0435129   1.  1.  0.
+ 0.112636    1.  2.  0.
+-0.0908663   1.  3.  0.
+ 0.028095    1.  4.  0.
+-0.00280368  1.  5.  0.
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for cyclopentane of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.216e-9           !Xi0 (amplitude) [m]
+0.058              !Gam0 (amplitude) [-]
+0.624e-9           !Qd_inverse (modified effective cutoff parameter) [m]
+767.58             !Tref (reference temperature) [K]
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Propane reference) for cyclopentane.
+:DOI: 10.6028/NIST.IR.8209
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+          ?Huber, M.L., (2018) "Models for the Viscosity, Thermal Conductivity, and
+          ? Surface Tension of Selected Pure Fluids as Implemented in REFPROP v10.0",
+          ? NISTIR 8209; doi: 10.6028/NIST.IR.8209
+          ?
+          ?THERMAL CONDUCTIVITY
+          ? Comparisons with liquid data of Assael, M. J., Dalaouti, N. K. "Thermal Conductivity of Toluene+Cyclopentane Mixtures: Measurements and Prediction" Int. J. Thermophys., 2001, 22(3), 659-678
+          ? indicate an estimated uncertainty of 2 % along the saturation boundary and at pressures to 15 MPa
+          ?
+          ?VISCOSITY
+          ? Comparisons with the liquid data of Assael, M. J., Dalaouti, N. K. "Measurement of the viscosity of cyclopentane  from 210 to 310 K and pressures up to 25 MPa" High Temp. - High Pressures, 2000, 32, 179-184
+          ? indicate an estimated uncertainty of 2-3 % along the saturation boundary and at pressures to 25 MPa
+          ?
+          ?The Lennard-Jones parameters were estimated with the method of Chung.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          179.7              !Lower temperature limit [K]
+          600.0              !Upper temperature limit [K]
+          200000.0           !Upper pressure limit [kPa]
+          12.2               !Maximum density [mol/L]
+          FEQ PROPANE.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          BIG                !Large molecule identifier
+          0.99 0. 0. 0.      !Large molecule parameters
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.518              !Lennard-Jones coefficient sigma [nm]
+          406.33             !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+          1  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00132       0. 0. 0.  !Coefficient, power of T, spare1, spare2
+          2  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+            1.04775      0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+         -8.02057e-4     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+           2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.01979       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+           0.00432795    0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for cyclopentane of Mulero et al. (2014).
+:DOI: 10.1063/1.4878755
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A. and Cachadiña, I.,
+? "Recommended Correlations for the Surface Tension of Several Fluids
+? Included in the REFPROP Program,"
+? J. Phys. Chem. Ref. Data, 43, 023104, 2014.
+? doi: 10.1063/1.4878755
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+511.72             !Critical temperature used in fit (dummy)
+0.07348   1.388    !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for cyclopentane of Gedanitz et al. (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+511.72    4582.8   !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-7.42670   1.0
+ 3.31721   1.5
+-2.67345   2.0
+-2.72910   4.4
+-3.17337   20.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for cyclopentane of Gedanitz et al. (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+511.72  3.92       !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 6.98737   0.55
+-16.8780   0.94
+ 26.8581   1.35
+-20.6403   1.8
+ 6.40338   2.35
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for cyclopentane of Gedanitz et al. (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+511.72  3.92       !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-4.36877   0.491
+-10.9430   1.9
+-34.8856   4.9
+-63.2191   10.0
+-155.468   20.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

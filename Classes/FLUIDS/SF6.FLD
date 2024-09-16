@@ -1,0 +1,848 @@
+Sulfur hexafluoride  !Short name
+2551-62-4            !CAS number
+Sulfur hexafluoride  !Full name
+SF6                  !Chemical formula {SF6}
+Sulfur fluoride      !Synonym
+146.0554192          !Molar mass [g/mol]
+223.555              !Triple point temperature [K]
+204.9                !Normal boiling point [K]
+318.7232             !Critical temperature [K]
+3754.983             !Critical pressure [kPa]
+5.0823               !Critical density [mol/L]
+0.218                !Acentric factor (calculated by extrapolating the vapor pressure curve beyond the triple point temperature)
+0.0                  !Dipole moment [Debye]; (exactly zero due to symmetry)
+IIR                  !Default reference state
+10.0                 !Version number
+1080                 !UN Number                                                 :UN:
+other                !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1S/F6S/c1-7(2,3,4,5)6                     !Standard InChI String                :InChi:
+SFZCNBIFKDRMGX-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+434e2a40  (ethane)                        !Alternative fluid for mixing rules   :AltID:
+7a75e610                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by M. McLinden, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 03-14-97  MM, Original version.
+! 08-24-98 EWL, Change EOS to that of de Reuck et al. (1991).
+! 11-18-98 EWL, Add equation of state of Polt et al. (1992).
+! 10-05-06 EWL, Add Guder and Wagner EOS.
+! 08-13-08 EWL, Add additional information from Guder and Wagner publication.
+! 04-05-11 MLH, Add altunin viscosity model and hafer viscosity models.
+! 11-18-11 MLH, Add revised FT model.
+! 01-09-12 MLH, Add Assael thermal conductivity model.
+! 09-18-12 MLH, Update references on thermal conductivity and viscosity.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 06-03-14 MLH, Correct thermal conductivity density scaling factor.
+! 08-26-14 EWL, Change acentric factor from 0.21 to 0.218.
+! 05-15-17 EWL, Change the hard coded VS0 model to the VS7 reverse Polish notation.
+! 02-02-18 EWL, Add melting line model of Harvey (2017).
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for sulfur hexafluoride of Guder and Wagner (2009).
+:TRUECRITICALPOINT:  318.7232   5.0823174112  !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1063/1.3037344
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Guder, C. and Wagner, W.,
+? "A Reference Equation of State for the Thermodynamic Properties of Sulfur
+? Hexafluoride (SF6) for Temperatures from the Melting Line to 625 K and
+? Pressures up to 150 MPa,"
+? J. Phys. Chem. Ref. Data, 38(1):33-94, 2009. doi: 10.1063/1.3037344
+?
+?The uncertainties in density are 0.02% for temperatures less than 340 K
+? (<30 MPa), 0.03% for temperatures below 500 K (<30 MPa), 0.1% increasing
+? to 0.3% at temperatures above 500 K, and 0.2% for all temperatures at
+? pressures above 30 MPa increasing to 1% at the pressure limits of the
+? equation of state.  In the critical region, the uncertainty in
+? pressure is 0.01%.  The uncertainties in the speed of sound range from
+? 0.1% at the lowest temperatures in the gas phase, to 0.5% in the liquid,
+? and to 1-2% elsewhere.  The uncertainties in heat capacities are
+? generally within 2%, decreasing to 0.2% at the lowest pressures in the
+? vapor phase; below 400 K and above 20 MPa, the uncertainties are 5%.
+? The uncertainty in vapor pressure is 0.01%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+223.555            !Lower temperature limit [K]
+625.0              !Upper temperature limit [K]
+150000.0           !Upper pressure limit [kPa]
+14.5               !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+146.0554192                            !Molar mass [g/mol]
+223.555                                !Triple point temperature [K]
+231.429                                !Pressure at triple point [kPa]
+12.632                                 !Density at triple point [mol/L]
+204.9                                  !Normal boiling point temperature [K]
+0.218                                  !Acentric factor
+318.7232      3754.983    5.0823174112 !Tc [K], pc [kPa], rhoc [mol/L]
+318.7232                  5.0823174112 !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  22  4  14 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 0.54958259132835      0.125    1.  0. !a(i),t(i),d(i),l(i)
+-0.87905033269396      1.25     1.  0.
+-0.84656969731452      1.875    1.  0.
+ 0.27692381593529      0.125    2.  0.
+-4.9864958372345       1.5      2.  0.
+ 4.8879127058055       1.625    2.  0.
+ 0.036917081634281     1.5      3.  0.
+ 0.00037030130305087   5.625    3.  0.
+ 0.039389132911585     0.625    4.  0.
+ 0.00042477413690006   0.25     6.  0.
+-0.02415001386389      6.0      1.  1.
+ 0.059447650642255     0.25     2.  1.
+-0.38302880142267      4.75     2.  1.
+ 0.32606800951983      5.375    2.  1.
+-0.029955940562031     5.875    3.  1.
+-0.086579186671173     2.0      6.  1.
+ 4.1600684707562       5.875    2.  2.
+-4.1398128855814       6.0      2.  2.
+-0.55842159922714      5.625    4.  2.
+ 0.56531382776891      5.75     4.  2.
+ 0.0082612463415545    0.0      2.  3.
+-0.01020099533808      0.5      2.  3.
+-0.021662523861406     4.0      1.  2. 2.     -10.0    -150.0   1.13    0.85     0. 0. 0.
+ 0.034650943893908     1.0      3.  2. 2.     -10.0    -150.0   1.13    0.85     0. 0. 0.
+-0.028694281385812     3.0      4.  2. 2.     -10.0    -150.0   1.13    0.85     0. 0. 0.
+ 0.0084007238998053    2.0      1.  2. 2.     -10.0    -150.0   1.16    0.85     0. 0. 0.
+-0.26969359922498      4.0      1.  2. 2.     -11.0    -225.0   1.19    1.0      0. 0. 0.
+ 9.0415215646344       3.0      4.  2. 2.     -25.0    -300.0   1.19    1.0      0. 0. 0.
+-3.7233103557977       4.0      3.  2. 2.     -30.0    -350.0   1.16    1.0      0. 0. 0.
+-2752.4670823704       1.0      4.  2. 2.     -30.0    -350.0   1.16    1.0      0. 0. 0.
+ 5771.1861697319       2.0      4.  2. 2.     -30.0    -350.0   1.16    1.0      0. 0. 0.
+-3023.4003119748       3.0      4.  2. 2.     -30.0    -350.0   1.16    1.0      0. 0. 0.
+ 2225277.843536        3.0      1.  2. 2.     -30.0    -400.0   1.22    1.0      0. 0. 0.
+-2305606.5559032       4.0      1.  2. 2.     -30.0    -400.0   1.22    1.0      0. 0. 0.
+ 6391885.2944475       3.0      3.  2. 2.     -30.0    -400.0   1.22    1.0      0. 0. 0.
+-6079209.1415592       4.0      3.  2. 2.     -30.0    -400.0   1.22    1.0      0. 0. 0.
+                                               eta      beta    gamma   epsilon
+                                         EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for sulfur hexafluoride of Guder and Wagner (2009).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Guder, C. and Wagner, W., 2009.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0        0.0
+ 3.66118232 515.4653151
+ 7.87885103 875.5693279
+ 3.45981679 1349.12572
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for sulfur hexafluoride of Guder and Wagner (2009).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Guder, C. and Wagner, W., 2009.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+-15.4089857348096295    0.0      !aj, ti for [ai*tau**ti] terms
+ 10.8151609115241314    1.0      !aj, ti for [ai*tau**ti] terms
+  3.66118232 515.4653151         !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  7.87885103 875.5693279
+  3.45981679 1349.12572
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for sulfur hexafluoride of Guder and Wagner (2009).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Guder, C. and Wagner, W., 2009.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  3  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 3.0               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+ 11.638611086      0.0                 !aj, ti for [ai*tau**ti] terms
+-6.392241811       1.0
+ 3.66118232       -1.617282065         !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 7.87885103       -2.747115139
+ 3.45981679       -4.232907175
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FES     !Helmholtz equation of state for sulfur hexafluoride of Span and Wagner (2003).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Span, R. and Wagner, W.
+          ? "Equations of State for Technical Applications. II. Results for Nonpolar Fluids,"
+          ? Int. J. Thermophys., 24(1):41-109, 2003. doi: 10.1023/A:1022310214958
+          ?
+          ?The uncertainties of the equation of state are approximately 0.2% (to
+          ? 0.5% at high pressures) in density, 1% (in the vapor phase) to 2% in
+          ? heat capacity, 1% (in the vapor phase) to 2% in the speed of sound, and
+          ? 0.2% in vapor pressure, except in the critical region.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          222.38             !Lower temperature limit [K]
+          600.0              !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          12.65              !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          146.054                                !Molar mass [g/mol]
+          222.38                                 !Triple point temperature [K]
+          221.22                                 !Pressure at triple point [kPa]
+          12.645                                 !Density at triple point [mol/L]
+          205.56                                 !Normal boiling point temperature [K]
+          0.218                                  !Acentric factor
+          318.7232      3755.0       5.0813398   !Tc [K], pc [kPa], rhoc [mol/L]
+          318.7232                   5.0813398   !Reducing parameters [K, mol/L]
+          8.31451                                !Gas constant [J/mol-K]
+            12  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           1.2279403       0.25      1.  0.      !a(i),t(i),d(i),l(i)
+          -3.3035623       1.125     1.  0.
+           1.2094019       1.5       1.  0.
+          -0.12316         1.375     2.  0.
+           0.11044657      0.25      3.  0.
+           0.00032952153   0.875     7.  0.
+           0.27017629      0.625     2.  1.
+          -0.062910351     1.75      5.  1.
+          -0.3182889       3.625     1.  2.
+          -0.099557419     3.625     4.  2.
+          -0.036909694    14.5       3.  3.
+           0.019136427    12.0       4.  3.
+
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for sulfur hexafluoride of de Reuck et al. (1991).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?de Reuck, K.M., Craven, R.J.B., and Cole, W.A.,
+          ? "Report on the Development of an Equation of State for Sulphur Hexafluoride,"
+          ? IUPAC Thermodynamic Tables Project Centre, London, 1991.
+          ?
+          ?The uncertainties of the equation of state are 0.1% in density, 2% in heat
+          ? capacity, and 5% in the speed of sound, except in the critical region.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          222.38             !Lower temperature limit [K]
+          525.0              !Upper temperature limit [K]
+          55000.0            !Upper pressure limit [kPa]
+          12.7               !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          146.0564                               !Molar mass [g/mol]
+          222.38                                 !Triple point temperature [K]
+          224.36                                 !Pressure at triple point [kPa]
+          12.677                                 !Density at triple point [mol/L]
+          204.9                                  !Normal boiling point temperature [K]
+          0.21                                   !Acentric factor
+          318.733       3754.55      5.0926      !Tc [K], pc [kPa], rhoc [mol/L]
+          318.733                    5.0926      !Reducing parameters [K, mol/L]
+          8.31448                                !Gas constant [J/mol-K]
+            25  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           0.26945570453       0.0       1.  0.  !a(i),t(i),d(i),l(i)
+          -0.554046585076      1.5       1.  0.
+          -0.929624636454      2.0       1.  0.
+           0.505661081063      0.0       2.  0.
+          -0.683495847809      1.0       2.  0.
+           0.579161832426      2.0       2.  0.
+          -0.122636218956      0.0       3.  0.
+          -0.0260339227668     2.0       4.  0.
+           0.0222201648687     0.0       5.  0.
+          -0.00118992341472    0.5      10.  0.
+           0.00292000609763    1.0      10.  0.
+          -0.00243315775571    1.5      10.  0.
+           0.00068977829755    2.0      10.  0.
+          -1.47585329235       3.0       2.  2.
+           2.75952303526       4.0       2.  2.
+          -1.42721418498       5.0       2.  2.
+           0.0598794196648     5.0       3.  2.
+           0.00219991168025    1.0       7.  2.
+           0.00746554473361    5.0       7.  2.
+           0.00345233637389    1.0       9.  2.
+          -0.0253226231963     9.0       4.  4.
+           0.0433906886402    14.0       4.  4.
+          -0.0249349699078    24.0       4.  4.
+           0.00338560952242   24.0       6.  4.
+           0.0005399858997     9.0       4.  6.
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for sulfur hexafluoride of Cole and de Reuck (1990).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Cole, W.A. and de Reuck, K.M.,
+          ? "An interim analytic equation of state for sulfurhexafluoride,"
+          ? Int. J. Thermophysics, 11:189-199, 1990. doi: 10.1007/BF00503870
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.31448    !Reducing parameters for T, Cp0
+          1 5   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           3.9837756784      0.0                 !  = f1 term of Cole and de Reuck
+           2.218185101       1114.38             !  = f2, g2 coefficients
+          -10.921337374      925.64
+           3.3102497939      499.26
+           17.5189671483     884.9
+           2.8903523803      1363.93
+
+
+@EOS    !---Equation of state---
+FE2     !Helmholtz equation of state for sulfur hexafluoride of Polt et al. (1992).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Polt, A., Platzer, B., and Maurer, G.,
+          ? "Parameter der thermischen Zustandsgleichung von Bender fuer 14
+          ? mehratomige reine Stoffe,"
+          ? Chem. Tech. (Leipzig), 44(6):216-224, 1992.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          222.38             !Lower temperature limit [K]
+          523.0              !Upper temperature limit [K]
+          40000.0            !Upper pressure limit [kPa]
+          13.133             !Maximum density [mol/L]
+          CP2                                    !Pointer to Cp0 model
+          146.05                                 !Molar mass [g/mol]
+          222.38                                 !Triple point temperature [K]
+          236.73                                 !Pressure at triple point [kPa]
+          12.712                                 !Density at triple point [mol/L]
+          200.44                                 !Normal boiling point temperature [K]
+          0.1891                                 !Acentric factor
+          318.75        3764.1       4.9880178   !Tc [K], pc [kPa], rhoc [mol/L]
+          318.75                     4.9880178   !Reducing parameters [K, mol/L]
+          8.3143                                 !Gas constant [J/mol-K]
+            22  5    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           0.131111896375     3.  0.  0.  0.     !a(i),t(i),d(i),l(i)
+          -0.792338803106     4.  0.  0.  0.
+           0.580899809209     5.  0.  0.  0.
+           1.53233600406      0.  1.  0.  0.
+          -4.85096079094      1.  1.  0.  0.
+           4.82411603806      2.  1.  0.  0.
+          -3.11285647219      3.  1.  0.  0.
+           0.442141211276     4.  1.  0.  0.
+           0.206313183222     0.  2.  0.  0.
+          -0.372305169645     1.  2.  0.  0.
+           0.443536383059     2.  2.  0.  0.
+          -0.047635485091     0.  3.  0.  0.
+           0.116313319336     1.  3.  0.  0.
+           0.0570240883234    0.  4.  0.  0.
+          -0.152963195118     1.  4.  0.  0.
+           0.0259842094503    1.  5.  0.  0.
+          -0.131111896375     3.  0.  2.  1.32678063
+           0.792338803106     4.  0.  2.  1.32678063
+          -0.580899809209     5.  0.  2.  1.32678063
+          -0.744763581796     3.  2.  2.  1.32678063
+           2.04368923925      4.  2.  2.  1.32678063
+          -1.2933532412       5.  2.  2.  1.32678063
+
+
+@AUX    !---Auxiliary function for Cp0
+CP2     !Ideal gas heat capacity function for sulfur hexafluoride.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Polt, A., Platzer, B., and Maurer, G.,
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     146.05     !Reducing parameters for T, Cp0
+          3 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+          -0.0376915         0.0
+           0.00305814        1.0
+          -0.00000237654     2.0
+
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#ETA   !---Viscosity---
+VS4    !Pure fluid generalized friction theory viscosity model for sulfur hexafluoride of Quinones-Cisneros et al. (2012).
+:DOI: 10.1063/1.3702441
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Quiñones-Cisneros, S.E., Huber, M.L., and Deiters, U.K.,
+? "Correlation for the Viscosity of Sulfur Hexafluoride (SF6) from the Triple
+? Point to 1000 K and Pressures to 50 MPa,"
+? J. Phys. Chem. Ref. Data, 41(2), 023102, 2012. doi: 10.1063/1.3702441
+?
+?In the low-pressure (less than 0.33 MPa) region from 300 K to 700 K the estimated uncertainty
+? is 0.3%. In the region from 300 K to 425 K for pressures less than 20 MPa, the estimated uncertainty
+? is less than 1%. Where there were data available for validation at temperatures from 230 K to 575 K
+? for pressures up to 50 MPa, the estimated uncertainty is 2%. The correlation extrapolates
+? in a physically reasonable manner and may be used at pressures to 100 MPa and temperatures
+? from the triple point to 1000 K.
+?
+!```````````````````````````````````````````````````````````````````````````````
+223.555            !Lower temperature limit [K]
+1000.0             !Upper temperature limit [K]
+100000.0           !Upper pressure limit [kPa]
+14.5               !Maximum density [mol/L]
+6 0 0 0 0 0        !Number of terms associated with dilute-gas function
+NUL                !Pointer to reduced effective collision cross-section model; not used
+0.5218             !Lennard-Jones coefficient sigma [nm] (not used)
+222.1              !Lennard-Jones coefficient epsilon/kappa [K] (not used)
+ 318.7232  0.001   !Reducing parameters for T, eta
+0.0         0.5    !Chapman-Enskog term; not used here
+ 118561.16699351955    0.0             !Empirical eta0 terms
+-378102.73635338076    0.25
+ 416427.9031538455     0.50
+-165294.7340464616     0.75
+ 24538.07646056496     1.0
+0                  !Number of terms for initial density dependence
+-0.000687811175736081  0.0008226610400301656    -0.00035486706526579556   0. 0.  !  a(0),a(1),a(2)
+ 0.00017273725029313174 -0.00020244781619303473  0.00019595249965414938   0. 0.  !  b(0),b(1),b(2)
+ 0.000053878327830358164 1.6380545026985154e-6  -0.000020815988636242458  0. 0.  !  c(0),c(1),c(2)
+ 9.995629603356937e-8 -9.641674089199906e-9     -7.541957772276217e-9     0. 0.  !  A(0),A(1),A(2)
+-8.982564893670087e-8 -8.494276469212978e-8      0.0                      0. 0.  !  B(0),B(1),B(2)
+-8.534317761264114e-6  0.000011440365750572709  -5.657623737235593e-6     0. 0.  !  C(0),C(1),C(2)
+ 0.0                   0.0                       2.2798018358592354e-11   0. 1.  !  D(0),D(1),D(2)
+ 0.0                  -5.6940155341869364e-11    2.921901268228413e-11    0. 1.  !  E(0),E(1),E(2)
+NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC1    !Pure fluid thermal conductivity model for sulfur hexafluoride of Assael et al. (2012).
+:DOI: 10.1063/1.4708620
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Assael, M.J., Koini, I.A., Antoniadis, K.D., Huber, M.L., Abdulagatov, I.M., and Perkins, R.A.,
+? "Reference Correlation of the Thermal Conductivity of Sulfur Hexafluoride
+? from the Triple Point to 1000 K and up to 150 MPa,"
+? J. Phys. Chem. Ref. Data, 41, 023104, 2012.  doi: 10.1063/1.4708620 Also see erratum, submitted 2014.
+?
+?The overall uncertainty is estimated, for pressures less than 150 MPa and temperatures less than 1000 K,
+? to be less than 4%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+223.55             !Lower temperature limit [K]
+1000.0             !Upper temperature limit [K]
+150000.0           !Upper pressure limit [kPa]
+14.5               !Maximum density [mol/L]
+4   3              !# terms for dilute gas function:  numerator, denominator
+ 1.0         0.001 !Reducing parameters for T, tcx
+ 1461860.0   0.
+-18539.4     1.
+ 77.7891     2.
+ 0.0241059   3.
+ 29661.7     0.
+ 505.67      1.
+ 1.0         2.
+ 10  0             !# terms for background gas function:  numerator, denominator
+318.7232 5.0823 1. !Reducing parameters for T, rho, tcx
+-0.0283746   0.  1.  0.
+ 0.0207472   0.  2.  0.
+-0.0055718   0.  3.  0.
+ 0.0053289   0.  4.  0.
+-0.00161688  0.  5.  0.
+ 0.0352768   1.  1.  0.
+-0.0433053   1.  2.  0.
+ 0.0512084   1.  3.  0.
+-0.0290262   1.  4.  0.
+ 0.00598438  1.  5.  0.
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for sulfur hexafluoride of Assael et al. (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Assael, M.J., Koini, I.A., Antoniadis, K.D., Huber, M.L., Abdulagatov, I.M., and Perkins, R.A., 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.2415             !Gamma (universal exponent)
+1.01               !R0 (universal amplitude)
+0.065              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.19e-9            !Xi0 (amplitude) [m]
+0.052              !Gam0 (amplitude) [-]
+0.35e-9            !Qd_inverse (modified effective cutoff parameter) [m]
+478.08             !Tref (reference temperature) [K]
+
+
+
+
+********************************************************************************
+
+@ETA    !---Viscosity---
+VS1     !Pure fluid viscosity model for sulfur hexafluoride of Hafer (1999).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Hafer, R.F., Torsional crystal viscometry: Wide ranging  resonance measurements
+          ? and feasability study of transient-decay measurements, MSc Thesis, Dept. Chem. Eng. Univ. Colorado (1999)
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          223.555            !Lower temperature limit [K]
+          625.0              !Upper temperature limit [K]
+          150000.0           !Upper pressure limit [kPa]
+          14.5               !Maximum density [mol/L]
+          1                  !Number of terms associated with dilute-gas function
+          CI1                !Pointer to reduced effective collision cross-section model
+          0.52451            !Lennard-Jones coefficient sigma [nm]
+          211.43             !Lennard-Jones coefficient epsilon/kappa [K]
+          1.0      1.0       !Reducing parameters for T, eta
+          0.32263     0.5    !=0.0266957*SQRT(MW)  [Chapman-Enskog term]
+          9                  !Number of terms for initial density dependence
+          211.43    0.08690  !Reducing parameters for T (=eps/k), etaB2 (= 0.6022137*sigma**3)
+          -19.572881    0.0  !Coefficient, power in T* = T/(eps/k)
+           219.73999   -0.25
+          -1015.3226   -0.5
+           2471.0125   -0.75
+          -3375.1717   -1.0
+           2491.6597   -1.25
+          -787.26086   -1.5
+           14.085455   -2.5
+          -0.34664158  -5.5
+          -2 4 1 2 0 0       !# resid terms:  close-packed density;  simple poly; numerator of rational poly; denominator of rat. poly; numerator of exponential; denominator of exponential
+          318.7232  5.0823        1000.0         !Reducing parameters for T, rho, eta
+           2.91772    0.0    !Alternative form for del10; numerator term
+          -0.0741208  0.5    !Alternative form for del10; denominator terms
+          -0.043169     0.0    1.  0.  0         !  beta1; powers of tau, del, del0; power of del in exponential [0 indicated no exponential term present]
+           0.0061884    0.0    2.  0.  0         !  beta2
+          -0.00542764   0.0    3.  0.  0         !  beta3
+          -0.0          0.0    1. -1.  0         !  beta7
+           0.140519     0.0    1.  0.  0         !  beta7 in non-simple poly term
+           1.0          0.0    0.  1.  0         !  del0 term in denominator
+          -1.0          0.0    1.  0.  0         !  -del term in denominator
+          NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+@AUX    !---Auxiliary function for the collision integral
+CI1     !Reduced effective collision cross-section model (empirical form in log(T*)) for sulfur hexafluoride.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          5                  !Number of terms
+           0.4450251      0  !Coefficient, power of Tstar
+          -0.5079322      1
+           0.1285776      2
+          -0.008328165    3
+          -0.002713173    4
+
+
+@ETA    !---Viscosity---
+VS7     !Pure fluid viscosity model for sulfur hexafluoride of Altunin (1984).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Altunin, V.V., "Equation for the viscosity of sulfur hexafluoride for a
+          ? broad range of temperatures and presurs, Tr. Mosk., Energ. Inst., 1984,622, pp12-18
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          223.555            !Lower temperature limit [K]
+          625.0              !Upper temperature limit [K]
+          150000.0           !Upper pressure limit [kPa]
+          14.5               !Maximum density [mol/L]
+          NUL                                    !Omega model
+          !
+          !Residual function
+          $RF RED SUM:3 SUMEX:10 *
+          !
+          !Coefficients
+          $CF
+           1.0  318.7  5.05287653  0.  0       !Reducing parameters for eta, T, rho
+           0.486           0.  0.  0.  0         !Dilute gas terms
+           17.075          1.  0.  0.  0
+          -1.3976          2.  0.  0.  0
+           0.911990483     0.  1.  0.  0         !Simple polynomial terms
+          -3.62880599      0.  2.  0.  0
+           4.68880707      0.  3.  0.  0
+          -2.04822413      0.  4.  0.  0
+           0.299289894     0.  5.  0.  0
+          -0.798662631    -1.  1.  0.  0
+           5.48041104     -1.  2.  0.  0
+          -6.15316823     -1.  3.  0.  0
+           2.58614144     -1.  4.  0.  0
+          -0.369541671    -1.  5.  0.  0
+          NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Propane reference); predictive mode for sulfur hexafluoride.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+          ?Unpublished; uses method described in the following reference:
+          ?Huber, M.L., Laesecke, A., and Perkins, R.A.
+          ? "Model for the Viscosity and Thermal Conductivity of Refrigerants, Including
+          ? a New Correlation for the Viscosity of R134a,"
+          ? Ind. Eng. Chem. Res., 42(13):3163-3178, 2003. doi: 10.1021/ie0300880
+          ?
+          ?The Lennard-Jones parameters were estimated from Reid, Prausnitz  & Sherwood (1977).
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          223.55             !Lower temperature limit [K]
+          1000.0             !Upper temperature limit [K]
+          150000.0           !Upper pressure limit [kPa]
+          14.5               !Maximum density [mol/L]
+          FEQ PROPANE.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.5128             !Lennard-Jones coefficient sigma [nm] for ECS method
+          222.1              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+          1  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00132  0. 0. 0. !Coefficient, power of T, spare1, spare2
+          1  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          1  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#DE    !---Dielectric constant---
+DE3    !Dielectric constant model for SF6 of Harvey and Mountain (2017).
+:DOI: 10.1007/s10765-017-2279-6
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Harvey, A.H. and Mountain, R.D.,
+? "Correlations for the Dielectric Constants of H2S, SO2, and SF6,"
+? Int. J. Thermophys., 38:147, 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+273.16 1000.0 1.0  !Reducing parameters for T and D
+0 1 4 0 0 0        !Number of terms in dielectric constant model
+ 16.5    0. 1.  0. !Coefficient, T exp, D exp
+ 69.2    0. 2.  0.
+ 38.8    1. 2.  0.
+-177.9   0. 2.2 0.
+-171.9   1. 2.2 0.
+
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for sulfur hexafluoride of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+2                  !Number of terms in surface tension model
+318.723            !Critical temperature used in fit (dummy)
+ 0.0538    1.271   !Sigma0 and n
+-0.00004064  0.2116
+
+
+#MLT   !---Melting line---
+ML1    !Melting line model for sulfur hexafluoride of Harvey (2017).
+:DOI: 10.1063/1.5005537
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Harvey, A.H.,
+? "On the Melting Curve of Sulfur Hexafluoride,"
+? J. Phys. Chem. Ref. Data, 46(4), 043102, 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+223.555            !Lower temperature limit [K]
+650.0              !Upper temperature limit [K]
+0.                 !
+0.                 !
+223.555   231.429  !Reducing temperature and pressure
+3 0 0 0 0 0        !Number of terms in melting line equation
+ 1.0          0.0  !Coefficients and exponents
+ 966.603148   1.555
+-966.603148   0.0
+
+
+#SBL   !---Sublimation line---
+SB2    !Sublimation line model for sulfur hexafluoride of Guder and Wagner (2009).
+:DOI: 10.1063/1.3037344
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Guder, C. and Wagner, W., 2009.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+223.555            !Upper temperature limit [K]
+0.                 !
+0.                 !
+223.555  231.429   !Reducing temperature and pressure
+2 0 0 0 0 0        !Number of terms in sublimation line equation
+-11.6942141 -1.07  !Coefficients and exponents
+ 11.6942141  0.0   !Coefficients and exponents
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for sulfur hexafluoride of Guder and Wagner (2009).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Guder, C. and Wagner, W., 2009.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+318.7232 3754.983  !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-7.09634642 1.0
+ 1.676662   1.5
+-2.3921599  2.5
+ 5.86078302 4.0
+-9.02978735 4.5
+
+
+#DL    !---Saturated liquid density---
+DL6    !Saturated liquid density equation for sulfur hexafluoride of Guder and Wagner (2009).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Guder, C. and Wagner, W., 2009.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^(ti/3))*Tc/T] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+318.7232 5.0823174112    !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+ 2.31174688  1.065
+-1.12912486  1.5
+-1.439347    4.0
+ 0.282489982 5.0
+
+
+#DV    !---Saturated vapor density---
+DV6    !Saturated vapor density equation for sulfur hexafluoride of Guder and Wagner (2009).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Guder, C. and Wagner, W., 2009.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^(ti/3))*Tc/T] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+318.7232 5.0823174112    !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+ 23.68063442    1.044
+ 0.513062232    0.5
+-24.4706238     1.0
+-4.6715244      2.0
+-1.7536843      8.0
+-6.65585369     17.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890
+                    @ETA               !Viscosity model specification
+                    VS0  pure fluid viscosity model of Altunin (1984).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?Altunin, V.V., "Equation for the viscosity of sulfur hexafluoride for a
+                    ? broad range of temperatures and presurs, Tr. MOsk., Energ. Inst., 1984,622, pp12-18
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    223.555            !Lower temperature limit [K]
+                    625.0              !Upper temperature limit [K]
+                    150000.0           !Upper pressure limit [kPa]
+                    14.5               !Maximum density [mol/L]
+                    SF6                !Pointer to hardcoded viscosity model
+                    0 1 1 0 0 0 0 0    !Number of terms for various pieces
+                    1.0  1.0  1.0      !Reducing parameters for T, rho, eta
+                    0. 0. 0. 0. 0      !Dilute gas coeffs
+                    0. 0. 0. 0. 0      !Residual coeffs
+                    NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+                    #MLT   !---Melting line---
+                    ML1    !Melting line model for sulfur hexafluoride of Guder and Wagner (2009).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?Guder, C. and Wagner, W.
+                    ? "A Reference Equation of State for the Thermodynamic Properties of Sulfur
+                    ? Hexafluoride (SF6) for Temperatures from the Melting Line to 625 K and
+                    ? Pressures up to 150 MPa,"
+                    ? J. Phys. Chem. Ref. Data, 38(1):33-94, 2009.
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    223.555            !Lower temperature limit [K]
+                    650.0              !Upper temperature limit [K]
+                    0.                 !
+                    0.                 !
+                    223.555   231.429  !Reducing temperature and pressure
+                    5 0 0 0 0 0        !Number of terms in melting line equation
+                     1.0          0.0  !Coefficients and exponents
+                    -30.0468473  -20.0
+                     30.0468473   0.0
+                     359.771253   3.25
+                    -359.771253   0.0
+
+

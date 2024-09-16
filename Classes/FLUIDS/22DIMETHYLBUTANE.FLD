@@ -1,0 +1,322 @@
+2,2-Dimethylbutane   !Short name
+75-83-2              !CAS number
+2,2-Dimethylbutane   !Full name
+(CH3)3CCH2CH3        !Chemical formula {C6H14}
+Neohexane            !Synonym
+86.17536             !Molar mass [g/mol]
+174.20               !Triple point temperature [K]
+322.846              !Normal boiling point [K]
+490.0                !Critical temperature [K]
+3138.0               !Critical pressure [kPa]
+2.78                 !Critical density [mol/L]
+0.230                !Acentric factor
+0.0                  !Dipole moment [Debye]; ab-initio calculations from HF 6-31G*
+NBP                  !Default reference state
+10.0                 !Version number
+1208, 2457           !UN Number                                                 :UN:
+br-alkane            !Family                                                    :Family:
+4177.52              !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C6H14/c1-5-6(2,3)4/h5H2,1-4H3          !Standard InChI String                :InChi:
+HNRMPXKDFBEGFZ-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+cb03ba40  (hexane)                        !Alternative fluid for mixing rules   :AltID:
+c9396950                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by K. Gao, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 05-18-17  KG, Original version.
+! 05-18-17  KG, Add equation of state of Gao et al. (2017)
+! 10-24-17 MLH, Add preliminary transport
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for 2,2-dimethylbutane of Gao et al. (2017).
+:TRUECRITICALPOINT:  490.0      2.78          !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W.,
+? unpublished equation, 2017.
+?
+?The uncertainties in density of the equation of state are 0.2 % in the liquid
+? phase region for temperatures between 240 K and 475 K and up to pressures of
+? 100 MPa, 1 % in the vapor phase region at temperatures between 495 K and
+? 575 K, and are higher in the critical region due to the lack of experimental
+? data.  The uncertainty in vapor pressure is 0.4 % between 230 K and 340 K.
+? The uncertainty in saturated-liquid density is 0.2 % between 240 K and 320 K.
+? The uncertainty in saturated-vapor density is 1.2 % between 275 K and 315 K. The
+? uncertainty in isobaric heat capacity is estimated to be 0.5 % in the liquid
+? phase at temperatures between the triple-point temperature (174.20 K) and 300 K,
+? and 0.6 % in the vapor phase at temperatures between 340 K and 450 K.
+?
+!```````````````````````````````````````````````````````````````````````````````
+174.20             !Lower temperature limit [K]
+575.0              !Upper temperature limit [K]
+1000000.0          !Upper pressure limit [kPa]
+8.77               !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+86.17536                               !Molar mass [g/mol]
+174.20                                 !Triple point temperature [K]
+0.00488865                             !Pressure at triple point [kPa]
+8.77                                   !Density at triple point [mol/L]
+322.846                                !Normal boiling point temperature [K]
+0.230                                  !Acentric factor
+490.0          3138.0       2.78       !Tc [K], pc [kPa], rhoc [mol/L]
+490.0                       2.78       !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  10  4   6 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.00702066   1.      5.  0.          !a(i),t(i),d(i),l(i)
+  0.70134226   0.156   1.  0.
+ -0.3659372    1.      1.  0.
+ -1.109303     1.      2.  0.
+  0.22742868   0.371   3.  0.
+ -1.8603613    1.4     1.  2.
+ -0.65052551   2.      3.  2.
+  1.1465612    1.      2.  1.
+ -0.31514795   2.15    2.  2.
+ -0.028916258  1.5     8.  2.
+  0.9153258    0.49    1.  2. 2.   -1.35    -1.709   1.275   0.7384   0. 0. 0.
+ -0.010020802  1.4     1.  2. 2.   -1.278   -0.218   0.91    2.063    0. 0. 0.
+ -0.52298297   0.687   3.  2. 2.   -1.35    -1.19    1.108   0.239    0. 0. 0.
+ -0.15308943   1.275   2.  2. 2.   -1.724   -0.33    1.184   1.057    0. 0. 0.
+ -0.21698526   1.48    1.  2. 2.   -1.042   -2.18    1.174   0.558    0. 0. 0.
+ -1.1808573    1.      3.  2. 2.  -27.     -1074.    1.094   0.926    0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for 2,2-dimethylbutane of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 7.5         0.0
+ 22.147   4370.0
+ 7.8764    525.0
+ 26.017   1620.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for 2,2-dimethylbutane of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  6.5                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+  4.0745022526048444    0.0      !aj, ti for [ai*tau**ti] terms
+ -1.0209177524244273    1.0      !aj, ti for [ai*tau**ti] terms
+  22.147   4370.0                !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  7.8764    525.0
+  26.017   1620.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Propane reference)
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?VISCOSITY
+? The ECS parameters for viscosity were based on the data of:
+? Chavanne, G. and Van Risseghem, H., "The Viscosities of Some Hydrocarbons," Bull. Soc. Chim. Belg., 31:87, 1922.
+? Brazier, D.W. and Freeman, G.R., "The Effects of Pressure on the Density, Dielectric Constant, and Viscosity of Several Hydrocarbons and Other Organic Liquids," Can. J. Chem., 47:893-899, 1969. doi: 10.1139/v69-147
+? Lambert et al., "Transport Properties of Gaseous Hydrocarbons," Proc. R. Soc. London, Ser. A, 231:280-290, 1955.
+?
+?Estimated uncertainty for liquid from 273-303 K at pressures to 100 MPa is 5%, vapor phase is 5%.
+?
+?THERMAL CONDUCTIVITY
+? The ECS parameters for thermal conductivity were based on the data of:
+? Watanabe, H., "Thermal Conductivity and Thermal Diffusivity of Sixteen Isomers of Alkanes: CnH2n+2(n=6 to 8)," J. Chem. Eng. Data, 48:124-136, 2003.
+? Lambert et al., "Transport Properties of Gaseous Hydrocarbons," Proc. R. Soc. London, Ser. A, 231, 280-290, 1955.
+?
+?The estimated uncertainty of the thermal conductivity of the liquid phase is 2% for
+? the saturated liquid from 257-321 K, 5% for the gas phase, and larger for higher pressures and near critical.
+?
+?The Lennard-Jones parameters were estimated with the method of Chung, T.H., Ajlan, M., Lee, L.L., and Starling, K.E., "Generalized Multiparameter Correlation for Nonpolar and Polar Fluid Transport Properties," Ind. Eng. Chem. Res., 27:671-679, 1988.
+?
+!```````````````````````````````````````````````````````````````````````````````
+174.20             !Lower temperature limit [K]
+575.0              !Upper temperature limit [K]
+100000.0           !Upper pressure limit [kPa]
+8.77               !Maximum density [mol/L]
+FEQ PROPANE.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.575              !Lennard-Jones coefficient sigma [nm] for ECS method
+389.1              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+1  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.00116       0. 0. 0.  !Coefficient, power of T, spare1, spare2
+2  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+  0.968903     0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+  0.0318896    0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 0.962159      0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+ 0.0268488     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for 2,2-dimethylbutane of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.240e-9           !Xi0 (amplitude) [m]
+0.059              !Gam0 (amplitude) [-]
+0.703e-9           !Qd_inverse (modified effective cutoff parameter) [m]; arbitrary guess
+735.0              !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for 2,2-dimethylbutane of Huber (2018).
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+? Fit to the data of:
+? Gao, W., Zhao, X., and Liu, Z., "Surface Tension of 2,2-Dimethylbutane from (233 to 378) K," J. Chem. Eng. Data, 54:1761-1763, 2009. doi: 10.1021/je8007952
+? Wilbaut et al., Recl. Trav. Chim. Pays-Bas, 58:329, 1939.
+?
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+490.0              !Critical temperature used in fit (dummy)
+0.0504886  1.24897 !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for 2,2-dimethylbutane of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+490.0    3138.0    !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-7.4088   1.0
+ 2.5218   1.5
+-1.5652   2.0
+-3.4318   3.85
+-1.2210  15.85
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for 2,2-dimethylbutane of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+490.0    2.78      !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 1.852    0.33
+-1.405    0.65
+ 6.393    0.95
+-7.718    1.3
+ 3.708    1.7
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for 2,2-dimethylbutane of Gao et al. (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., and Lemmon, E.W., 2017.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+490.0   2.78       !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-1.7198   0.320
+-5.7667   0.904
+-17.244   2.85
+-51.992   6.4
+-126.59  14.75
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

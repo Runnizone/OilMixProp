@@ -1,0 +1,315 @@
+R13I1                !Short name
+2314-97-8            !CAS number
+Trifluoroiodomethane !Full name
+CF3I                 !Chemical formula {CF3I}
+HFC-13I1             !Synonym
+195.9104             !Molar mass [g/mol]
+195.15               !Triple point temperature [K]
+251.291              !Normal boiling point [K]
+396.44               !Critical temperature [K]
+3953.0               !Critical pressure [kPa]
+4.4306               !Critical density [mol/L]
+0.176                !Acentric factor
+0.92                 !Dipole moment [Debye]; Di Giacomo & Smyth, J Am Chem Soc 77:774-777 (1955).
+IIR                  !Default reference state
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+halocb               !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1S/CF3I/c2-1(3,4)5                        !Standard InChI String                :InChi:
+VPAYJEUHKVESSD-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+7b3b4080  (butane)                        !Alternative fluid for mixing rules   :AltID:
+d26ca240                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by M. McLinden, NIST Thermophysics Division, Boulder, Colorado
+! 11-07-96  MM, Original version.
+! 04-07-98  MM, Add dipole moment.
+! 02-22-99  MM, Add surface tension.
+! 07-20-06 EWL, Add preliminary equation of state.
+! 11-13-06 MLH, Add LJ parameters.
+! 12-21-11 EWL, Minor changes to the EOS to prepare for publication.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 04-01-13  SH, Add ancillary equations.
+! 08-04-15 EWL, Change name to R13I1.
+! 08-04-15 EWL, Minor update to match new manuscript.  Refit the saturated density ancillaries.
+! 05-01-16 MLH, Update transport.
+! 02-14-17 MLH, Revise ECS transport.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for CF3I (R-13I1) of Lemmon and Span (2015).
+:TRUECRITICALPOINT:  396.44     4.4306        !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1021/acs.jced.5b00684
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R.,
+? "Thermodynamic Properties of R-227ea, R-365mfc, R-115, and R-13I1,"
+? J. Chem. Eng. Data, 60(12):3745-3758, 2015. doi: 10.1021/acs.jced.5b00684
+?
+?The uncertainties are 0.1 % in density in the liquid phase, 0.3 % in density
+? in the vapor phase, and 0.1 % in vapor pressures and vapor-phase speeds of sounds.
+? Uncertainties in other properties in the liquid phase except density are unknown.
+?
+!```````````````````````````````````````````````````````````````````````````````
+195.15             !Lower temperature limit [K] (this needs to be verified)
+420.               !Upper temperature limit [K]
+50000.             !Upper pressure limit [kPa]
+12.62              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+195.9104                               !Molar mass [g/mol]
+195.15                                 !Triple point temperature [K]
+4.8844                                 !Pressure at triple point [kPa]
+12.61                                  !Density at triple point [mol/L]
+251.291                                !Normal boiling point temperature [K]
+0.176                                  !Acentric factor
+396.44        3953.0       4.4306      !Tc [K], pc [kPa], rhoc [mol/L]
+396.44                     4.4306      !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  12  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 1.12191         0.25      1.  0.      !a(i),t(i),d(i),l(i)
+-3.08087         1.125     1.  0.
+ 1.11307         1.5       1.  0.
+-0.184885        1.375     2.  0.
+ 0.110971        0.25      3.  0.
+ 0.000325        0.875     7.  0.
+ 0.333357        0.625     2.  1.
+-0.0288288       1.75      5.  1.
+-0.371554        3.625     1.  2.
+-0.0997985       3.625     4.  2.
+-0.0333205      14.5       3.  3.
+ 0.0207882      12.0       4.  3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for CF3I (R-13I1) of Lemmon and Span (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 1   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0        0.0
+ 6.2641     694.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for CF3I (R-13I1) of Lemmon and Span (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  1  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+-24.6915063028695059    0.0      !aj, ti for [ai*tau**ti] terms
+ 14.2175285511018874    1.0      !aj, ti for [ai*tau**ti] terms
+  6.2641     694.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for R-13I1.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  1  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 3.0               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+-24.6914997848     0.0                 !aj, ti for [ai*tau**ti] terms
+ 14.2175252628     1.0
+ 6.2641           -1.7505801635        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (R134a reference); predictive mode for R-13I1.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?Estimated uncertainty for viscosity in the liquid phase along the saturation boundary
+? is 5%, 10% in the gas phase.
+?
+?Estimated uncertainty for thermal conductivity in the gas phase and liquid phases
+? is 10%; no data available for liquid phase.
+?
+?The Lennard-Jones parameters were estimated with the method of Chung.
+?
+!```````````````````````````````````````````````````````````````````````````````
+195.15             !Lower temperature limit [K]  (MSDS,  Trifluoromethyl Iodide, Synquest labs, 2016)
+420.0              !Upper temperature limit [K]
+50000.0            !Upper pressure limit [kPa]
+14.1               !Maximum density [mol/L]
+FEQ R134A.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+BIG                !Large molecule identifier
+0.95 0. 0. 0.      !Large molecule parameters
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.4926             !Lennard-Jones coefficient sigma [nm]
+314.8              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+2  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.00128541    0. 0. 0.  !Coefficient, power of T, spare1, spare2
+ 5.32854e-7    1. 0. 0.  !Coefficient, power of T, spare1, spare2
+2  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 1.22725       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.0879263     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+1  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 1.0           0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for R-13I1 of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.21e-9            !Xi0 (amplitude) [m]
+0.057              !Gam0 (amplitude) [-]
+0.598e-9           !Qd_inverse (modified effective cutoff parameter) [m]
+594.66             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for R-13I1 of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+396.44             !Critical temperature used in fit (dummy)
+0.05767   1.298    !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for R-13I1 of Lemmon and Span (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+396.44  3953.0     !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+-6.8642    1.0
+ 1.7877    1.5
+-1.0619    1.9
+-2.1677    3.8
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for R-13I1 of Lemmon and Span (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+396.44  4.4306     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 18.776    0.58
+-78.705    0.8
+ 149.49    1.0
+-130.69    1.2
+ 43.856    1.4
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for R-13I1 of Lemmon and Span (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+396.44  4.4306     !Reducing parameters
+7 0 0 0 0 0        !Number of terms in equation
+-47.722    0.65
+ 108.57    0.8
+-169.0     1.1
+ 171.54    1.4
+-82.244    1.75
+-40.758    5.8
+-83.584    13.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

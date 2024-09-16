@@ -1,0 +1,756 @@
+Parahydrogen         !Short name
+1333-74-0p           !CAS number
+Parahydrogen         !Full name
+H2                   !Chemical formula {H2}
+R-702p               !Synonym
+2.01588              !Molar mass [g/mol]
+13.8033              !Triple point temperature [K]
+20.271               !Normal boiling point [K]
+32.938               !Critical temperature [K]
+1285.8               !Critical pressure [kPa]
+15.538               !Critical density [mol/L]
+-0.219               !Acentric factor
+0.0                  !Dipole moment [Debye]; (exactly zero due to symmetry)
+NBP                  !Default reference state
+10.0                 !Version number
+1049                 !UN Number                                                 :UN:
+cryogen              !Family                                                    :Family:
+285.83               !Heating value (upper) [kJ/mol]                            :Heat:
+A3                   !Safety Group (ASHRAE Standard 34, 2010)                   :Safety:
+????                                      !Standard InChI String                :InChi:
+????                                      !Standard InChI Key                   :InChiKey:
+8d757b40  (hydrogen)                      !Alternative fluid for mixing rules   :AltID:
+8d757b4a                                  !Hash number from InChI Key           :Hash:
+
+
+!Quantum mechanics requires orthohydrogen to retain rotational energy at low temperatures, even below the triple point
+! temperature, that manifests in significantly higher ideal-gas thermal properties relative to parahydrogen.  The
+! traditional reference state determination method of setting the enthalpy and entropy of an ideal-gas equal to zero for a
+! saturated liquid at the normal boiling point does not account for this difference and results in false comparisons
+! between parahydrogen and orthohydrogen.  To allow the orthohydrogen and parahydrogen equations of state to accurately
+! reflect these differences, the reference state properties for orthohydrogen have been set in agreement with those
+! tabulated in LeRoy et al., J. Phys. Chem., 94:923-929, 1990.
+!
+!Here, the reference state for parahydrogen was left as NBP to conform with that from earlier versions of Refprop.
+! If you wish to obtain enthalpy and entropy properties that are consistent with those now used in the orthohydrogen
+! fluid file, delete line 14 above that has NBP on it and replace it with the following two lines:
+!OT0                  !Default reference state that agrees with those of LeRoy et al., J. Phys. Chem., 94:923-929, 1990.
+!25.0  0.1  519.654  123.5089
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 04-06-98 EWL, Original version.
+! 10-20-99 EWL, Add tcx and eta formulations from NIST12, Version 3.1.
+! 08-05-04 EWL, Add Harvey and Lemmon dielectric correlation.
+! 03-27-07 JWL, Add equation of state of Leachman et al. (2009).
+! 10-16-07 EWL, Change upper temp. limit of vis and tcx from 400 to 1000 K based on good graphical extrapolation.
+! 07-17-08 EWL, Change incorrect molecular weight from 2.01594 to 2.01588.
+! 07-21-08 EWL, Add vapor pressure ancillary.
+! 06-17-10 CKL, Add ancillaries for sat. densities.
+! 04-07-11 MLH, Add thermal conductivity model of Assael et al. (2011).
+! 04-07-11 MLH, Add viscosity model of Quinones-Cisneros et al. (2011) but not as default.
+! 11-16-12 MLH, Add new SR model of Muzny for viscosity.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 05-13-17 EWL, Change the ECS LJ sigma from 2.827 to the correct 0.2827.
+! 05-15-17 EWL, Change the hard coded VS0 model to the VS7 reverse Polish notation.
+! 08-06-17 EWL, Change melting point at Ttrp to match triple point pressure of Leachman et al.
+! 02-13-18 IHB, Update sublimation line model to match triple point (w/ AHH).
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for parahydrogen of Leachman et al. (2009).
+:TRUECRITICALPOINT:  32.938    15.538         !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1063/1.3160306
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Leachman, J.W., Jacobsen, R.T, Penoncello, S.G., and Lemmon, E.W.,
+? "Fundamental Equations of State for Parahydrogen, Normal Hydrogen, and Orthohydrogen,"
+? J. Phys. Chem. Ref. Data, 38(3):721-748, 2009.
+?
+?The uncertainty in density is 0.1% at temperatures from the triple point
+? to 250 K and at pressures up to 40 MPa, except in the critical region,
+? where an uncertainty of 0.2% in pressure is generally attained.  In the
+? region between 250 and 450 K and at pressures to 300 MPa, the
+? uncertainty in density is 0.04%.  At temperatures between 450 and 1000
+? K, the uncertainty in density increases to 1%.  At pressures between 300
+? and 2000 MPa, the uncertainty in density is 8%.  Speed of sound data are
+? represented within 0.5% below 100 MPa. The estimated uncertainty for
+? heat capacities is 1.0%.  The estimated uncertainties of vapor pressures
+? and saturated liquid densities calculated with the Maxwell criterion
+? are 0.1% for each property.
+?
+!```````````````````````````````````````````````````````````````````````````````
+13.8033            !Lower temperature limit [K]
+1000.0             !Upper temperature limit [K]
+2000000.0          !Upper pressure limit [kPa]
+104.0              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+2.01588                                !Molar mass [g/mol]
+13.8033                                !Triple point temperature [K]
+7.041                                  !Pressure at triple point [kPa]
+38.185                                 !Density at triple point [mol/L]
+20.271                                 !Normal boiling point temperature [K]
+-0.219                                 !Acentric factor
+32.938        1285.8      15.538       !Tc [K], pc [kPa], rhoc [mol/L]
+32.938                    15.538       !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+   9  4   5 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.01         1.0     4.  0.          !a(i),t(i),d(i),l(i)
+ -7.33375      0.6855  1.  0.
+  2.60375      1.0     1.  0.
+  4.66279      0.489   1.  0.
+  0.682390     0.774   2.  0.
+ -1.47078      1.133   2.  0.
+  0.135801     1.386   3.  0.
+ -1.05327      1.619   1.  1.
+  0.328239     1.162   3.  1.
+ -0.0577833    3.96    2.  2. 2.    -1.7437   -0.194   0.8048  1.5487   0. 0. 0.
+  0.0449743    5.276   1.  2. 2.    -0.5516   -0.2019  1.5248  0.1785   0. 0. 0.
+  0.0703464    0.99    3.  2. 2.    -0.0634   -0.0301  0.6648  1.28     0. 0. 0.
+ -0.0401766    6.791   1.  2. 2.    -2.1341   -0.2383  0.6832  0.6319   0. 0. 0.
+  0.119510     3.190   1.  2. 2.    -1.7770   -0.3253  1.4930  1.7104   0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for parahydrogen of Leachman et al. (2009).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Leachman, J.W., Jacobsen, R.T, Penoncello, S.G., and Lemmon, E.W., 2009.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+1 7   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 2.5        0.0
+ 4.30256    499.0
+ 13.0289    826.5
+-47.7365    970.8
+ 50.0013    1166.2
+-18.6261    1341.4
+ 0.993973   5395.0
+ 0.536078   10185.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for parahydrogen of Leachman et al. (2009).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Leachman, J.W., Jacobsen, R.T, Penoncello, S.G., and Lemmon, E.W., 2009.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  7  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  1.5                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -1.4485885457134948    0.0      !aj, ti for [ai*tau**ti] terms
+  1.8845208741487571    1.0      !aj, ti for [ai*tau**ti] terms
+  4.30256    499.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  13.0289    826.5
+ -47.7365    970.8
+  50.0013    1166.2
+ -18.6261    1341.4
+  0.993973   5395.0
+  0.536078   10185.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for parahydrogen.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Leachman, J.W., Jacobsen, R.T, Penoncello, S.G., and Lemmon, E.W., 2009.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  7  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 1.5               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+-1.4485891134      0.0                 !aj, ti for [ai*tau**ti] terms
+ 1.884521239       1.0
+ 4.30256          -15.1496751472       !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 13.0289          -25.0925982148
+-47.7365          -29.4735563787
+ 50.0013          -35.4059141417
+-18.6261          -40.724998482
+ 0.993973         -163.7925799988
+ 0.536078         -309.2173173842
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+BWR     !MBWR equation of state for parahydrogen of Younglove (1982).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Younglove, B.A.,
+          ? "Thermophysical Properties of Fluids.  I. Argon, Ethylene,
+          ? Parahydrogen, Nitrogen, Nitrogen Trifluoride, and Oxygen,"
+          ? J. Phys. Chem. Ref. Data, Vol. 11, Suppl. 1, pp. 1-11, 1982.
+          ?
+          ?The uncertainties in density are 0.1% in the liquid phase, 0.25% in the
+          ? vapor phase, and 0.2% in the supercritical region.  The uncertainty in
+          ? heat capacity is 3% and the uncertainty in speed of sound is 2% in the
+          ? liquid phase and 1% elsewhere.
+          ?
+          ?Note:
+          ? The ideal gas equation was refit from calculations of piecewise Cp0 equation
+          ? of McCarty
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          13.8               !Lower temperature limit [K]
+          400.0              !Upper temperature limit [K]
+          121000.0           !Upper pressure limit [kPa]
+          44.0               !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          2.01594                                !Molar mass [g/mol]
+          13.8                                   !Triple point temperature [K]
+          7.042                                  !Pressure at triple point [kPa]
+          38.21                                  !Density at triple point [mol/L]
+          20.2769                                !Normal boiling point temperature [K]
+          -0.218                                 !Acentric factor
+          32.938        1283.77     15.556       !Tc [K], pc [kPa], rhoc [mol/L]
+          32.938                    15.556       !Reducing parameters [K, mol/L]
+          15.6173762                             !gamma
+          0.0831434                              !Gas constant [L-bar/mol-K]
+                32       1                       !Nterm, Ncoeff per term
+           0.0004675528393416    0.04289274251454     -0.5164085596504
+           2.961790279801       -30.27194968412        0.1908100320379e-4
+          -0.001339776859288     0.3056473115421       51.61197159532
+           0.1999981550224e-6    0.0002896367059356   -0.02257803939041
+          -0.2287392761826e-5    0.2446261478645e-4   -0.001718181601119
+          -0.5465142603459e-6    0.4051941401315e-8    0.1157595123961e-5
+          -0.1269162728389e-7   -49.83023605519       -160.6676092098
+          -0.192679918531        9.319894638928       -0.0003222596554434
+           0.001206839307669    -0.384158819747e-6    -0.4036157453608e-4
+          -0.1250868123513e-9    0.1976107321888e-8   -0.2411883474011e-12
+          -0.4127551498251e-12   0.891797288361e-11
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for parahydrogen.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?refit by EWL from calculations of piecewise fit of Cp0 by McCarty
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.31434    !Reducing parameters for T, Cp0
+          6 4   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           2.4995169         0.0
+          -0.0011125185      1.0
+           0.00027491461     1.5
+          -0.000010005269    2.0
+           0.22695404e-8     3.0
+          -0.21031029e-12    4.0
+           12.353388         598.0
+          -17.777676         778.0
+           6.4309174         1101.0
+           7.3347521         6207.0
+
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#ETA   !---Viscosity---
+VS7    !Pure fluid viscosity model from symbolic regression for parahydrogen of Muzny et al. (2013).
+:DOI: 10.1021/je301273j
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Muzny, C.D., Huber, M.L., and Kazakov, A.F.,
+? "Correlation for the Viscosity of Normal Hydrogen Obtained from Symbolic Regression,"
+? J. Chem. Eng. Data, 58:969-979, 2013.
+?
+?The estimated uncertainty is 4 % for the saturated liquid from the triple point to 31 K, with larger deviations
+? as the critical region is approached. The estimated uncertainty is 4 % for the supercritical fluid phase at pressures to 200 MPa.
+? For the limited range of 200 K to 400 K at pressures up to 0.1 MPa, the uncertainty is 0.1 %.
+?
+!```````````````````````````````````````````````````````````````````````````````
+13.8033            !Lower temperature limit [K]
+2000.0             !Upper temperature limit [K]
+2000000.0          !Upper pressure limit [kPa]
+104.0              !Maximum density [mol/L]
+NUL                !Pointer to collision integral model
+!
+!Dilute gas function
+$DG RED SUMLOGT:5 EXP CNST SQR * INV SUM:1 CNST * SQRT *
+!
+!Second viscosity virial function
+$VV RED SUM:7 CNST CUBE *
+!
+!Residual function
+$RF RED SUM:3 SUM:1 SUM:2 / + EXP SUM:1 *
+!
+!Coefficients
+$CF
+ 0.021357   30.41    1.  0.  0         !Reducing parameters for eta, T, rho
+ 0.209630        0.  0.  0.  0         !  s1*LOG(Ts)    Coefficient to match Moldover
+-0.455274        1.  0.  0.  0         !  s2*LOG(Ts)
+ 0.143602        2.  0.  0.  0         !  s3*LOG(Ts)^2
+-0.0335325       3.  0.  0.  0         !  s4*LOG(Ts)^3
+ 0.00276981      4.  0.  0.  0         !  s5*LOG(Ts)^4
+ 0.297           0.  0.  0.  0         !  e3^2*EXP(above)
+ 2.01588         1.  0.  0.  0         !  e2*T (use below)
+ 30.41           0.  0.  0.  0         !  SQRT(e2*T*Tred)
+!Virial terms
+ 0.6022137  30.41    1.  0.  0         !Reducing parameters for eta, T, rho
+-0.187           0.  0.  0.  0         !  b2
+ 2.4871         -1.  0.  0.  0         !  b3/Ts
+ 3.7151         -2.  0.  0.  0         !  b4/Ts^2
+-11.0972        -3.  0.  0.  0         !  b5/Ts^3
+ 9.0965         -4.  0.  0.  0         !  b6/Ts^4
+-3.8292         -5.  0.  0.  0         !  b7/Ts^5
+ 0.5166         -6.  0.  0.  0         !  b8/Ts^6
+ 0.297           0.  0.  0.  0         !  b9^3*sum(above)
+!Residual function terms
+ 1000. 33.145 45.096479408 0.  0       !Reducing parameters for eta, T, rho
+ 0.0456334068    1.  0.  0.  0         !  a2*Tr
+ 0.232797868    -1.  0.  0.  0         !  a3/Tr
+ 0.363576595     0.  6.  0.  0         !  a6*Dr^6
+ 0.958326120     0.  2.  0.  0         !  a4*Dr^2
+ 0.127941189     0.  0.  0.  0         !  a5
+ 1.0             1.  0.  0.  0         !  [a4*Dr^2 from above]/(a5+Tr)
+ 0.00643449673   0.  2.  0.  0         !  a1*Dr^2*EXP(above)
+NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC1    !Pure fluid thermal conductivity model for parahydrogen of Assael et al. (2011).
+:DOI: 10.1063/1.3606499
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Assael, M.J., Assael. J.-A.M., Huber, M.L., Perkins, R.A., and Takata, Y.,
+? "Correlation of the Thermal Conductivity of Normal and Parahydrogen
+? from the Triple Point to 1000 K and up to 100 MPa,"
+? J. Phys. Chem. Ref. Data, 40(3), 033101, 2011.
+?
+?For the region from the triple point to 300 K at pressures to 20 MPa, the estimated uncertainty
+? is 4%, with the exception of the critical region. The uncertainty is estimated to
+? be 6% for temperatures from 400 K to 1000 K and pressures to 100 MPa. The correlation behaves
+? in a physically reasonable manner for extrapolations to higher pressures at temperatures
+? below 400 K, but will be subject to larger uncertainties.
+?
+!```````````````````````````````````````````````````````````````````````````````
+13.8033            !Lower temperature limit [K]
+1000.0             !Upper temperature limit [K]
+2000000.0          !Upper pressure limit [kPa]
+104.0              !Maximum density [mol/L]
+8   7              !# terms for dilute gas function:  numerator, denominator
+ 1.0         0.001 !Reducing parameters for T, tcx
+-1245.       0.
+ 9418.06     1.
+-305.098     2.
+ 6.88449     3.
+-0.0558871   4.
+ 2.79243e-4  5.
+-4.06944e-7  6.
+ 3.42309e-10 7.
+ 14230.4     0.
+-588.749     1.
+ 14.5983     2.
+-0.13483     3.
+ 6.19047e-4  4.
+-9.21777e-7  5.
+ 7.83099e-10 6.
+ 10  0             !# terms for background gas function:  numerator, denominator
+ 32.938  15.538 1. !Reducing parameters for T, rho, tcx
+ 0.0265975   0.  1.  0.
+-0.00133826  0.  2.  0.
+ 0.0130219   0.  3.  0.
+-0.00567678  0.  4.  0.
+-0.92338e-4  0.  5.  0.
+-0.00121727  1.  1.  0.
+ 0.00366663  1.  2.  0.
+ 0.00388715  1.  3.  0.
+-0.00921055  1.  4.  0.
+ 0.00400723  1.  5.  0.
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for parahydrogen of Assael et al. (2011).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Assael, M.J., Assael. J.-A.M., Huber, M.L., Perkins, R.A., and Takata, Y., 2011.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.2415             !Gamma (universal exponent)
+1.01               !R0 (universal amplitude)
+0.065              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.15e-9            !Xi0 (amplitude) [m]
+0.052              !Gam0 (amplitude) [-]
+0.5e-9             !Qd_inverse (modified effective cutoff parameter) [m]
+49.407             !Tref (reference temperature) [K]
+
+
+
+
+********************************************************************************
+
+@ETA    !---Viscosity---
+VS4     !Pure fluid generalized friction theory viscosity model for parahydrogen of Quinones-Cisneros et al. (2011).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Quinones-Cisneros, S.E., Huber, M.L., and Deiters, U.K.,
+          ? model of 27-jan-2011 unpublished
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          13.8033            !Lower temperature limit [K]
+          1000.0             !Upper temperature limit [K]
+          2000000.0          !Upper pressure limit [kPa]
+          104.0              !Maximum density [mol/L]
+          8 1 2 0 0 0        !Number of terms associated with dilute-gas function
+          NUL                !Pointer to reduced effective collision cross-section model; not used
+          0.2827             !Lennard-Jones coefficient sigma [nm];not used
+          59.7               !Lennard-Jones coefficient epsilon/kappa [K];not used
+          32.938    1.0      !Reducing parameters for T, eta
+          0.0       0.5      !Chapman-Enskog term; not used here !use for extra pieces?
+           7.7144542105280585    0.0
+          -36.82065170523866     0.25
+           68.49882398219104     0.50
+          -58.00162637079715     0.75
+           27.013888066380914    1.0
+          -5.55928755948473      1.25
+           0.46490717320145977   1.50
+          1.   0.75          !Additional special terms for numerator
+          1.   0.0           !Additional special terms for denominator
+          1.   1.0           !Additional special terms for denominator
+          7                  !Number of terms for initial density dependence
+          1.0  0.0157768     !Reducing parameters for T (= eps/k), etaB2 (= 0.6022137*sigma**3)
+          -0.187      0.0    !Coefficient, power in T* = T/(eps/k)
+           75.6327              -1.0
+           3435.61              -2.0
+          -312078.              -3.0
+           7779290.             -4.0
+          -99584100.            -5.0
+           408557000.           -6.0
+          -0.03768564675677641   0.02238493598199995    0.006424167560123974  -5.723254060608424e-7   0.0 !  a(0),a(1),a(2)
+          -0.04897821165342249  -0.05786784231898735    0.016640614921653815  -4.352926821749732e-6   0.0 !  b(0),b(1),b(2)
+           0.0                   0.0                    0.0                    0.0       0.0              !  c(0),c(1),c(2)
+          -3.046799839803415e-5  8.228692086410122e-5   1.8647927082356328e-5 -4.59581250908383e-10   0.0 !  A(0),A(1),A(2)
+           1.232548095616199e-4  1.2379026782334722e-4  7.504884568669591e-6   1.9436562071471596e-8  0.0 !  B(0),B(1),B(2)
+           0.0                   0.0                    0.0                    0.0       0.0              !  C(0),C(1),C(2)
+           3.1464688766415165e-7 4.304432732999407e-7  -7.96709495655157e-8    0.0       0.0              !  D(0),D(1),D(2)
+           0.0                   0.0                    0.0                    0.0       0.0              !  E(0),E(1),E(2)
+          NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Nitrogen reference); predictive mode for parahydrogen.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Klein, S.A., McLinden, M.O., and Laesecke, A., "An Improved Extended Corresponding States Method for Estimation of Viscosity of Pure Refrigerants and Mixtures," Int. J. Refrigeration, 20(3):208-217, 1997. doi: 10.1016/S0140-7007(96)00073-4.
+          ?McLinden, M.O., Klein, S.A., and Perkins, R.A., "An Extended Corresponding States Model for the Thermal Conductivity of Refrigerants and Refrigerant Mixtures," Int. J. Refrigeration, 23(1):43-63, 2000. doi: 10.1016/S0140-7007(99)00024-9
+          ?
+          ?The Lennard-Jones parameters are for H2 from Reid, R.C., Prausnitz, J.M., and Poling, B.E., "The Properties of Gases and Liquids," 4th edition, New York, McGraw-Hill Book Company, 1987.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          13.8               !Lower temperature limit [K]
+          400.0              !Upper temperature limit [K]
+          121000.0           !Upper pressure limit [kPa]
+          66.94              !Maximum density [mol/L]
+          FEQ NITROGEN.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.2827             !Lennard-Jones coefficient sigma [nm] for ECS method
+          59.7               !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+          1  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00132  0. 0. 0. !Coefficient, power of T, spare1, spare2
+          1  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          1  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for parahydrogen of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+32.938             !Critical temperature used in fit (dummy)
+0.005314  1.06     !Sigma0 and n
+
+
+#DE    !---Dielectric constant---
+DE3    !Dielectric constant model for parahydrogen of Harvey and Lemmon (2005).
+:DOI: 10.1007/s10765-005-2351-5
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Harvey, A.H. and Lemmon, E.W.,
+? "Method for Estimating the Dielectric Constant of Natural Gas Mixtures,"
+? Int. J. Thermophys., 26(1):31-46, 2005. doi: 10.1007/s10765-005-2351-5
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+273.16 1000.0 1.0  !Reducing parameters for T and D
+0 2 3 0 0 0        !Number of terms in dielectric constant model
+ 2.0297   0. 1. 0. !Coefficient, T exp, D exp
+ 0.0069   1. 1. 0.
+ 0.181    0. 2. 0.
+ 0.021    1. 2. 0.
+-7.4      0. 3. 0.
+
+
+#MLT   !---Melting line---
+MLP    !Melting line model for parahydrogen of Younglove (1982).
+:DOI:
+:WEB: https://srd.nist.gov/JPCRD/jpcrdS1Vol11.pdf
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Younglove, B.A.,
+? "Thermophysical Properties of Fluids.  I. Argon, Ethylene,
+? Parahydrogen, Nitrogen, Nitrogen Trifluoride, and Oxygen,"
+? J. Phys. Chem. Ref. Data, Vol. 11, Suppl. 1, pp. 1-11, 1982.
+?
+!```````````````````````````````````````````````````````````````````````````````
+13.8               !Lower temperature limit [K]
+400.0              !Upper temperature limit [K]
+0.                 !
+0.                 !
+1.       1000.     !Reducing temperature and pressure
+4 0 0 0 0 0        !Number of terms in melting line equation
+-26.5289115   0.0  !Coefficients and exponents
+ 0.248578596  1.764739
+-21.2823393   0.0
+ 0.125746643  1.955
+
+
+#SBL   !---Sublimation line---
+SB2    !Sublimation line model for parahydrogen of Brown and Zeigler (2009).
+:DOI: 10.1007/978-1-4613-9856-1_76
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Based on G.N. Brown and W.T. Ziegler, Adv. Cryo. Eng., 25:662-670, 1979.
+? Modified to match the triple point of the equation of state.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.0                !Lower temperature limit [K]
+13.8               !Upper temperature limit [K]
+0.                 !
+0.                 !
+1.0  1000.0        !Reducing temperature and pressure
+6 0 0 0 0 0        !Number of terms in sublimation line equation
+ 4.78288     0.0   !Coefficients and exponents
+-1.485636e2 -1.0
+ 2.32321e2  -2.0
+-5.60207e2  -3.0
+ 6.64126e2  -4.0
+-2.8906e2   -5.0
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for parahydrogen of Leachman et al. (2009).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+32.938    1285.8   !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+-4.87767   1.0
+ 1.03359   1.5
+ 0.826680  2.65
+-0.129412  7.4
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for parahydrogen of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, C.K. and Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+32.938  15.538     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-0.13509   0.15
+ 4.0739    0.44
+-5.3985    0.7
+ 5.5230    0.99
+-2.3643    1.31
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for parahydrogen of Lemmon (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, C.K. and Lemmon, E.W., 2010.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+32.938  15.538     !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-5.7545    0.53
+ 3.8153    0.7
+-12.293    1.7
+ 15.095    2.4
+-17.295    3.3
+-34.190    10.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+
+                    @ETA               !Viscosity model specification
+                    VS0  pure fluid viscosity model of McCarty and Weber (1972).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?McCarty, R.D. and Weber, L.A.,
+                    ? "Thermophysical properties of parahydrogen from the freezing liquid line to
+                    ? 5000 R for pressures to 10,000 psia,"
+                    ? Natl. Bur. Stand., Tech. Note 617, 1972.
+                    ?
+                    ?The uncertainty in viscosity ranges from 4% to 15%.
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    13.8               !Lower temperature limit [K]
+                    1000.0             !Upper temperature limit [K]
+                    121000.0           !Upper pressure limit [kPa]
+                    66.94              !Maximum density [mol/L]
+                    H2                 !Pointer to hardcoded thermal conductivity model
+                    0 9 8 0 0 0 0 0    !Number of terms for various pieces
+                    1.0       1.0           1.0            !Reducing parameters for T, rho, eta
+                    -18.41091042788     0.  0.  0.  0      !Dilute gas coeffs
+                     31.85762039455     0.  0.  0.  0
+                    -23.08233586574     0.  0.  0.  0
+                     9.129812714730     0.  0.  0.  0
+                    -2.163626387630     0.  0.  0.  0
+                     0.3175128582601    0.  0.  0.  0
+                    -0.02773173035271   0.  0.  0.  0
+                     0.001347359367871  0.  0.  0.  0
+                    -0.2775671778154e-4 0.  0.  0.  0
+                    -10.99981128000     0.  0.  0.  0      !Residual coeffs
+                     18.95876508000     0.  0.  0.  0
+                    -381.3005056000     0.  0.  0.  0
+                     59.50473265000     0.  0.  0.  0
+                     1.099399458000     0.  0.  0.  0
+                     8.987269839000     0.  0.  0.  0
+                     1231.422148000     0.  0.  0.  0
+                     0.311              0.  0.  0.  0
+                    NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+                    @ETA               !Viscosity model specification
+                    VS0  pure fluid viscosity model from symbolic regression (Muzny, Huber, Kazakov) (2013).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?Muzny, C.D., Huber, M.L., and Kazakov, A.F.,
+                    ? "Correlation for the Viscosity of normal hydrogen obtained from symbolic regression"
+                    ? submitted to J. Chem. Eng. Data, 2013
+                    ?
+                    ?The estimated uncertainty is 4 % for the saturated liquid from the triple point to 31 K, with larger deviations
+                    ? as the critical region is approached. The estimated uncertainty is 4 % for the supercritical fluid phase at pressures to 200 MPa.
+                    ? For the limited range of 200 K to 400 K at pressures up to 0.1 MPa, the uncertainty is 0.1 %.
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    13.8033            !Lower temperature limit [K]
+                    2000.0             !Upper temperature limit [K]
+                    2000000.0          !Upper pressure limit [kPa]
+                    104.0              !Maximum density [mol/L]
+                    H2A                !Pointer to hardcoded model
+                    0 0 0 0 0 0 0 0    !Number of terms for various pieces
+                    1.0 1.0 1.0        !Reducing parameters for T, rho, eta
+                    NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+                    @SBL    !---Sublimation line---
+                    SB2     !Sublimation line model for parahydrogen of McCarty et al. (1981).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?McCarty, R.D., Hord, J., and Roder, H.M.,
+                    ? "Selected Properties of Hydrogen (Engineering Design Data),"
+                    ? NBS Monograph 168, National Bureau of Standards, Boulder, 1981.
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    0.                 !
+                    13.8               !Upper temperature limit [K]
+                    0.                 !
+                    0.                 !
+                    1.      0.13332237 !Reducing temperature and pressure
+                    2 0 1 0 0 0        !Number of terms in sublimation line equation
+                     4.009857354  0.0  !Coefficients and exponents
+                    -90.77568949 -1.0
+                     2.489830940  1.0

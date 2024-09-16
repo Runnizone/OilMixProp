@@ -1,0 +1,410 @@
+R115                 !Short name
+76-15-3              !CAS number
+Chloropentafluoroethane !Full name
+CClF2CF3             !Chemical formula {C2ClF5}
+CFC-115              !Synonym
+154.466416           !Molar mass [g/mol]
+173.75               !Triple point temperature [K] Aston et al.,J. Am. Chem. Soc.,1955,77,3939
+233.932              !Normal boiling point [K]
+353.1                !Critical temperature [K]
+3129.0               !Critical pressure [kPa]
+3.98                 !Critical density [mol/L]
+0.248                !Acentric factor
+0.52                 !Dipole moment [Debye]; value from REFPROP v5.10
+IIR                  !Default reference state
+10.0                 !Version number
+1020                 !UN Number                                                 :UN:
+halocb               !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+7370.                !GWP (IPCC 2007)                                           :GWP:
+0.57                 !ODP (WMO 2010)                                            :ODP:
+120000.              !RCL (ppm v/v, ASHRAE Standard 34, 2010)                   :RCL:
+A1                   !Safety Group (ASHRAE Standard 34, 2010)                   :Safety:
+1S/C2ClF5/c3-1(4,5)2(6,7)8                !Standard InChI String                :InChi:
+RFCAUADVODFSLZ-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+f7285250                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 06-09-97 EWL, Original version.
+! 11-13-97 EWL, Add Platzer equation.
+! 05-08-02 MLH, Add viscosity fit, revised thermal conductivity fit, added LJ parameters.
+! 04-19-04 MLH, Update transport reference.
+! 11-17-05 EWL, Add short Helmholtz equation.
+! 08-17-10 IDC, Add ancillary equations.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 08-04-15 EWL, Minor update to match new manuscript.  Refit the vapor density ancillary.
+! 01-05-16 MLH, Change TK6 to TK3.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for R-115 of Lemmon and Span (2015).
+:TRUECRITICALPOINT:  353.1      3.98          !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1021/acs.jced.5b00684
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R.,
+? "Thermodynamic Properties of R-227ea, R-365mfc, R-115, and R-13I1,"
+? J. Chem. Eng. Data, 60(12):3745-3758, 2015. doi: 10.1021/acs.jced.5b00684
+?
+?The uncertainties are 0.5% in density and vapor pressure, and 1% in sound speed
+? and heat capacity.
+?
+!```````````````````````````````````````````````````````````````````````````````
+173.75             !Lower temperature limit [K]
+550.0              !Upper temperature limit [K]
+60000.0            !Upper pressure limit [kPa]
+11.3               !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+154.466416                             !Molar mass [g/mol]
+173.75                                 !Triple point temperature [K]
+2.213                                  !Pressure at triple point [kPa]
+11.3                                   !Density at triple point [mol/L]
+233.932                                !Normal boiling point temperature [K]
+0.248                                  !Acentric factor
+353.1         3129.0       3.98        !Tc [K], pc [kPa], rhoc [mol/L]
+353.1                      3.98        !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  12  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 1.20873     0.25    1.  0.            !a(i),t(i),d(i),l(i)
+-3.54460     1.25    1.  0.
+ 0.745302    1.5     1.  0.
+ 0.114128    0.25    3.  0.
+ 4.36572e-4  0.875   7.  0.
+ 0.988385    2.375   1.  1.
+ 1.13878     2.0     2.  1.
+-0.0215633   2.125   5.  1.
+-0.630230    3.5     1.  2.
+ 0.0167901   6.5     1.  2.
+-0.149412    4.75    4.  2.
+-0.0271153  12.5     2.  3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for R-115 of Lemmon and Span (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 2   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0        0.0
+ 7.142      289.0
+ 10.61      1301.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for R-115 of Lemmon and Span (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  2  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+-13.4050037923356555    0.0      !aj, ti for [ai*tau**ti] terms
+ 10.0015536023086682    1.0      !aj, ti for [ai*tau**ti] terms
+  7.142      289.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  10.61      1301.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for R-115.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  2  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 3.0               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+-13.4049986532     0.0                 !aj, ti for [ai*tau**ti] terms
+ 10.0015506914     1.0
+ 7.142            -0.8184650241        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 10.61            -3.6845086378
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FE1     !Bender equation of state for R-115 of Platzer et al. (1990).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Platzer, B., Polt, A., and Maurer, G.,
+          ? "Thermophysical properties of refrigerants,"
+          ? Berlin,  Springer-Verlag, 1990.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          200.0              !Lower temperature limit [K]
+          450.0              !Upper temperature limit [K]
+          7000.0             !Upper pressure limit [kPa]
+          10.7               !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          154.467                                !Molar mass [g/mol]
+          200.0                                  !Triple point temperature [K]
+          16.213                                 !Pressure at triple point [kPa]
+          10.743                                 !Density at triple point [mol/L]
+          234.03                                 !Normal boiling point temperature [K]
+          0.2520                                 !Acentric factor
+          353.1         3160.0       3.9714      !Tc [K], pc [kPa], rhoc [mol/L]
+          353.1                      3.9714      !Reducing parameters [K, mol/L]
+          8.31451                                !Gas constant [J/mol-K]
+            22  5    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+          -0.377294477051     3.  0.  0.  0.     !a(i),t(i),d(i),l(i)
+          -0.0695891789165    4.  0.  0.  0.
+           0.206972205161     5.  0.  0.  0.
+           0.266609543946     0.  1.  0.  0.
+          -1.17158857583      1.  1.  0.  0.
+           0.817521154071     2.  1.  0.  0.
+          -0.978729789251     3.  1.  0.  0.
+          -0.17448244876      4.  1.  0.  0.
+           1.43598704796      0.  2.  0.  0.
+          -2.65460417723      1.  2.  0.  0.
+           1.65212655822      2.  2.  0.  0.
+          -0.588257570097     0.  3.  0.  0.
+           0.738774518022     1.  3.  0.  0.
+           0.296779702685     0.  4.  0.  0.
+          -0.534330750773     1.  4.  0.  0.
+           0.0659766160237    1.  5.  0.  0.
+           0.377294477051     3.  0.  2.  1.50553819
+           0.0695891789165    4.  0.  2.  1.50553819
+          -0.206972205161     5.  0.  2.  1.50553819
+          -0.350603135603     3.  2.  2.  1.50553819
+           1.08682541098      4.  2.  2.  1.50553819
+          -0.619304197853     5.  2.  2.  1.50553819
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for R-115.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Platzer, B., Polt, A., and Maurer, G.,
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.31451    !Reducing parameters for T, Cp0
+          5 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           2.4409547         0.0
+           0.053544743       1.0
+          -0.000081861429    2.0
+           0.10410538e-6     3.0
+          -0.71645701e-10    4.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (R134a reference); fitted to data for R-115.
+:DOI: 10.1021/ie0300880
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Unpublished; uses method described in the following reference:
+?Huber, M.L., Laesecke, A., and Perkins, R.A.,
+? "Model for the Viscosity and Thermal Conductivity of Refrigerants, Including
+? a New Correlation for the Viscosity of R134a,"
+? Ind. Eng. Chem. Res., 42(13):3163-3178, 2003. doi: 10.1021/ie0300880
+?
+?THERMAL CONDUCTIVITY
+? The ECS parameters for thermal conductivity were based in part on the data of:
+? Hahne, E., Gross, U., and Song, Y.W., "The Thermal Conductivity of R115 in the Critical Region," Int. J. Thermophys., 10:687-700, 1989. doi: 10.1007/BF00507989
+? Yata, J., Minamiyama, T., and Tanaka, S., "Measurement of Thermal Conductivity of Liquid Fluorocarbons," Int. J. Thermophys., 5:209-218, 1984.
+? Zaporozhan, G.V., Lenskiy, L.R., Baryshev, V.P., and Geller, V.Z., "Thermal Conductivities of Freons 218 and 115," Izv. Vyssh. Uchebn. Zaved., Energ., 18(10):146-60, 1975.
+? Slusarev, V.V., "The Investigation of Thermal Conductivity of Freons of the Ethane Type of Fluorocarbons," Ph.D. Dissertation, Tekhnol. Inst. Pisch. Promst., Odessa, USSR, 1979.
+? Average absolute deviations of the fit from the experimental data are:
+? Hahne: 4.89%; Yata: 1.88%; Zaporozhan: 3.77%; Slusarev: 2.17%. Overall: 3.48%.
+?
+?VISCOSITY
+? The ECS parameters for viscosity were based in part on the data of:
+? Witzell, O.W. and Kamien, C.Z., "Effect of Pressure and Temperature on the Viscosity of Refrigerants in the Vapor Phase," ASHRAE Trans., 65:663-674, 1959.
+? Kronberg, A.V., "Experimental and Theoretical Investigation of the Viscosity of Methane and Ethane Row's Refrigerants," Ph.D. Dissertation, Azer. Inst. Neft. Khim., Baku, USSR, 1979.
+? Geller, V.Z., "Investigation of the Viscosity of Freons of the Methane, Ethane, and Propane Types. Summary of Experimental Data," Teplofiz. Svoistva Veshchestv. Mater., No. 15, Sychev, V.V., Ed., Standards Publ.: Moscow, pp. 89-114, 1980.
+? Takahashi, M., Yokoyama, C., and Takahashi, S., Kagaku Kogaku Ronbunshu, 11(2):155-161, 1985. doi: 10.1252/kakoronbunshu.11.155
+? Average absolute deviations of the fit from the experimental data are:
+? Witzell: 1.97%; Kronberg: 3.60%; Geller: 7.63%; Takahashi: 1.25%.
+? Overall: 3.42%.
+?
+?The Lennard-Jones parameters were taken from Takahashi, M., Yokoyama, C., and Takahashi, S., Kagaku Kogaku Ronbunshu, 11(2):155-161, 1985.
+?
+!```````````````````````````````````````````````````````````````````````````````
+173.75             !Lower temperature limit [K]
+600.0              !Upper temperature limit [K]
+200000.0           !Upper pressure limit [kPa]
+17.9380            !Maximum density [mol/L]
+FEQ R134A.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.5876             !Lennard-Jones coefficient sigma [nm] for ECS method
+201.9              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+2  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.00125079    0. 0. 0.  !Coefficient, power of T, spare1, spare2
+ 2.96636e-7    1. 0. 0.  !Coefficient, power of T, spare1, spare2
+2  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 1.1838        0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.0591896     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 1.03432       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.00216614    0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for R-115 of Olchowy and Sengers (1989).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Olchowy, G.A. and Sengers, J.V.,
+? "A Simplified Representation for the Thermal Conductivity of Fluids in the Critical Region,"
+? Int. J. Thermophys., 10:417-426, 1989. doi: 10.1007/BF01133538
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.03               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.194e-9           !Xi0 (amplitude) [m]
+0.0496             !Gam0 (amplitude) [-]
+3.72933e-10        !Qd_inverse (modified effective cutoff parameter) [m]; fitted to data
+529.65             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for R-115 of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+353.1              !Critical temperature used in fit (dummy)
+0.04771   1.246    !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for R-115 of Lemmon and Span (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+353.1   3129.0     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-7.7016    1.0
+ 4.3462    1.5
+-4.0020    1.9
+-6.5510    5.2
+ 3.9278    6.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for R-115 of Lemmon and Span (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+353.1   3.98       !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 18.245    0.556
+-57.373    0.75
+ 78.511    0.95
+-50.979    1.2
+ 14.361    1.5
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for R-115 of Lemmon and Span (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Lemmon, E.W. and Span, R., 2006.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+353.1   3.98       !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-10.179    0.53
+ 49.312    0.9
+-150.13    1.2
+ 219.87    1.5
+-129.65    1.75
+-54.218    6.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

@@ -1,0 +1,795 @@
+Helium               !Short name
+7440-59-7            !CAS number
+Helium-4             !Full name
+He                   !Chemical formula {He}
+R-704                !Synonym
+4.002602             !Molar mass [g/mol]
+2.1768               !Triple point temperature [K]
+4.2238               !Normal boiling point [K]
+5.1953               !Critical temperature [K]
+228.32               !Critical pressure [kPa]
+17.3837              !Critical density [mol/L]
+-0.3836              !Acentric factor
+0.0                  !Dipole moment [Debye]; (exactly zero for monatomic molecules)
+NBP                  !Default reference state
+10.0                 !Version number
+1046                 !UN Number                                                 :UN:
+cryogen              !Family                                                    :Family:
+0.0                  !Heating value (upper) [kJ/mol]                            :Heat:
+A1                   !Safety Group (ASHRAE Standard 34, 2010)                   :Safety:
+1S/He                                     !Standard InChI String                :InChi:
+SWQJXJOGLNCZEY-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+3b8eed30                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 01-23-97 EWL, Original version.
+! 11-06-00 EWL, Switch transport equations to hardcoded models.
+! 08-05-04 EWL, Add Harvey and Lemmon dielectric correlation.
+! 11-18-04 MLH, Add tPr coeff.
+! 12-11-09 EWL, Add 40 term EOS derived from the McCarty and Arp BWR equation.
+! 09-08-10 EWL, Add equation of state of Ortiz-Vega.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 04-08-13 EWL, Add second equation of state of Ortiz-Vega.
+! 06-04-14 EWL, Add final equation of state of Ortiz-Vega.
+! 02-10-17 EWL, Update ancillary equations.
+! 05-15-17 EWL, Change the hard coded VS0 model to the VS7 reverse Polish notation.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for helium of Ortiz-Vega et al. (2015).
+:TRUECRITICALPOINT:  5.1953    17.3837        !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Ortiz-Vega, D.O., Hall, K.R., Holste, J.C., Arp, V.D., Harvey, A.H., and Lemmon, E.W.,
+? final equation of state, to be submitted to J. Phys. Chem. Ref. Data, 2018.
+?
+?The uncertainties below 50 K in density are 0.25% at pressures up to 10 MPa.
+? From 50 K to 200 K, the uncertainties decrease linearly from 0.2% at 50 K to
+? 0.05% at 200 K for all pressures up to 50 MPa. Between 200 K and 500 K, the
+? uncertainty is 0.03% up to pressures of 40 MPa and 0.1% between 40 MPa and 100
+? MPa. For all other states not listed here, the uncertainties increase to 0.5%
+? in density.  The uncertainties in the speed of sound are 0.01% for the vapor
+? phase and 0.2% for the liquid phase.  The uncertainty in vapor pressure is
+? less than 0.02%, and that for heat capacities is about 2%.  Uncertainties in
+? the critical region are higher for all properties except vapor pressure.
+?
+!```````````````````````````````````````````````````````````````````````````````
+2.1768             !Lower temperature limit [K]
+2000.0             !Upper temperature limit [K]
+1000000.0          !Upper pressure limit [kPa]
+141.22             !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+4.002602                               !Molar mass [g/mol]
+2.1768                                 !Triple point temperature [K]
+5.0393                                 !Pressure at triple point [kPa]
+36.48                                  !Density at triple point [mol/L]
+4.2238                                 !Normal boiling point temperature [K]
+-0.3836                                !Acentric factor
+5.1953         228.32     17.3837      !Tc [K], pc [kPa], rhoc [mol/L]
+5.1953                    17.3837      !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  12  4  11 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.015559018  1.0     4.  0.          !a(i),t(i),d(i),l(i)
+  3.0638932    0.425   1.  0.
+ -4.2420844    0.63    1.  0.
+  0.054418088  0.69    2.  0.
+ -0.18971904   1.83    2.  0.
+  0.087856262  0.575   3.  0.
+  2.2833566    0.925   1.  1.
+ -0.53331595   1.585   1.  2.
+ -0.53296502   1.69    3.  2.
+  0.99444915   1.51    2.  1.
+ -0.30078896   2.9     2.  2.
+ -1.6432563    0.8     1.  1.
+  0.8029102    1.26    2.  2. 2.    -1.5497   -0.2471  3.15    0.596    0. 0. 0.
+  0.026838669  3.51    1.  2. 2.    -9.245    -0.0983  2.54505 0.3423   0. 0. 0.
+  0.04687678   2.785   2.  2. 2.    -4.76323  -0.1556  1.2513  0.761    0. 0. 0.
+ -0.14832766   1.      1.  2. 2.    -6.3826   -2.6782  1.9416  0.9747   0. 0. 0.
+  0.03016211   4.22    1.  2. 2.    -8.7023   -2.7077  0.5984  0.5868   0. 0. 0.
+ -0.019986041  0.83    3.  2. 2.    -0.255    -0.6621  2.2282  0.5627   0. 0. 0.
+  0.14283514   1.575   2.  2. 2.    -0.3523   -0.1775  1.606   2.5346   0. 0. 0.
+  0.007418269  3.447   2.  2. 2.    -0.1492   -0.4821  3.815   3.6763   0. 0. 0.
+ -0.22989793   0.73    3.  2. 2.    -0.05     -0.3069  1.61958 4.5245   0. 0. 0.
+  0.79224829   1.634   2.  2. 2.    -0.1668   -0.1758  0.6407  5.039    0. 0. 0.
+ -0.049386338  6.13    2.  2. 2.   -42.2358 -1357.6577 1.076   0.959    0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for helium of Ortiz-Vega et al. (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Ortiz-Vega, D.O., Hall, K.R., Holste, J.C., Arp, V.D., Harvey, A.H., and Lemmon, E.W., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+2.5     0.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for helium of Ortiz-Vega et al. (2015).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Ortiz-Vega, D.O., Hall, K.R., Holste, J.C., Arp, V.D., Harvey, A.H., and Lemmon, E.W., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  0  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  1.5                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+  0.1733487932835764    0.0      !aj, ti for [ai*tau**ti] terms
+  0.4674522201550815    1.0      !aj, ti for [ai*tau**ti] terms
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FEK     !Helmholtz equation of state for helium of Kunz and Wagner (2004).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Kunz, O., Klimeck, R., Wagner, W., Jaeschke, M.
+          ? "The GERG-2004 Wide-Range Equation of State for Natural Gases
+          ? and Other Mixtures," GERG Technical Monograph 15,
+          ? Fortschritt-Berichte VDI, VDI-Verlag, Düsseldorf, 2007.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          2.1768             !Lower temperature limit [K]
+          1500.0             !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          88.73              !Maximum density [mol/L]
+          PHK                                    !Pointer to Cp0 model
+          4.002602                               !Molar mass [g/mol]
+          2.1768                                 !Triple point temperature [K]
+          4.8565                                 !Pressure at triple point [kPa]
+          36.537                                 !Density at triple point [mol/L]
+            4.22                                 !Normal boiling point temperature [K]
+          -0.3859                                !Acentric factor
+          5.1953         227.46     17.399       !Tc [K], pc [kPa], rhoc [mol/L]
+          5.1953                    17.399       !Reducing parameters [K, mol/L]
+          8.314472                               !Gas constant [J/mol-K]
+            12  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+          -0.45579024006737      0.0       1.   0.
+           1.2516390754925       0.125     1.   0.
+          -1.5438231650621       0.75      1.   0.
+           0.020467489707221     1.0       4.   0.
+          -0.34476212380781      0.75      1.   1.
+          -0.020858459512787     2.625     3.   1.
+           0.016227414711778     0.125     5.   1.
+          -0.057471818200892     1.25      5.   1.
+           0.019462416430715     2.0       5.   1.
+          -0.03329568012302      1.0       2.   2.
+          -0.010863577372367     4.5       1.   3.
+          -0.022173365245954     5.0       2.   3.
+
+
+@AUX    !---Auxiliary function for PH0
+PHK     !Ideal gas Helmholtz form for helium of Kunz and Wagner (2004).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Kunz, O., Klimeck, R., Wagner, W., Jaeschke, M.
+          ? "The GERG-2004 Wide-Range Equation of State for Natural Gases
+          ? and Other Mixtures," GERG Technical Monograph 15,
+          ? Fortschritt-Berichte VDI, VDI-Verlag, Düsseldorf, 2007.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1 2  0 0 0  0 0 0  !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+           1.5               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+           13.628409737      0.0                 !aj, ti for [ai*tau**ti] terms
+          -143.470759602     1.0
+
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for helium of Ortiz-Vega et al. (2010).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Ortiz-Vega, D.O., Hall, K.R., Arp, V.D., and Lemmon, E.W.,
+          ? Interim equation, 2010.
+          ?
+          ?Below 50 K, the uncertainties in density are 0.5% at pressures up to 10 MPa.
+          ? From 50 K to 200 K the uncertainties decrease to 0.2 % at pressures up to 50
+          ? MPa. At higher temperatures the uncertainties in density are 0.1 % up to
+          ? pressures of 20 MPa. At all temperatures and at pressures higher than listed
+          ? here, the uncertainties increase to 1% in density.  The uncertainties in the
+          ? speed of sound are 0.04% for the vapor phase and 0.25% for the liquid phase.
+          ? The uncertainties in vapor pressure are less than 0.05% and for the heat
+          ? capacities are about 5%.  Uncertainties in the critical region are higher for
+          ? all properties except vapor pressure.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          2.1768             !Lower temperature limit [K]
+          2000.0             !Upper temperature limit [K]
+          1000000.0          !Upper pressure limit [kPa]
+          141.22             !Maximum density [mol/L]
+          CPP                                    !Pointer to Cp0 model
+          4.002602                               !Molar mass [g/mol]
+          2.1768                                 !Triple point temperature [K]
+          5.043                                  !Pressure at triple point [kPa]
+          36.46                                  !Density at triple point [mol/L]
+          4.222                                  !Normal boiling point temperature [K]
+          -0.385                                 !Acentric factor
+          5.1953         227.6      18.13        !Tc [K], pc [kPa], rhoc [mol/L]
+          5.1953                    18.13        !Reducing parameters [K, mol/L]
+          8.314472                               !Gas constant [J/mol-K]
+            12  4    9 12    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+            0.009288766  1.0     4.  0.          !a(i),t(i),d(i),l(i)
+            0.9258069    0.28    1.  0.
+           -1.718156     0.735   1.  0.
+            0.7606137    0.64    2.  0.
+           -1.024864     0.82    2.  0.
+            0.1052455    1.16    3.  0.
+           -0.1875722    1.28    1.  1.
+           -0.1287812    2.0     1.  2.
+           -0.002227619  0.41    3.  2.
+            0.1823465    1.33    2.  1.
+           -0.04450014   4.2     2.  2.
+          -0.00008729033 0.6     8.  1.
+            0.0385432    3.0     1.  2. 2.    -1.0833   -0.0385  1.9776  0.6914   0. 0. 0.
+           -0.9585106    1.0     1.  2. 2.   -18.3824  -19.8246  1.6178  0.8590   0. 0. 0.
+           -0.0545401    8.2     1.  2. 2.    -5.0573   -9.3799  0.4371  0.8787   0. 0. 0.
+           -0.0368726    1.0     2.  2. 2.    -0.2832   -0.8073  0.5355  2.7182   0. 0. 0.
+           -0.001021851  2.71    2.  2. 2.    -6.0582   -0.031   0.7777  2.0301   0. 0. 0.
+            0.06166348   1.0     2.  2. 2.    -0.2444   -0.0061  0.4832  0.89     0. 0. 0.
+            0.02493437   1.0     3.  2. 2.    -0.0539   -0.3581  0.8162  1.179    0. 0. 0.
+           -0.008127424  2.0     3.  2. 2.    -0.185    -0.7518  1.2896  0.568    0. 0. 0.
+           -0.008233032  1.0     2.  2. 2.    -0.5941   -7.4629  0.3577  1.6412   0. 0. 0.
+
+
+@EOS    !---Equation of state---
+BWR     !MBWR equation of state for helium of McCarty and Arp (1990).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?McCarty, R.D. and Arp, V.D.,
+          ? "A New Wide Range Equation of State for Helium,"
+          ? Adv. Cryo. Eng., 35:1465-1475, 1990.
+          ?
+          ?The uncertainties of the equation of state range from 1% at low
+          ? temperatures (<20 K) to 0.1% at temperatures between 200 and 400 K, and
+          ? from 3% in the speed of sound in the liquid phase to 0.1% in the speed
+          ? of sound between 100 and 500 K.  The uncertainty of heat capacities is
+          ? about 5%.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          2.1768             !Lower temperature limit [K]
+          1500.0             !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          88.73              !Maximum density [mol/L]
+          CPP                                    !Pointer to Cp0 model
+          4.0026                                 !Molar mass [g/mol]
+          2.1768                                 !Triple point temperature [K]
+          4.8565                                 !Pressure at triple point [kPa]
+          36.537                                 !Density at triple point [mol/L]
+          4.230                                  !Normal boiling point temperature [K]
+          -0.382                                 !Acentric factor
+          5.1953         227.46     17.399       !Tc [K], pc [kPa], rhoc [mol/L]
+          5.1953                    17.399       !Reducing parameters [K, mol/L]
+          17.399                                 !gamma
+          0.0831431                              !Gas constant [L-bar/mol-K]
+                32       1                       !Nterm, Ncoeff per term
+           0.0004558980227431    0.01260692007853     -0.07139657549318
+           0.09728903861441     -0.1589302471562       0.1454229259623e-4
+          -0.0004708238429298    0.01132915223587      0.02410763742104
+          -0.5093547838381e-7    0.26997269279e-4     -0.0003954146691114
+           0.1551961438127e-7    0.1050712335785e-6   -0.550115836675e-6
+          -0.1037673478521e-8    0.6446881346448e-11   0.3298960057071e-9
+          -0.3555585738784e-11  -0.0688540136769       0.09166109232806
+          -0.6544314242937e-4   -0.0003315398880031   -0.2067693644676e-6
+           0.3850153114958e-6   -0.1399040626999e-9   -0.1888462892389e-10
+          -0.4595138561035e-13   0.6872567403738e-13  -0.6097223119177e-17
+          -0.7636186157005e-16   0.3848665703556e-16
+
+
+@EOS    !---Equation of state---
+FE2     !Helmholtz equation of state of McCarty and Arp (1990).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?McCarty, R.D. and Arp, V.D.,
+          ? "A New Wide Range Equation of State for Helium,"
+          ? Adv. Cryo. Eng., 35:1465-1475, 1990.
+          ?
+          ?The coefficients used in this equation are derived from the BWR coefficients
+          ? given in the original manuscript.  The uncertainties are thus the same
+          ? as those given for the BWR EOS.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          2.1768             !Lower temperature limit [K]
+          1500.0             !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          88.73              !Maximum density [mol/L]
+          CPP                                    !Pointer to Cp0 model
+          4.0026                                 !Molar mass [g/mol]
+          2.1768                                 !Triple point temperature [K]
+          4.8565                                 !Pressure at triple point [kPa]
+          36.537                                 !Density at triple point [mol/L]
+          4.230                                  !Normal boiling point temperature [K]
+          -0.382                                 !Acentric factor
+          5.1953         227.46     17.399       !Tc [K], pc [kPa], rhoc [mol/L]
+          5.1953                    17.399       !Reducing parameters [K, mol/L]
+          8.31431                                !Gas constant [J/mol-K]
+            40  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+          -2.08984171567       3.0       0.  0.  !a(i),t(i),d(i),l(i)
+           0.381792817549      4.0       0.  0.
+          -0.0441393943069     5.0       0.  0.
+           0.0954038242224     0.0       1.  0.
+           1.15744872054       0.5       1.  0.
+          -2.87584069992       1.0       1.  0.
+           0.754294125268      2.0       1.  0.
+          -0.237177092854      3.0       1.  0.
+           0.026474346333      0.0       2.  0.
+          -0.164983375328      1.0       2.  0.
+           0.764132237117      2.0       2.  0.
+           0.312978947837      3.0       2.  0.
+          -0.00107558759761    0.0       3.  0.
+           0.109732330796      1.0       3.  0.
+          -0.309354837550      2.0       3.  0.
+           0.000823154284944   1.0       4.  0.
+           0.0149309620852     2.0       5.  0.
+          -0.0150469153718     3.0       5.  0.
+          -0.00213800009686    2.0       6.  0.
+           0.000198095303505   2.0       7.  0.
+           0.00195115121471    3.0       7.  0.
+          -0.000320152846941   3.0       8.  0.
+           2.08984171567       3.0       0.  2.
+          -0.381792817549      4.0       0.  2.
+           0.0441393943069     5.0       0.  2.
+           1.19594006419       3.0       2.  2.
+          -0.152740402594      4.0       2.  2.
+           0.0441393941765     5.0       2.  2.
+           0.469369369369      3.0       4.  2.
+          -0.0763702010715     4.0       4.  2.
+          -0.00206787489008    5.0       4.  2.
+           0.0744548107827     3.0       6.  2.
+           0.00393354771579    4.0       6.  2.
+          -0.000689291627989   5.0       6.  2.
+           0.00601642971226    3.0       8.  2.
+           0.000983386926042   4.0       8.  2.
+          -0.000235321870328   5.0       8.  2.
+           0.000201249794359   3.0      10.  2.
+           0.000485142401906   4.0      10.  2.
+          -0.470643739266e-4   5.0      10.  2.
+
+
+@EOS    !---Cubic equation of state---
+PRT     !Translated Peng-Robinson equation for helium.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Volume translation of Peng Robinson EOS.
+          ? Translation computed so that sat. liquid density at Tr=0.7 matches MBWR equation
+          ? of state for He of McCarty and Arp (1990).
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          2.1768             !Lower temperature limit [K]
+          1500.0             !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          88.73              !Maximum density [mol/L]
+          CPP                !Pointer to Cp0 model
+          4.0026             !Molar mass [g/mol]
+          -0.382             !Acentric factor
+          5.1953             !Critical temperature [K]
+          227.46             !Critical pressure [kPa]
+          17.399             !Critical density [mol/L]
+          8.314472           !Gas constant [J/mol-K]
+          1                  !Number of parameters
+          -0.005886
+
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#ETA   !---Viscosity---
+VS7    !Pure fluid viscosity model for helium of Arp et al. (1998).
+:DOI:
+:WEB: https://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote1334.pdf
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Arp, V.D., McCarty, R.D., and Friend, D.G.,
+? "Thermophysical Properties of Helium-4 from 0.8 to 1500 K with
+? Pressures to 2000 MPa,"
+? NIST Technical Note 1334 (revised), 1998.
+?
+?The uncertainty in viscosity is 10%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+2.1768             !Lower temperature limit [K]
+1500.0             !Upper temperature limit [K]
+100000.0           !Upper pressure limit [kPa]
+88.73              !Maximum density [mol/L]
+NUL                !Omega model
+!
+!Variables
+$VR RED CNST TEMP LOG 300 TEMP POP> =TAU             !Reducing function for T for next line, equal to the first coefficient below or LOG(T) depending on T>300.
+$VR SUMTAU:5 EXP DUP =V1 =V5  100 TEMP EXIT<         !eta0a
+$VR SUMEX:3 SUM:1 * DUP  =V5  110 TEMP EXIT>=   V1 - TEMP 100 - 10 / * V1 + =V5  !eta0, with value depending on whether or not T<110
+!
+!Dilute gas
+$DG V5
+!
+!Residual function
+$RF SUMTAU:15 EXP V1 * V5 -   100 TEMP EXIT<=   V5 + V1 -     !Viscosity, which depends on T>100
+!
+!Coefficients
+$CF
+ 0.1  1.  249.837480718    0.  0       !Reducing parameters for eta, T, rho
+ 5.7037825       0.  0.  0.  0
+-0.135311743    -1.  0.  0.  0         !  eta0a
+ 1.00347841      0.  0.  0.  0
+ 1.20654649      1.  0.  0.  0
+-0.149564551     2.  0.  0.  0
+ 0.0125208416    3.  0.  0.  0
+!
+-4.1249          0.  0.  0.  0         !  V3
+ 12.451         -1.  0.  0.  0
+-295.67         -2.  0.  0.  0
+ 196.0       0.71938 0.  0.  0
+!
+-47.5295259     -1.  1.  0.  0         !  eta0e
+ 87.6799309      0.  1.  0.  0
+-42.0741589      1.  1.  0.  0
+ 8.33128289      2.  1.  0.  0
+-0.589252385     3.  1.  0.  0
+ 547.309267     -1.  2.  0.  0
+-904.870586      0.  2.  0.  0
+ 431.404928      1.  2.  0.  0
+-81.4504854      2.  2.  0.  0
+ 5.37008433      3.  2.  0.  0
+-1684.39324     -1.  3.  0.  0
+ 3331.08630      0.  3.  0.  0
+-1632.19172      1.  3.  0.  0
+ 308.804413      2.  3.  0.  0
+-20.2936367      3.  3.  0.  0
+NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC7    !Pure fluid thermal conductivity model for helium of Hands and Arp (1981).
+:DOI: 10.1016/0011-2275(81)90211-3
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Hands, B.A. and Arp, V.D.,
+? "A Correlation of Thermal Conductivity Data for Helium,"
+? Cryogenics, 21(12):697-703, 1981.
+?
+?The uncertainty in thermal conductivity is 5%, except at low temperatures
+? where it increases to 10%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+2.1768             !Lower temperature limit [K]
+1500.0             !Upper temperature limit [K]
+100000.0           !Upper pressure limit [kPa]
+88.73              !Maximum density [mol/L]
+$DG RED SUM:1 SUMEX:4 *
+$RF RED TR THRD POWR =TR SUMLOGL:15
+$CE TEMP CNST EXIT>=   TEMP CNST EXIT<=   DENS 0 EXIT>=
+$CE CNST =C1   CNST =C2   CNST =C3   CNST =C4
+$CE DENS CNST / 1 - ABS                                         =V0  !deld
+$CE TEMP CNST / 1 - ABS                                         =V1  !delt
+$CE 1 DPDD / DENS / CNST /                                      =V2  !bkt
+$CE V1 CNST / 2 POWR V0 CNST / SQR +                            =V3  !r2
+$CE TEMP SQR DENS / WMAS / ETA / DPDT SQR *
+$CE CNST * CNST V1 SQR * CNST V0 4 POWR * - EXP * CNST *
+$CE DUP V2 SQRT * V3 1 EXIT<= POP
+$CE V1 V0 C4 POWR /                                             =V4  !xx
+$CE V4 C1 + C1 /                                                =V5  !x1
+$CE V5 2 C4 / POWR                                              =V6  !x2b
+$CE 1 C3 V6 * + CNST 2 / C4 * POWR                              =V7  !x2be
+$CE C2 V7 * C1 / C2 C3 * C1 / V6 * V7 * 1 C3 V6 * + / CNST * +  =V8  !dhdx
+$CE CNST C2 * V5 * V7 * V4 V8 * C4 * - V0 CNST 1 - POWR *       =V9  !d2kt
+$CE V3 V2 * 1 V3 - CNST DENS / SQR * V9 / CNST / + SQRT *
+!
+$CF
+ 1.        1.  0.2498376 0. 0          !Reducing parameters for T, rho, eta
+ 0.0027870034 0.7034007057  0. 0. 0    !Pre-exponential term
+ 3.739232544      -1. 0. 0. 0          !Coefficient, power in T
+-26.20316969      -2. 0. 0. 0
+ 59.82252246      -3. 0. 0. 0
+-49.26397634      -4. 0. 0. 0
+ 1.        1.  0.2498376 0. 0          !Reducing parameters for T, rho, eta
+ 0.000186297053    0. 1. 0. 0          !Coefficient, powers of T, rho, ln(rho)
+-0.7275964435e-6   3. 1. 0. 0
+-0.0001427549651   1. 1. 0. 0
+ 0.3290833592e-4   2. 1. 0. 0
+-0.5213335363e-7   0. 3. 0. 0
+ 0.4492659933e-7   1. 3. 0. 0
+-0.5924416513e-8   2. 3. 0. 0
+ 0.7087321137e-5   0. 2. 0. 1
+-0.6013335678e-5   1. 2. 0. 1
+ 0.8067145814e-6   2. 2. 0. 1
+ 0.3995125013e-6  -3. 2. 0. 1
+-2.99050061466e-5  0. 2. 0. 0          !Accounts for the ln(1/Dc) in Eq. (17)
+ 2.53733162271e-5  1. 2. 0. 0
+-3.40393839209e-6  2. 2. 0. 0
+-1.68574607754e-6 -3. 2. 0. 0
+ 3.5               0. 0. 0. 0
+ 12.               0. 0. 0. 0
+ 0.392             0. 0. 0. 0
+ 2.8461            0. 0. 0. 0
+ 0.27156           0. 0. 0. 0
+ 2.81373100732     0. 0. 0. 0
+ 17.2782604916     0. 0. 0. 0
+ 5.18992           0. 0. 0. 0
+ 1000.             0. 0. 0. 0
+ 0.2               0. 0. 0. 0
+ 0.25              0. 0. 0. 0
+ 3.726229668       0. 0. 0. 0
+-18.66             0. 0. 0. 0
+ 4.25              0. 0. 0. 0
+ 0.000034685233    0. 0. 0. 0
+ 0.1743            0. 0. 0. 0
+ 0.1743            0. 0. 0. 0
+ 4.304             0. 0. 0. 0
+ 4.304             0. 0. 0. 0
+ 17.2782604916     0. 0. 0. 0
+ 227460.           0. 0. 0. 0
+NUL                !Pointer to critical enhancement auxiliary function
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Nitrogen reference); predictive mode for helium.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Klein, S.A., McLinden, M.O., and Laesecke, A., "An Improved Extended Corresponding States Method for Estimation of Viscosity of Pure Refrigerants and Mixtures," Int. J. Refrigeration, 20(3):208-217, 1997. doi: 10.1016/S0140-7007(96)00073-4.
+          ?McLinden, M.O., Klein, S.A., and Perkins, R.A., "An Extended Corresponding States Model for the Thermal Conductivity of Refrigerants and Refrigerant Mixtures," Int. J. Refrigeration, 23(1):43-63, 2000. doi: 10.1016/S0140-7007(99)00024-9
+          ?
+          ?The Lennard-Jones parameters were taken from Reid, R.C., Prausnitz, J.M., and Poling, B.E., "The Properties of Gases and Liquids," 4th edition, New York, McGraw-Hill Book Company, 1987.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          13.957             !Lower temperature limit [K]
+          500.0              !Upper temperature limit [K]
+          40000.0            !Upper pressure limit [kPa]
+          88.73              !Maximum density [mol/L]
+          FEQ NITROGEN.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.2551             !Lennard-Jones coefficient sigma [nm] for ECS method
+          10.22              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+          1  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00132  0. 0. 0. !Coefficient, power of T, spare1, spare2
+          1  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          1  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          NUL                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for helium of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+3                  !Number of terms in surface tension model
+5.1953             !Critical temperature used in fit (dummy)
+ 0.0004656 1.04    !Sigma0 and n
+ 0.001889  2.468
+-0.002006  2.661
+
+
+#DE    !---Dielectric constant---
+DE3    !Dielectric constant model for helium of Harvey and Lemmon (2005).
+:DOI: 10.1007/s10765-005-2351-5
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Harvey, A.H. and Lemmon, E.W.,
+? "Method for Estimating the Dielectric Constant of Natural Gas Mixtures,"
+? Int. J. Thermophys., 26(1):31-46, 2005. doi: 10.1007/s10765-005-2351-5
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+273.16 1000.0 1.0  !Reducing parameters for T and D
+0 1 3 0 0 0        !Number of terms in dielectric constant model
+ 0.517254 0. 1. 0. !Coefficient, T exp, D exp
+-0.203    0. 2. 0.
+ 0.039    1. 2. 0.
+ 7.47     0. 3. 0.
+
+
+#MLT   !---Melting line---
+ML1    !Melting line model for helium of McCarty and Arp (1990).
+:DOI:
+:WEB: https://link.springer.com/chapter/10.1007/978-1-4613-0639-9_174
+?
+?```````````````````````````````````````````````````````````````````````````````
+?McCarty, R.D. and Arp, V.D.,
+? "A New Wide Range Equation of State for Helium,"
+? Adv. Cryo. Eng., 35:1465-1475, 1990.
+?
+!```````````````````````````````````````````````````````````````````````````````
+2.1768             !Lower temperature limit [K]
+1500.0             !Upper temperature limit [K]
+0.                 !
+0.                 !
+1.       1000.     !Reducing temperature and pressure
+2 0 0 0 0 0        !Number of terms in melting line equation
+-1.7455837   0.0   !Coefficients and exponents
+ 1.6979793   1.555414
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for helium of Ortiz-Vega et al. (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+5.1953  228.32     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-4.0558    1.0
+ 0.69089   1.5
+ 1.1982    2.0
+ 0.79703   5.0
+-9.0432    14.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for helium of Ortiz-Vega et al. (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+5.1953   17.3837   !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+ 2.6970    0.44
+-4.0115    0.72
+ 5.5835    1.0
+-4.7467    1.5
+ 2.7509    2.5
+-2.4711    5.0
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for helium of Ortiz-Vega et al. (2010).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+5.1953   17.3837   !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-1.8975    0.41
+-6.9133    1.35
+ 13.711    2.0
+-14.644    2.5
+-23.179    10.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+
+                    @TCX               !Thermal conductivity model specification
+                    TC0  pure fluid thermal conductivity model of Hands and Arp (1981).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?Hands, B.A. and Arp, V.D.,
+                    ? "A Correlation of Thermal Conductivity Data for Helium,"
+                    ? Cryogenics, 21(12):697-703, 1981.
+                    ?
+                    ?The uncertainty in thermal conductivity is 5%, except at low temperatures
+                    ? where it increases to 10%.
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    2.1768             !Lower temperature limit [K]
+                    1500.0             !Upper temperature limit [K]
+                    100000.0           !Upper pressure limit [kPa]
+                    88.73              !Maximum density [mol/L]
+                    HE                 !Pointer to hardcoded thermal conductivity model
+                    5 0 15 0 0 0 0 0   !Number of terms for various pieces
+                     1.0          0.2498376    1.  0.  0   !Reducing parameters for T, rho, eta
+                     0.0027870034 0.7034007057 0.  0.  0   !Pre-exponential term
+                     3.739232544      -1.  0.  0.  0       !Coefficient, power in T
+                    -26.20316969      -2.  0.  0.  0
+                     59.82252246      -3.  0.  0.  0
+                    -49.26397634      -4.  0.  0.  0
+                     0.000186297053    0.  1.  0.  0       !Coefficient, powers of T, rho, ln(rho)
+                    -0.7275964435e-6   3.  1.  0.  0
+                    -0.0001427549651   1.  1.  0.  0
+                     0.3290833592e-4   2.  1.  0.  0
+                    -0.5213335363e-7   0.  3.  0.  0
+                     0.4492659933e-7   1.  3.  0.  0
+                    -0.5924416513e-8   2.  3.  0.  0
+                     0.7087321137e-5   0.  2.  1.  0
+                    -0.6013335678e-5   1.  2.  1.  0
+                     0.8067145814e-6   2.  2.  1.  0
+                     0.3995125013e-6  -3.  2.  1.  0
+                    -2.99050061466e-5  0.  2.  0.  0       !Accounts for the ln(1/Dc) in Eq. (17)
+                     2.53733162271e-5  1.  2.  0.  0
+                    -3.40393839209e-6  2.  2.  0.  0
+                    -1.68574607754e-6 -3.  2.  0.  0
+                    NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+                    @ETA               !Viscosity model specification
+                    VS0  pure fluid viscosity model of Arp et al. (1998).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?Arp, V.D., McCarty, R.D., and Friend, D.G.,
+                    ? "Thermophysical Properties of Helium-4 from 0.8 to 1500 K with
+                    ? Pressures to 2000 MPa,"
+                    ? NIST Technical Note 1334 (revised), 1998.
+                    ?
+                    ?The uncertainty in viscosity is 10%.
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    2.1768             !Lower temperature limit [K]
+                    1500.0             !Upper temperature limit [K]
+                    100000.0           !Upper pressure limit [kPa]
+                    88.73              !Maximum density [mol/L]
+                    HE                 !Pointer to hardcoded thermal conductivity model
+                    0 0 0 0 0 0 0 0    !Number of terms for various pieces
+                    NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)

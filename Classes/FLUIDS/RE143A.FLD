@@ -1,0 +1,296 @@
+RE143a               !Short name
+421-14-7             !CAS number
+Methyl trifluoromethyl ether !Full name
+CH3-O-CF3            !Chemical formula {C2H3F3O}
+HFE-143a             !Synonym
+100.0398             !Molar mass [g/mol]
+240.                 !Triple point temperature [K]
+249.572              !Normal boiling point [K]
+377.921              !Critical temperature [K]
+3635.                !Critical pressure [kPa]
+4.648140744          !Critical density [mol/L]
+0.289                !Acentric factor
+2.48                 !Dipole moment [Debye]; (computed by A. Kazakov, Nov. 2017, DF-MP2/def2-QZVPD, unc. 0.1-0.15 D)
+IIR                  !Default reference state
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+halocb               !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C2H3F3O/c1-6-2(3,4)5/h1H3              !Standard InChI String                :InChi:
+JRHMNRMPVRXNOS-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+bf6c1a00                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 12-14-11 EWL, Original version.
+! 04-06-13 MLH, Add dipole moment.
+! 05-25-16 MLH, Add predictive thermal conductivity, viscosity, and surface tension models.
+! 11-15-17 MLH, Revise dipole moment, thermal conductivity, viscosity, and surface tension models based on extremely limited data.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for HFE-143a of Akasaka and Kayukawa (2012).
+:TRUECRITICALPOINT:  377.921    4.648140744   !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1016/j.ijrefrig.2012.01.003
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Akasaka, R. and Kayukawa, Y.,
+? "A Fundamental Equation of State for Trifluoromethyl Methyl Ether
+? (HFE-143m) and Its Application to Refrigeration Cycle Analysis,"
+? Int. J. Refrig., 35(4):1003-1013, 2012. doi: 10.1016/j.ijrefrig.2012.01.003
+?
+?The uncertainties are 0.1% for liquid density, 0.3% in pressure of the
+? vapor phase, and 0.1% for vapor pressure, except in the critical region.
+?
+!```````````````````````````````````````````````````````````````````````````````
+240.               !Lower temperature limit [K]
+420.               !Upper temperature limit [K]
+7200.              !Upper pressure limit [kPa]
+12.62              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+100.0398                               !Molar mass [g/mol]
+240.                                   !Triple point temperature [K]
+65.35                                  !Pressure at triple point [kPa]
+12.62                                  !Density at triple point [mol/L]
+249.572                                !Normal boiling point temperature [K]
+0.289                                  !Acentric factor
+377.921       3635.0       4.648140744 !Tc [K], pc [kPa], rhoc [mol/L]
+377.921                    4.648140744 !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  17  4   0 0    0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+ 7.7715884        0.682     1.   0.    !a(i),t(i),d(i),l(i)
+-8.704275         0.851     1.   0.
+-0.28095049       1.84      1.   0.
+ 0.14540153       1.87      2.   0.
+ 0.0092291277     0.353     5.   0.
+-0.21416510       3.92      1.   1.
+ 0.099475155      1.14      3.   1.
+ 0.023247135      0.104     5.   1.
+-0.012873573      1.19      7.   1.
+-0.057366549      6.58      1.   2.
+ 0.36504650       6.73      2.   2.
+-0.25433763       7.99      2.   2.
+-0.090896436      7.31      3.   2.
+ 0.083503619      7.45      4.   2.
+ 0.015477603      16.5      2.   3.
+-0.016641941      24.8      3.   3.
+ 0.0052410163     10.5      5.   3.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for R-143a of Akasaka and Kayukawa (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Akasaka, R. and Kayukawa, Y., 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     1.0        !Reducing parameters for T, Cp0
+4 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 20.37      0.0
+ 0.2918     1.0
+-0.000195   2.0
+ 4.65e-8    3.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for R-143a of Akasaka and Kayukawa (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Akasaka, R. and Kayukawa, Y., 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 5  0  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  1.4499487026204636    1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -7.5730724565886645    0.0      !aj, ti for [ai*tau**ti] terms
+  8.0922918999612889    1.0      !aj, ti for [ai*tau**ti] terms
+  0.0350954850969392   -1.0
+ -0.234531171827e-04   -2.0
+  0.559266640510e-08   -3.0
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (R134a reference); predictive model for R-E143a.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?VISCOSITY
+? Extremely limited experimental data found.
+? Estimated uncertainty in the gas phase 20%, in the saturated liquid 5%, higher at higher pressures.
+?
+?THERMAL CONDUCTIVITY
+? Extremely limited experimental data found.
+? Estimated uncertainty in the gas phase 20%, in the saturated liquid 5%, higher at higher pressures.
+?
+?The Lennard-Jones parameters were estimated with the method of Chung.
+?
+!```````````````````````````````````````````````````````````````````````````````
+240.0              !Lower temperature limit [K]
+420.0              !Upper temperature limit [K]
+7200.0             !Upper pressure limit [kPa]
+12.62              !Maximum density [mol/L]
+FEQ R134A.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+0.4847             !Lennard-Jones coefficient sigma [nm] from method Chung
+300.104            !Lennard-Jones coefficient epsilon/kappa [K] from Chung method
+1  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 0.001129 0. 0. 0. !Coefficient, power of T, spare1, spare2 coeff from re245cb
+1  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 1.008      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+1  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 0.975      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for R-E143a of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.198e-9           !Xi0 (amplitude) [m]
+0.054              !Gam0 (amplitude) [-]
+5.88e-10           !Qd_inverse (modified effective cutoff parameter) [m]; R125 value
+566.88             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for RE143a of Huber (2018). Fit to extrememly limited experimental data.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?Estimated uncertainty is 10%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+377.921            !Critical temperature used in fit (dummy)
+0.0371 0.98412     !Sigma0 and n 0.0315059
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for R-E143a of Akasaka and Kayukawa (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+377.921 3635.0     !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+-7.44314   1.0
+ 1.69164   1.5
+-2.27778   2.5
+-4.094     5.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for R-E143a of Akasaka and Kayukawa (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+377.921 4.64814    !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+ 1.20552   0.33
+ 1.33568   0.5
+ 0.0981486 1.5
+ 0.248917  2.5
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for R-E143a of Akasaka and Kayukawa (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+377.921 4.64814    !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+-3.02576   0.38
+-6.97239   1.24
+-20.2601   3.2
+-53.4441   6.9
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

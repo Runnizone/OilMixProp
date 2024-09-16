@@ -1,0 +1,501 @@
+RE347mcc (HFE-7000)  !Short name
+375-03-1             !CAS number
+1,1,1,2,2,3,3-Heptafluoro-3-methoxypropane !Full name
+CF3CF2CF2OCH3        !Chemical formula {C4H3F7O}
+HFE-7000             !Synonym  [also known as R347sE(gamma)(delta)]
+200.0548424          !Molar mass [g/mol]
+150.65               !Triple point temperature [K] (from 3M spec sheet)
+307.328              !Normal boiling point [K]
+437.7                !Critical temperature [K]
+2478.2               !Critical pressure [kPa]
+2.64                 !Critical density [mol/L]
+0.403                !Acentric factor
+3.13                 !Dipole moment [Debye]; calculated by A. Laesecke, July, 2012.
+IIR                  !Default reference state
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+halocb               !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C4H3F7O/c1-12-4(10,11)2(5,6)3(7,8)9/h1H3                                     :InChi:  !Standard InChI String
+NOPJRYAFUXTDLX-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+12934ef0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 11-20-10  YZ, Original version.
+! 12-02-10 MLH, Add predictive transport.
+! 07-07-11 EWL, Update equation of state.
+! 09-13-11 MLH, Update viscosity based on Fortin 2011 data.
+! 08-23-12 EWL, Update equation of state with new speed of sound data and vapor pressures.
+! 08-23-12 MLH, Update viscosity with revised EOS.
+! 04-17-14 EWL, Add surface tension coefficients of Mulero et al. (2014).
+! 04-29-14 EWL, Change full name.
+! 04-02-15 EWL, Update equation of state.
+! 04-28-16 EWL, Update triple point and lower temperature limits.
+! 12-04-15 MLH, Update viscosity, thermal conductivity.
+! 05-23-16 MLH, Update crit enhancement coefficients.
+! 02-16-17  KG, Add ancillary equations.
+! 03-13-17 MLH, Revise transport with new preliminary data.
+! 05-20-18 MLH, Revise thermal conductivity with full preliminary data set
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for R-E347mcc of Zhou and Lemmon (2016).
+:TRUECRITICALPOINT:  437.7      2.64          !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Zhou, Y. and Lemmon, E.W.,
+?"Equations of State for RE245cb2, RE347mcc, RE245fa2, and R1216,"
+? to be submitted to J. Phys. Chem. Ref. Data, 2018.
+?
+?The uncertainty in liquid density is 0.1% to 0.2% from 260 K to 370 K at
+? pressures up to 3 MPa. No data are available below 260 K or at higher pressures.
+? Above 370 K, the uncertainty remains small for liquid like states, and increases
+? to 0.6% at temperatures above the critical point.  Uncertainties are higher in
+? the near critical region.  In the vapor region, most data are represented to
+? within 0.2% in density, except the experimental data for one isochore that
+? appear to be wrong.  The uncertainty in speed of sound is 0.03% in the vapor
+? phase.  In the liquid phase at 1 atm the uncertainty is 0.1% between 278 K and
+? 298 K. States close to but outside this region will have similar uncertainties.
+? The uncertainty in vapor pressure is 0.2% above 300 K. The uncertainty in heat
+? capacities is estimated to be 2% or less.
+?
+!```````````````````````````````````````````````````````````````````````````````
+150.65             !Lower temperature limit [K]
+500.0              !Upper temperature limit [K]
+20000.0            !Upper pressure limit [kPa]
+8.886              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+200.0548424                            !Molar mass [g/mol]
+150.65                                 !Triple point temperature [K]
+0.00005707                             !Pressure at triple point [kPa]
+8.886                                  !Density at triple point [mol/L]
+307.328                                !Normal boiling point temperature [K]
+0.403                                  !Acentric factor
+437.7         2478.2       2.64        !Tc [K], pc [kPa], rhoc [mol/L]
+437.7                      2.64        !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  10  4   6 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.07342      1.0     4.  0.          !a(i),t(i),d(i),l(i)
+  1.9394       0.185   1.  0.
+ -2.8353       0.842   1.  0.
+ -0.3876       1.      2.  0.
+  0.1428       0.5     3.  0.
+ -1.979        2.74    1.  2.
+ -2.0455       2.74    3.  2.
+  0.3085       0.87    2.  1.
+ -2.166        2.77    2.  2.
+ -0.04225      1.24    7.  1.
+  3.0317       2.3     1.  2. 2.    -1.205    -0.53    0.9     0.655    0. 0. 0.
+ -1.0685       1.74    1.  2. 2.    -1.19     -2.57    0.69    0.9      0. 0. 0.
+ -0.3598       2.22    3.  2. 2.    -0.94     -1.6     0.87    0.655    0. 0. 0.
+ -0.4525       2.1     3.  2. 2.    -1.64     -2.56    1.22    0.34     0. 0. 0.
+  0.9488       1.85    2.  2. 2.    -0.92     -1.21    0.71    0.745    0. 0. 0.
+  0.3184       0.5     3.  2. 2.    -1.71     -8.9     1.11    0.28     0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for R-E347mcc of Zhou and Lemmon (2016).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Zhou, Y. and Lemmon, E.W., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 17.916     0.0
+ 0.6505     21.0
+ 0.3794     7754.0
+ 21.292     1562.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for R-E347mcc of Zhou and Lemmon (2016).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Zhou, Y. and Lemmon, E.W., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  3  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+ 16.916                 1.0      !ai, ti for [ai*log(tau**ti)] terms
+-19.888795933910032     0.0      !aj, ti for [ai*tau**ti] terms
+  7.3473678427598825    1.0      !aj, ti for [ai*tau**ti] terms
+  0.6505     21.0                !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  0.3794     7754.0
+  21.292     1562.0
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for R-E347mcc of Zhou and Lemmon (2012).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Zhou, Y. and Lemmon, E.W.
+          ? preliminary equation, 2012.
+          ?
+          ?The uncertainty in liquid density is 0.1% to 0.2% from 260 K to 370 K at
+          ? pressures up to 3 MPa. No data are available below 260 K or at higher pressures.
+          ? Above 370 K, the uncertainty remains small for liquid like states, and increases
+          ? to 0.6% at temperatures above the critical point.  Uncertainties are higher in
+          ? the near critical region.  In the vapor region, most data are represented to
+          ? within 0.2% in density, except the experimental data for one isochore that
+          ? appear to be wrong.  The uncertainty in speed of sound is 0.03% in the vapor
+          ? phase.  In the liquid phase at 1 atm the uncertainty is 0.1% between 278 K and
+          ? 298 K. States close to but outside this region will have similar uncertainties.
+          ? The uncertainty in vapor pressure is 0.2% above 300 K. The uncertainty in heat
+          ? capacities is estimated to be 2% or less.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          150.65             !Lower temperature limit [K]
+          500.0              !Upper temperature limit [K]
+          20000.0            !Upper pressure limit [kPa]
+          8.886              !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          200.0548424                            !Molar mass [g/mol]
+          150.65                                 !Triple point temperature [K]
+          6.825                                  !Pressure at triple point [kPa]
+          7.66                                   !Density at triple point [mol/L]
+          307.349                                !Normal boiling point temperature [K]
+          0.403                                  !Acentric factor
+          437.7         2476.2       2.62        !Tc [K], pc [kPa], rhoc [mol/L]
+          437.7                      2.62        !Reducing parameters [K, mol/L]
+          8.314472                               !Gas constant [J/mol-K]
+            10  4    7 12    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+            0.0330627    1.0     4.  0.          !a(i),t(i),d(i),l(i)
+            2.606165     0.34    1.  0.
+           -4.902937     0.77    1.  0.
+            2.228012     1.02    1.  0.
+            1.494115     0.79    2.  0.
+           -2.420459     1.017   2.  0.
+            0.160067     0.634   3.  0.
+            1.383893     1.35    2.  1.
+           -2.092005     2.25    1.  2.
+           -0.5904708    2.5     2.  2.
+           -0.701794     2.0     1.  2. 2.    -0.593    -0.0872  1.06    1.12     0. 0. 0.
+            2.765425     1.66    1.  2. 2.    -1.36     -1.176   1.22    0.79     0. 0. 0.
+            0.6860982    1.33    2.  2. 2.    -1.73     -1.530   0.92    1.055    0. 0. 0.
+           -2.208170     2.0     2.  2. 2.    -1.483    -0.78    1.08    0.5      0. 0. 0.
+            0.1739594    1.87    3.  2. 2.    -0.617    -0.088   1.21    0.84     0. 0. 0.
+           -0.9028007    1.75    3.  2. 2.    -1.596    -1.04    0.85    0.85     0. 0. 0.
+           -0.0213123    1.05    1.  2. 2.    -9.64   -263.0     1.12    0.91     0. 0. 0.
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for R-E347mcc (HFE-7000).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Zhou, Y. and Lemmon, E.W.
+          ? preliminary equation, 2012.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.314472   !Reducing parameters for T, Cp0
+          1 2   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           13.09      0.0
+           13.78      2045.0
+           14.21      850.0
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC1    !Pure fluid preliminary thermal conductivity model for R-E347mcc (HFE-7000) of Huber (2018).
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?Fit to preliminary NIST data of Perkins, 5/20/2018
+? Estimated uncertainty 2% in the liquid to 70 MPa, 4% in the vapor for T<340 K.
+?
+!```````````````````````````````````````````````````````````````````````````````
+150.65             !Lower temperature limit [K]
+600.0              !Upper temperature limit [K]
+70000.0            !Upper pressure limit [kPa]
+12.0               !Maximum density [mol/L]
+5   0              !# terms for dilute gas function:  numerator, denominator
+ 437.7       1.0   !Reducing parameters for T, tcx
+ 0.0         0.0
+-0.0239098   1.0
+ 0.0960335   2.0
+-0.060505    3.0
+ 0.012299    4.0
+ 10  0             !# terms for background gas function:  numerator, denominator
+ 437.7  2.64 1.0   !Reducing parameters for T, rho, tcx    TEST4 MODEL
+-0.00842403  0.0   1.0   0.
+ 0.0545889   0.0   2.0   0.
+-0.0530301   0.0   3.0   0.
+ 0.0201447   0.0   4.0   0.
+-0.0025046   0.0   5.0   0.
+ 0.00931228  1.0   1.0   0.
+-0.0367016   1.0   2.0   0.
+ 0.0392477   1.0   3.0   0.
+-0.0155674   1.0   4.0   0.
+ 0.00220816  1.0   5.0   0.
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for R-E347mcc (HFE-7000) of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.231e-9           !Xi0 (amplitude) [m]
+0.058              !Gam0 (amplitude) [-]
+5.553e-10          !Qd_inverse (modified effective cutoff parameter) [m]
+656.55             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Propane reference); fit to very limited data for R-E347mcc (HFE-7000).
+:DOI: 10.6028/NIST.IR.8209
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Huber, M.L., (2018) "Models for the Viscosity, Thermal Conductivity, and
+          ? Surface Tension of Selected Pure Fluids as Implemented in REFPROP v10.0",
+          ? NISTIR 8209; doi: 10.6028/NIST.IR.8209
+          ?
+          ?VISCOSITY
+          ? Hu, X., Meng, X., Wei, K., Li, W. and Wu, J., Compressed Liquid Viscosity Measurements of HFE-7000,HFE-7100, HFE-7200, and HFE-7500 at Temperatures from (253 to 373) K and Pressures up to 30 MPa, J. Chem. Eng. Data,(2015)60, 3562-3570 doi: 10.1021/acs.jced.5b00499
+          ?
+          ?Estimated uncertainty in liquid phase at atmospheric pressure up to 20 MPa is 2%.
+          ? No data for gas phase; estimated uncertainty 10-20 %
+          ?
+          ?THERMAL CONDUCTIVITY
+          ? Sekiya, A., Misaki, S. The potential of hydrofluoroethers to replace CFCs, HCFCs, and PFCs. J. Fluorine Chem., 2000, 101, 215-221 doi: 10.1016/S0022-1139(99)00162-1
+          ? Takada, N., Matsuo, S., Tanaka, Y., Sekiya, A. Gaseous thermal conductivities of new hydrofluoroethers (HFEs) J. Fluorine Chem., 1998, 91, 81-85 doi: 10.1016/S0022-1139(98)00202-4
+          ?
+          ?Very limited data-only two data points found.
+          ? Estimated uncertainty approximately 10-20%.
+          ?
+          ?The Lennard-Jones parameters were estimated with the method of Chung.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          150.65             !Lower temperature limit [K]
+          600.0              !Upper temperature limit [K]
+          70000.0            !Upper pressure limit [kPa]
+          12.0               !Maximum density [mol/L]
+          FEQ PROPANE.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.5853             !Lennard-Jones coefficient sigma [nm] from method Chung
+          347.6              !Lennard-Jones coefficient epsilon/kappa [K] from Chung method
+          1  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00111       0. 0. 0.  !Coefficient, power of T, spare1, spare2
+          4  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           2.57345       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+          -1.73973       0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+           0.659016      0. 2. 0.  !Coefficient, power of Tr, power of Dr, spare
+          -0.0824925     0. 3. 0.  !Coefficient, power of Tr, power of Dr, spare
+          1  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.14          0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+********************************************************************************
+
+@ETA    !---Viscosity---
+VS5     !Pure fluid viscosity model for R-E347mcc (HFE-7000) of Chung et al. (1988).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Chung, T-H., Ajlan, M., Lee, L.L. and Starling, K.E.
+          ? "Generalized Multiparameter Correlation for Nonpolar and Polar Fluid Transport Properties"
+          ? Ind. Eng. Chem. Res. 1998, 27, 671-679.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          150.65             !Lower temperature limit [K]
+          500.0              !Upper temperature limit [K]
+          20000.0            !Upper pressure limit [kPa]
+          8.886              !Maximum density [mol/L]
+          1                  !Number of terms associated with dilute-gas function
+          NUL                !Pointer to reduced effective collision cross-section model; not used
+          0.5871             !Lennard-Jones coefficient sigma [nm] =0.809vc*(1/3)A
+          347.57             !Lennard-Jones coefficient epsilon/kappa [K] =Tc/1.2593
+          1.0      1.0       !Reducing parameters for T, eta
+          0.30207     0.5    !=0.021357*SQRT(MW)  [Chapman-Enskog term]
+          0                  !Number of terms for initial density dependence
+          0.411 0.0 0.0 0. 0 !w, mur, kappa for Chung
+          0                  !Additional parameters for Chung
+          NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+@TCX    !---Thermal conductivity---
+TC5     !Pure fluid thermal conductivity model for R-E347mcc (HFE-7000) of Chung et al. (1988).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Chung, T-H., Ajlan, M., Lee, L.L. and Starling, K.E.
+          ? "Generalized Multiparameter Correlation for Nonpolar and Polar Fluid Transport Properties"
+          ? Ind. Eng. Chem. Res. 1998, 27, 671-679.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          150.65             !Lower temperature limit [K]
+          500.0              !Upper temperature limit [K]
+          20000.0            !Upper pressure limit [kPa]
+          8.886              !Maximum density [mol/L]
+          0.5871             !Lennard-Jones coefficient sigma [nm] =0.809vc*(1/3)A
+          347.57             !Lennard-Jones coefficient epsilon/kappa [K] =Tc/1.2593
+          0.411   0.  0.     !w, mur, kappa for Chung
+          0                  !Additional parameters for Chung
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for R-E347mcc (HFE-7000) of Mulero et al. (2014).
+:DOI: 10.1063/1.4878755
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A. and Cachadiña, I.,
+? "Recommended Correlations for the Surface Tension of Several Fluids
+? Included in the REFPROP Program,"
+? J. Phys. Chem. Ref. Data, 43, 023104, 2014.
+? doi: 10.1063/1.4878755
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+437.7              !Critical temperature used in fit (dummy)
+0.05031   1.232    !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for R-E347mcc (HFE-7000) of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+437.7   2478.2     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-7.9110    1.0
+ 1.4904    1.5
+-3.0464    2.7
+-4.9639    4.8
+-7.7423    13.5
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for R-E347mcc (HFE-7000) of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+437.7   2.64       !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 3.1002    0.395
+-3.1869    0.75
+ 8.0538    1.15
+-7.5947    1.5
+ 2.8275    2.15
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for R-E347mcc (HFE-7000) of Gao (2017).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., 2017.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+437.7   2.64       !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-3.2144    0.4
+-7.0853    1.21
+-23.820    3.19
+-69.536    6.65
+-182.42    14.0
+-494.30    27.85
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

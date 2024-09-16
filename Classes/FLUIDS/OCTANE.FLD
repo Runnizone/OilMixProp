@@ -1,0 +1,745 @@
+Octane               !Short name
+111-65-9             !CAS number
+Octane               !Full name
+CH3-6(CH2)-CH3       !Chemical formula {C8H18}
+n-Octane             !Synonym
+114.2285             !Molar mass [g/mol]
+216.37               !Triple point temperature [K]
+398.794              !Normal boiling point [K]
+568.74               !Critical temperature [K]
+2483.59              !Critical pressure [kPa]
+2.031                !Critical density [mol/L]
+0.398                !Acentric factor
+0.07                 !Dipole moment [Debye]; (estimated value)
+NBP                  !Default reference state
+10.0                 !Version number
+1262                 !UN Number                                                 :UN:
+n-alkane             !Family                                                    :Family:
+5511.80              !Heating value (upper) [kJ/mol]                            :Heat:
+1S/C8H18/c1-3-5-7-8-6-4-2/h3-8H2,1-2H3    !Standard InChI String                :InChi:
+TVMXDCGIABBOFY-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+f174a9b0                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 04-02-98 EWL, Original version.
+! 11-09-98 EWL, Add equations of Span and of Polt et al.
+! 02-19-04 MLH, Add viscosity VS1 model.
+! 03-12-04 MLH, Add thermal conductivity TC1.
+! 04-19-04 MLH, Update VS1, TC1 references.
+! 07-07-04 AHH, Update dipole moment.
+! 08-05-04 EWL, Add Harvey and Lemmon dielectric correlation.
+! 10-13-04 MLH, Add family.
+! 12-02-06 MLH, Update LJ for ECS.
+! 03-05-07 MLH, Add VS4 model.
+! 08-17-10 IDC, Add ancillary equations.
+! 04-11-12 MLH, Add extra blank FT coeff for consistent formatting.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 07-31-17  MT, Add final EOS of Beckmueller et al. (2017).
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for octane of Beckmueller et al. (2018).
+:TRUECRITICALPOINT:  568.74     2.031         !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Beckmueller, R., Thol, M., Lemmon, E.W., and Span, R.,
+? "Fundamental Equation of State for n-Octane,"
+? to be submitted to Int. J. Thermophys., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+216.37             !Lower temperature limit [K]
+730.0              !Upper temperature limit [K]
+1000000.0          !Upper pressure limit [kPa]
+6.69               !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+114.229                                !Molar mass [g/mol]
+216.37                                 !Triple point temperature [K]
+0.0020746                              !Pressure at triple point [kPa]
+6.682                                  !Density at triple point [mol/L]
+398.794                                !Normal boiling point temperature [K]
+0.398                                  !Acentric factor
+568.74        2483.59      2.031       !Tc [K], pc [kPa], rhoc [mol/L]
+568.74                     2.031       !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  10  4   4 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.042240369  1.      4.  0.          !a(i),T(i),D(i),l(i)
+  1.4800888    0.243   1.  0.
+ -2.0975357    0.856   1.  0.
+ -0.72303256   1.07    2.  0.
+  0.26084383   0.52    3.  0.
+ -1.6713762    2.3     1.  2.
+ -1.3023632    2.55    3.  2.
+  0.67710461   1.075   2.  1.
+ -1.1644509    2.24    2.  2.
+ -0.030939987  0.951   7.  1.
+  3.1437871    0.59    1.  2. 2.   -0.985    -1.52     1.448    0.989     0. 0. 0.
+ -0.011637891  0.917   1.  2. 2.   -13.6     -998.     1.08     0.986     0. 0. 0.
+ -0.95649696   1.05    3.  2. 2.   -1.03     -1.57     1.185    0.532     0. 0. 0.
+ -0.36897912   1.634   2.  2. 2.   -1.084    -1.44     1.3      1.16      0. 0. 0.
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for octane of Beckmueller et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Beckmueller, R., Thol, M., Lemmon, E.W., and Span, R.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 3   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0        0.0
+ 17.47    380.0
+ 33.25   1724.0
+ 15.63   3881.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for octane of Beckmueller et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Beckmueller, R., Thol, M., Lemmon, E.W., and Span, R.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  3  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+    3.0                 1.0      !ai, ti for [ai*log(tau**ti)] terms
+   16.93282505786505    0.0      !aj, ti for [ai*tau**ti] terms
+   -4.06060362648397    1.0      !aj, ti for [ai*tau**ti] terms
+  17.47    380.0                 !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  33.25   1724.0
+  15.63   3881.0
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for octane of Span and Wagner (2003).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Span, R. and Wagner, W.
+          ? "Equations of State for Technical Applications. II. Results for Nonpolar Fluids,"
+          ? Int. J. Thermophys., 24(1):41-109, 2003. doi: 10.1023/A:1022310214958
+          ?
+          ?The uncertainties of the equation of state are approximately 0.2% (to
+          ? 0.5% at high pressures) in density, 1% (in the vapor phase) to 2% in
+          ? heat capacity, 1% (in the vapor phase) to 2% in the speed of sound, and
+          ? 0.2% in vapor pressure, except in the critical region.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          216.37             !Lower temperature limit [K]
+          600.0              !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          6.69               !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          114.229                                !Molar mass [g/mol]
+          216.37                                 !Triple point temperature [K]
+          0.001989                               !Pressure at triple point [kPa]
+          6.6864                                 !Density at triple point [mol/L]
+          398.769                                !Normal boiling point temperature [K]
+          0.395                                  !Acentric factor
+          569.32        2497.0       2.056404    !Tc [K], pc [kPa], rhoc [mol/L]
+          569.32                     2.056404    !Reducing parameters [K, mol/L]
+          8.31451                                !Gas constant [J/mol-K]
+            12  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           1.0722545       0.25      1.  0.      !a(i),t(i),d(i),l(i)
+          -2.4632951       1.125     1.  0.
+           0.65386674      1.5       1.  0.
+          -0.36324974      1.375     2.  0.
+           0.12713270      0.25      3.  0.
+           0.00030713573   0.875     7.  0.
+           0.52656857      0.625     2.  1.
+           0.019362863     1.75      5.  1.
+          -0.58939427      3.625     1.  2.
+          -0.14069964      3.625     4.  2.
+          -0.0078966331   14.5       3.  3.
+           0.0033036598   12.0       4.  3.
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for octane of Span and Wagner (2003).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Jaeschke, M. and Schley, P.
+          ? "Ideal-Gas Thermodynamic Properties for Natural-Gas Applications,"
+          ? Int. J. Thermophys., 16(6):1381-1392, 1995. doi: 10.1007/BF02083547
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.31451    !Reducing parameters for T, Cp0
+          1 0   1 2   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           4.0        0.0
+           22456260.0    -2.0    815.064   -1.0  -2.0
+           396181.4      -2.0    158.922   -1.0  -2.0
+           138087500.0   -2.0    1693.07   -1.0  -2.0
+
+
+@EOS    !---Equation of state---
+FEK     !Helmholtz equation of state for octane of Kunz and Wagner (2004).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Kunz, O., Klimeck, R., Wagner, W., Jaeschke, M.
+          ? "The GERG-2004 Wide-Range Equation of State for Natural Gases
+          ? and Other Mixtures," GERG Technical Monograph 15,
+          ? Fortschritt-Berichte VDI, VDI-Verlag, Düsseldorf, 2007.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          216.37             !Lower temperature limit [K]
+          600.0              !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          6.69               !Maximum density [mol/L]
+          PHK                                    !Pointer to Cp0 model
+          114.22852                              !Molar mass [g/mol]
+          216.37                                 !Triple point temperature [K]
+          0.001989                               !Pressure at triple point [kPa]
+          6.686                                  !Density at triple point [mol/L]
+          398.77                                 !Normal boiling point temperature [K]
+           0.3964                                !Acentric factor
+          569.32        2506.7       2.056404127 !Tc [K], pc [kPa], rhoc [mol/L]
+          569.32                     2.056404127 !Reducing parameters [K, mol/L]
+          8.314472                               !Gas constant [J/mol-K]
+            12  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           1.0722544875633       0.25      1.   0.
+          -2.4632951172003       1.125     1.   0.
+           0.65386674054928      1.5       1.   0.
+          -0.36324974085628      1.375     2.   0.
+           0.12713269626764      0.250     3.   0.
+           0.0003071357277793    0.875     7.   0.
+           0.52656856987540      0.625     2.   1.
+           0.019362862857653     1.75      5.   1.
+          -0.58939426849155      3.625     1.   2.
+          -0.14069963991934      3.625     4.   2.
+          -0.0078966330500036    14.5      3.   3.
+           0.0033036597968109    12.0      4.   3.
+
+
+@AUX    !---Auxiliary function for PH0
+PHK     !Ideal gas Helmholtz form for octane of Kunz and Wagner (2004).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Kunz, O., Klimeck, R., Wagner, W., Jaeschke, M.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1 2  0 1 2  0 0 0  !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+           3.0               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+           15.864687161      0.0                 !aj, ti for [ai*tau**ti] terms
+          -97.370667555      1.0
+          -33.8029           1.431644769         !aj, ti for cosh and sinh terms
+           15.6865           0.27914354
+           48.1731           2.973845992
+
+
+@EOS    !---Equation of state---
+FE3     !Helmholtz equation of state for octane of Polt et al. (1992).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Polt, A., Platzer, B., and Maurer, G.,
+          ? "Parameter der thermischen Zustandsgleichung von Bender fuer 14
+          ? mehratomige reine Stoffe,"
+          ? Chem. Tech. (Leipzig), 44(6):216-224, 1992.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          258.0              !Lower temperature limit [K]
+          500.0              !Upper temperature limit [K]
+          200000.0           !Upper pressure limit [kPa]
+          6.6355607          !Maximum density [mol/L]
+          CP3                                    !Pointer to Cp0 model
+          114.233                                !Molar mass [g/mol]
+          216.37                                 !Triple point temperature [K]
+          0.15134                                !Pressure at triple point [kPa]
+          6.3907                                 !Density at triple point [mol/L]
+          398.823                                !Normal boiling point temperature [K]
+          0.3985                                 !Acentric factor
+          569.35        2517.0       2.0571989   !Tc [K], pc [kPa], rhoc [mol/L]
+          569.35                     2.0571989   !Reducing parameters [K, mol/L]
+          8.3143                                 !Gas constant [J/mol-K]
+            22  5    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           2.66117347782      3.  0.  0.  0.     !a(i),t(i),d(i),l(i)
+          -3.43810366899      4.  0.  0.  0.
+           0.700476763325     5.  0.  0.  0.
+           5.73101545749      0.  1.  0.  0.
+          -4.11975339382      1.  1.  0.  0.
+          -7.71251551395      2.  1.  0.  0.
+           5.26137115388      3.  1.  0.  0.
+          -0.716144047789     4.  1.  0.  0.
+          -5.84632875151      0.  2.  0.  0.
+           7.36422551908      1.  2.  0.  0.
+          -1.00540027381      2.  2.  0.  0.
+           1.583872422        0.  3.  0.  0.
+          -1.53643650819      1.  3.  0.  0.
+          -0.142010818863     0.  4.  0.  0.
+           0.0333126039209    1.  4.  0.  0.
+           0.0271948869925    1.  5.  0.  0.
+          -2.66117347782      3.  0.  2.  0.9995725
+           3.43810366899      4.  0.  2.  0.9995725
+          -0.700476763325     5.  0.  2.  0.9995725
+           4.43217980268      3.  2.  2.  0.9995725
+          -12.3858312597      4.  2.  2.  0.9995725
+           8.03373487925      5.  2.  2.  0.9995725
+
+
+@AUX    !---Auxiliary function for Cp0
+CP3     !Ideal gas heat capacity function for octane.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Polt, A., Platzer, B., and Maurer, G.,
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.3143     !Reducing parameters for T, Cp0
+          5 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           3.018753          0.0
+           0.07297005        1.0
+          -0.000014171168    2.0
+          -0.1225317e-7      3.0
+           0.12912645e-11    4.0
+
+
+@EOS    !---Equation of state---
+FE4     !Helmholtz equation of state for octane of Starling (1973).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Starling, K.E.,
+          ? "Fluid Thermodynamic Properties for Light Petroleum Systems,"
+          ? Gulf Publishing Company, 1973.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          255.372            !Lower temperature limit [K]
+          644.0              !Upper temperature limit [K]
+          55000.0            !Upper pressure limit [kPa]
+          6.36203            !Maximum density [mol/L]
+          CP4                                    !Pointer to Cp0 model
+          114.224                                !Molar mass [g/mol]
+          216.37                                 !Triple point temperature [K]
+          0.099571                               !Pressure at triple point [kPa]
+          6.3620                                 !Density at triple point [mol/L]
+          398.440                                !Normal boiling point temperature [K]
+          0.394                                  !Acentric factor
+          568.76        2487.0       2.0291709   !Tc [K], pc [kPa], rhoc [mol/L]
+          568.76                     2.0291709   !Reducing parameters [K, mol/L]
+          8.3159524                              !Gas constant [J/mol-K]
+            13  5    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           2.53526486527      3.  0.  0.  0.     !a(i),t(i),d(i),l(i)
+           0.61687265305      0.  1.  0.  0.
+          -0.941731168114     1.  1.  0.  0.
+          -1.09609729872      3.  1.  0.  0.
+           0.0849362892312    4.  1.  0.  0.
+          -0.000363538456997  5.  1.  0.  0.
+           0.0849748115039    0.  2.  0.  0.
+          -0.0961236603829    1.  2.  0.  0.
+          -0.132591135067     2.  2.  0.  0.
+           0.00269748328453   1.  5.  0.  0.
+           0.00372085674947   2.  5.  0.  0.
+          -2.53526486527      3.  0.  2.  0.35285564
+          -0.447291258549     3.  2.  2.  0.35285564
+
+
+@AUX    !---Auxiliary function for Cp0
+CP4     !Ideal gas heat capacity function for octane.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Starling, K.E.,
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     4.184      !Reducing parameters for T, Cp0
+          1 0   1 1   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           34.0847    0.0
+           41241363.0    -2.0    768.847   -1.0  -2.0
+           260366400.0   -2.0    1611.55   -1.0  -2.0
+
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#ETA   !---Viscosity---
+VS1    !Pure fluid viscosity model for octane of Huber et al. (2004).
+:DOI: 10.1016/j.fluid.2005.03.008
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., Laesecke, A., and Xiang, H.W., "Viscosity Correlations for
+? Minor Constituent Fluids in Natural Gas: n-Octane, n-Nonane and n-Decane,"
+? Fluid Phase Equilib., 224:263-270, 2004.
+?
+?The estimated uncertainty in viscosity is 0.5% along the saturated liquid line,
+? 2% in compressed liquid to 200 MPa, 5% in vapor and supercritical regions.
+?
+?DATA SOURCES FOR VISCOSITY
+? The parameters for viscosity were based in part on the data of:
+? Knapstad, B., Skjolsvik, P.A., Oye, H.A., "Viscosity of Three Binary Hydrocarbon Mixtures," J. Chem. Eng. Data, 36:84-88, 1991.
+? Dymond, J.H., Young, K.J., "Transport Properties of Nonelectrolyte Liquid Mixtures- I. Viscosity Coefficients for n-Alkane Mixtures at Saturation Pressure from 283 to 378 K," Int. J. Thermophys., 1(4):331-344, 1980.
+? Caudwell, D.R., "Viscosity measurements on dense fluid mixtures, PhD Thesis, Imperial College, London, UK, 2004.
+? Lyusternik, V.E. and Zhdanov, A.G., Teplofiz. Svoistva Veshchestv Mater, No.7, Rabinovich, V.A. ed., Standards Publishing, Moscow, 1973.
+? Average absolute deviations of the fit from the experimental data are:
+? Knapstad: avg 0.20% (max 0.37); Dymond avg. 0.27% (max 0.45);
+? Caudwell: avg 0.59% (max 2.71); Lyusternik: 1.07% (max -1.85).
+?
+!```````````````````````````````````````````````````````````````````````````````
+216.37             !Lower temperature limit [K]
+1000.0             !Upper temperature limit [K]
+500000.0           !Upper pressure limit [kPa]
+7.6                !Maximum density [mol/L]
+1                  !Number of terms associated with dilute-gas function
+CI1                !Pointer to reduced effective collision cross-section model
+0.636170           !Lennard-Jones coefficient sigma [nm]
+452.09             !Lennard-Jones coefficient epsilon/kappa [K]
+1.0         1.0    !Reducing parameters for T, eta
+0.228258776 0.5    !=0.021357*SQRT(MW)  [Chapman-Enskog term]
+9                  !Number of terms for initial density dependence
+452.09  0.1550494  !Reducing parameters for T (=eps/k), etaB2 (= 0.6022137*sigma**3)
+-19.572881    0.0  !Coefficient, power in T* = T/(eps/k)
+ 219.73999   -0.25
+-1015.3226   -0.5
+ 2471.0125   -0.75
+-3375.1717   -1.0
+ 2491.6597   -1.25
+-787.26086   -1.5
+ 14.085455   -2.5
+-0.34664158  -5.5
+3 5 1 2 0 0        !# resid terms:  close-packed density;  simple poly; numerator of rational poly; denominator of rat. poly; numerator of exponential; denominator of exponential
+569.32    2.0564        1000.0         !Reducing parameters for T, rho, eta (Laesecke correlation in terms of mPa-s, convert to uPa-s)
+ 2.0651       0.0    0.  0.  0         !  c1
+ 3.07843      0.5    0.  0.  0         !  c8
+-0.879088     1.0    0.  0.  0         !  c22
+-0.103924    -1.0    2.  0.  0         !  beta16; powers of tau, del, del0; power of del in exponential [0= no exp.]
+ 0.0113327   -1.0    3.  0.  0         !  beta17; powers of tau, del, del0; power of del in exponential [0= no exp.]
+ 0.0992302   -2.0    2.  0.  0         !  beta18; powers of tau, del, del0; power of del in exponential [0= no exp.]
+-0.0322455   -2.0    3.  0.  0         !  beta19; powers of tau, del, del0; power of del in exponential [0= no exp.]
+-0.606122     0.0    1. -1.  0         !  beta7 over del0 term
+ 0.606122     0.0    1.  0.  0         !  beta7 in non-simple poly term
+ 1.0          0.0    0.  1.  0         !  del0 term in denominator
+-1.0          0.0    1.  0.  0         !  -del term in denominator
+NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+#AUX   !---Auxiliary function for the collision integral
+CI1    !Reduced effective collision cross-section model (empirical form in log(T*)) for octane.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., Laesecke, A., and Xiang, H.W., 2004.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+2                  !Number of terms
+ 0.335103       0  !Coefficient, power of Tstar
+-0.467898       1
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC1    !Pure fluid thermal conductivity model for octane of Huber and Perkins (2005).
+:DOI: 10.1016/j.fluid.2004.10.031
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L. and Perkins, R.A., "Thermal Conductivity Correlations for
+? Minor Constituent Fluids in Natural Gas: n-Octane, n-Nonane and n-Decane,"
+? Fluid Phase Equilib., 227:47-55, 2005.
+?
+?Uncertainty in thermal conductivity is 3%, except in the supercritical region
+? and dilute gas which have an uncertainty of 5%.
+?
+?DATA SOURCES FOR THERMAL CONDUCTIVITY
+? Li, S.F.Y., Maitland, G.C., Wakeham, W.A., "The Thermal Conductivity of n-Hexane and n-Octane at Pressures up to 0.64 GPa in the Temperature Range 34 - 90 C," Ber. Bunsenges. Phys. Chem., 88:32-36, 1984.
+? Mustafaev, R.A., "Thermal Conductivity of Vapors of Normal Saturated Hydrocarbons at High Temperatures," Izv. Vyssh. Ucheb. Zaved., Neft Gaz, 16(11):71-74, 1973.
+? Naziev, D.Y., "Thermal Conductivity of Hydrocarbons and Methods of Measurements," Baku, 2001.
+? Watanabe, H. and Seong, D.J., "The Thermal Conductivity and Thermal Diffusivity of Liquid n-Alkanes: CnH2n+2 (n=5 to 10) and Toluene," Int. J. Thermophys., 23:337-356, 2002.
+? Average absolute deviations of the fit from the experimental data are:
+? Li et al.: 0.46% (max -1.34); Mustafaev: 1.12% (max 3.09); Naziev: 1.06% (max -4.09);
+? Watanabe and Seong: 0.28% (max 0.91).
+?
+!```````````````````````````````````````````````````````````````````````````````
+200.0              !Lower temperature limit [K] allow for extrapolation to low T
+1000.0             !Upper temperature limit [K]
+800000.0           !Upper pressure limit [kPa]
+7.6                !Maximum density [mol/L]
+4   0              !# terms for dilute gas function:  numerator, denominator
+ 569.32      1.    !Reducing parameters for T, tcx
+ 0.0077293   0.    !Coefficient, power in T
+-0.0371138   1.    !(2)
+ 0.097758    2.    !(3)
+-0.0288707   3.    !(16)
+10  0              !# terms for background gas function:  numerator, denominator
+ 569.32  2.0564 1. !Reducing parameters for T, rho, tcx
+ 0.0285553   0.  1.  0.  !Coefficient, powers of T, rho, spare for future use
+-0.00926155  1.  1.  0.
+-0.0171398   0.  2.  0.
+ 0.0         1.  2.  0.
+ 0.00659971  0.  3.  0.
+ 0.00153496  1.  3.  0.
+ 0.0         0.  4.  0.
+ 0.0         1.  4.  0.
+ 0.0         0.  5.  0.
+ 0.0         1.  5.  0.
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for octane of Olchowy and Sengers (1989).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Olchowy, G.A. and Sengers, J.V.,
+? "A Simplified Representation for the Thermal Conductivity of Fluids in the Critical Region,"
+? Int. J. Thermophys., 10:417-426, 1989. doi: 10.1007/BF01133538
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.03               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.194e-9           !Xi0 (amplitude) [m]
+0.0496             !Gam0 (amplitude) [-]
+0.68628e-9         !Qd_inverse (modified effective cutoff parameter) [m]; fitted to data
+853.98             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+********************************************************************************
+
+@ETA    !---Viscosity---
+VS4     !Pure fluid generalized friction theory viscosity model for octane of Quinones-Cisneros and Deiters (2006).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Quinones-Cisneros, S.E. and Deiters, U.K.,
+          ? "Generalization of the Friction Theory for Viscosity Modeling,"
+          ? J. Phys. Chem. B, 110(25):12820-12834, 2006. doi: 10.1021/jp0618577
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          182.55             !Lower temperature limit [K]
+          600.0              !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          7.75               !Maximum density [mol/L]
+          4 0 0 0 0 0        !Number of terms associated with dilute-gas function
+          NUL                !Pointer to reduced effective collision cross-section model; not used
+          0.636170           !Lennard-Jones coefficient sigma [nm] (not used)
+          452.09             !Lennard-Jones coefficient epsilon/kappa [K] (not used)
+           569.32    1.0     !Reducing parameters for T, eta
+           0.0       0.5     !Chapman-Enskog term; not used here
+           16.7562   0.0     !Empirical terms for eta0
+          -53.1705   0.25
+           46.9105   0.50
+          0                  !Number of terms for initial density dependence
+           8.68736376035937e-5   0.0                  -2.69591205491896e-5 0. 0. !  a(0),a(1),a(2)
+           1.46266597799792e-4   0.0                  -5.44584119633888e-5 0. 0. !  b(0),b(1),b(2)
+           1.286733871e-4       -1.76442029e-5         0.0                 0. 0. !  c(0),c(1),c(2)
+          -2.40884095261648e-9   5.20715310859732e-11  0.0                 0. 0. !  A(0),A(1),A(2)
+           0.0                   6.62141302562572e-9   1.60012396822086e-9 0. 0. !  B(0),B(1),B(2)
+          -9.50545390021906e-7   1.03767490732769e-6   0.0                 0. 0. !  C(0),C(1),C(2)
+           0.0                   0.0                   0.0                 0. 0. !  D(0),D(1),D(2)
+           0.0                   0.0                   0.0                 0. 0. !  E(0),E(1),E(2)
+          NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Nitrogen reference); predictive mode for octane.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Klein, S.A., McLinden, M.O., and Laesecke, A., "An Improved Extended Corresponding States Method for Estimation of Viscosity of Pure Refrigerants and Mixtures," Int. J. Refrigeration, 20(3):208-217, 1997. doi: 10.1016/S0140-7007(96)00073-4.
+          ?McLinden, M.O., Klein, S.A., and Perkins, R.A., "An Extended Corresponding States Model for the Thermal Conductivity of Refrigerants and Refrigerant Mixtures," Int. J. Refrigeration, 23(1):43-63, 2000. doi: 10.1016/S0140-7007(99)00024-9
+          ?
+          ?The Lennard-Jones parameters were taken from Huber, M.L., Laesecke, A. and Xiang, H.W., "Viscosity correlations for minor constituent fluids in natural gas: n-octane, n-nonane and n-decane," Fluid Phase Equilibria 224(2004)263-270.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          216.37             !Lower temperature limit [K]
+          1000.0             !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          7.6                !Maximum density [mol/L]
+          FEQ NITROGEN.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.636170           !Lennard-Jones coefficient sigma [nm]
+          452.09             !Lennard-Jones coefficient epsilon/kappa [K]
+          1  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00132  0. 0. 0. !Coefficient, power of T, spare1, spare2
+          1  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          1  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for octane of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+3                  !Number of terms in surface tension model
+569.32             !Critical temperature used in fit (dummy)
+ 0.34338   1.6607  !Sigma0 and n
+-0.50634   1.9632
+ 0.2238    2.3547
+
+
+#DE    !---Dielectric constant---
+DE3    !Dielectric constant model for octane of Harvey and Lemmon (2005).
+:DOI: 10.1007/s10765-005-2351-5
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Harvey, A.H. and Lemmon, E.W.,
+? "Method for Estimating the Dielectric Constant of Natural Gas Mixtures,"
+? Int. J. Thermophys., 26(1):31-46, 2005. doi: 10.1007/s10765-005-2351-5
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+273.16 1000.0 1.0  !Reducing parameters for T and D
+1 2 4 0 0 0        !Number of terms in dielectric constant model
+ 0.10924 -1. 1. 0. !Coefficient, T exp, D exp
+ 39.74    0. 1. 0.
+ 0.040    1. 1. 0.
+ 348.01   0. 2. 0.
+ 494.18   1. 2. 0.
+-76838.0  0. 3. 0.
+-65772.0  1. 3. 0.
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for octane of Beckmueller et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Beckmueller, R., Thol, M., Lemmon, E.W., and Span, R.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+568.74  2483.59    !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-8.09474   1.0     !Coefficients and exponents
+ 2.6247    1.5
+-2.3855    1.99
+-4.42236   3.95
+-2.8186   15.5
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for octane of Beckmueller et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Beckmueller, R., Thol, M., Lemmon, E.W., and Span, R.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+568.74  2.031      !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+ 2.2946   0.358    !Coefficients and exponents
+ 2.6596   1.568
+-8.4135   2.3
+ 14.251   3.02
+-11.590   3.815
+ 4.0217   4.78
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for octane of Beckmueller et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Beckmueller, R., Thol, M., Lemmon, E.W., and Span, R.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+568.74  2.031      !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-3.18016   0.394   !Coefficients and exponents
+-7.70809   1.249
+-24.2673   3.32
+-59.8140   6.715
+-138.757  14.2
+-487.182  31.1
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

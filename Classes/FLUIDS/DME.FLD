@@ -1,0 +1,449 @@
+Dimethyl ether       !Short name
+115-10-6             !CAS number
+Methoxymethane       !Full name
+(CH3)2O              !Chemical formula {C2H6O}
+RE-170               !Synonym
+46.06844             !Molar mass [g/mol]
+131.66               !Triple point temperature [K]
+248.368              !Normal boiling point [K]
+400.378              !Critical temperature [K]
+5336.845             !Critical pressure [kPa]
+5.94                 !Critical density [mol/L]
+0.196                !Acentric factor
+1.301                !Dipole moment [Debye]; Nelson, R.D., Lide, D.R., Maryott, A., NSRDS 10, NBS (1967)
+NBP                  !Default reference state
+10.0                 !Version number
+1033                 !UN Number                                                 :UN:
+ether                !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1.                   !GWP (IPCC 2007)                                           :GWP:
+8500.                !RCL (ppm v/v, ASHRAE Standard 34, 2010)                   :RCL:
+A3                   !Safety Group (ASHRAE Standard 34, 2010)                   :Safety:
+1S/C2H6O/c1-3-2/h1-2H3                    !Standard InChI String                :InChi:
+LCGLNKUTAGEVQW-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+????                                      !Alternative fluid for mixing rules   :AltID:
+8f27e300                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by M. McLinden, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 07-16-98  MM, Original version.
+! 05-12-05 MLH, Add transport.
+! 05-10-06 EWL, Add new Helmholtz EOS.
+! 04-12-07 EWL, Change full name from ethylene oxide to methoxymethane.
+! 01-06-09 MLH, Revise thermal conductivity.
+! 06-29-10  YZ, Add Wu et al. equation of state.
+! 08-19-10 IDC, Add density ancillary equations.
+! 03-22-11 EWL, Change ttrp from 131.65 to 131.66 K.
+! 03-28-11 EWL, Replace ancillaries with those from Wu et al.
+! 03-08-12 EWL, Add viscosity equation of Meng et al. (2012).
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 11-20-17 MLH, Revise ecs thermal conductivity.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for dimethylether of Wu et al. (2011).
+:TRUECRITICALPOINT:  400.378    5.94          !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1063/1.3582533
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Wu, J., Zhou, Y., and Lemmon, E.W.,
+? "An Equation of State for the Thermodynamic Properties of Dimethyl Ether,"
+? J. Phys. Chem. Ref. Data, 40, 023104, 2011.
+?
+?The uncertainties (k = 2, indicating a level of confidence of 95%) of the
+? equation of state in density are 0.1% in the liquid phase and 0.3% in the vapor
+? phase.  In the extended critical region, the uncertainty in density is 0.5%,
+? except for very near the critical point.  In the vapor-liquid region, the
+? uncertainty in vapor pressure is 0.2% above 230 K, but increases as temperature
+? decreases; the uncertainty in saturated liquid density is 0.05 %, except for
+? very near the critical point.  The uncertainty in heat capacity is 2.0 %. In the
+? critical region, the uncertainties are higher for all properties except vapor
+? pressure.
+?
+!```````````````````````````````````````````````````````````````````````````````
+131.66             !Lower temperature limit [K]
+525.0              !Upper temperature limit [K]
+40000.0            !Upper pressure limit [kPa]
+19.15              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+46.06844                               !Molar mass [g/mol]
+131.66                                 !Triple point temperature [K]
+0.00221                                !Pressure at triple point [kPa]
+19.15                                  !Density at triple point [mol/L]
+248.368                                !Normal boiling point temperature [K]
+0.196                                  !Acentric factor
+400.378       5336.8       5.94        !Tc [K], pc [kPa], rhoc [mol/L]
+400.378                    5.94        !Reducing parameters [K, mol/L]
+8.314472                               !Gas constant [J/mol-K]
+  11  4   4 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.029814139  1.0     4.  0.          !a(i),t(i),d(i),l(i)
+  1.43517      0.4366  1.  0.
+ -2.64964      1.011   1.  0.
+ -0.29515532   1.137   2.  0.
+  0.17035607   0.45    3.  0.
+ -0.94642918   2.83    1.  2.
+ -0.099250514  1.5     3.  2.
+  1.1264071    1.235   2.  1.
+ -0.76936548   2.675   2.  2.
+ -0.020717696  0.7272  7.  1.
+  0.24527037   1.816   1.  1.
+  1.1863438    1.783   1.  2. 2.    -0.965336 -1.287190   1.277720   0.672698 0. 0. 0.
+ -0.49398368   3.779   1.  2. 2.    -1.508580 -0.806235   0.430750   0.924246 0. 0. 0.
+ -0.16388716   3.282   3.  2. 2.    -0.963855 -0.777942   0.429607   0.750815 0. 0. 0.
+ -0.027583584  1.059   3.  2. 2.    -9.72643  -197.681    1.13849    0.800022 0. 0. 0.
+                                      eta        beta       gamma     epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for dimethylether of Wu et al. (2011).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Wu et al., 2011.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.314472   !Reducing parameters for T, Cp0
+1 4   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.039      0.0
+ 2.641      361.0
+ 2.123      974.0
+ 8.992      1916.0
+ 6.191      4150.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for dimethylether of Wu et al. (2011).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Wu et al., 2011.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  4  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.039                 1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -1.9809687492709855    0.0      !aj, ti for [ai*tau**ti] terms
+  3.1712155645197       1.0      !aj, ti for [ai*tau**ti] terms
+  2.641      361.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  2.123      974.0
+  8.992      1916.0
+  6.191      4150.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for dimethylether.
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Wu et al., 2011.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 2  4  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 3.039             1.0                 !ai, ti for [ai*log(tau**ti)] terms
+-1.9809704305      0.0                 !aj, ti for [ai*tau**ti] terms
+ 3.1712166102      1.0
+ 2.641            -0.9016479427        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 2.123            -2.4327010975
+ 8.992            -4.7854777236
+ 6.191            -10.3652048814
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for dimethylether of Ihmels and Lemmon (2007).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Ihmels, E.C. and Lemmon, E.W.
+          ? "Experimental Densities, Vapor Pressures, and Critical Point, and a
+          ? Fundamental Equation of State for Dimethyl Ether,"
+          ? Fluid Phase Equilibria, 260:36-48, 2007.
+          ?
+          ?The uncertainty in density of the equation of state ranges from 0.1% in the
+          ? liquid to 1% near the critical point.  The uncertainty in heat capacities is
+          ? 2%, and the uncertainty in vapor pressure is 0.25% at temperatures above 200
+          ? K. The uncertainty in vapor pressure increases at lower temperatures due to
+          ? the lack of experimental data.  In the critical region, the uncertainties
+          ? are higher for all properties except vapor pressure.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          131.65             !Lower temperature limit [K]
+          525.0              !Upper temperature limit [K]
+          40000.0            !Upper pressure limit [kPa]
+          19.15              !Maximum density [mol/L]
+          CPP                                    !Pointer to Cp0 model
+          46.06844                               !Molar mass [g/mol]
+          131.65                                 !Triple point temperature [K]
+          0.0023                                 !Pressure at triple point [kPa]
+          19.15                                  !Density at triple point [mol/L]
+          248.34                                 !Normal boiling point temperature [K]
+          0.197                                  !Acentric factor
+          400.3         5340.5       6.013       !Tc [K], pc [kPa], rhoc [mol/L]
+          400.3                      6.013       !Reducing parameters [K, mol/L]
+          8.314472                               !Gas constant [J/mol-K]
+            10  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           1.22690     0.21    1.  0.            !a(i),t(i),d(i),l(i)
+          -2.47245     1.0     1.  0.
+           0.119889    0.5     3.  0.
+           0.0000354   1.0     8.  0.
+           0.567139    1.4     2.  1.
+           0.166649    3.1     1.  1.
+          -0.078412    1.5     5.  1.
+          -0.289066    5.0     1.  2.
+          -0.031272    5.9     4.  2.
+          -0.065607    3.7     3.  2.
+
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#ETA   !---Viscosity---
+VS1    !Pure fluid viscosity model for dimethylether of Meng et al. (2012).
+:DOI: 10.1021/je201297j
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Meng, X., Zhang, J., Wu, J., and Liu, Z.,
+? "Experimental Measurement and Modeling of the Viscosity of Dimethyl Ether,"
+? J. Chem. Eng. Data, 57:988-993, 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+131.66             !Lower temperature limit [K]
+525.0              !Upper temperature limit [K]
+40000.0            !Upper pressure limit [kPa]
+19.15              !Maximum density [mol/L]
+1                  !Number of terms associated with dilute-gas function
+CI1                !Pointer to reduced effective collision cross-section model
+0.446704           !Lennard-Jones coefficient sigma [nm]
+317.937            !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+1.0      1.0       !Reducing parameters for T, eta
+0.14508011  0.5    !Chapman-Enskog term
+0                  !Number of terms for initial density dependence
+0 10 0 0 0 0       !# resid terms:  close-packed density;  simple poly; numerator of rational poly; denominator of rat. poly; numerator of exponential; denominator of exponential
+400.378       5.94      1.0            !Reducing parameters for T, rho, eta
+-2.70002     -5.92   3.  0.  0         !Simple polynomial terms
+ 4.44583     -4.36   3.  0.  0
+-104.998     -2.93   3.  0.  1
+ 78.27474    -1.64   4.  0.  1
+ 41.3751     -7.86   5.  0.  2
+-175.055     -4.25   2.  0.  1
+ 62.81975    -4.79   2.  0.  1
+ 0.21302     -5.87   5.  0.  0
+ 112.3219    -3.11   2.  0.  2
+ 6.50681     -0.45   1.  0.  0
+NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+#AUX   !---Auxiliary function for the collision integral
+CI1    !Collision integral model for dimethylether of Meng et al. (2012).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Meng, X., Zhang, J., Wu, J., and Liu, Z., 2012.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+3                  !Number of terms
+ 0.294261       0  !Coefficient, power of Tstar
+-0.377826       1
+-0.491673       2
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (Propane reference); fitted to data for dimethylether.
+:DOI: 10.6028/NIST.IR.8209
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?*** ESTIMATION METHOD *** NOT STANDARD REFERENCE QUALITY ***
+          ?
+          ?Huber, M.L., (2018) "Models for the Viscosity, Thermal Conductivity, and
+          ? Surface Tension of Selected Pure Fluids as Implemented in REFPROP v10.0",
+          ? NISTIR 8209; doi: 10.6028/NIST.IR.8209
+          ?
+          ?Reference for experimental data for viscosity
+          ? Wu, J., Liu, Z., Bi, S. and Meng, X., "Viscosity of saturated liquid dimethyl ether from (227 to 343 )K", 2003,J. Chem. Eng. Data 48, 426-429.
+          ?
+          ?Reference for experimental data for thermal conductivity
+          ? Wu, J., Li, X., Zheng. H. and Assael, M.J.,"Thermal Conductivity of Liquid Dimethyl Ether from 233 K to 373 K at Pressures up to 30 MPa" J. Chem. Eng. Data (2009)
+          ?
+          ?Estimated uncertainties based on deviations of the fit from the experimental data were:
+          ? Liquid viscosity at saturation: < 1 %
+          ? Liquid thermal conductivity at saturation, < 2 %, at pressures
+          ? up to 30 MPa, < 6 %
+          ? Gas phase thermal conductivity not validated; may have errors 10-15 %
+          ?
+          ?The Lennard-Jones parameters were taken from Reid, R.C., Prausnitz, J.M., and Poling, B.E., "The Properties of Gases and Liquids," 4th edition, New York, McGraw-Hill Book Company, 1987.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          131.66             !Lower temperature limit [K]
+          450.0              !Upper temperature limit [K]
+          20000.0            !Upper pressure limit [kPa]
+          19.24              !Maximum density [mol/L]
+          FEQ PROPANE.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.4307             !Lennard-Jones coefficient sigma [nm]
+          395.0              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+          3  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+          -9.81010e-4    0. 0. 0.  !Coefficient, power of T, spare1, spare2
+           1.22857e-5    1. 0. 0.  !Coefficient, power of T, spare1, spare2
+          -1.60844e-8    2. 0. 0.  !Coefficient, power of T, spare1, spare2
+          3  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           1.81678       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+          -0.696062      0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+           0.13901       0. 2. 0.  !Coefficient, power of Tr, power of Dr, spare
+          2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.12497       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+          -4.88562e-2    0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+          TK3                !Pointer to critical enhancement auxiliary function
+
+
+@AUX    !---Auxiliary function for the thermal conductivity critical enhancement
+TK3     !Simplified thermal conductivity critical enhancement for dimethylether of Perkins et al. (2013).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+          ? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+          ? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+          1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+          0.63               !Nu (universal exponent)
+          1.239              !Gamma (universal exponent)
+          1.02               !R0 (universal amplitude)
+          0.063              !Z (universal exponent--not used for t.c., only viscosity)
+          1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+          0.189e-9           !Xi0 (amplitude) [m]
+          0.057              !Gam0 (amplitude) [-]
+          0.540e-9           !Qd_inverse (modified effective cutoff parameter) [m]; arbitrary guess
+          600.57             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for dimethylether of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1                  !Number of terms in surface tension model
+400.378            !Critical temperature used in fit (dummy)
+0.063157  1.2595   !Sigma0 and n
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for dimethylether of Wu et al. (2011).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+400.378   5336.8   !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+-7.112782  1.0
+ 1.971239  1.5
+-2.276083  2.5
+-2.215774  5.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for dimethylether of Wu et al. (2011).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+400.378 5.94       !Reducing parameters
+4 0 0 0 0 0        !Number of terms in equation
+ 7.884834  0.54
+-10.516328 0.74
+ 5.39142   0.95
+ 0.404890  11.43
+
+
+#DV    !---Saturated vapor density---
+DV4    !Saturated vapor density equation for dimethylether of Wu et al. (2011).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^(ti/3))] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+400.378 5.94       !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-4.136444  1.467
+-4.302025  4.2
+-12.032140 8.0
+-39.527936 17.0
+-89.476860 36.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890

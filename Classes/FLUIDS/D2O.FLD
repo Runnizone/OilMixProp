@@ -1,0 +1,633 @@
+Heavy water          !Short name
+7789-20-0            !CAS number
+Deuterium oxide      !Full name
+D2O                  !Chemical formula {D2O}
+Deuterium oxide      !Synonym
+20.027508            !Molar mass [g/mol]
+276.969              !Triple point temperature [K]
+374.549              !Normal boiling point [K]
+643.847              !Critical temperature [K]
+21661.8              !Critical pressure [kPa]
+17.77555             !Critical density [mol/L]
+0.364                !Acentric factor
+1.9                  !Dipole moment [Debye]; Reid, Prausnitz, & Poling, McGraw-Hill (1987)
+OTH                  !Default reference state
+300.0   1.0   47295.7573563077224310   167.2166252383840886  !Tref, Pref, Href, Sref (corresponds to u,s = 0 @ Ttp)
+10.0                 !Version number
+????                 !UN Number                                                 :UN:
+other                !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+1S/H2O/h1H2/i/hD2                         !Standard InChI String                :InChi:
+XLYOFNOQVPJJNP-ZSJDYOACSA-N               !Standard InChI Key                   :InChiKey:
+b43a7600  (water)                         !Alternative fluid for mixing rules   :AltID:
+3e131610                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 07-23-98 EWL, Original version.
+! 11-06-00 EWL, Add transport equations.
+! 03-21-02 MLH, Add LJ parameters to ECS method.
+! 05-29-07 AHH, Update EOS to 2005 IAPWS Release and criticals to 1992 IAPWS Release.
+! 06-21-10 CKL, Add ancillary equations.
+! 07-23-13 EWL, Add equation of state of Herrig et al. (2013).
+! 05-15-17 EWL, Change the hard coded TC0 model to the TC7 reverse Polish notation.
+! 05-29-17  SH, Add equation of state of Herrig et al. (2017).
+! 04-03-18  SH, Add final equation of state of Herrig et al. (2018).
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for heavy water of Herrig et al. (2018).
+:TRUECRITICALPOINT:  643.847   17.77555       !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., Thol, M., Span, R., Harvey, A.H., and Lemmon, E.W.,
+?"A Reference Equation of State for Heavy Water,"
+? to be submitted to J. Phys. Chem. Ref. Data, 2018.
+?
+?In the homogenous liquid and vapor phase, the expanded relative uncertainties
+? of densities calculated from the equation of state are mostly within 0.1 % or
+? smaller; liquid-phase densities at atmospheric pressure can be calculated with
+? an uncertainty of 0.01 %. The speed of sound in the liquid phase is described
+? with a maximum uncertainty of 0.1 %; the most accurate experimental sound speeds
+? are represented within their uncertainties ranging from 0.015 % to 0.02 %. In a
+? large part of the liquid region, the isobaric heat capacity is represented with
+? an uncertainty of 1 %. The uncertainty in vapor pressure is mostly within 0.05 %.
+? In the critical region, the uncertainties of calculated properties are in
+? most cases higher than the values given above."
+?
+!```````````````````````````````````````````````````````````````````````````````
+276.969            !Lower temperature limit [K]
+825.0              !Upper temperature limit [K]
+1200000.0          !Upper pressure limit [kPa]
+73.72              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+20.027508                              !Molar mass [g/mol]
+276.969                                !Triple point temperature [K]
+0.66159                                !Pressure at triple point [kPa]
+55.188                                 !Density at triple point [mol/L]
+374.549                                !Normal boiling point temperature [K]
+0.364                                  !Acentric factor
+643.847      21661.8      17.77555     !Tc [K], pc [kPa], rhoc [mol/L]
+643.847                   17.77555     !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  12  4  12 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.012208206  1.      4.  0.          !a(i),t(i),d(i),l(i)
+  2.9695687    0.6555  1.  0.
+ -3.7900454    0.9369  1.  0.
+  0.9410896    0.561   2.  0.
+ -0.92246625   0.7017  2.  0.
+ -0.013960419  1.0672  3.  0.
+ -0.12520357   3.9515  1.  1.
+ -5.553915     4.6     1.  2.
+ -4.9300974    5.159   3.  2.
+ -0.035947024  0.2     2.  1.
+ -9.3617287    5.4644  2.  2.
+ -0.69183515   2.366   1.  2.
+ -0.04561106   3.4553  1.  2. 2.   -0.6014   -0.42     1.5414   1.8663    0. 0. 0.
+ -2.245133     1.415   3.  2. 2.   -1.4723   -2.4318   1.3794   0.2895    0. 0. 0.
+  8.6000607    1.5745  1.  2. 2.   -1.5305   -1.2888   1.7385   0.5803    0. 0. 0.
+ -2.4841042    3.454   3.  2. 2.   -2.4297   -8.271    1.3045   0.2236    0. 0. 0.
+ 16.44769      3.8106  1.  2. 2.   -1.3086   -0.3673   2.7242   0.6815    0. 0. 0.
+  2.7039336    4.895   1.  2. 2.   -1.3528   -0.9504   3.5321   0.9495    0. 0. 0.
+ 37.563747     1.43    2.  2. 2.   -3.4456   -7.8318   2.4552   1.1158    0. 0. 0.
+ -1.7760776    1.587   2.  2. 2.   -1.2645   -3.3281   0.8319   0.1607    0. 0. 0.
+  2.2092464    3.79    2.  2. 2.   -2.5547   -7.1753   1.35     0.4144    0. 0. 0.
+  5.19652      2.62    1.  2. 2.   -1.2148   -0.9465   2.5617   0.9683    0. 0. 0.
+  0.4210974    1.9     1.  2. 2.   -18.738  -1177.     1.0491   0.9488    0. 0. 0.
+ -0.3919211    4.32    1.  2. 2.   -18.677  -1167.     1.0486   0.9487    0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for heavy water of Herrig et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., Thol, M., Span, R., Harvey, A.H., and Lemmon, E.W., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+1 4   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0           0.0
+ 0.010633    308.0
+ 0.99787    1695.0
+ 2.1483     3949.0
+ 0.3549    10317.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for heavy water of Herrig et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., Thol, M., Span, R., Harvey, A.H., and Lemmon, E.W., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 2  4  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -8.670994022646008     0.0      !aj, ti for [ai*tau**ti] terms
+  6.9603357845878007    1.0      !aj, ti for [ai*tau**ti] terms
+  0.010633    308.0              !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  0.99787    1695.0
+  2.1483     3949.0
+  0.3549    10317.0
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for heavy water of Hill et al. (1982).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?International Association for the Properties of Water and Steam,
+          ? "Revised Release on the IAPS Formulation 1984 for the Thermodynamic Properties
+          ? of Heavy Water Substance," 2005.
+          ?
+          ?This is an update for temperature scale (ITS-90) of the EOS of:
+          ?
+          ?Hill, P.G., MacMillan, R.D.C., and Lee, V.,
+          ? "A Fundamental Equation of State for Heavy Water,"
+          ? J. Phys. Chem. Ref. Data, 11(1):1-14, 1982.
+          ?
+          ?also reported in:
+          ?
+          ?Kestin, J. and Sengers, J.V.,
+          ? "New International Formulations for the Thermodynamic Properties of Light
+          ? and Heavy Water,"
+          ? J. Phys. Chem. Ref. Data, 15(1):305-321, 1986.
+          ?
+          ?The uncertainties are 0.1% in density, 0.05% in vapor pressure, and 1% in
+          ? heat capacities and the speed of sound.
+          ?
+          ?Use this reference state to get u,s=0 at the triple point:
+          ? 300.0  1.0   47320.602694539673  167.30941141671   !Tref, Pref, Href, Sref (corresponds to u,s = 0 @ Ttp)
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          276.97             !Lower temperature limit [K]
+          800.0              !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          65.0               !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          20.027508                              !Molar mass [g/mol]
+          276.97                                 !Triple point temperature [K]
+          0.66103                                !Pressure at triple point [kPa]
+          55.198                                 !Density at triple point [mol/L]
+          374.563                                !Normal boiling point temperature [K]
+          0.364                                  !Acentric factor
+          643.847      21671.0      17.77555     !Tc [K], pc [kPa], rhoc [mol/L]
+          643.847                   17.875414    !Reducing parameters [K, mol/L]
+          8.3143565                              !Gas constant [J/mol-K]
+            50  5    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+          -384.820628204      0.  1.  0.  0.     !a(i),t(i),d(i),l(i)
+           1082.13047259      1.  1.  0.  0.
+          -1107.68260635      2.  1.  0.  0.
+           1646.68954246      3.  1.  0.  0.
+          -1379.59852228      4.  1.  0.  0.
+           598.964185629      5.  1.  0.  0.
+          -100.451752702      6.  1.  0.  0.
+           419.192736351      0.  2.  0.  0.
+          -1072.79987867      1.  2.  0.  0.
+           653.852283544      2.  2.  0.  0.
+          -984.305985655      3.  2.  0.  0.
+           845.444459339      4.  2.  0.  0.
+          -376.79993049       5.  2.  0.  0.
+           64.4512590492      6.  2.  0.  0.
+          -214.911115714      0.  3.  0.  0.
+           531.113962967      1.  3.  0.  0.
+          -135.45422442       2.  3.  0.  0.
+           202.814416558      3.  3.  0.  0.
+          -178.293865031      4.  3.  0.  0.
+           81.873939497       5.  3.  0.  0.
+          -14.3312594493      6.  3.  0.  0.
+           65.1202383207      0.  4.  0.  0.
+          -171.227351208      1.  4.  0.  0.
+           10.0859921516      2.  4.  0.  0.
+          -14.4684680657      3.  4.  0.  0.
+           12.8871134847      4.  4.  0.  0.
+          -6.10605957134      5.  4.  0.  0.
+           1.09663804408      6.  4.  0.  0.
+          -11.5734899702      0.  5.  0.  0.
+           37.4970075409      1.  5.  0.  0.
+           0.897967147669     0.  6.  0.  0.
+          -5.27005883203      1.  6.  0.  0.
+           0.0438084681795    0.  7.  0.  0.
+           0.40677208268      1.  7.  0.  0.
+          -0.00965258571044   0.  8.  0.  0.
+          -0.0119044600379    1.  8.  0.  0.
+           382.589102341      0.  1.  1.  1.5394
+          -1064.06466204      1.  1.  1.  1.5394
+           1055.44952919      2.  1.  1.  1.5394
+          -1575.79942855      3.  1.  1.  1.5394
+           1327.03387531      4.  1.  1.  1.5394
+          -579.34887987       5.  1.  1.  1.5394
+           97.4163902526      6.  1.  1.  1.5394
+           286.799294226      0.  2.  1.  1.5394
+          -1275.43020847      1.  2.  1.  1.5394
+           2758.02674911      2.  2.  1.  1.5394
+          -3812.84331492      3.  2.  1.  1.5394
+           2937.55152012      4.  2.  1.  1.5394
+          -1178.58249946      5.  2.  1.  1.5394
+           186.261198012      6.  2.  1.  1.5394
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for heavy water.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Hill, P.G., MacMillan, R.D.C., and Lee, V.,
+          ? "A Fundamental Equation of State for Heavy Water,"
+          ? J. Phys. Chem. Ref. Data, 11(1):1-14, 1982.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.3143565  !Reducing parameters for T, Cp0
+          6 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+          -0.00031123915     1.0
+           0.0000041173363   2.0
+          -0.28943955e-8     3.0
+           0.63278791e-12    4.0
+           3.9176485         0.0
+           0.7872874        -1.0
+
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#ETA   !---Viscosity---
+VS0    !Pure fluid viscosity model for heavy water of IAPWS (1994).
+:DOI: 10.1063/1.555714
+:WEB: http://www.iapws.org/relguide/TransD2O-2007.pdf
+?
+?```````````````````````````````````````````````````````````````````````````````
+?International Association for the Properties of Water and Steam,
+? "Viscosity and Thermal Conductivity of Heavy Water Substance,"
+? Physical Chemistry of Aqueous Systems: Proceedings of the 12th
+? International Conference on the Properties of Water and Steam,
+? Orlando, Florida, September 11-16, A107-A138, 1994.
+?
+?The uncertainty in viscosity is 1% in the liquid below 474 K, 2% in the liquid
+? at higher temperatures and in the vapor, and 5% between 623 and 723 K at
+? pressures between 16 and 50 MPa.
+?
+!```````````````````````````````````````````````````````````````````````````````
+276.969            !Lower temperature limit [K]
+825.0              !Upper temperature limit [K]
+100000.0           !Upper pressure limit [kPa]
+65.0               !Maximum density [mol/L]
+H2O                !Pointer to hardcoded thermal conductivity model
+0 0 4 26 0 0 0 0   !Number of terms for various pieces
+643.89    17.87542      55.2651        !Reducing parameters for T, rho, eta
+ 1.0          0.   0.   0.   0
+ 0.940695     1.   0.   0.   0
+ 0.578377     2.   0.   0.   0
+-0.202044     3.   0.   0.   0
+ 0.4864192    0.   0.   0.   0
+-0.2448372    1.   0.   0.   0
+-0.8702035    2.   0.   0.   0
+ 0.8716056    3.   0.   0.   0
+-1.051126     4.   0.   0.   0
+ 0.3458395    5.   0.   0.   0
+ 0.3509007    0.   1.   0.   0
+ 1.315436     1.   1.   0.   0
+ 1.297752     2.   1.   0.   0
+ 1.353448     3.   1.   0.   0
+-0.2847572    0.   2.   0.   0
+-1.037026     1.   2.   0.   0
+-1.287846     2.   2.   0.   0
+-0.02148229   5.   2.   0.   0
+ 0.07013759   0.   3.   0.   0
+ 0.4660127    1.   3.   0.   0
+ 0.2292075    2.   3.   0.   0
+-0.4857462    3.   3.   0.   0
+ 0.0164122    0.   4.   0.   0
+-0.02884911   1.   4.   0.   0
+ 0.1607171    3.   4.   0.   0
+-0.009603846  5.   4.   0.   0
+-0.01163815   0.   5.   0.   0
+-0.008239587  1.   5.   0.   0
+ 0.004559914  5.   5.   0.   0
+-0.003886659  3.   6.   0.   0
+NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)
+
+
+
+
+================================================================================
+
+#TCX   !---Thermal conductivity---
+TC7    !Pure fluid thermal conductivity model for heavy water of IAPWS (1994).
+:DOI: 10.1063/1.555714
+:WEB: http://www.iapws.org/relguide/TransD2O-2007.pdf
+?
+?```````````````````````````````````````````````````````````````````````````````
+?International Association for the Properties of Water and Steam,
+? "Viscosity and Thermal Conductivity of Heavy Water Substance,"
+? Physical Chemistry of Aqueous Systems: Proceedings of the 12th
+? International Conference on the Properties of Water and Steam,
+? Orlando, Florida, September 11-16, A107-A138, 1994.
+?
+?The uncertainty in viscosity is 2% in the liquid below 623 K and in the vapor
+? below 573 K, 5% elsewhere in the liquid and vapor, and 10% in the critical
+? region (623 to 723 K and 21.66 to 50 MPa).
+?
+!```````````````````````````````````````````````````````````````````````````````
+276.969            !Lower temperature limit [K]
+825.0              !Upper temperature limit [K]
+100000.0           !Upper pressure limit [kPa]
+65.0               !Maximum density [mol/L]
+!
+!Dilute gas
+$DG RED SUM:5
+!
+!Background function
+$RF RED SUM:4 SUMEX:1 SIGN 1 + CNST * +
+!
+!Critical enhancement
+$CE RED TR TR CNST - ABS CNST + / =TAU
+$CE SUMEX:2 =V1                          !These are f1, f2, f3, and f4 in the old hardcoded routine.
+$CE DR 1 - SQR CNST * EXP DR CNST - SQR CNST * EXP CNST * + =V2
+$CE TAU 1 -  60 * 20 + EXP 1 + =V3
+$CE TAU 1 - 100 * 15 + EXP 1 + =V4
+$CE CNST V1 V2 * * 1 V2 SQR CNST V1 SQR SQR * V3 / CNST V2 * V4 / + * + *  !Equal to tcxc
+$CE CNST V1 CNST POWR * DR CNST / 10 POWR SIGN EXP SIGN 1 + * +            !Equal to tcxl
+!
+!Coefficients
+$CF
+ 0.000742128 643.89  17.87542  0.  0   !Reducing parameters for eta, T, and D
+ 1.0         0. 0. 0. 0
+ 37.3223     1. 0. 0. 0
+ 22.5485     2. 0. 0. 0
+ 13.0465     3. 0. 0. 0
+-2.60735     5. 0. 0. 0
+ 0.000742128 643.89  17.87542  0.  0   !Reducing parameters for eta, T, and D
+ 483.656     0. 1. 0. 0
+-191.039     0. 2. 0. 0
+ 73.0358     0. 3. 0. 0
+-7.57467     0. 4. 0. 0
+-2.506       0. 1. 0. 0
+-167.310     0. 0. 0. 0
+ 0.000742128 643.89  17.87542  0.  0   !Reducing parameters for eta, T, and D
+ 1.1         0. 0. 0. 0
+ 1.1         0. 0. 0. 0
+ 0.144847    1. 0. 0. 0
+-5.64493     2. 0. 0. 0
+-2.8         0. 0. 0. 0
+ 0.125698    0. 0. 0. 0
+-17.943      0. 0. 0. 0
+-0.080738543 0. 0. 0. 0
+ 35429.6     0. 0. 0. 0
+ 0.5e+10     0. 0. 0. 0
+ 3.5         0. 0. 0. 0
+-741.112     0. 0. 0. 0
+ 1.2         0. 0. 0. 0
+ 2.5         0. 0. 0. 0
+NUL                !Pointer to critical enhancement auxiliary function
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@TRN    !---ECS Transport---
+ECS     !Extended Corresponding States model (R134a reference); predictive mode for heavy water.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Klein, S.A., McLinden, M.O., and Laesecke, A., "An Improved Extended Corresponding States Method for Estimation of Viscosity of Pure Refrigerants and Mixtures," Int. J. Refrigeration, 20(3):208-217, 1997. doi: 10.1016/S0140-7007(96)00073-4.
+          ?McLinden, M.O., Klein, S.A., and Perkins, R.A., "An Extended Corresponding States Model for the Thermal Conductivity of Refrigerants and Refrigerant Mixtures," Int. J. Refrigeration, 23(1):43-63, 2000. doi: 10.1016/S0140-7007(99)00024-9
+          ?
+          ?The Lennard-Jones parameters were taken from Reid, R.C., Prausnitz, J.M., and Poling, B.E., "The Properties of Gases and Liquids," 4th edition, New York, McGraw-Hill Book Company, 1987.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          276.97             !Lower temperature limit [K]
+          800.0              !Upper temperature limit [K]
+          100000.0           !Upper pressure limit [kPa]
+          65.0               !Maximum density [mol/L]
+          FEQ R134A.FLD
+          VS1                !Model for reference fluid viscosity
+          TC1                !Model for reference fluid thermal conductivity
+          NUL                !Large molecule identifier
+          1                  !Lennard-Jones flag (0 or 1) (0 => use estimates)
+          0.2641             !Lennard-Jones coefficient sigma [nm] for ECS method
+          809.1              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+          1  0  0            !Number of terms in f_int term in Eucken correlation, spare1, spare2
+           0.00132  0. 0. 0. !Coefficient, power of T, spare1, spare2
+          1  0  0            !Number of terms in psi (visc shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          1  0  0            !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+           1.0      0. 0. 0. !Coefficient, power of Tr, power of Dr, spare
+          NUL                !Pointer to critical enhancement auxiliary function
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for heavy water from IAPWS.
+:DOI:
+:WEB: http://www.iapws.org/relguide/surfd2o.pdf
+?
+?```````````````````````````````````````````````````````````````````````````````
+?International Association for the Properties of Water and Steam,
+? "IAPWS Release on Surface Tension of Heavy Water Substance,"
+? Physical Chemistry of Aqueous Systems: Proceedings of the 12th
+? International Conference on the Properties of Water and Steam,
+? Orlando, Florida, September 11-16, A103-A106, 1994.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+2                  !Number of terms in surface tension model
+643.847            !Critical temperature used in fit (dummy)
+ 0.238     1.25    !Sigma0 and n
+-0.152082  2.25
+
+
+#MLT   !---Melting line---
+MLH    !Melting line model for heavy water of Herrig et al. (2018).
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., Thol, M., Span, R., Harvey, A.H., and Lemmon, E.W., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+254.415            !Lower temperature limit [K]
+10000.             !Upper temperature limit [K]
+0.                 !
+0.                 !
+1.0      1.0       !Reducing temperature and pressure
+0 0 0 0 0 0        !Number of terms in melting line equation
+
+
+#SBL   !---Sublimation line---
+SB2    !Sublimation line model for heavy water of Herrig et al. (2018).
+:DOI:
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., Thol, M., Span, R., Harvey, A.H., and Lemmon, E.W., 2018.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+276.969            !Upper temperature limit [K]
+0.                 !
+0.                 !
+276.969  0.66159   !Reducing temperature and pressure
+4 0 0 0 0 0        !Number of terms in sublimation line equation
+-13.14226   0.     !Coefficients and exponents
+ 13.14226  -1.73
+ 32.12969   0.
+-32.12969  -1.42
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for heavy water of Herrig et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., Thol, M., Span, R., Harvey, A.H., and Lemmon, E.W., 2018.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+643.847 21661.8    !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-7.9444   1.0      !Coefficients and exponents
+ 1.9434   1.5
+-2.4353   2.44
+-3.42     5.3
+ 35.5    14.0
+-302.0   20.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for heavy water of Herrig et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., Thol, M., Span, R., Harvey, A.H., and Lemmon, E.W., 2018.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+643.847  17.77555  !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+ 1.6620   0.29
+ 9.0113   1.0
+-15.421   1.3
+ 11.576   1.77
+-5.1694   2.5
+-236.24  16.0
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for heavy water of Herrig et al. (2018).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Herrig, S., Thol, M., Span, R., Harvey, A.H., and Lemmon, E.W., 2018.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+643.847  17.77555  !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-2.4714   0.33     !Coefficients and exponents
+-26.6744  1.29
+ 53.108   1.68
+-48.015   2.09
+-57.623   6.1
+-371.72  17.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+
+                    @TCX               !Thermal conductivity model specification
+                    TC0  pure fluid thermal conductivity model of IAPWS (1994).
+                    ?
+                    ?```````````````````````````````````````````````````````````````````````````````
+                    ?International Association for the Properties of Water and Steam,
+                    ? "Viscosity and Thermal Conductivity of Heavy Water Substance,"
+                    ? Physical Chemistry of Aqueous Systems:  Proceedings of the 12th
+                    ? International Conference on the Properties of Water and Steam,
+                    ? Orlando, Florida, September 11-16, A107-A138, 1994.
+                    ?
+                    ?The uncertainty in viscosity is 2% in the liquid below 623 K and in the vapor
+                    ? below 573 K, 5% elsewhere in the liquid and vapor, and 10% in the critical
+                    ? region (623 to 723 K and 21.66 to 50 MPa).
+                    ?
+                    !```````````````````````````````````````````````````````````````````````````````
+                    276.97             !Lower temperature limit [K]
+                    800.0              !Upper temperature limit [K]
+                    100000.0           !Upper pressure limit [kPa]
+                    65.0               !Maximum density [mol/L]
+                    D2O                !Pointer to hardcoded thermal conductivity model
+                    5 0 4 11 0 0 0 0   !Number of terms for various pieces
+                     643.89  17.87542  0.000742128 0.  0   !Reducing parameters for T, rho, eta
+                     1.0         0.  0.  0.  0
+                     37.3223     1.  0.  0.  0
+                     22.5485     2.  0.  0.  0
+                     13.0465     3.  0.  0.  0
+                    -2.60735     5.  0.  0.  0
+                     483.656     1.  0.  0.  0
+                    -191.039     2.  0.  0.  0
+                     73.0358     3.  0.  0.  0
+                    -7.57467     4.  0.  0.  0
+                    -2.506       0.  0.  0.  0
+                    -167.31      0.  0.  0.  0
+                     35429.6     0.  0.  0.  0
+                     0.5e+10     0.  0.  0.  0
+                     0.144847    0.  0.  0.  0
+                    -5.64493     0.  0.  0.  0
+                    -2.8         0.  0.  0.  0
+                    -0.080738543 0.  0.  0.  0
+                    -17.943      0.  0.  0.  0
+                     0.125698    0.  0.  0.  0
+                    -741.112     0.  0.  0.  0
+                    NUL                !Pointer to the viscosity critical enhancement auxiliary function (none used)

@@ -1,0 +1,537 @@
+Sulfur dioxide       !Short name
+7446-09-5            !CAS number
+Sulfur dioxide       !Full name
+SO2                  !Chemical formula {O2S}
+R-764                !Synonym
+64.0638              !Molar mass [g/mol]
+197.7                !Triple point temperature [K]
+263.137              !Normal boiling point [K]
+430.64               !Critical temperature [K]
+7886.6               !Critical pressure [kPa]
+8.078                !Critical density [mol/L]
+0.256                !Acentric factor
+1.6                  !Dipole moment [Debye]; Reid, Prausnitz, & Poling, McGraw-Hill (1987)
+NBP                  !Default reference state
+10.0                 !Version number
+1079                 !UN Number                                                 :UN:
+other                !Family                                                    :Family:
+????                 !Heating value (upper) [kJ/mol]                            :Heat:
+B1                   !Safety Group (ASHRAE Standard 34, 2010)                   :Safety:
+1S/O2S/c1-3-2                             !Standard InChI String                :InChi:
+RAHZWNYVWXNFOC-UHFFFAOYSA-N               !Standard InChI Key                   :InChiKey:
+e9847540  (ammonia)                       !Alternative fluid for mixing rules   :AltID:
+7fad4b80                                  !Hash number from InChI Key           :Hash:
+
+
+
+
+!The fluid files contain general information about the fluid in the first 15 to 20 lines, followed by sections for the
+! equations of state, transport equations, and auxiliary equations.  Equations of state are listed first.  The NIST recommended
+! equations begin with a hash mark (#).  The secondary equations begin with the @ symbol.  These symbols can be swapped to
+! select a secondary equation as primary and the primary as secondary.  The equation of state section also contains auxiliary
+! equations for the ideal gas heat capacity or ideal gas Helmholtz energy.  Below the equations of state (both primary and
+! secondary) are the transport equations, first viscosity and then thermal conductivity.  These are then followed by the
+! secondary equations if available.  The transport section also contains auxiliary equations required to calculate either the
+! dilute gas state or the critical enhancement.  At the end of the file are additional but not necessary auxiliary equations,
+! including simple equations for the vapor pressure, saturated liquid and vapor densities, melting line (for some fluids), and
+! sublimation line (for even fewer fluids).  This section also contains the equations for dielectric constant and surface
+! tension if available.  The sections are divided by different symbols (these being _-+=^*~) to aid the eye in locating a
+! particular section.  Secondary equations are indented 10 spaces to avoid confusion with the NIST recommended equations.  The
+! end of the fluid file is marked with @END.  Anything below that is ignored.
+
+
+! compiled by E.W. Lemmon, NIST Physical and Chemical Properties Division, Boulder, Colorado
+! 11-13-98 EWL, Original version.
+! 01-31-02 EWL, Fit new equation of state based on data of Ihmels.
+! 04-30-02 EWL, Update fit.
+! 11-14-02 EWL, Update fit with new PVT data of Ihmels.
+! 08-17-10 IDC, Add ancillary equations.
+! 12-06-12 EWL, Add surface tension coefficients of Mulero et al. (2012).
+! 03-11-13 MLH, Add ECS transport, estimation not std ref quality.
+! 02-29-16 EWL, Add equation of state of Gao et al. (2016).
+! 02-28-17 MLH, Revise transport.
+
+
+
+
+________________________________________________________________________________
+
+#EOS   !---Equation of state---
+FEQ    !Helmholtz equation of state for sulfur dioxide of Gao et al. (2016).
+:TRUECRITICALPOINT:  430.64     8.078         !True EOS critical point [K, mol/L] (where dP/dD=0 and d^2P/dD^2=0 at constant T)
+:DOI: 10.1021/acs.jced.6b00195
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., Zhang, P., and Lemmon, E.W.,
+? "A Helmholtz Energy Equation of State for Sulfur Dioxide,"
+? J. Chem. Eng. Data, 61:2859-2872, 2016. doi: 10.1021/acs.jced.6b00195
+?
+?The equation of state is valid from the triple point temperature of 197.7 K to
+? 523 K, with pressures up to 35 MPa and densities up to 25.3 mol/l.  The
+? uncertainties in density of the equation of state are 0.1 % in the liquid phase,
+? 0.25 % in the vapor phase, and 1 % in the critical region.  The uncertainty in
+? vapor pressure is 0.2 % and the uncertainty in saturated liquid density is 0.2 %
+? below 410 K. The uncertainty in isobaric heat capacity is 2 % between 200 K and
+? 290 K. In the critical region, the uncertainties are higher for all properties
+? except for vapor pressure.
+?
+!```````````````````````````````````````````````````````````````````````````````
+197.7              !Lower temperature limit [K]
+525.0              !Upper temperature limit [K]
+35000.0            !Upper pressure limit [kPa]
+25.42              !Maximum density [mol/L]
+CPP                                    !Pointer to Cp0 model
+64.0638                                !Molar mass [g/mol]
+197.7                                  !Triple point temperature [K]
+1.6661                                 !Pressure at triple point [kPa]
+25.41                                  !Density at triple point [mol/L]
+263.137                                !Normal boiling point temperature [K]
+0.256                                  !Acentric factor
+430.64        7886.6       8.078       !Tc [K], pc [kPa], rhoc [mol/L]
+430.64                     8.078       !Reducing parameters [K, mol/L]
+8.3144598                              !Gas constant [J/mol-K]
+  10  4   6 12   0 0    0 0  0 0  0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+  0.01744413   1.0     4.  0.          !a(i),t(i),d(i),l(i)
+  1.814878     0.45    1.  0.
+ -2.246338     0.9994  1.  0.
+ -0.4602906    1.      2.  0.
+  0.1097049    0.45    3.  0.
+ -0.9485769    2.907   1.  2.
+ -0.8751541    2.992   3.  2.
+  0.4228777    0.87    2.  1.
+ -0.4174962    3.302   2.  2.
+ -0.002903451  1.002   7.  1.
+  1.64041      1.15    1.  2. 2.    -1.061    -0.967   1.276   0.832    0. 0. 0.
+ -0.4103535    0.997   1.  2. 2.    -0.945    -2.538   0.738   0.69     0. 0. 0.
+ -0.08316597   1.36    3.  2. 2.    -1.741    -2.758   0.71    0.35     0. 0. 0.
+ -0.2728126    2.086   2.  2. 2.    -1.139    -1.062   0.997   0.961    0. 0. 0.
+ -0.1075782    0.855   2.  2. 2.    -1.644    -1.039   1.35    0.981    0. 0. 0.
+ -0.4348434    0.785   1.  2. 2.    -0.647    -0.41    0.919   0.333    0. 0. 0.
+                                      eta      beta    gamma   epsilon
+                                   EXP[eta*(delta-epsilon)^2+beta*(tau-gamma)^2]
+
+
+#AUX   !---Auxiliary function for Cp0
+CPP    !Ideal gas heat capacity function for sulfur dioxide of Gao et al. (2016).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., Zhang, P., and Lemmon, E.W., 2016.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1.0     8.3144598  !Reducing parameters for T, Cp0
+2 2   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+ 4.0        0.0
+ 0.00007397 1.0
+ 1.0875     783.0
+ 1.916      1864.0
+
+
+#AUX   !---Auxiliary function for PX0
+PX0    !Helmholtz energy ideal-gas function for sulfur dioxide of Gao et al. (2016).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., Zhang, P., and Lemmon, E.W., 2016.
+?
+!```````````````````````````````````````````````````````````````````````````````
+1 3  2  0 0  0 0 0               !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau))
+  3.0                   1.0      !ai, ti for [ai*log(tau**ti)] terms
+ -4.541423325625578     0.0      !aj, ti for [ai*tau**ti] terms
+  4.4732288061807504    1.0      !aj, ti for [ai*tau**ti] terms
+  0.00007397 -1.0
+  1.0875     783.0               !aj, ti for [ai*log(1-exp(-ti/T)] terms
+  1.916      1864.0
+
+
+#AUX   !---Auxiliary function for PH0
+PH0    !Ideal gas Helmholtz form for sulfur dioxide of Gao et al. (2016).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., Zhang, P., and Lemmon, E.W., 2016.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+1 3  2  0 0  0 0 0 !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+ 3.0               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+-4.5414235721      0.0                 !aj, ti for [ai*tau**ti] terms
+ 4.4732289572      1.0
+-0.0159272204     -1.0
+ 1.0875           -1.8182240386        !aj, ti for [ai*log(1-exp(ti*tau)] terms
+ 1.916            -4.3284413896
+
+
+
+
+--------------------------------------------------------------------------------
+
+@EOS    !---Equation of state---
+FE1     !Helmholtz equation of state for sulfur dioxide of Lemmon and Span (2006).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Lemmon, E.W. and Span, R.,
+          ? "Short Fundamental Equations of State for 20 Industrial Fluids,"
+          ? J. Chem. Eng. Data, 51(3):785-850, 2006. doi: 10.1021/je050186n
+          ?
+          ?see also:
+          ? Ihmels, E.C., Lemmon, E.W., Gmehling, J.,
+          ? "An Equation of State and Compressed Liquid and Supercritical Densities for
+          ? Sulfur Dioxide,"
+          ? Fluid Phase Equilib., 207:111-130, 2003. doi: 10.1016/S0378-3812(03)00004-9
+          ?
+          ?The uncertainty in density of the equation of state ranges from 0.1% at low
+          ? temperatures in the liquid and vapor to 0.5% at the highest temperatures.
+          ? The uncertainty in heat capacities is 2%, and the uncertainty in vapor
+          ? pressure is 0.4% at temperatures above 270 K. The uncertainty in vapor
+          ? pressure increases at lower temperatures due to the lack of reliable
+          ? experimental data.  In the critical region, the uncertainties are higher
+          ? for all properties except vapor pressure.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          197.7              !Lower temperature limit [K]
+          525.0              !Upper temperature limit [K]
+          35000.0            !Upper pressure limit [kPa]
+          25.30              !Maximum density [mol/L]
+          CP1                                    !Pointer to Cp0 model
+          64.0638                                !Molar mass [g/mol]
+          197.7                                  !Triple point temperature [K]
+          1.66                                   !Pressure at triple point [kPa]
+          25.29                                  !Density at triple point [mol/L]
+          263.13                                 !Normal boiling point temperature [K]
+          0.2557                                 !Acentric factor
+          430.64        7884.0       8.195       !Tc [K], pc [kPa], rhoc [mol/L]
+          430.64                     8.195       !Reducing parameters [K, mol/L]
+          8.314472                               !Gas constant [J/mol-K]
+            12  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           0.93061     0.25    1.  0.            !a(i),t(i),d(i),l(i)
+          -1.9528      1.25    1.  0.
+          -0.17467     1.5     1.  0.
+           0.061524    0.25    3.  0.
+           0.00017711  0.875   7.  0.
+           0.21615     2.375   1.  1.
+           0.51353     2.0     2.  1.
+           0.010419    2.125   5.  1.
+          -0.25286     3.5     1.  2.
+          -0.054720    6.5     1.  2.
+          -0.059856    4.75    4.  2.
+          -0.016523   12.5     2.  3.
+
+
+@AUX    !---Auxiliary function for Cp0
+CP1     !Ideal gas heat capacity function for sulfur dioxide.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Lemmon, E.W. and Span, R.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     8.314472   !Reducing parameters for T, Cp0
+          2 2   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           4.0               0.0
+           0.000072453       1.0
+           1.062             775.0
+           1.9401            1851.0
+
+
+@AUX    !---Auxiliary function for PH0
+PH1     !Ideal gas Helmholtz form for sulfur dioxide.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Lemmon, E.W. and Span, R.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1 3  2 0 0  0 0 0  !Nterms:  ai*log(tau**ti); ai*tau**ti; ai*log(1-exp(bi*tau)); cosh; sinh
+           3.0               1.0                 !ai, ti for [ai*log(tau**ti)] terms
+          -4.5328346436      0.0                 !aj, ti for [ai*tau**ti] terms
+           4.4777967379      1.0
+          -0.01560058       -1.0
+           1.062            -1.799647037         !aj, ti for [ai*log(1-exp(ti*tau)] terms
+           1.9401           -4.2982537618
+
+
+@EOS    !---Equation of state---
+FE2     !Helmholtz equation of state for sulfur dioxide of Polt (1987).
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Polt, A.,
+          ? Zur Beschreibung der thermodynamischen Eigenschaften reiner Fluide
+          ? mit "Erweiterten BWR-Gleichungen",
+          ? Ph.D. Dissertation, Universitaet Kaiserslautern, Germany, 1987.
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          273.0              !Lower temperature limit [K]
+          523.0              !Upper temperature limit [K]
+          32000.0            !Upper pressure limit [kPa]
+          22.91              !Maximum density [mol/L]
+          CP2                                    !Pointer to Cp0 model
+          64.066                                 !Molar mass [g/mol]
+          197.7                                  !Triple point temperature [K]
+          11.82                                  !Pressure at triple point [kPa]
+          23.0                                   !Density at triple point [mol/L] (unknown)
+          256.61                                 !Normal boiling point temperature [K]
+          0.23                                   !Acentric factor
+          430.65        7880.0       8.1946742   !Tc [K], pc [kPa], rhoc [mol/L]
+          430.65                     8.1946742   !Reducing parameters [K, mol/L]
+          8.3143                                 !Gas constant [J/mol-K]
+            22  4    0  0    0 0    0 0 0 0 0 0  !# terms and # coefs/term for normal terms, Gaussian terms, and Gao terms
+           0.789407019882      3.0       0.  0.  !a(i),t(i),d(i),l(i)
+          -1.70449580056       4.0       0.  0.
+           1.15984637964       5.0       0.  0.
+          -0.576307837294      0.0       1.  0.
+           2.49237283833       1.0       1.  0.
+          -5.18115678632       2.0       1.  0.
+           3.20766081899       3.0       1.  0.
+          -1.23636065893       4.0       1.  0.
+           0.0144419600938     0.0       2.  0.
+          -0.153807055040      1.0       2.  0.
+           0.386324300525      2.0       2.  0.
+           0.292550313202      0.0       3.  0.
+          -0.372445361392      1.0       3.  0.
+          -0.063692433391      0.0       4.  0.
+           0.0986166451596     1.0       4.  0.
+          -0.00216993783055    1.0       5.  0.
+          -0.789407019882      3.0       0.  2.
+           1.70449580056       4.0       0.  2.
+          -1.15984637964       5.0       0.  2.
+          -0.480876182378      3.0       2.  2.
+           1.64910076886       4.0       2.  2.
+          -1.33861069604       5.0       2.  2.
+
+
+@AUX    !---Auxiliary function for Cp0
+CP2     !Ideal gas heat capacity function for sulfur dioxide.
+          ?
+          ?```````````````````````````````````````````````````````````````````````````````
+          ?Polt, A.,
+          ?
+          !```````````````````````````````````````````````````````````````````````````````
+          0.                 !
+          10000.             !
+          0.                 !
+          0.                 !
+          1.0     64.066     !Reducing parameters for T, Cp0
+          5 0   0 0   0 0 0  !Nterms:  polynomial, exponential, cosh, sinh
+           0.4021066         0.0
+           0.0008734857      1.0
+          -0.4596882e-6      2.0
+          -0.133284e-11      3.0
+           0.23785e-13       4.0
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#TRN   !---ECS Transport---
+ECS    !Extended Corresponding States model (Propane reference); fitted to very limited data for sulfur dioxide.
+:DOI: 10.6028/NIST.IR.8209
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Huber, M.L., "Models for the Viscosity, Thermal Conductivity, and Surface Tension
+? of Selected Pure Fluids as Implemented in REFPROP v10.0," NISTIR 8209, 2018.
+? doi: 10.6028/NIST.IR.8209
+?
+?THERMAL CONDUCTIVITY
+? The parameters for thermal conductivity were based in part on the data of:
+? Kardos, A., "The Heat Conductivities of Various Liquids," Z. ges. Kalte-Ind., 41, 29-35, 1934.
+? Baker, C.B. and de Haas, N., "Gas Thermal Conductivity Studies at High Temperature. III. Results for SO2," Phys. Fluids, 7:1400-1402, 1964. doi: 10.1063/1.1711394
+?
+?The estimated uncertainty of thermal conductivity in the liquid phase along the saturation boundary is 5%, rising to 10% at 35 MPa.
+? The estimated uncertainty of thermal conductivity in the gas phase is 5%.
+?
+?VISCOSITY
+? The ECS parameters for viscosity were based in part on the data of:
+? Hartl, R., Neueder, R., and Gores, H.J., "Temperature Dependence of Association Constants of LiAlCl4 in Liquid Sulfur Dioxide," Acta Chim. Slov., 56:109-114, 2009.
+? Awbery, J.H. and Griffiths, E., "The Viscosities of Some Liquid Refrigerants," Proc. Phys. Soc., London, 48:372-80, 1936.
+? Stewart, W.W. and Maass, "The Coefficient of Viscosity of Sulphur Dioxide over a Low Temperature Range," Can. J. of Research, 6(5):453-457, 1932. doi: 10.1139/cjr32-035
+?
+?The estimated uncertainty of viscosity in the liquid phase along the saturation boundary is 5%, rising to 10% at 35 MPa.
+?The estimated uncertainty of viscosity in the gas phase is 5%.
+?
+!```````````````````````````````````````````````````````````````````````````````
+197.7              !Lower temperature limit [K]
+525.0              !Upper temperature limit [K]
+35000.0            !Upper pressure limit [kPa]
+25.42              !Maximum density [mol/L]
+FEQ PROPANE.FLD
+VS1                !Model for reference fluid viscosity
+TC1                !Model for reference fluid thermal conductivity
+NUL                !Large molecule identifier
+1                  !Lennard-Jones flag (0 or 1) (0 => use estimates) !from scaling R134a
+0.4026             !Lennard-Jones coefficient sigma [nm] for ECS method
+363.0              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
+2  0  0                  !Number of terms in f_int term in Eucken correlation, spare1, spare2
+ 6.60505e-4    0. 0. 0.  !Coefficient, power of T, spare1, spare2
+ 7.47059e-7    1. 0. 0.  !Coefficient, power of T, spare1, spare2
+2  0  0                  !Number of terms in psi (visc shape factor): poly,spare1,spare2
+ 0.917778      0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+ 0.0248405     0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+2  0  0                  !Number of terms in chi (t.c. shape factor): poly,spare1,spare2
+ 1.38755       0. 0. 0.  !Coefficient, power of Tr, power of Dr, spare
+-0.128721      0. 1. 0.  !Coefficient, power of Tr, power of Dr, spare
+TK3                !Pointer to critical enhancement auxiliary function
+
+
+#AUX   !---Auxiliary function for the thermal conductivity critical enhancement
+TK3    !Simplified thermal conductivity critical enhancement for sulfur dioxide of Perkins et al. (2013).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Perkins, R.A., Sengers, J.V., Abdulagatov, I.M., and Huber, M.L.,
+? "Simplified Model for the Critical Thermal-Conductivity Enhancement in Molecular Fluids,"
+? Int. J. Thermophys., 34(2):191-212, 2013. doi: 10.1007/s10765-013-1409-z
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+9 0 0 0            !# terms:  CO2-terms, spare, spare, spare
+1.0  1.0  1.0      !Reducing parameters for T, rho, tcx [mW/(m-K)]
+0.63               !Nu (universal exponent)
+1.239              !Gamma (universal exponent)
+1.02               !R0 (universal amplitude)
+0.063              !Z (universal exponent--not used for t.c., only viscosity)
+1.0                !C (constant in viscosity eqn = 1/[2 - (alpha + gamma)/(2*nu)], but often set to 1)
+0.167e-9           !Xi0 (amplitude) [m]
+0.059              !Gam0 (amplitude) [-]
+0.485e-9           !Qd_inverse (modified effective cutoff parameter) [m]
+645.96             !Tref (reference temperature)=1.5*Tc [K]
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#DE    !---Dielectric constant---
+DE5    !Dielectric constant model for SO2 of Harvey and Mountain (2017).
+:DOI: 10.1007/s10765-017-2279-6
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Harvey, A.H. and Mountain, R.D.,
+? "Correlations for the Dielectric Constants of H2S, SO2, and SF6,"
+? Int. J. Thermophys., 38:147, 2017.
+?
+!```````````````````````````````````````````````````````````````````````````````
+197.7              !Lower temperature limit [K]
+525.0              !Upper temperature limit [K]
+0.                 !
+0.                 !
+450.0 25.0 1.0     !Reducing parameters for T and D
+4 1 1 1 0 0        !Number of terms in dielectric constant model
+ 4.09e-24  0.0   0.0    0.    !  alpha (cm^3)
+ 1.63308   0.0   0.0    0.    !  mu (debye)
+ 0.335     0.0   0.0    0.    !  cu
+ 2.516     0.0   0.0    0.    !  cg
+ 1.        0.0   1.018  0.75  !  f
+ 1.        0.0   0.8972 0.98  !  g1
+ 1.        0.0   0.5264 1.2   !  g2
+
+
+#STN   !---Surface tension---
+ST1    !Surface tension model for sulfur dioxide of Mulero et al. (2012).
+:DOI: 10.1063/1.4768782
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Mulero, A., Cachadiña, I., and Parra, M.I.,
+? "Recommended Correlations for the Surface Tension of Common Fluids,"
+? J. Phys. Chem. Ref. Data, 41(4), 043105, 2012. doi: 10.1063/1.4768782
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+3                  !Number of terms in surface tension model
+430.64             !Critical temperature used in fit (dummy)
+ 0.0803    0.928   !Sigma0 and n
+ 0.0139    1.57
+-0.0114    0.364
+
+
+#PS    !---Vapor pressure---
+PS5    !Vapor pressure equation for sulfur dioxide of Gao et al. (2016).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., Zhang, P., and Lemmon, E.W., 2016.
+?
+?Functional Form:  P=Pc*EXP[SUM(Ni*Theta^ti)*Tc/T] where Theta=1-T/Tc, Tc and Pc
+? are the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+430.64  7886.6     !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+-7.303     1.0
+ 1.9794    1.5
+-2.078     2.2
+-3.5446    4.7
+ 0.51776   6.0
+
+
+#DL    !---Saturated liquid density---
+DL1    !Saturated liquid density equation for sulfur dioxide of Gao et al. (2016).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., Zhang, P., and Lemmon, E.W., 2016.
+?
+?Functional Form:  D=Dc*[1+SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+430.64  8.078      !Reducing parameters
+5 0 0 0 0 0        !Number of terms in equation
+ 7.2296    0.54
+-16.928    0.88
+ 29.832    1.23
+-27.901    1.6
+ 11.085    2.0
+
+
+#DV    !---Saturated vapor density---
+DV3    !Saturated vapor density equation for sulfur dioxide of Gao et al. (2016).
+?
+?```````````````````````````````````````````````````````````````````````````````
+?Gao, K., Wu, J., Zhang, P., and Lemmon, E.W., 2016.
+?
+?Functional Form:  D=Dc*EXP[SUM(Ni*Theta^ti)] where Theta=1-T/Tc, Tc and Dc are
+? the reducing parameters below, which are followed by rows containing Ni and ti.
+?
+!```````````````````````````````````````````````````````````````````````````````
+0.                 !
+10000.             !
+0.                 !
+0.                 !
+430.64  8.078      !Reducing parameters
+6 0 0 0 0 0        !Number of terms in equation
+-7.487     0.545
+ 10.118    0.85
+-13.608    1.2
+-25.408    3.7
+-42.04     7.5
+-38.668    10.0
+
+
+@END
+c        1         2         3         4         5         6         7         8
+c2345678901234567890123456789012345678901234567890123456789012345678901234567890
+                    0.4112             !Lennard-Jones coefficient sigma [nm] for ECS method
+                    335.4              !Lennard-Jones coefficient epsilon/kappa [K] for ECS method
