@@ -4,7 +4,9 @@ OilMixProp 1.0 Manual by Xiaoxian Yang - July 18, 2024.
 Feel free to contact Xiaoxian for any help.
 
 1. For fluid property calculation.
+
     Run FluidCalc.m
+	
 	See examples and comments in FluidCalc.m for more details
 
 2. Add your own oil: TheOilName
