@@ -1,0 +1,2 @@
+*Nur Werte angeben, wenn T gelöst werden soll und auch gute Schätzungen bekannt sind. Das beschleunigt die Berechnungen.
+*Ansonsten Nullen setzen

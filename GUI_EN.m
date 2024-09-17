@@ -1,4 +1,4 @@
-clear;close;clc; path(path,[pwd,'\Classes']); path(path,[pwd,'\REFPROP_addin']);   format short; warning('off');
+clear;close;clc; path(path,[pwd,'\Classes']);format short; warning('off');
 oilmixprop_v1;
 
 function oilmixprop_v1()
