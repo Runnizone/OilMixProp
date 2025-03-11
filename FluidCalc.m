@@ -5,6 +5,7 @@ clear;clc;path(path,[pwd,'/Classes']); format short;  AllEOS = {'PR','SRK','PTV'
 %%%  Define cubic EoS, PTV and YFR are recommended %%%
 CubicEOS = AllEOS{4}; 
 
+
 %%% define fluids to study %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Please see Classes/Fluid_Constants(_xxx).txt files for all available fluids
 % Both mole fraction and mass fraction are available
