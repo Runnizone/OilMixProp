@@ -13,14 +13,14 @@ CubicEOS = AllEOS{4};
 
 % Refrigerant = {'R1233zde','Emkarate RL32'};   MassFrac1 = 0.5;  pres_kPa = 1.2e3;  temp_K = 273.15 + 150;  
 % Refrigerant = {'CO2','RENISO ACC HV'};   MassFrac1 = 0.6;  pres_kPa = 1e3;  temp_K = 273.15 + 10;  
-% Refrigerant = {'propane','R32'};   MassFrac1 = 0.4588;  pres_kPa = 0.84e3;  temp_K = 283.15;  
+ Refrigerant = {'propane','R32'};   MassFrac1 = 0.120553544760139;  pres_kPa = 3.4e3;  temp_K = 290;  
 % Refrigerant = {'CO2'};   MassFrac1 = 1;  pres_kPa = 1e3;  temp_K = 273.15  + 10;  
 % Refrigerant = {'hydrogen'};   MassFrac1 = 1;  pres_kPa = 5e3;  temp_K = 19;  
 % Refrigerant = {'CO2','POEiso68'};   MassFrac1 = 0.6;  pres_kPa = 1e4;  temp_K = 273.15 + 10;  
 % Refrigerant = {'1-Methylnaphthalene','R32'};   MassFrac1 = 0.9;  pres_kPa = 1.2e3;  temp_K = 273.15 + 150;  
 % Refrigerant = {'water','nitrogen'};   MassFrac1 = 0.5;  pres_kPa = 1.0e3;  temp_K = 273.15 + 30;  
 % Refrigerant = {'EGLYCOL'};   MassFrac1 = 1;  pres_kPa = 5e5;  temp_K = 273.15 + 1000;  
-Refrigerant = {'PAG68','propane'};   MassFrac1 = 0.8068;  pres_kPa = 80;  temp_K = 232.11; 
+% Refrigerant = {'PAG68','propane'};   MassFrac1 = 0.8068;  pres_kPa = 80;  temp_K = 232.11; 
 % Refrigerant = {'PAG68'};   MassFrac1 = 1;  pres_kPa = 100;  temp_K = 273; 
 % Refrigerant = {'propane','R32'};   MoleFrac1 = 0.1499;  pres_kPa = 3.4e3;  temp_K = 290; 
 % Refrigerant = {'water','nitrogen','argon'};   MassFrac1 = 0.5; MassFrac2 = 0.2;  pres_kPa = 1.0e3;  temp_K = 273.15 + 30;  
@@ -53,7 +53,7 @@ p_kPa_guess = 0;  % if p to be solved and a good guess is known, otherwise set 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%% A list of example inputs %%%%%%%%%%%%%%%%%%%%%%%%%
-ff = OilPropm('All','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);   
+ff = OilPropm('H','T',temp_K,'P',pres_kPa,MassFrac,GL,0,0);   
 % ff = OilPropm('All','T',temp_K,'D',ff.rho_kgm3_all,MassFrac,GL,0,0); 
 % ff = OilPropm('All','T',temp_K,'S',ff.ss_JkgK_all,MassFrac,GL,0,0);   
 % ff = OilPropm('All','T',temp_K,'H',ff.hh_Jkg_all,MassFrac,GL,0,0); 
