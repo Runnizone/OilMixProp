@@ -1,0 +1,36 @@
+Private Use License Agreement
+
+Copyright (c) [2025] [Xiaoxian Yang and Markus Richter]
+
+This software is provided free of charge for personal, non-commercial use only.
+
+1. **License Grant**
+   You are granted a non-exclusive, non-transferable, non-commercial license to:
+   - Install and use the Software on your personal devices;
+   - Modify the Software solely for personal, non-commercial purposes.
+
+2. **Prohibited Uses**
+   You may **not**:
+   - Distribute, publish, or share the Software or any modified version of it;
+   - Use the Software, or any portion of it, for any commercial or for-profit purpose;
+   - Rent, lease, sublicense, or otherwise make the Software available to third parties;
+   - Attempt to reverse-engineer or decrypt encrypted or obfuscated parts, unless permitted under applicable law.
+
+3. **Encryption Notice**
+   Portions of the Software may be encrypted, obfuscated, or compiled.  
+   You are permitted to modify the Software to the extent technically possible, but no guarantee of source readability is provided.
+
+4. **Termination**
+   This license is immediately terminated if you violate any of its terms.
+
+5. **Disclaimer**
+   The Software is provided "as is", without warranty of any kind, express or implied.  
+   In no event shall the authors be liable for any damages or other liability, arising from the use of the Software.
+
+6. **No Support**
+   The copyright holders have no obligation to provide maintenance, support, updates, or enhancements for the Software.
+
+7. **Governing Law**
+   This Agreement shall be governed by and construed in accordance with the laws of Germany, without regard to its conflict of law principles.
+
+By using the Software, you agree to be bound by the terms of this license.
