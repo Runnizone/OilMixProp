@@ -1,2 +1,0 @@
-     Materials;    MM_gmol;  Power_fix;      Zc;      Tc_K;   Dc_kgm3;    pc_MPa;   acentric;  k0_JmolK;  k1_JmolK;    n1_mu;     n2_mu;     n3_mu;    n4_mu;        n1_tc;       n2_tc;       n3_tc;       n4_tc
-     TUD POE68;   200.000;    0.2857;    0.2640;   632.257;   309.922;    2.1506;    0.5954;   300.000;   400.000;  0.965017; -0.539645;  0.130661;  0.000000;    0.002705;    1.810749;    1.608012;   -0.134288
