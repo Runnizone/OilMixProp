@@ -10,10 +10,12 @@ PowerConst = 2/7;  xi0 = 1.97E-10; Gamma = 5.42E-02; qDinv = 5.98E-10; xi_mu = 1
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define the fluid to be fitted
-iOilNum = 2;            % oil to be study, see the fluid definition below, if 0, run all oils.
-CubicEOS = AllEOS{3}; 
+iOilNum = 9;            % oil to be study, see the fluid definition below, if 0, run all oils.
+% strange result 4 (very high viscosity at low T) and 12 (data are questionable)
 
-N_Oil = 11;            % the number of all avaiable oil 
+CubicEOS = AllEOS{4}; 
+
+N_Oil = 18;            % the number of all avaiable oil 
 Lplot = 1;             % plot and save the figure? 1 yes, 0 not
 Lsave2database = 1;    % save parameters to database (Classes/Fluid_Constants_Fitted.txt)? 1 yes, 0 not
 
@@ -44,6 +46,7 @@ for OilNum = OilRun
         MM_gmol = 560.26;          % give a good guess of the molar mass
         FitIndex_D = [1,3,5];            % Index of density data used for fit, at least two
         FitIndex_V = [1,3,5];       % Index of viscosity data used for fit, at least four
+        Zc = 0.258; 
     elseif OilNum == 5
         Material = 'LAB ISO5'; 
         MM_gmol = 240;          % give a good guess of the molar mass
@@ -69,10 +72,12 @@ for OilNum = OilRun
         FitIndex_V = [1,31,44,60,92];       % Index of viscosity data used for fit, at least four
     elseif OilNum == 9
         Material = 'HATCOL 4467'; 
-        MM_gmol = 500;          % give a good guess of the molar mass
-        FitIndex_D = [1,9,17];         % Index of density data used for fit, at least two
-        FitIndex_cp = [1,9,17];          % Index of isobaric heat capacity data used for fit, at least two
+        MM_gmol = 200;          % give a good guess of the molar mass
+%         FitIndex_D = [1,9,17];         % Index of density data used for fit, at least two
+        FitIndex_D = [1,3,5];         % Index of density data used for fit, at least two
+        FitIndex_cp = [1,24];          % Index of isobaric heat capacity data used for fit, at least two
         FitIndex_TC = [1,8,9,17];   % Index of thermal conductivity data used for fit, at least four
+        FitIndex_V = [1,5,9,13,17];       % Index of viscosity data used for fit, at least four
     elseif OilNum == 10
         Material = 'PEB8'; 
         Zc = 0.2600;
@@ -83,6 +88,43 @@ for OilNum = OilRun
         Material = 'RENISO ACC HV';
         MM_gmol = 200;          % give a good guess of the molar mass
         FitIndex_D = [1,9,19];         % Index of density data used for fit, at least two
+    elseif OilNum == 12
+        Material = 'Shrieve POE68';
+        MM_gmol = 150;          % give a good guess of the molar mass
+        FitIndex_D = [1,2,3];         % Index of density data used for fit, at least two
+        FitIndex_V = [1,2,3];       % Index of viscosity data used for fit, at least four
+    elseif OilNum == 13
+        Material = 'TUD MO10';
+        MM_gmol = 200;          % give a good guess of the molar mass
+        FitIndex_D = [1,3,5];         % Index of density data used for fit, at least two
+        FitIndex_V = [1,2,3,4,5];       % Index of viscosity data used for fit, at least four
+        FitIndex_TC = 1:4;   % Index of thermal conductivity data used for fit, at least four
+    elseif OilNum == 14
+        Material = 'TUD POE68';
+        MM_gmol = 200;          % give a good guess of the molar mass
+        FitIndex_D = [1,5,10];         % Index of density data used for fit, at least two
+        FitIndex_V = [1,5,10,17];       % Index of viscosity data used for fit, at least four
+        FitIndex_TC = 1:4;   % Index of thermal conductivity data used for fit, at least four
+    elseif OilNum == 15
+        Material = 'TUD POE100';
+        MM_gmol = 200;          % give a good guess of the molar mass
+        FitIndex_D = [1,3,6];         % Index of density data used for fit, at least two
+        FitIndex_V = 1:6;       % Index of viscosity data used for fit, at least four
+        FitIndex_TC = 1:4;   % Index of thermal conductivity data used for fit, at least four
+    elseif OilNum == 16   % to be complete
+        Material = 'PEC8';
+        % MM_gmol = 640.942;          % give a good guess of the molar mass
+        % Zc = 0.2640; 
+        % MM_gmol = 300;          % give a good guess of the molar mass
+        FitIndex_D = [10,20,30,40];         % Index of density data used for fit, at least two
+    elseif OilNum == 17   % to be complete
+        Material = 'Paragon S60';
+        FitIndex_D = [1,6,11,16,21];         % Index of density data used for fit, at least two
+        FitIndex_V = [1,6,11,16,21];       % Index of viscosity data used for fit, at least four
+    elseif OilNum == 18   % to be complete
+        Material = 'Paragon S600';
+        FitIndex_D = [1,6,11,16,21];         % Index of density data used for fit, at least two
+        FitIndex_V = [1,6,11,16,21];       % Index of viscosity data used for fit, at least four
     else
         error(['not defined yet'])
     end

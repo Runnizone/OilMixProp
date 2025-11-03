@@ -13,3 +13,4 @@
    12;           DECANE;           MLINOLEA;        0.04
    13;             PEB8;               PEC7;         0.1
    13;            PAG68;            propane;        -0.4
+   14;      Hatcol 4467;            propane;         -0

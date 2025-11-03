@@ -8,7 +8,7 @@ AllEOS = {'PR','SRK','PTV','YFR'};     CubicEOS = AllEOS{4};
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define the fluid to be fitted
-OilNum = 1;            % oil to be study, see the fluid definition below
+OilNum = 2;            % oil to be study, see the fluid definition below
 Lplot = 1;             % plot and save the figure? 1 yes, 0 not
 Lsave2database = 1;    % save parameters to database (Classes/Bin_kij_fit.txt)? 1 yes, 0 not
 % Oil mixture details
@@ -16,7 +16,8 @@ if OilNum == 1
     Material = {'Emkarate RL32','R1233zde'};     % make sure oil is the second component
     FitIndex_VP = [1,6,9];                        % Index of data used for fit, only one point needed
 elseif OilNum == 2
-
+    Material = {'PEC8','CO2'};     % make sure oil is the second component
+    FitIndex_VP = [6];                        % Index of data used for fit, only one point needed
 elseif OilNum == 3
 
 else
@@ -47,7 +48,7 @@ if exist(VPfile,'file')
     vp_Pa = vp_Pa_all(FitIndex_VP);
     molef_oil = molef_oil_all(FitIndex_VP);
     xdata = [molef_oil, T_K, vp_Pa];   ydata = vp_Pa;     
-    n0 = [0];    lb = [-1];    ub = [1];
+    n0 = [-0.03];    lb = [-1];    ub = [1];
     n_fit = lsqcurvefit(@(n,xdata) EOSmodel.fit_CKij(n,xdata,GL),n0,xdata,ydata,lb,ub,options);
     vp_fit = EOSmodel.fit_CKij(n_fit,xdata,GL);
     kij_fit = n_fit(1);

@@ -179,8 +179,8 @@ elseif algorithm == 2
                 break;
             end
         end
-        x1(iT) = ff.MoleF_Li(1);
-        y1(iT) = ff.MoleF_Vi(1);
+        x1(iT) = ff.MoleF(1,3);
+        y1(iT) = ff.MoleF(1,4);
     end
     Tline(deleteindex) = [];
     x1(deleteindex) = [];

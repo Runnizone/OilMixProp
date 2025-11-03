@@ -14,6 +14,10 @@ AllEOS = {'PR','SRK','PTV','YFR'};      figure(1);clf; hold on; box on;
 % Refrigerant = {'propane','R134A'};     temp = 283.15;  
 Refrigerant = {'propane','C12'};     temp = 419.15; %   temp = 457.65;  
 % Refrigerant = {'CO2','ethane'};  temp = 273.15 - 20;  
+% Refrigerant = {'Shrieve POE68','R32'};  temp = 273.15; %   temp = 457.65;  
+% Refrigerant = {'Decane','water'};  temp = 540.15; %   temp = 457.65;  
+% Refrigerant = {'CO2','methanol'};  temp = 298.15; %   temp = 457.65;  
+% Refrigerant = {'methanol','ethane'};  temp = 298.15; %   temp = 457.65;  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% define other parameters
@@ -40,6 +44,54 @@ if strcmpi(Refrigerant{1},'propane') && strcmpi(Refrigerant{2},'C12') &&  temp =
     ];
 end
 
+if strcmpi(Refrigerant{1},'CO2') && strcmpi(Refrigerant{2},'methanol') &&  temp == 298.15
+    xyp = [
+        0.941	0.999	6.104
+        0.9286	0.999	6.062
+        0.8986	0.999	6.012
+        0.8752	0.999	5.975
+        0.8474	0.999	5.944
+        0.8188	0.999	5.923
+        0.7946	0.999	5.904
+        0.7725	0.999	5.874
+        0.7485	0.999	5.851
+        0.7274	0.999	5.831
+        0.7075	0.999	5.801
+        0.688	0.999	5.775
+        0.6664	0.999	5.744
+        0.6474	0.999	5.712
+        0.6288	0.999	5.673
+        0.6139	0.999	5.633
+        0.599	0.999	5.592
+        0.5822	0.999	5.555
+        0.5701	0.999	5.515
+        0.4972	0.999	5.223
+        0.4903	0.999	5.192
+        0.456	0.999	4.984
+        0.4263	0.999	4.772
+        0.3724	0.999	4.252
+        0.3369	0.999	3.903
+        0.3058	0.999	3.592
+        0.275	0.999	3.304
+        0.2487	0.999	2.995
+        0.2222	0.999	2.702
+        0.196	0.999	2.391
+        0.1723	0.999	2.125
+        0.1608	0.999	1.993
+        0.1443	0.999	1.792
+        0.1274	0.999	1.595
+        0.1129	0.999	1.421
+        0.0961	0.999	1.211
+        0.0804	0.999	1.015
+        0.0734	0.999	0.915
+        0.0631	0.999	0.814
+        0.058	0.999	0.712
+        0.0503	0.999	0.602
+        0.0446	0.999	0.505
+
+
+    ];
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Main program - Nothing needs to be changed
@@ -174,7 +226,7 @@ elseif algorithm == 2
                 MF1 = dx;
             end 
         else
-            MF1 = (ffo.MoleF_Li(1) + ffo.MoleF_Vi(1))/2  + 2 * ((psat1 > psat2) -0.5) * dx;
+            MF1 = (ffo.MoleF(1,3) + ffo.MoleF(1,4))/2  + 2 * ((psat1 > psat2) -0.5) * dx;
         end
         loopcount = 0;
         while 1 
@@ -206,8 +258,8 @@ elseif algorithm == 2
                 break;
             end
         end
-        x1(ip) = ff.MoleF_Li(1);
-        y1(ip) = ff.MoleF_Vi(1);
+        x1(ip) = ff.MoleF(1,3);
+        y1(ip) = ff.MoleF(1,4);
     end
     pline(deleteindex) = [];
     x1(deleteindex) = [];
@@ -221,6 +273,8 @@ if exist('xyp','var')
     plot(xyp(:,1),xyp(:,3),'+',"Color",'b')
     plot(xyp(:,2),xyp(:,3),'x',"Color",'r')
 end
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% plot the results

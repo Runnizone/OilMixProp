@@ -1,5 +1,16 @@
           Material_1;          Material_2; Cubic_kij
                  xxx;              Emxxx2;    0.0511
        Emkarate RL32;            R1233zde;    0.0000
-             propane;                 C12;    0.0100
-             propane;               PAG68;    0.0381
+                 C12;             propane;    0.0100
+               PAG68;             propane;    0.0381
+       Shrieve POE68;                 R32;   -0.0750
+         HATCOL 4467;             propane;    0.0450
+           TUD POE68;               R152a;    0.0700
+           TUD POE68;                 CO2;    0.0400
+          TUD POE100;                 DME;    0.0300
+          TUD POE100;             propane;    0.0300
+              decane;               water;    0.2700
+               water;           1-butanol;    0.2000
+                PEC8;                 CO2;     0.06
+                CO2;              methanol;    0.05
+              CO2;               R152a;      -0.00600

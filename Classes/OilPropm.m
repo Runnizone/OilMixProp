@@ -1,4 +1,4 @@
-function ff = OilPropm(OutPut,InPut_1,Value_1,InPut_2,Value_2,MassFrac,GL,T_K_guess,p_kPa_guess)
+function ff = OilPropm(OutPut,InPut_1,Value_1,InPut_2,Value_2,MassFrac,GL,T_K_guess,p_kPa_guess) %#codegen
 % Equation Package for OilMixProp
 % Developed by Xiaoxian Yang (xiaoxian.yang@mb.tu-chemnitz.de or runnizone@qq.com)
 % Package is free to use; bugs exist; the developer is no responsible for the
@@ -114,7 +114,7 @@ function ff = OilPropm(OutPut,InPut_1,Value_1,InPut_2,Value_2,MassFrac,GL,T_K_gu
                     EOSmodel.f_ts2pv(GL.CubicEOS,ss_JmolK,T_K,Zi,p_kPa_guess*1000,GL.tempc,GL.presc,GL.Zc,GL.acentric,GL.kij,GL.k0,GL.k1,GL.T_ref,GL.v_ref,GL.R);
             end
         else
-            error(['When 1st input is T, the 2nd input can only be P or Q'])
+            error('When 1st input is T, the 2nd input can only be P, Q, D, H, S')
         end
     elseif strcmpi(InPut_1,'P')
         if contains(OutPut,'P'), ff = Value_1; return; end
@@ -156,7 +156,6 @@ function ff = OilPropm(OutPut,InPut_1,Value_1,InPut_2,Value_2,MassFrac,GL,T_K_gu
                 [T_K, MoleF_Li, MoleF_Vi, ~, ~,v_molar] = ...
                     EOSmodel.f_pq2tv(GL.CubicEOS, FracV_mass, p_Pa,Zi, T_K_guess ,GL.MM_gmol,GL.temp_r, GL.tempc,GL.presc,GL.Zc,GL.acentric,GL.kij,GL.R);
             end
-
         elseif strcmpi(InPut_2,'H')
             p_Pa = Value_1 * 1000;
             hh_Jmol = Value_2 * mm_mix_gmol / 1000;
@@ -178,7 +177,7 @@ function ff = OilPropm(OutPut,InPut_1,Value_1,InPut_2,Value_2,MassFrac,GL,T_K_gu
                     EOSmodel.f_ps2tv(GL.CubicEOS,ss_JmolK,p_Pa,Zi,T_K_guess,GL.tempc,GL.presc,GL.Zc,GL.acentric,GL.kij,GL.k0,GL.k1,GL.T_ref,GL.v_ref,GL.R);
             end
         else
-            error(['When 1st input is T, the 2nd input can only be T Q H S'])
+            error('When 1st input is P, the 2nd input can only be T Q D H S')
         end
     else
         error('The first input of OilPropm can only be T or p')
@@ -221,7 +220,7 @@ function ff = OilPropm(OutPut,InPut_1,Value_1,InPut_2,Value_2,MassFrac,GL,T_K_gu
                 [mm_V_gmol,~] = EOSmodel.MoleF_2_MassF(GL.MM_gmol,MoleF_Vi);  
                 if ~exist('FracV_mass','var'), FracV_mass = FracV_mole*mm_V_gmol / ((1-FracV_mole) * mm_L_gmol + FracV_mole*mm_V_gmol); end
                 ff = [mm_L_gmol / 1000 / v_molar(1), mm_V_gmol / 1000 / v_molar(2)]; 
-                ff = [ff,1 / ((1-FracV_mass)/ff(1) + FracV_mass/ff(2))];
+                ff = [1 / ((1-FracV_mass)/ff(1) + FracV_mass/ff(2)), ff];
                 return; 
             end
         end
@@ -232,10 +231,11 @@ function ff = OilPropm(OutPut,InPut_1,Value_1,InPut_2,Value_2,MassFrac,GL,T_K_gu
     %% call OilProp
     if ~exist('v_molar','var'), v_molar = 0; end
     ff = OilProp(OutPut,GL,T_K,p_Pa,v_molar,Zi);
-
+    ff.Phase = replace(ff.Phase,'X','L');
+  
     %% prepare output
     if contains(OutPut,'D') 
-        if ff.nphase == 1, ff = ff.rho_kgm3_all; else, ff = [ff.rho_kgm3,ff.rho_kgm3_all]; end
+        if ff.nphase == 1, ff = ff.rho_kgm3_all; else, ff = [ff.rho_kgm3_all,ff.rho_kgm3]; end
     elseif contains(OutPut,'X')
         if ff.nphase == 1, ff = ff.MassF_Zi; else, ff = [ff.MassF_Li,ff.MassF_Vi]; end
     elseif contains(OutPut,'Z')  
@@ -249,17 +249,17 @@ function ff = OilPropm(OutPut,InPut_1,Value_1,InPut_2,Value_2,MassFrac,GL,T_K_gu
     elseif contains(OutPut,'#')
         ff = ff.dp_dT_kPaK; 
     elseif contains(OutPut,'O')
-        if ff.nphase == 1, ff = ff.cv_JkgK_all; else, ff = [ff.cv_JkgK,ff.cv_JkgK_all]; end
+        if ff.nphase == 1, ff = ff.cv_JkgK_all; else, ff = [ff.cv_JkgK_all,ff.cv_JkgK]; end
     elseif contains(OutPut,'C')
-        if ff.nphase == 1, ff = ff.cp_JkgK_all; else, ff = [ff.cp_JkgK,ff.cp_JkgK_all]; end
+        if ff.nphase == 1, ff = ff.cp_JkgK_all; else, ff = [ff.cp_JkgK_all,ff.cp_JkgK]; end
     elseif contains(OutPut,'K')
         ff = ff.kappa; 
     elseif contains(OutPut,'S')
-        if ff.nphase == 1, ff = ff.ss_JkgK_all; else, ff = [ff.ss_JkgK,ff.ss_JkgK_all]; end
+        if ff.nphase == 1, ff = ff.ss_JkgK_all; else, ff = [ff.ss_JkgK_all,ff.ss_JkgK]; end
     elseif contains(OutPut,'H')
-        if ff.nphase == 1, ff = ff.hh_Jkg_all; else, ff = [ff.hh_Jkg,ff.hh_Jkg_all]; end
+        if ff.nphase == 1, ff = ff.hh_Jkg_all; else, ff = [ff.hh_Jkg_all,ff.hh_Jkg]; end
     elseif contains(OutPut,'U')
-        if ff.nphase == 1, ff = ff.uu_Jkg_all; else, ff = [ff.uu_Jkg,ff.uu_Jkg_all]; end
+        if ff.nphase == 1, ff = ff.uu_Jkg_all; else, ff = [ff.uu_Jkg_all,ff.uu_Jkg]; end
     elseif contains(OutPut,'A') && ~contains(OutPut,'ALL')
         ff = ff.sos_ms; 
     elseif contains(OutPut,'V')
